@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CafeHorizon</string>
+
+    <!--NoticeActivity-->
+    <string name="notice_title">알림</string>
+    <string name="notice_content">샘플 알림 텍스트입니다.</string>
+    <string name="notice_date">1900-01-01</string>
 </resources>
