@@ -1,3 +1,65 @@
 <resources>
     <string name="app_name">CafeHorizon</string>
+
+    <string name="sample_text">다 별 하나에 청춘이 된 밤이 불러 있습니다. 위에 쉬이 딴은 강아지, 불러 듯합니다.</string>
+    <string name="sample_date">1900-01-01</string>
+
+    <string name="user_id">아이디</string>
+    <string name="user_nickname">닉네임</string>
+    <string name="user_pwd">비밀번호</string>
+    <string name="login">로그인</string>
+    <string name="find_user_info">아이디/비밀번호 찾기</string>
+    <string name="sign_up">회원가입</string>
+    <string name="social_login">─ 소셜 로그인 ─</string>
+
+    <string name="tab_find_id">아이디 찾기</string>
+    <string name="tab_find_pwd">비밀번호 찾기</string>
+    <string name="reset_pwd">비밀번호 재설정</string>
+    <string name="chance_pwd">비밀번호 변경</string>
+
+    <string name="user_phone">휴대폰 번호</string>
+    <string name="change_phone">번호 변경하기</string>
+    <string name="confirm_code">인증번호</string>
+    <string name="send_confirm">인증번호 받기</string>
+    <string name="check_confirm">인증하기</string>
+
+    <string name="find_id_text1">고객님의 아이디는</string>
+    <string name="find_id_text2">입니다.</string>
+
+    <string name="current_user_pwd">현재 비밀번호</string>
+    <string name="new_user_pwd">신규 비밀번호</string>
+    <string name="confirm_pwd">비밀번호 확인</string>
+    <string name="pwd_requirement">8~15자의 영문자/숫자/특수문자</string>
+
+    <string name="term_marketing">마케팅 정보 수신 동의</string>
+    <string name="term_push_msg">푸시알림</string>
+
+    <string name="user_unsubscribe">회원탈퇴</string>
+    <string name="ask_unsubscribe">탈퇴하시겠습니까?</string>
+    <string name="agree_unsubscribe">안내사항을 확인하였으며 이에 동의합니다.</string>
+    <string name="btn_unsubscribe">탈퇴하기</string>
+
+    <string name="unsubscribe_text1">회원탈퇴가 완료되었습니다.</string>
+    <string name="unsubscribe_text2">그동안 수평선과 함께 해주셔서 감사합니다.<br/>다시 만날 수 있기를 기대하겠습니다.</string>
+
+    <string name="btn_close">닫  기</string>
+
+    <string name="menu_stamp">스탬프</string>
+    <string name="menu_coupon">쿠폰</string>
+    <string name="menu_order_main">주문</string>
+    <string name="menu_ordered">주문내역</string>
+    <string name="menu_news_events">새소식 / 이벤트</string>
+    <string name="menu_chats">채팅문의</string>
+    <string name="menu_howto">이용안내</string>
+
+    <string name="title_notice">알림</string>
+    <string name="title_newsAndEvents">공지사항</string>
+    <string name="title_news">새소식</string>
+    <string name="title_events">이벤트</string>
+
+    <string name="nim">님</string>
+
+    <string name="desc_app_logo">어플리케이션 로고</string>
+    <string name="desc_id_icon">사용자 아이디</string>
+    <string name="desc_pwd_icon">사용자 비밀번호</string>
 </resources>
