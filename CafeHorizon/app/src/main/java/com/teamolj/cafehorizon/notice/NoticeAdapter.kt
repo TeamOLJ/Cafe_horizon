@@ -8,10 +8,13 @@ import com.teamolj.cafehorizon.R
 import kotlinx.android.synthetic.main.notice_item_recycler.view.*
 import java.util.*
 
-data class Notice(var content: String, var date: Long)  //테스트를 위해 date 변수형을 Date->Long 으로 변경
+internal data class Notice(
+    var content: String,
+    var date: Long
+)  //테스트를 위해 date 변수형을 Date->Long 으로 변경
 
-class noticeAdapter : RecyclerView.Adapter<noticeHolder>() {
-    var noticeList = mutableListOf<Notice>()
+class NoticeAdapter : RecyclerView.Adapter<noticeHolder>() {
+    internal var noticeList = mutableListOf<Notice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): noticeHolder {
         return noticeHolder(
@@ -25,15 +28,12 @@ class noticeAdapter : RecyclerView.Adapter<noticeHolder>() {
         holder.setNotice(notice)
     }
 
-    override fun getItemCount(): Int {
-        return noticeList.size
-    }
-
+    override fun getItemCount(): Int = noticeList.size
 
 }
 
 class noticeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setNotice(notice: Notice) {
+    internal fun setNotice(notice: Notice) {
         itemView.noticeContent.text = notice.content
         itemView.noticeDate.text = notice.date.toString()
     }

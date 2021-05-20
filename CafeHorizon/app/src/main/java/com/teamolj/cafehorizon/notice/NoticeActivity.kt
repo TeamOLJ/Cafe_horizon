@@ -15,14 +15,14 @@ class NoticeActivity : AppCompatActivity() {
 
         val data: MutableList<Notice> = loadNotices()
 
-        var adapter = noticeAdapter()
+        var adapter = NoticeAdapter()
         adapter.noticeList = data
         binding.noticeRecyclerView.adapter = adapter
         binding.noticeRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
 
-    fun loadNotices(): MutableList<Notice> {
+    internal fun loadNotices(): MutableList<Notice> {
         val data:MutableList<Notice> = mutableListOf()
 
         for (no in 0..100) {

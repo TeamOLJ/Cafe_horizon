@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">CafeHorizon</string>
+    <string name="sample_text">다 별 하나에 청춘이 된 밤이 불러 있습니다. 위에 쉬이 딴은 강아지, 불러 듯합니다.</string>
+    <string name="sample_date">1900-01-01</string>
 
-    <!--NoticeActivity-->
+    <!--Notice-->
     <string name="notice_title">알림</string>
-    <string name="notice_content">샘플 알림 텍스트입니다.</string>
-    <string name="notice_date">1900-01-01</string>
+
+    <!--NewsAndEvent-->
+    <string name="newsAndEvents_title">공지사항</string>
+    <string name="news_title">새소식</string>
+    <string name="events_title">이벤트</string>
 </resources>

@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_margin="10dp">
+    android:layout_height="@dimen/item_height"
+    android:background="@drawable/notice_item_border"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/eventsImage_padding_left_right"
+    android:paddingTop="@dimen/eventsImage_padding_top_bottom"
+    android:paddingRight="@dimen/eventsImage_padding_left_right"
+    android:paddingBottom="@dimen/eventsImage_padding_top_bottom">
 
     <TextView
         android:id="@+id/noticeContent"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:gravity="center_vertical"
-        android:text="@string/notice_content"/>
+        android:text="@string/sample_text"
+        android:textSize="@dimen/titleSize" />
 
-    <Space
-        android:layout_width="5dp"
-        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/noticeDate"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:gravity="center_vertical"
-        android:text="@string/notice_date"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:text="@string/sample_date" />
 
 </LinearLayout>
