@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/eventsImage_padding_top_bottom">
 
     <ImageView
-        android:id="@+id/eventImage"
+        android:id="@+id/imageEvents"
         android:layout_width="match_parent"
         android:layout_height="@dimen/eventsImage_height"
         android:src="@color/colorPrimary" />
@@ -19,16 +19,16 @@
         android:layout_height="10dp" />
 
     <TextView
-        android:id="@+id/eventTitle"
+        android:id="@+id/titleEvents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/sample_text"
-        android:textSize="@dimen/titleSize"
+        android:textSize="@dimen/title_size"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/eventPeriod"
+        android:id="@+id/periodEvents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sample_date" />

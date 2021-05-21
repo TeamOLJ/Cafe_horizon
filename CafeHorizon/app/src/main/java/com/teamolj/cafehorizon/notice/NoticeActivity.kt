@@ -17,8 +17,8 @@ class NoticeActivity : AppCompatActivity() {
 
         var adapter = NoticeAdapter()
         adapter.noticeList = data
-        binding.noticeRecyclerView.adapter = adapter
-        binding.noticeRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewNotice.adapter = adapter
+        binding.recyclerViewNotice.layoutManager = LinearLayoutManager(this)
     }
 
 

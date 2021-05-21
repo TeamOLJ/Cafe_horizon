@@ -10,17 +10,17 @@
     android:paddingBottom="@dimen/eventsImage_padding_top_bottom">
 
     <TextView
-        android:id="@+id/noticeContent"
+        android:id="@+id/textNoticeContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:gravity="center_vertical"
         android:text="@string/sample_text"
-        android:textSize="@dimen/titleSize" />
+        android:textSize="@dimen/title_size" />
 
 
     <TextView
-        android:id="@+id/noticeDate"
+        android:id="@+id/textNoticeDate"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

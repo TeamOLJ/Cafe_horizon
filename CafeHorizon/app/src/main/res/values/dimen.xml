@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--NewsAndEvent-->
-    <dimen name="titleSize">18dp</dimen>
+    <dimen name="title_size">18dp</dimen>
     <dimen name="item_height">90dp</dimen>
 
     <dimen name="eventsItem_height">200dp</dimen>

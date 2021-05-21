@@ -4,10 +4,10 @@
     <string name="sample_date">1900-01-01</string>
 
     <!--Notice-->
-    <string name="notice_title">알림</string>
+    <string name="title_notice">알림</string>
 
     <!--NewsAndEvent-->
-    <string name="newsAndEvents_title">공지사항</string>
-    <string name="news_title">새소식</string>
-    <string name="events_title">이벤트</string>
+    <string name="title_newsAndEvents">공지사항</string>
+    <string name="title_news">새소식</string>
+    <string name="title_events">이벤트</string>
 </resources>

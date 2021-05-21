@@ -23,8 +23,8 @@ class NewsFragment : Fragment() {
 
         var adapter = NewsAdapter()
         adapter.newsList = data
-        binding.newsRecyclerView.adapter = adapter
-        binding.newsRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerViewNews.adapter = adapter
+        binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
 
         return view
     }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.teamolj.cafehorizon.R
-import kotlinx.android.synthetic.main.news_item_recycler.view.*
+import kotlinx.android.synthetic.main.recycler_item_news.view.*
 
 
 internal data class News(
@@ -22,7 +22,7 @@ class NewsAdapter : RecyclerView.Adapter<newsHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): newsHolder =
         newsHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.news_item_recycler, parent, false)
+                .inflate(R.layout.recycler_item_news, parent, false)
         )
 
     override fun onBindViewHolder(holder: newsHolder, position: Int) {
@@ -47,13 +47,13 @@ class newsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         this.content = news.content
 
         if (news.isNew) {
-            itemView.newImage.setImageResource(android.R.color.black)
+            itemView.imageNewIcon.setImageResource(android.R.color.black)
         } else {
-            itemView.newImage.setImageResource(android.R.color.transparent)
+            itemView.imageNewIcon.setImageResource(android.R.color.transparent)
         }
 
-        itemView.newsTitle.text = news.title
-        itemView.newsDate.text = news.date.toString()
+        itemView.textNewsTitle.text = news.title
+        itemView.textNewsDate.text = news.date.toString()
     }
 
 //    internal fun saveContent(content: String) {
