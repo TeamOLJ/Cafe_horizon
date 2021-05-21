@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_stamp"
+            android:icon="@drawable/ic_stamp"
+            android:title="@string/menu_stamp"
+            android:checked="true" />
+
+        <item
+            android:id="@+id/item_coupon"
+            android:icon="@drawable/ic_coupons"
+            android:title="@string/menu_coupon" />
+
+        <item
+            android:id="@+id/item_order_main"
+            android:icon="@drawable/ic_order_main"
+            android:title="@string/menu_order_main" />
+            
+        <item
+            android:id="@+id/item_ordered"
+            android:icon="@drawable/ic_ordered"
+            android:title="@string/menu_ordered" />
+            
+        <item
+            android:id="@+id/item_notice"
+            android:icon="@drawable/ic_news_events"
+            android:title="@string/menu_news_events" />
+            
+        <item
+            android:id="@+id/item_chats"
+            android:icon="@drawable/ic_chats"
+            android:title="@string/menu_chats" />
+            
+        <item
+            android:id="@+id/item_howto"
+            android:icon="@drawable/ic_howto"
+            android:title="@string/menu_howto" />
+
+    </group>
+
+</menu>
