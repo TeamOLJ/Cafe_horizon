@@ -63,6 +63,12 @@
     <string name="welcome">환영합니다</string>
     <string name="nim">님</string>
 
+    <string name="toast_check_internet">인터넷 연결을 확인하세요.</string>
+    <string name="toast_empty_userid">아이디를 입력하세요.</string>
+    <string name="toast_empty_userpwd">비밀번호를 입력하세요.</string>
+    <string name="toast_failed_verification">잘못된 로그인 정보입니다.</string>
+    <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
+
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>
     <string name="desc_pwd_icon">사용자 비밀번호</string>

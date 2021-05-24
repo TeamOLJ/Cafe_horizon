@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_bias="0.18"
         app:srcCompat="@drawable/app_logo_login" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -35,8 +35,10 @@
         app:startIconDrawable="@drawable/ic_user_id">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtUserID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:fontFamily="sans-serif" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,9 +59,11 @@
         app:startIconDrawable="@drawable/ic_user_pwd">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtUserPwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            app:fontFamily="sans-serif" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +112,7 @@
         android:textColor="#8C8C8C" />
 
     <Button
-        android:id="@+id/btnKaKaoLogin"
+        android:id="@+id/btnKakaoLogin"
         style="@style/IconOnlyButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -166,6 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/social_login"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/btnNaverLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
