@@ -11,8 +11,7 @@
     <ImageView
         android:id="@+id/imageEvents"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/eventsImage_height"
-        android:src="@color/colorPrimary" />
+        android:layout_height="@dimen/eventsImage_height" />
 
     <Space
         android:layout_width="match_parent"

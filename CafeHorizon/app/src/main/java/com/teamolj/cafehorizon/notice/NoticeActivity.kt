@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamolj.cafehorizon.databinding.ActivityNoticeBinding
+import java.text.SimpleDateFormat
 
 class NoticeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoticeBinding
@@ -28,7 +29,8 @@ class NoticeActivity : AppCompatActivity() {
         for (no in 0..100) {
             val title = "이것은 ${no}번째 알림입니다. 14일 이전의 알림만 표시하도록 합니다. height 50dp"
             val date = System.currentTimeMillis()
-            var notice = Notice(title, date)
+            val sdf = SimpleDateFormat("yyyy/MM/dd")
+            var notice = Notice(title, sdf.format(date))
             data.add(notice)
         }
         

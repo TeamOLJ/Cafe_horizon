@@ -1,9 +1,6 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -23,7 +20,7 @@ class NewsAndEventsActivity : FragmentActivity() {
         setContentView(binding.root)
 
         viewPager = binding.viewPager
-        viewPager.offscreenPageLimit = NUM_ITEMS
+//        viewPager.offscreenPageLimit = NUM_ITEMS
         val pagerAdapter = NewsAndEventsAdapter(this)
         viewPager.adapter = pagerAdapter
 
@@ -42,9 +39,9 @@ class NewsAndEventsActivity : FragmentActivity() {
 
         override fun createFragment(position: Int): Fragment {
             if (position == 0) {
-                return NewsFragment()
+                return NewsRecyclerFragment()
             } else {
-                return EventsFragment()
+                return EventsRecyclerFragment()
             }
         }
     }

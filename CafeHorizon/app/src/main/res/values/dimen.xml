@@ -3,6 +3,7 @@
     <!--NewsAndEvent-->
     <dimen name="title_size">18dp</dimen>
     <dimen name="item_height">90dp</dimen>
+    <dimen name="padding_size">10dp</dimen>
 
     <dimen name="eventsItem_height">200dp</dimen>
     <dimen name="eventsImage_padding_left_right">20dp</dimen>
