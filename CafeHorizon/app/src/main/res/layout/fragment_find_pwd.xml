@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutFindIdUserInput"
+        android:id="@+id/layoutFindPwdUserInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,15 +17,17 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
             android:hint="@string/user_id"
+            app:boxStrokeWidthFocused="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editUserID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -36,7 +38,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/user_phone"
@@ -46,8 +48,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textFieldUserID">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPhoneNum"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,49 +59,39 @@
             android:id="@+id/btnSendConfirm"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
             android:insetTop="1dp"
             android:insetBottom="1dp"
             android:paddingHorizontal="8dp"
             android:text="@string/send_confirm"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textFieldPhoneNum"
+            android:backgroundTint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum" />
+            app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum"
+            app:layout_constraintTop_toTopOf="@+id/textFieldPhoneNum" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldConfirmCode"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="40dp"
             android:hint="@string/confirm_code"
             app:boxStrokeWidthFocused="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnCheckConfirm"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textFieldPhoneNum">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btnCheckConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="48dp"
-            android:insetTop="1dp"
-            android:insetBottom="1dp"
-            android:text="@string/check_confirm"
-            app:layout_constraintBottom_toBottomOf="@+id/textFieldConfirmCode"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textFieldConfirmCode" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,19 +106,24 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
             android:hint="@string/new_user_pwd"
+            app:endIconMode="password_toggle"
             app:helperText="@string/pwd_requirement"
             app:helperTextEnabled="true"
+            app:boxStrokeWidthFocused="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editNewPwd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                app:fontFamily="sans-serif" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,30 +132,36 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="48dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="40dp"
             android:hint="@string/confirm_pwd"
+            app:endIconMode="password_toggle"
+            app:boxStrokeWidthFocused="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textFieldNewPwd">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmPwd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                app:fontFamily="sans-serif" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/btnFindID"
+        android:id="@+id/btnFindPwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-        android:paddingVertical="8dp"
+        android:layout_marginHorizontal="32dp"
+        android:paddingVertical="12dp"
+        android:enabled="false"
         android:textSize="24dp"
         android:textStyle="bold"
         android:text="@string/reset_pwd"

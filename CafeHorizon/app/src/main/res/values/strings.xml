@@ -45,6 +45,7 @@
     <string name="unsubscribe_text1">회원탈퇴가 완료되었습니다.</string>
     <string name="unsubscribe_text2">그동안 수평선과 함께 해주셔서 감사합니다.<br/>다시 만날 수 있기를 기대하겠습니다.</string>
 
+    <string name="btn_go_login">로그인하러 가기</string>
     <string name="btn_close">닫  기</string>
 
     <string name="menu_stamp">스탬프</string>
@@ -64,10 +65,18 @@
     <string name="nim">님</string>
 
     <string name="toast_check_internet">인터넷 연결을 확인하세요.</string>
-    <string name="toast_empty_userid">아이디를 입력하세요.</string>
-    <string name="toast_empty_userpwd">비밀번호를 입력하세요.</string>
     <string name="toast_failed_verification">잘못된 로그인 정보입니다.</string>
+    <string name="toast_error_occurred">오류가 발생했습니다. 잠시 후에 다시 시도하세요.</string>
+    <string name="toast_pwd_changed">비밀번호가 변경되었습니다. 다시 로그인하세요.</string>
     <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
+
+    <string name="warning_empty_userid">아이디를 입력하세요.</string>
+    <string name="warning_empty_userpwd">비밀번호를 입력하세요.</string>
+    <string name="warning_empty_pwd_confirm">비밀번호를 한 번 더 입력하세요.</string>
+    <string name="warning_different_pwd">비밀번호가 일치하지 않습니다.</string>
+    <string name="warning_empty_phonenum">휴대폰 번호를 입력하세요.</string>
+    <string name="warning_empty_confirms">인증번호를 입력하세요.</string>
+    <string name="warning_wrong_confirms">잘못된 인증번호입니다.</string>
 
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>
