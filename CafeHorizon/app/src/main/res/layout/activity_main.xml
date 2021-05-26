@@ -13,42 +13,38 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeMainActionBar"
-            android:background="#00FFFFFF"
-            app:elevation="0dp"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/home_notices">
-
-                <ImageView
-                    android:id="@+id/logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/main_logo"
-                    android:contentDescription="@string/desc_app_logo" />
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <ImageView
+            android:id="@+id/imgDefault"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPagerMainImage"
+            app:layout_constraintEnd_toEndOf="@+id/viewPagerMainImage"
+            app:layout_constraintStart_toStartOf="@+id/viewPagerMainImage"
+            app:layout_constraintTop_toTopOf="@+id/viewPagerMainImage"
+            android:visibility="invisible"
+            android:scaleType="centerCrop" />
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerMainImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/btnBarcode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
+            app:layout_constraintTop_toTopOf="@+id/appBarLayout" >
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <com.teamolj.cafehorizon.views.SlideIndicatorView
+            android:id="@+id/slideIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPagerMainImage" />
 
         <TextView
             android:id="@+id/textUserNickname"
@@ -147,6 +143,35 @@
             app:viewMainBtnText="@string/menu_chats"
             app:viewMainBtnTextColor="@color/black"
             app:viewMainBtnTextSize="20dp" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeMainActionBar"
+            android:background="@android:color/transparent"
+            app:elevation="0dp"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/btn_navigation"
+                app:menu="@menu/home_notices">
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/main_logo"
+                    android:contentDescription="@string/desc_app_logo" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

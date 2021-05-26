@@ -26,7 +26,7 @@
             android:title="@string/menu_ordered" />
             
         <item
-            android:id="@+id/item_notice"
+            android:id="@+id/item_news_events"
             android:icon="@drawable/ic_news_events"
             android:title="@string/menu_news_events" />
             

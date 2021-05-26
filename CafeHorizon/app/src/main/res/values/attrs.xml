@@ -18,4 +18,6 @@
         <attr name="viewListItemDescTextColor" format="reference|integer" />
         <attr name="viewListItemDescTextSize" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="SlideIndicatorView" />
 </resources>

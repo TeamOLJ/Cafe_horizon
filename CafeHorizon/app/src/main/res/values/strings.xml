@@ -46,7 +46,7 @@
     <string name="unsubscribe_text2">그동안 수평선과 함께 해주셔서 감사합니다.<br/>다시 만날 수 있기를 기대하겠습니다.</string>
 
     <string name="btn_go_login">로그인하러 가기</string>
-    <string name="btn_close">닫  기</string>
+    <string name="btn_close">닫기</string>
 
     <string name="menu_stamp">스탬프</string>
     <string name="menu_coupon">쿠폰</string>
