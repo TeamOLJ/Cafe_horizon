@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MainButtonView">
+        <attr name="viewMainBtnBgColor" format="reference|integer" />
+        <attr name="viewMainBtnImage" format="reference|integer" />
+        <attr name="viewMainBtnText" format="reference|string" />
+        <attr name="viewMainBtnTextColor" format="reference|integer" />
+        <attr name="viewMainBtnTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ListItemView">
+        <attr name="viewListItemType" format="string" />
+        <attr name="viewListItemBgColor" format="reference|integer" />
+        <attr name="viewListItemTitleText" format="reference|string" />
+        <attr name="viewListItemTitleTextColor" format="reference|integer" />
+        <attr name="viewListItemTitleTextSize" format="dimension" />
+        <attr name="viewListItemDescText" format="reference|string" />
+        <attr name="viewListItemDescTextColor" format="reference|integer" />
+        <attr name="viewListItemDescTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SlideIndicatorView">
+        <attr name="viewSlideIndicatorSize" format="string" />
+        <attr name="viewSlideIndicatorDotSize" format="reference|dimension" />
+        <attr name="viewSlideIndicatorMargin" format="reference|dimension" />
+    </declare-styleable>
+</resources>

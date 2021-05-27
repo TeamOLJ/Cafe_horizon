@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teamolj.cafehorizon">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -24,6 +26,20 @@
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
+
+        <activity android:name=".LoginActivity">
+        </activity>
+
+        <activity android:name=".FindInfoActivity" />
+        
+        <activity android:name=".BarcodeActivity" />
+
+        <activity android:name=".MyInfoActivity" />
+
+        <activity android:name=".UnsubscribeActivity" />
+
+        <activity android:name=".UnsubDoneActivity" />
+
     </application>
 
 </manifest>
