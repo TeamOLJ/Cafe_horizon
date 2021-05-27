@@ -56,10 +56,22 @@
     <string name="title_newsAndEvents">공지사항</string>
     <string name="title_news">새소식</string>
     <string name="title_events">이벤트</string>
+    <string name="title_smartOrder">스마트오더</string>
+    <string name="title_shoppingCart">장바구니</string>
 
     <string name="nim">님</string>
 
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>
     <string name="desc_pwd_icon">사용자 비밀번호</string>
+
+    <string-array name="array_menu">
+        <item>신메뉴</item>
+        <item>커피(hot)</item>
+        <item>커피(ice)</item>
+        <item>프라푸치노</item>
+        <item>음료</item>
+        <item>디저트</item>
+    </string-array>
+
 </resources>
