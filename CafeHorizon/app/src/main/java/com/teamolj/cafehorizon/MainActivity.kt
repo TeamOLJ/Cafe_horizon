@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         Glide.with(this)
-            .load(R.drawable.temp_main_image)
+            .load(R.drawable.img_main_loading_failed)
             .into(binding.imgDefault)
 
         val headerView = binding.navigationView.getHeaderView(0)
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
                     // Main page image slider
                     val imageSlideAdapter = SlideImageAdapter(this)
                     binding.viewPagerMainImage.adapter = imageSlideAdapter
-                    binding.viewPagerMainImage.offscreenPageLimit = 3
+                    binding.viewPagerMainImage.offscreenPageLimit = SLIDE_NUM_PAGES
 
                     binding.viewPagerMainImage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                         override fun onPageSelected(position: Int) {

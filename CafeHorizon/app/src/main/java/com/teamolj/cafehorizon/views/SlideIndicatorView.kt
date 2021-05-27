@@ -14,6 +14,8 @@ class SlideIndicatorView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     LinearLayout(context, attrs, defStyleAttr) {
 
+    private var defaultSize = 1
+
     init {
         LayoutInflater
             .from(context)
@@ -26,6 +28,22 @@ class SlideIndicatorView @JvmOverloads constructor(
         ).apply {
 
             try {
+                defaultSize = getInt(R.styleable.SlideIndicatorView_viewSlideIndicatorSize, 0)
+
+                for(idx in 1..defaultSize) {
+                    val indicatorDot = View(context)
+
+                    val indicatorDotSize = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorDotSize, 0)
+                    val indicatorDotMargin = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorMargin, 0)
+
+                    val indicatorParams = LayoutParams(indicatorDotSize, indicatorDotSize)
+                    indicatorParams.setMargins(indicatorDotMargin, 0, indicatorDotMargin, 0)
+                    indicatorDot.layoutParams = indicatorParams
+                    indicatorDot.setBackgroundResource(R.drawable.img_indicator)
+
+                    layoutIndicator.addView(indicatorDot)
+                }
+
             } finally {
                 recycle()
             }
@@ -33,42 +51,18 @@ class SlideIndicatorView @JvmOverloads constructor(
     }
 
     fun setSlideSize(size: Int) {
-        when (size) {
-            1 ->  {
-                indicator1.visibility = View.VISIBLE
-                indicator2.visibility = View.GONE
-                indicator3.visibility = View.GONE
-            }
-            2 -> {
-                indicator1.visibility = View.VISIBLE
-                indicator2.visibility = View.VISIBLE
-                indicator3.visibility = View.GONE
-            }
-            3 -> {
-                indicator1.visibility = View.VISIBLE
-                indicator2.visibility = View.VISIBLE
-                indicator3.visibility = View.VISIBLE
-            }
+        for(idx in 0 until size) {
+            layoutIndicator.getChildAt(idx).visibility = View.VISIBLE
+        }
+        for(idx in size until defaultSize) {
+            layoutIndicator.getChildAt(idx).visibility = View.GONE
         }
     }
 
     fun setCurrentSlide(position: Int) {
-        when(position) {
-            0 -> {
-                indicator1.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
-                indicator2.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-                indicator3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-            }
-            1 -> {
-                indicator1.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-                indicator2.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
-                indicator3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-            }
-            2 -> {
-                indicator1.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-                indicator2.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
-                indicator3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
-            }
+        for(idx in 0 until defaultSize) {
+            layoutIndicator.getChildAt(idx).backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
         }
+        layoutIndicator.getChildAt(position).backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
     }
 }

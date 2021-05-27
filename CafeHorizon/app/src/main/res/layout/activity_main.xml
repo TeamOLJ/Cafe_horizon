@@ -44,7 +44,10 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/viewPagerMainImage" />
+            app:layout_constraintBottom_toBottomOf="@+id/viewPagerMainImage"
+            app:viewSlideIndicatorSize="3"
+            app:viewSlideIndicatorDotSize="8dp"
+            app:viewSlideIndicatorMargin="5dp" />
 
         <TextView
             android:id="@+id/textUserNickname"

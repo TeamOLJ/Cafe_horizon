@@ -19,5 +19,9 @@
         <attr name="viewListItemDescTextSize" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="SlideIndicatorView" />
+    <declare-styleable name="SlideIndicatorView">
+        <attr name="viewSlideIndicatorSize" format="string" />
+        <attr name="viewSlideIndicatorDotSize" format="reference|dimension" />
+        <attr name="viewSlideIndicatorMargin" format="reference|dimension" />
+    </declare-styleable>
 </resources>
