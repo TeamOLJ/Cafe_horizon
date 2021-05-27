@@ -20,7 +20,18 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edit_my_info"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/bold"
+                android:textSize="20dp"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,6 +51,7 @@
             android:orientation="vertical">
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemUserID"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_description"
@@ -49,6 +61,7 @@
                 app:viewListItemDescTextSize="16dp" />
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemUserNickname"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_description"
@@ -58,6 +71,7 @@
                 app:viewListItemDescTextSize="16dp" />
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemUserPhoneNum"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_description_slider"
@@ -148,7 +162,7 @@
                     android:text="@string/change_phone"
                     android:textSize="14dp"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/gray"
+                    android:enabled="false"
                     app:layout_constraintBottom_toBottomOf="@+id/textFieldConfirmCode"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textFieldConfirmCode" />
@@ -156,6 +170,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemUserPwd"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_slider"
@@ -192,6 +207,7 @@
                     android:layout_marginTop="8dp"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="password_toggle"
                     app:layout_constraintStart_toEndOf="@id/textPwd1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -200,7 +216,8 @@
                         android:id="@+id/editCurrentPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -226,16 +243,18 @@
                     android:layout_marginHorizontal="8dp"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="password_toggle"
                     app:layout_constraintTop_toBottomOf="@+id/textFieldCurrentPwd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textPwd2"
-                    android:hint="@string/pwd_requirement">
+                    app:helperText="@string/pwd_requirement">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editNewPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -262,8 +281,8 @@
                     android:layout_marginBottom="8dp"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="password_toggle"
                     app:layout_constraintTop_toBottomOf="@+id/textFieldNewPwd"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/textPwd3"
                     app:layout_constraintEnd_toEndOf="parent">
 
@@ -271,13 +290,29 @@
                         android:id="@+id/editConfirmPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnChagedPwd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/change_pwd"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/textFieldConfirmPwd"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemTermMarketing"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_switch"
@@ -285,6 +320,7 @@
                 app:viewListItemTitleTextSize="16dp" />
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemTermPushMsg"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:viewListItemType="view_title_switch"
@@ -299,6 +335,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="@string/user_unsubscribe"
                 android:textSize="16dp"
+                android:fontFamily="@font/light"
                 android:textColor="#8C8C8C" />
 
         </LinearLayout>

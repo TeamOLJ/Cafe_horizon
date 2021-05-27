@@ -42,12 +42,12 @@ class FindPwdFragment : Fragment() {
 
         binding.editNewPwd.doOnTextChanged { _, _, _, _ ->
             binding.textFieldNewPwd.error = null
-            binding.textFieldConfirmCode.isErrorEnabled = false
+            binding.textFieldNewPwd.isErrorEnabled = false
         }
 
         binding.editConfirmPwd.doOnTextChanged { _, _, _, _ ->
             binding.textFieldConfirmPwd.error = null
-            binding.textFieldConfirmCode.isErrorEnabled = false
+            binding.textFieldConfirmPwd.isErrorEnabled = false
         }
 
         binding.btnSendConfirm.setOnClickListener {
@@ -103,7 +103,7 @@ class FindPwdFragment : Fragment() {
                 binding.layoutFindPwdUserInput.visibility = View.GONE
                 binding.layoutFoundUserPwd.visibility = View.VISIBLE
 
-                binding.btnFindPwd.text = getText(R.string.chance_pwd)
+                binding.btnFindPwd.text = getText(R.string.change_pwd)
 
                 binding.btnFindPwd.setOnClickListener(changePwdListener)
 
@@ -139,7 +139,7 @@ class FindPwdFragment : Fragment() {
             // 비밀번호 변경 루틴 진행
 
             // if 성공한 경우
-            Toast.makeText(requireContext(), getString(R.string.toast_pwd_changed), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.toast_pwd_changed_relogin), Toast.LENGTH_SHORT).show()
             activity?.finish()
 
             // else 실패한 경우

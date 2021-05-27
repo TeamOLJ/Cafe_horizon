@@ -70,8 +70,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
-//             val intent = Intent(this, SignUpActivity::class.java)
-//             startActivity(intent)
+//            val intent = Intent(this, SigninActivity::class.java)
+//            startActivity(intent)
         }
 
         binding.btnKakaoLogin.setOnClickListener(loginWithKakao)

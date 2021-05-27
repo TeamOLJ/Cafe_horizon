@@ -92,11 +92,11 @@ class ListItemView @JvmOverloads constructor(
             itemSlider.setOnClickListener(l)
         }
         if (itemSwitch.visibility == View.VISIBLE) {
-            itemSwitch.isChecked = !itemSwitch.isChecked
+            itemSwitch.setOnClickListener(l)
         }
     }
 
-    private fun toggleSlider() {
+    fun toggleSlider() {
         if (itemSlider.tag == "not_open") {
             itemSlider.tag = "open"
             itemSlider.setImageResource(R.drawable.ic_slideup)
@@ -105,5 +105,17 @@ class ListItemView @JvmOverloads constructor(
             itemSlider.tag = "not_open"
             itemSlider.setImageResource(R.drawable.ic_slidedown)
         }
+    }
+
+    fun isSlideOpen() : Boolean = (itemSlider.tag == "open")
+
+    fun toggleSwitch() {
+        itemSwitch.isChecked = !(itemSwitch.isChecked)
+    }
+
+    fun isSwitchChecked() : Boolean = (itemSwitch.isChecked)
+
+    fun setSwitch(state: Boolean) {
+        itemSwitch.isChecked = state
     }
 }

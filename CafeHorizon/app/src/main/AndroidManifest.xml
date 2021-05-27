@@ -29,6 +29,10 @@
 
         <activity android:name=".MyInfoActivity" />
 
+        <activity android:name=".UnsubscribeActivity" />
+
+        <activity android:name=".UnsubDoneActivity" />
+
     </application>
 
 </manifest>

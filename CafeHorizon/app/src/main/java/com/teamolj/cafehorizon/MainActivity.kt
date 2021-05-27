@@ -37,9 +37,8 @@ class MainActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.notice -> {
-                    // val intent = Intent(this, NoticeActivity::class.java)
-                    // startActivity(intent)
-                    Toast.makeText(this, "알림", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, NoticeActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false
@@ -54,37 +53,35 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.item_stamp -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, StampActivity::class.java)
-                    // startActivity(intent)
+//                    val intent = Intent(this, StampActivity::class.java)
+//                    startActivity(intent)
                     Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_coupon -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, CouponActivity::class.java)
-                    // startActivity(intent)
+//                    val intent = Intent(this, CouponActivity::class.java)
+//                    startActivity(intent)
                     Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.item_order_main -> {
+                R.id.item_smart_order -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, OrderMainActivity::class.java)
-                    // startActivity(intent)
-                    Toast.makeText(this, "주문", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, SmartOrderActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.item_ordered -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, OrderedActivity::class.java)
-                    // startActivity(intent)
+//                    val intent = Intent(this, OrderedActivity::class.java)
+//                    startActivity(intent)
                     Toast.makeText(this, "주문내역", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_news_events -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, NewsAndEventsItem::class.java)
-                    // startActivity(intent)
-                    Toast.makeText(this, "새소식/이벤트", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, NewsAndEventsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.item_chats -> {
@@ -121,21 +118,20 @@ class MainActivity : AppCompatActivity() {
         }
 
          binding.btnStamp.setOnClickListener {
-        //     val intent = Intent(this, StampActivity::class.java)
-        //     startActivity(intent)
+//             val intent = Intent(this, StampActivity::class.java)
+//             startActivity(intent)
              Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
          }
 
          binding.btnCoupon.setOnClickListener {
-        //     val intent = Intent(this, CouponActivity::class.java)
-        //     startActivity(intent)
+//             val intent = Intent(this, CouponActivity::class.java)
+//             startActivity(intent)
              Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
          }
 
          binding.btnOrderMain.setOnClickListener {
-        //     val intent = Intent(this, OrderMainActivity::class.java)
-        //     startActivity(intent)
-             Toast.makeText(this, "주문", Toast.LENGTH_SHORT).show()
+             val intent = Intent(this, SmartOrderActivity::class.java)
+             startActivity(intent)
          }
 
          binding.btnChatting.setOnClickListener {

@@ -126,8 +126,8 @@
             app:layout_constraintEnd_toStartOf="@+id/btnChatting"
             app:layout_constraintStart_toStartOf="parent"
             app:viewMainBtnBgColor="@color/orangeBackground"
-            app:viewMainBtnImage="@drawable/ic_order_main"
-            app:viewMainBtnText="@string/menu_order_main"
+            app:viewMainBtnImage="@drawable/ic_smart_order"
+            app:viewMainBtnText="@string/menu_smart_order"
             app:viewMainBtnTextColor="@color/black"
             app:viewMainBtnTextSize="20dp" />
 
