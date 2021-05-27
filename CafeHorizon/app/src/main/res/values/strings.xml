@@ -6,10 +6,22 @@
     <!--Notice-->
     <string name="title_notice">알림</string>
 
-    <!--NewsAndEvent-->
+    <!--News and event-->
     <string name="title_newsAndEvents">공지사항</string>
     <string name="title_news">새소식</string>
     <string name="title_events">이벤트</string>
+
+    <!--Smart order-->
+    <string name="title_smartOrder">스마트오더</string>
+    <string name="title_shoppingCart">장바구니</string>
+    <string-array name="array_menu">
+        <item>신메뉴</item>
+        <item>커피(hot)</item>
+        <item>커피(ice)</item>
+        <item>프라푸치노</item>
+        <item>음료</item>
+        <item>디저트</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
