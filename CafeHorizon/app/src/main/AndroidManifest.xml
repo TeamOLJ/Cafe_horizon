@@ -7,38 +7,33 @@
     <application
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_horizon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_horizon_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-        <activity android:name=".smartOrder.ShoppingCartActivity"></activity>
-        <activity android:name=".smartOrder.SmartOrderActivity"></activity>
-        <activity android:name=".newsAndEvents.NewsDetailActivity" />
-        <activity android:name=".newsAndEvents.EventsDetailActivity" />
-        <activity android:name=".newsAndEvents.NewsAndEventsActivity" />
-        <activity android:name=".notice.NoticeActivity" />
+
         <activity android:name=".MainActivity">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".LoginActivity">
         </activity>
 
         <activity android:name=".FindInfoActivity" />
-        
         <activity android:name=".BarcodeActivity" />
-
         <activity android:name=".MyInfoActivity" />
-
         <activity android:name=".UnsubscribeActivity" />
-
         <activity android:name=".UnsubDoneActivity" />
+        <activity android:name=".smartOrder.ShoppingCartActivity" />
+        <activity android:name=".smartOrder.SmartOrderActivity" />
+        <activity android:name=".newsAndEvents.NewsDetailActivity" />
+        <activity android:name=".newsAndEvents.EventsDetailActivity" />
+        <activity android:name=".newsAndEvents.NewsAndEventsActivity" />
+        <activity android:name=".notice.NoticeActivity" />
 
     </application>
 

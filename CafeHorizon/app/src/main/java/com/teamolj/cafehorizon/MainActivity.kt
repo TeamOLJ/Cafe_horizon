@@ -15,6 +15,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityMainBinding
+import com.teamolj.cafehorizon.newsAndEvents.NewsAndEventsActivity
+import com.teamolj.cafehorizon.notice.NoticeActivity
+import com.teamolj.cafehorizon.smartOrder.SmartOrderActivity
 import kotlinx.android.synthetic.main.header_navigation_drawer.view.*
 
 class MainActivity : AppCompatActivity() {

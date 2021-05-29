@@ -14,7 +14,6 @@ class UnsubDoneActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val topAppBar = binding.toolbar
-        topAppBar.setTitle(R.string.user_unsubscribe)   // 중앙정렬, 색상 지정 필요
         topAppBar.setBackgroundColor(255)
 
         binding.btnClose.setOnClickListener {
