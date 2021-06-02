@@ -24,7 +24,6 @@ class UnsubscribeActivity : AppCompatActivity() {
 
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
-        topAppBar.setTitle(R.string.user_unsubscribe)   // 중앙정렬, 색상 지정 필요
         topAppBar.setBackgroundColor(255)
 
         topAppBar.setNavigationOnClickListener {

@@ -24,4 +24,11 @@
         <attr name="viewSlideIndicatorDotSize" format="reference|dimension" />
         <attr name="viewSlideIndicatorMargin" format="reference|dimension" />
     </declare-styleable>
+
+    <declare-styleable name="MenuOptionView">
+        <attr name="viewMenuOptionBgColor" format="reference|integer" />
+        <attr name="viewMenuOptionItemType" format="string" />
+        <attr name="viewMenuOptionTitleText" format="string" />
+        <attr name="viewMenuOptionDefaultAmount" format="string" />
+    </declare-styleable>
 </resources>

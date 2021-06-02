@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height"
     android:background="@drawable/notice_item_border"
-    android:padding="@dimen/padding_size">
+    android:padding="@dimen/space">
 
     <ImageView
         android:id="@+id/imageNewIcon"

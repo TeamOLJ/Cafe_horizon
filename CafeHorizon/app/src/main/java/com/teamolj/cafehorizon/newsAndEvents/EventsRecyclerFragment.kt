@@ -36,7 +36,7 @@ class EventsRecyclerFragment : Fragment() {
 
         for (no in 0..5) {
             val title = "${no}번째 이벤트"
-            val uri = "android.resource://"+activity?.packageName+"/"+ R.drawable.sample_coffee_image
+            val uri = "android.resource://"+activity?.packageName+"/"+ R.drawable.coffee_image
             val period = "1900-01-01 ~ 2100-01-01"
 
             var events = Events(title, uri, period)

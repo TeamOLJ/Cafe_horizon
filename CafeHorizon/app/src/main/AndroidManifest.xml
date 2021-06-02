@@ -12,34 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-        <activity android:name=".smartOrder.ShoppingCartActivity"></activity>
-        <activity android:name=".smartOrder.SmartOrderActivity"></activity>
+        <activity android:name=".smartOrder.MenuDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".smartOrder.FilledCartActivity" />
+        <activity android:name=".smartOrder.EmptyCartActivity" />
+        <activity android:name=".smartOrder.SmartOrderActivity" />
         <activity android:name=".newsAndEvents.NewsDetailActivity" />
         <activity android:name=".newsAndEvents.EventsDetailActivity" />
         <activity android:name=".newsAndEvents.NewsAndEventsActivity" />
         <activity android:name=".notice.NoticeActivity" />
-        <activity android:name=".MainActivity">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-        </activity>
-
-        <activity android:name=".LoginActivity">
-        </activity>
-
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".FindInfoActivity" />
-        
         <activity android:name=".BarcodeActivity" />
-
         <activity android:name=".MyInfoActivity" />
-
         <activity android:name=".UnsubscribeActivity" />
-
         <activity android:name=".UnsubDoneActivity" />
-
     </application>
 
 </manifest>

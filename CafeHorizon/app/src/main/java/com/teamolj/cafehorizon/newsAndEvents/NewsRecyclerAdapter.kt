@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemNewsBinding
 
 
@@ -42,7 +43,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.newsHolder>() {
         internal fun setNews(n: News) {
             this.news = n
 
-            binding.imageNewIcon.setImageResource(android.R.color.black)
+            binding.imageNewIcon.setImageResource(R.drawable.ic_new_item)
 //        binding.imageNewIcon.setImageResource(android.R.color.transparent)
             binding.textNewsTitle.text = news.title
             binding.textNewsDate.text = news.date

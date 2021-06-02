@@ -21,10 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_notice" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_notice"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/bold"
+                android:textSize="20dp"/>
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

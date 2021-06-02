@@ -11,34 +11,31 @@ import com.teamolj.cafehorizon.databinding.ActivitySmartOrderBinding
 
 class SmartOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySmartOrderBinding
-    private lateinit var menuList: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySmartOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
 
-        menuList = resources.getStringArray(R.array.array_menu).toList()
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_filled_Cart -> {
+                    var intent = Intent(this, FilledCartActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.action_empty_Cart -> {
+                    var intent = Intent(this, EmptyCartActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
 
         val tabLayout = binding.tabLayout
         val recyclerView = binding.recyclerviewMenu
-
-
-    }
-    
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_smartorder, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem):Boolean = when (item.itemId) {
-        R.id.action_shoppingCart -> {
-            var intent = Intent(this, ShoppingCartActivity::class.java)
-            startActivity(intent)
-            true
-        }
-        else -> super.onOptionsItemSelected(item)
     }
 }

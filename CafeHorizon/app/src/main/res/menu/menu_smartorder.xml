@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_shoppingCart"
-        android:icon="@drawable/ic_baseline_keyboard_arrow_right_36"
+        android:id="@+id/action_filled_Cart"
+        android:icon="@drawable/ic_cart_fill"
         android:title="@string/title_shoppingCart"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/action_empty_Cart"
+        android:icon="@drawable/ic_cart_empty"
+        android:title="@string/title_shoppingCart"
+        app:showAsAction="always"
+        android:visible="true"/>
 
 </menu>
