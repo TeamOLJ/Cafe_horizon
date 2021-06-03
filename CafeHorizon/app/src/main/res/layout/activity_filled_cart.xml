@@ -36,6 +36,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCart"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/layoutPrice"
@@ -46,9 +47,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutPrice"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:background="@color/lightgray"
-        android:padding="@dimen/space"
+        android:paddingLeft="@dimen/space20"
+        android:paddingRight="@dimen/space20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -56,7 +58,7 @@
         <TextView
             android:id="@+id/textTotalCartPrice"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="합계 21,600원"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +68,7 @@
         <Button
             android:id="@+id/btnOrder"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/btn_order"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"

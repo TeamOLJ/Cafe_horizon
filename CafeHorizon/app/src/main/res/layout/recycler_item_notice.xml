@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height"
-    android:background="@drawable/notice_item_border"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/height_item"
+    android:background="@drawable/recycler_item_border"
     android:orientation="vertical"
     android:paddingLeft="@dimen/eventsImage_padding_left_right"
     android:paddingTop="@dimen/eventsImage_padding_top_bottom"
@@ -16,7 +17,7 @@
         android:layout_weight="3"
         android:gravity="center_vertical"
         android:text="@string/sample_text"
-        android:textSize="@dimen/title_size" />
+        android:textSize="@dimen/size_title" />
 
 
     <TextView

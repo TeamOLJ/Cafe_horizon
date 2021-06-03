@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_item"
+    android:background="@drawable/recycler_item_border">
+
+    <ImageView
+        android:id="@+id/imageMenu"
+        android:layout_width="@dimen/size_menu_image_in_recycler"
+        android:layout_height="@dimen/size_menu_image_in_recycler"
+        android:layout_marginLeft="@dimen/space20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee_image" />
+
+    <TextView
+        android:id="@+id/textMenuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space16"
+        android:text="메뉴 이름"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textMenuOrglPrice"
+        app:layout_constraintStart_toEndOf="@+id/imageMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textMenuOrglPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가격"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textMenuName"
+        app:layout_constraintTop_toBottomOf="@+id/textMenuName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

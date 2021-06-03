@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_cart_item"
+    android:layout_marginLeft="@dimen/space20"
+    android:layout_marginRight="@dimen/space20"
+    android:layout_marginTop="@dimen/space10"
+    android:layout_marginBottom="@dimen/space10"
+    android:background="@color/blueBackground"
+    android:padding="@dimen/space16">
+
+    <ImageView
+        android:id="@+id/imageMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee_image" />
+
+    <TextView
+        android:id="@+id/textMenuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space16"
+        android:text="메뉴 이름"
+        android:textSize="24dp"
+        app:layout_constraintStart_toEndOf="@id/imageMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutAmount"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textMenuName">
+
+        <ImageButton
+            android:id="@+id/imageBtnMinus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_minus" />
+
+        <TextView
+            android:id="@+id/textAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:padding="0dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="1" />
+
+        <ImageButton
+            android:id="@+id/imageBtnPlus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_plus" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="5dp"
+        android:backgroundTint="@color/gray"
+        android:text="@string/btn_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTotalMenuPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8,000원"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

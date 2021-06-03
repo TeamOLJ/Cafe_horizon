@@ -12,7 +12,7 @@ import com.teamolj.cafehorizon.databinding.ActivityNewsAndEventsBinding
 class NewsAndEventsActivity : FragmentActivity() {
     private lateinit var binding: ActivityNewsAndEventsBinding
     private lateinit var viewPager: ViewPager2
-    private val NUM_ITEMS: Int = 2
+    private val ITEMS_NUM: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class NewsAndEventsActivity : FragmentActivity() {
         setContentView(binding.root)
 
         viewPager = binding.viewPager
-//        viewPager.offscreenPageLimit = NUM_ITEMS
+        viewPager.offscreenPageLimit = ITEMS_NUM
         val pagerAdapter = NewsAndEventsAdapter(this)
         viewPager.adapter = pagerAdapter
 
@@ -35,7 +35,7 @@ class NewsAndEventsActivity : FragmentActivity() {
 
 
     private inner class NewsAndEventsAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = NUM_ITEMS
+        override fun getItemCount(): Int = ITEMS_NUM
 
         override fun createFragment(position: Int): Fragment {
             if (position == 0) {

@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height"
-    android:background="@drawable/notice_item_border"
-    android:padding="@dimen/space">
+    android:layout_height="@dimen/height_item"
+    android:background="@drawable/recycler_item_border"
+    android:paddingLeft="@dimen/space20"
+    android:paddingRight="@dimen/space20">
 
     <ImageView
         android:id="@+id/imageNewIcon"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:scaleType="fitCenter"
-        android:src="@android:color/transparent" />
+        android:src="@drawable/ic_new_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textNewsTitle"/>
 
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/textNewsTitle"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="8"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/sample_text"
+        android:textSize="@dimen/size_title"
+        android:textStyle="bold"
+        android:layout_marginLeft="@dimen/space10"
+        app:layout_constraintBottom_toTopOf="@+id/textNewsDate"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@id/imageNewIcon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textNewsTitle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:textSize="@dimen/title_size"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/sample_text"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textNewsDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textNewsTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textNewsTitle" />
 
-        <TextView
-            android:id="@+id/textNewsDate"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/sample_date" />
-    </LinearLayout>
 
     <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_baseline_keyboard_arrow_right_36" />
+        android:src="@drawable/ic_baseline_keyboard_arrow_right_36"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

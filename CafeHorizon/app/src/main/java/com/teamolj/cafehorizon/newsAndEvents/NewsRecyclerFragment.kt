@@ -1,11 +1,14 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.FragmentNewsRecyclerBinding
 
 class NewsRecyclerFragment : Fragment() {
@@ -29,18 +32,25 @@ class NewsRecyclerFragment : Fragment() {
         return view
     }
 
-    internal fun loadNews(): MutableList<News> {
-        //firebase 연결하기
+    fun loadNews(): MutableList<News> { //데이터 가져와서 리스트에 넣고, 그 리스트를 어댑터 리스트에 넣고 업데이트 하는 것까지!
+        val db = Firebase.firestore
         val data: MutableList<News> = mutableListOf()
 
-        for (no in 0..10) {
-            val title = "${no}번째 새소식"
-            val content = "${no}번째 소식의 내용입니다.\n첫번째줄\n두번째줄\n세번째줄\n네번째줄\n다섯번째줄\n여섯번째줄\n일곱번째줄 "
-            val date = System.currentTimeMillis().toString()
-
-            var news = News(title, content, date)
-            data.add(news)
-        }
+        db.collection("News")
+            .get().addOnSuccessListener { documents ->
+                for (document in documents) {
+                    data.add(
+                        News(
+                            document.getString("title")!!,
+                            document.getString("content")!!,
+                            document.getString("date")!!
+                        )
+                    )
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("firebase", "Error getting documents.", exception)
+            }
 
         return data
     }

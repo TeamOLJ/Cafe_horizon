@@ -21,8 +21,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/menu_smartorder">
+            android:layout_height="?attr/actionBarSize">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,9 +33,7 @@
                 android:textSize="20dp" />
 
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -51,14 +48,14 @@
             android:id="@+id/layoutMenuInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/space20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/imageMenu"
-                android:layout_width="@dimen/size_menu_image"
-                android:layout_height="@dimen/size_menu_image"
-                android:layout_marginTop="@dimen/space"
+                android:layout_width="@dimen/size_menu_image_in_detail"
+                android:layout_height="@dimen/size_menu_image_in_detail"
                 android:src="@drawable/coffee_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,15 +64,15 @@
                 android:id="@+id/layoutMenuTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space16"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toEndOf="@+id/imageMenu"
                 app:layout_constraintTop_toTopOf="@id/imageMenu">
 
                 <TextView
-                    android:id="@+id/textMenuTitle"
+                    android:id="@+id/textMenuName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/space"
                     android:text="가나다라마바사아"
                     android:textSize="20dp" />
 
@@ -84,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
+                    android:layout_marginLeft="@dimen/space10"
                     android:text="5500원"
                     android:textSize="16dp" />
             </LinearLayout>
@@ -92,19 +90,19 @@
                 android:id="@+id/textMenuDesc"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:padding="@dimen/space"
                 android:text="@string/sample_text"
                 android:textSize="16dp"
+                android:layout_marginTop="@dimen/space16"
                 app:layout_constraintBottom_toBottomOf="@+id/imageMenu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageMenu"
+                app:layout_constraintStart_toStartOf="@+id/layoutMenuTitle"
                 app:layout_constraintTop_toBottomOf="@id/layoutMenuTitle" />
 
             <com.teamolj.cafehorizon.views.MenuOptionView
                 android:id="@+id/customViewAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/double_space"
+                android:layout_marginTop="@dimen/space20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageMenu"
@@ -117,7 +115,7 @@
                 android:id="@+id/layoutOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/double_space"
+                android:layout_marginTop="@dimen/space20"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,12 +134,12 @@
                 android:id="@+id/textTotalMenuPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space20"
                 android:layout_marginEnd="16dp"
                 android:text="총합 5,500원"
                 android:textSize="20dp"
-                android:layout_marginTop="@dimen/double_space"
-                app:layout_constraintTop_toBottomOf="@id/layoutOption"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutOption" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -153,7 +151,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/lightgray"
-        android:padding="@dimen/space"
+        android:padding="@dimen/space10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

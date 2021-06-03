@@ -96,6 +96,7 @@
     <string name="btn_order_now">바로 주문하기</string>
     <string name="btn_whippingcream_normal">기본</string>
     <string name="btn_whippingcream_remove">없음</string>
+    <string name="btn_delete">삭제</string>
 
     <string name="menu_amount">수량</string>
     <string name="menu_option">추가옵션</string>
