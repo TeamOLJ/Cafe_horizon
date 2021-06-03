@@ -30,7 +30,7 @@
     <string name="new_user_pwd">신규 비밀번호</string>
     <string name="confirm_pwd">비밀번호 확인</string>
     <string name="pwd_requirement">8~15자의 영문자/숫자/특수문자</string>
-    
+
     <string name="edit_my_info">내 정보 수정</string>
     <string name="log_out">로그아웃</string>
 
@@ -62,6 +62,7 @@
     <string name="title_events">이벤트</string>
     <string name="title_smartOrder">스마트오더</string>
     <string name="title_shoppingCart">장바구니</string>
+    <string name="title_ordered_status">주문현황</string>
 
     <string name="welcome">환영합니다</string>
     <string name="nim">님</string>
@@ -85,6 +86,18 @@
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>
     <string name="desc_pwd_icon">사용자 비밀번호</string>
+
+    <string name="order_standby">주문대기</string>
+    <string name="order_receipt">주문접수</string>
+    <string name="order_wait">픽업대기</string>
+    <string name="order_cplt">픽업완료</string>
+
+    <string name="msg_stby">주문이 접수중입니다.</string>
+    <string name="msg_rcpt">음료를 준비중입니다.</string>
+    <string name="msg_wait">음료가 준비되었습니다! \n픽업해주세요.</string>
+    <string name="msg_cplt">픽업이 완료되었습니다. \n맛있게 드세요.</string>
+
+    <string name="hello_blank_fragment">hello</string>
 
     <string-array name="array_menu">
         <item>신메뉴</item>

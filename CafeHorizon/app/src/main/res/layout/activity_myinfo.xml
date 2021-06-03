@@ -64,11 +64,11 @@
                 android:id="@+id/itemUserNickname"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                app:viewListItemType="view_title_description"
+                app:viewListItemDescText="userNickname"
+                app:viewListItemDescTextSize="16dp"
                 app:viewListItemTitleText="@string/user_nickname"
                 app:viewListItemTitleTextSize="16dp"
-                app:viewListItemDescText="userNickname"
-                app:viewListItemDescTextSize="16dp" />
+                app:viewListItemType="view_title_description" />
 
             <com.teamolj.cafehorizon.views.ListItemView
                 android:id="@+id/itemUserPhoneNum"

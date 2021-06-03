@@ -14,7 +14,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.teamolj.cafehorizon.coupon.CouponActivity
 import com.teamolj.cafehorizon.databinding.ActivityMainBinding
+import com.teamolj.cafehorizon.newsAndEvents.NewsAndEventsActivity
+import com.teamolj.cafehorizon.notice.NoticeActivity
+import com.teamolj.cafehorizon.smartOrder.SmartOrderActivity
+import com.teamolj.cafehorizon.stamp.StampActivity
 import kotlinx.android.synthetic.main.header_navigation_drawer.view.*
 
 class MainActivity : AppCompatActivity() {
@@ -53,15 +58,15 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.item_stamp -> {
                     binding.drawerLayout.close()
-//                    val intent = Intent(this, StampActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this, StampActivity::class.java)
+                    startActivity(intent)
                     Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_coupon -> {
                     binding.drawerLayout.close()
-//                    val intent = Intent(this, CouponActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this, CouponActivity::class.java)
+                    startActivity(intent)
                     Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -73,8 +78,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_ordered -> {
                     binding.drawerLayout.close()
-//                    val intent = Intent(this, OrderedActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this, OrderedActivity::class.java)
+                    startActivity(intent)
                     Toast.makeText(this, "주문내역", Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -118,14 +123,14 @@ class MainActivity : AppCompatActivity() {
         }
 
          binding.btnStamp.setOnClickListener {
-//             val intent = Intent(this, StampActivity::class.java)
-//             startActivity(intent)
+             val intent = Intent(this, StampActivity::class.java)
+             startActivity(intent)
              Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
          }
 
          binding.btnCoupon.setOnClickListener {
-//             val intent = Intent(this, CouponActivity::class.java)
-//             startActivity(intent)
+             val intent = Intent(this, CouponActivity::class.java)
+             startActivity(intent)
              Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
          }
 

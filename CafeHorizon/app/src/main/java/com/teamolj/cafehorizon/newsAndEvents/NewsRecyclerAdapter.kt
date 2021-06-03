@@ -1,4 +1,4 @@
-package com.teamolj.cafehorizon.newsAndEvents
+ package com.teamolj.cafehorizon.newsAndEvents
 
 import android.content.Intent
 import android.view.LayoutInflater

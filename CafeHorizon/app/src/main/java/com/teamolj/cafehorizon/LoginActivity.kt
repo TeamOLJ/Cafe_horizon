@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.teamolj.cafehorizon.databinding.ActivityLoginBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
+import com.teamolj.cafehorizon.sign.SigninActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -70,8 +71,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
-//            val intent = Intent(this, SigninActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, SigninActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnKakaoLogin.setOnClickListener(loginWithKakao)
