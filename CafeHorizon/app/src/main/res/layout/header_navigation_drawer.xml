@@ -41,21 +41,38 @@
         app:layout_constraintBottom_toBottomOf="@+id/textUserNickname"
         app:layout_constraintStart_toEndOf="@+id/textUserNickname" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/btnMyInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/btnMyInfo"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginTop="28dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:layout_marginTop="28dp"
         android:text="@string/edit_my_info"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:cornerRadius="0dp"
-        style="?attr/materialButtonOutlinedStyle"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/btnLogOut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textUserNickname" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogOut"
+        app:layout_constraintStart_toEndOf="@+id/btnMyInfo"
+        app:layout_constraintTop_toTopOf="@+id/btnMyInfo"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMyInfo"/>
 
     <Button
         android:id="@+id/btnLogOut"
@@ -66,11 +83,20 @@
         android:text="@string/log_out"
         android:textSize="16dp"
         app:cornerRadius="0dp"
-        style="?attr/materialButtonOutlinedStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/btnMyInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnMyInfo"
         app:layout_constraintTop_toTopOf="@+id/btnMyInfo" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMyInfo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

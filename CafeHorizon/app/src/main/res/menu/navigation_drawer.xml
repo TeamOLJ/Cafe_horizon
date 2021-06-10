@@ -7,8 +7,7 @@
         <item
             android:id="@+id/item_stamp"
             android:icon="@drawable/ic_stamp"
-            android:title="@string/menu_stamp"
-            android:checked="true" />
+            android:title="@string/menu_stamp" />
 
         <item
             android:id="@+id/item_coupon"

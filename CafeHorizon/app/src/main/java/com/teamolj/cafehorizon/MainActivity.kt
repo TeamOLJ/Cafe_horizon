@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -60,14 +61,12 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayout.close()
                     val intent = Intent(this, StampActivity::class.java)
                     startActivity(intent)
-                    Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_coupon -> {
                     binding.drawerLayout.close()
                     val intent = Intent(this, CouponActivity::class.java)
                     startActivity(intent)
-                    Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_smart_order -> {
@@ -80,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayout.close()
                     val intent = Intent(this, OrderedActivity::class.java)
                     startActivity(intent)
-                    Toast.makeText(this, "주문내역", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.item_news_events -> {
@@ -125,13 +123,11 @@ class MainActivity : AppCompatActivity() {
          binding.btnStamp.setOnClickListener {
              val intent = Intent(this, StampActivity::class.java)
              startActivity(intent)
-             Toast.makeText(this, "스탬프", Toast.LENGTH_SHORT).show()
          }
 
          binding.btnCoupon.setOnClickListener {
              val intent = Intent(this, CouponActivity::class.java)
              startActivity(intent)
-             Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
          }
 
          binding.btnOrderMain.setOnClickListener {
@@ -198,16 +194,23 @@ class MainActivity : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment = MainImageFragment(mainImageList.get(position))
     }
 
-    // BackPress twice to close the app
+    // if navigation is open, close navigation drawer
+    // else, BackPress twice to close the app
     override fun onBackPressed() {
-        if (doubleBackPressed) {
-            closeToast.cancel()
-            super.onBackPressed()
-            return
+        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayout.closeDrawers()
         }
-        this.doubleBackPressed = true
-        closeToast = Toast.makeText(this, getString(R.string.toast_backpress_close), Toast.LENGTH_SHORT)
-        closeToast.show()
-        Handler(Looper.getMainLooper()).postDelayed({ doubleBackPressed = false }, 2000)
+        else {
+            if (doubleBackPressed) {
+                closeToast.cancel()
+                super.onBackPressed()
+                return
+            }
+            this.doubleBackPressed = true
+            closeToast =
+                Toast.makeText(this, getString(R.string.toast_backpress_close), Toast.LENGTH_SHORT)
+            closeToast.show()
+            Handler(Looper.getMainLooper()).postDelayed({ doubleBackPressed = false }, 2000)
+        }
     }
 }

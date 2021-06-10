@@ -95,7 +95,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:hint="@string/user_phone"
+                    app:placeholderText="@string/user_phone"
+                    app:hintEnabled="false"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:layout_constraintEnd_toStartOf="@+id/btnSendConfirm"
@@ -135,7 +136,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
-                    android:hint="@string/confirm_code"
+                    app:placeholderText="@string/confirm_code"
+                    app:hintEnabled="false"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -189,14 +191,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textFieldCurrentPwd"
-                    app:layout_constraintTop_toTopOf="@+id/textFieldCurrentPwd"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/textFieldCurrentPwd"
+                    android:layout_marginTop="16dp"
                     android:text="@string/current_user_pwd"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textSize="14dp"/>
+                    app:layout_constraintEnd_toStartOf="@id/textFieldCurrentPwd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldCurrentPwd" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldCurrentPwd"
@@ -208,6 +210,7 @@
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:endIconMode="password_toggle"
+                    app:hintEnabled="false"
                     app:layout_constraintStart_toEndOf="@id/textPwd1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -216,8 +219,10 @@
                         android:id="@+id/editCurrentPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="4dp"
                         android:textSize="14dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        app:fontFamily="sans-serif" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -226,14 +231,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textFieldNewPwd"
-                    app:layout_constraintTop_toTopOf="@+id/textFieldNewPwd"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/textFieldNewPwd"
+                    android:layout_marginTop="16dp"
                     android:text="@string/new_user_pwd"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textSize="14dp"/>
+                    app:layout_constraintEnd_toStartOf="@id/textFieldNewPwd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldNewPwd" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldNewPwd"
@@ -241,20 +246,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="2dp"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:endIconMode="password_toggle"
-                    app:layout_constraintTop_toBottomOf="@+id/textFieldCurrentPwd"
+                    app:helperText="@string/pwd_requirement"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textPwd2"
-                    app:helperText="@string/pwd_requirement">
+                    app:layout_constraintTop_toBottomOf="@+id/textFieldCurrentPwd">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editNewPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:paddingVertical="4dp"
                         android:textSize="14dp"
-                        android:inputType="textPassword" />
+                        app:fontFamily="sans-serif" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -263,14 +272,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textFieldConfirmPwd"
-                    app:layout_constraintTop_toTopOf="@+id/textFieldConfirmPwd"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/textFieldConfirmPwd"
+                    android:layout_marginTop="16dp"
                     android:text="@string/confirm_pwd"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textSize="14dp"/>
+                    app:layout_constraintEnd_toStartOf="@id/textFieldConfirmPwd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldConfirmPwd" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldConfirmPwd"
@@ -282,6 +291,7 @@
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:endIconMode="password_toggle"
+                    app:hintEnabled="false"
                     app:layout_constraintTop_toBottomOf="@+id/textFieldNewPwd"
                     app:layout_constraintStart_toEndOf="@id/textPwd3"
                     app:layout_constraintEnd_toEndOf="parent">
@@ -290,8 +300,10 @@
                         android:id="@+id/editConfirmPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="4dp"
                         android:textSize="14dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        app:fontFamily="sans-serif" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -332,6 +344,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="@string/user_unsubscribe"
                 android:textSize="16dp"
