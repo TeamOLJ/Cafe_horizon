@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivitySigninBinding
 
-class SigninActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
