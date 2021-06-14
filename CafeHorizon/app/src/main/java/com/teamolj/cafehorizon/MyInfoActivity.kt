@@ -195,7 +195,6 @@ class MyInfoActivity : AppCompatActivity() {
         }
 
         binding.itemTermMarketing.setOnClickListener {
-            binding.itemTermMarketing.toggleSwitch() // 작동하지 않는다... 원인 파악 필요
             if (binding.itemTermMarketing.isSwitchChecked()) {
                 Toast.makeText(this, "마케팅 정보 수신 설정", Toast.LENGTH_SHORT).show()
                 // 마케팅 정보 수신 설정
@@ -207,7 +206,6 @@ class MyInfoActivity : AppCompatActivity() {
         }
 
         binding.itemTermPushMsg.setOnClickListener {
-            binding.itemTermPushMsg.toggleSwitch()
             if (binding.itemTermPushMsg.isSwitchChecked()) {
                 Toast.makeText(this, "푸시메시지 허용", Toast.LENGTH_SHORT).show()
                 // 푸시메시지 허용

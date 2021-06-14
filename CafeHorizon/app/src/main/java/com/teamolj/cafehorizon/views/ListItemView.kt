@@ -109,10 +109,6 @@ class ListItemView @JvmOverloads constructor(
 
     fun isSlideOpen() : Boolean = (itemSlider.tag == "open")
 
-    fun toggleSwitch() {
-        itemSwitch.isChecked = !(itemSwitch.isChecked)
-    }
-
     fun isSwitchChecked() : Boolean = (itemSwitch.isChecked)
 
     fun setSwitch(state: Boolean) {

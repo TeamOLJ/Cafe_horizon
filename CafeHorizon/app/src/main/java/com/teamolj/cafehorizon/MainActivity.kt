@@ -19,6 +19,7 @@ import com.teamolj.cafehorizon.coupon.CouponActivity
 import com.teamolj.cafehorizon.databinding.ActivityMainBinding
 import com.teamolj.cafehorizon.newsAndEvents.NewsAndEventsActivity
 import com.teamolj.cafehorizon.notice.NoticeActivity
+import com.teamolj.cafehorizon.operation.InternetConnection
 import com.teamolj.cafehorizon.smartOrder.SmartOrderActivity
 import com.teamolj.cafehorizon.stamp.StampActivity
 import kotlinx.android.synthetic.main.header_navigation_drawer.view.*
@@ -155,38 +156,53 @@ class MainActivity : AppCompatActivity() {
         }
 
         // get images url from Firebase DB
-        val docRef = db.collection("Operational").document("MainSlider")
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    SLIDE_NUM_PAGES = document.data?.get("numOfPage").toString().toInt()
-                    mainImageList.add(document.data?.get("firstImage").toString())
-                    mainImageList.add(document.data?.get("secondImage").toString())
-                    mainImageList.add(document.data?.get("thirdImage").toString())
+        if (!InternetConnection.isInternetConnected(this)) {
+            Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
 
-                    // Main page image slider
-                    val imageSlideAdapter = SlideImageAdapter(this)
-                    binding.viewPagerMainImage.adapter = imageSlideAdapter
-                    binding.viewPagerMainImage.offscreenPageLimit = SLIDE_NUM_PAGES
+            binding.slideIndicator.visibility = View.GONE
+            binding.imgDefault.visibility = View.VISIBLE
+            binding.viewPagerMainImage.visibility = View.INVISIBLE
+        }
+        else {
+            binding.slideIndicator.visibility = View.VISIBLE
+            binding.imgDefault.visibility = View.INVISIBLE
+            binding.viewPagerMainImage.visibility = View.VISIBLE
 
-                    binding.viewPagerMainImage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                        override fun onPageSelected(position: Int) {
-                            super.onPageSelected(position)
-                            binding.slideIndicator.setCurrentSlide(position)
-                        }
-                    })
+            val docRef = db.collection("Operational").document("MainSlider")
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        SLIDE_NUM_PAGES = document.data?.get("numOfPage").toString().toInt()
+                        mainImageList.add(document.data?.get("firstImage").toString())
+                        mainImageList.add(document.data?.get("secondImage").toString())
+                        mainImageList.add(document.data?.get("thirdImage").toString())
 
-                    binding.slideIndicator.setSlideSize(SLIDE_NUM_PAGES)
+                        // Main page image slider
+                        val imageSlideAdapter = SlideImageAdapter(this)
+                        binding.viewPagerMainImage.adapter = imageSlideAdapter
+                        binding.viewPagerMainImage.offscreenPageLimit = SLIDE_NUM_PAGES
 
-                } else {
+                        binding.viewPagerMainImage.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                            override fun onPageSelected(position: Int) {
+                                super.onPageSelected(position)
+                                binding.slideIndicator.setCurrentSlide(position)
+                            }
+                        })
+
+                        binding.slideIndicator.setSlideSize(SLIDE_NUM_PAGES)
+
+                    } else {
+                        binding.slideIndicator.visibility = View.GONE
+                        binding.imgDefault.visibility = View.VISIBLE
+                        binding.viewPagerMainImage.visibility = View.INVISIBLE
+                    }
+                }
+                .addOnFailureListener {
                     binding.slideIndicator.visibility = View.GONE
                     binding.imgDefault.visibility = View.VISIBLE
+                    binding.viewPagerMainImage.visibility = View.INVISIBLE
                 }
-            }
-            .addOnFailureListener {
-                binding.slideIndicator.visibility = View.GONE
-                binding.imgDefault.visibility = View.VISIBLE
-            }
+        }
     }
 
     private inner class SlideImageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {

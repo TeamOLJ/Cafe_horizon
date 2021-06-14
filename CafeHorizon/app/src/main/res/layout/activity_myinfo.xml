@@ -93,9 +93,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginHorizontal="8dp"
                     app:placeholderText="@string/user_phone"
+                    app:expandedHintEnabled="false"
                     app:hintEnabled="false"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
@@ -107,7 +107,9 @@
                         android:id="@+id/editPhoneNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp" />
+                        android:paddingVertical="14dp"
+                        android:textSize="14dp"
+                        android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,27 +118,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/gray"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:paddingHorizontal="8dp"
                     android:text="@string/send_confirm"
-                    android:textStyle="bold"
                     android:textSize="14dp"
-                    android:backgroundTint="@color/gray"
-                    app:layout_constraintBottom_toBottomOf="@+id/textFieldPhoneNum"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum" />
+                    app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldPhoneNum" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldConfirmCode"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     app:placeholderText="@string/confirm_code"
+                    app:expandedHintEnabled="false"
                     app:hintEnabled="false"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
@@ -149,6 +151,8 @@
                         android:id="@+id/editConfirmCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:paddingVertical="14dp"
                         android:textSize="14dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -157,17 +161,18 @@
                     android:id="@+id/btnCheckConfirm"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="8dp"
+                    android:enabled="false"
                     android:insetTop="1dp"
                     android:insetBottom="1dp"
                     android:paddingHorizontal="8dp"
                     android:text="@string/change_phone"
                     android:textSize="14dp"
                     android:textStyle="bold"
-                    android:enabled="false"
-                    app:layout_constraintBottom_toBottomOf="@+id/textFieldConfirmCode"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textFieldConfirmCode" />
+                    app:layout_constraintStart_toEndOf="@+id/textFieldConfirmCode"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldConfirmCode" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -344,7 +349,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_marginVertical="20dp"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="@string/user_unsubscribe"
                 android:textSize="16dp"

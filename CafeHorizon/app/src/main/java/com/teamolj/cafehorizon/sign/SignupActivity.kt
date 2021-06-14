@@ -3,14 +3,14 @@ package com.teamolj.cafehorizon.sign
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.teamolj.cafehorizon.R
-import com.teamolj.cafehorizon.databinding.ActivitySigninBinding
+import com.teamolj.cafehorizon.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySigninBinding
+    private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySigninBinding.inflate(layoutInflater)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val topAppBar = binding.toolbar
