@@ -12,8 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_horizon_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-        <activity android:name=".OrderedStatusActivity">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <activity android:name=".OrderedStatusActivity" />
         <activity android:name=".OrderedActivity" />
         <activity android:name=".coupon.CouponActivity" />
         <activity android:name=".stamp.StampActivity" />
@@ -24,18 +31,14 @@
         <activity android:name=".newsAndEvents.EventsDetailActivity" />
         <activity android:name=".newsAndEvents.NewsAndEventsActivity" />
         <activity android:name=".notice.NoticeActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".FindInfoActivity" />
         <activity android:name=".BarcodeActivity" />
         <activity android:name=".MyInfoActivity" />
         <activity android:name=".UnsubscribeActivity" />
         <activity android:name=".UnsubDoneActivity" />
+
+        <activity android:name=".TesterFunctions" />
     </application>
 
 </manifest>
