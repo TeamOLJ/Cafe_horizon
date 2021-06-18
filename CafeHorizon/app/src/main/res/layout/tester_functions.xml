@@ -173,6 +173,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="14dp"
             android:inputType="textPassword"
+            android:fontFamily="sans-serif"
             android:textSize="14dp" />
 
     </com.google.android.material.textfield.TextInputLayout>

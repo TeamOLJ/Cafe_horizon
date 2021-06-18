@@ -129,6 +129,29 @@ class TesterFunctions : AppCompatActivity() {
             val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, confirmCode)
             checkCodeValidation(credential)
         }
+
+        binding.btnSignUp.setOnClickListener {
+            val editEmail = binding.editEmail.text.toString().trim()
+            val editPwd = binding.editPwd.text.toString().trim()
+
+            val credential = EmailAuthProvider.getCredential(editEmail, editPwd)
+
+            auth.currentUser!!.linkWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "linkWithCredential:success")
+                        Toast.makeText(baseContext, "회원가입 성공", Toast.LENGTH_SHORT).show()
+
+                        Log.d(TAG, "finalSignUp: ${task.result?.user!!.uid}")
+                        Log.d(TAG, "finalSignUp: ${task.result?.user!!.email}")
+
+                    } else {
+                        Log.w(TAG, "linkWithCredential:failure", task.exception)
+                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
+
     }
 
     private fun checkCodeValidation(credential: PhoneAuthCredential) {
