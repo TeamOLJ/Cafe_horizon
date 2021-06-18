@@ -4,53 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_item"
+    android:layout_height="72dp"
     android:background="@drawable/recycler_item_border"
-    android:paddingLeft="@dimen/space20"
-    android:paddingRight="@dimen/space20">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <ImageView
         android:id="@+id/imageNewIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_new_item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textNewsTitle"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textNewsTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/sample_text"
-        android:textSize="@dimen/size_title"
+        android:textSize="16dp"
         android:textStyle="bold"
-        android:layout_marginLeft="@dimen/space10"
         app:layout_constraintBottom_toTopOf="@+id/textNewsDate"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintStart_toEndOf="@id/imageNewIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageNewIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/textNewsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sample_date"
+        android:textSize="14dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/textNewsTitle"
+        app:layout_constraintStart_toStartOf="@+id/textNewsTitle"
         app:layout_constraintTop_toBottomOf="@+id/textNewsTitle" />
 
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_keyboard_arrow_right_36"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

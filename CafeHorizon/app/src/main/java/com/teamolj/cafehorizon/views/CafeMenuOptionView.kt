@@ -6,37 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.teamolj.cafehorizon.R
-import com.teamolj.cafehorizon.databinding.ViewMenuOptionBinding
+import com.teamolj.cafehorizon.databinding.ViewCafeMenuOptionBinding
 
-class MenuOptionView @JvmOverloads constructor(
+class CafeMenuOptionView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) :
     ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private var binding: ViewMenuOptionBinding
+    private var binding: ViewCafeMenuOptionBinding
 
     init {
-        binding = ViewMenuOptionBinding.inflate(LayoutInflater.from(context), this, true)
+        binding = ViewCafeMenuOptionBinding.inflate(LayoutInflater.from(context), this, true)
 
         context.theme.obtainStyledAttributes(
             attrs,
-            R.styleable.MenuOptionView,
+            R.styleable.CafeMenuOptionView,
             0, 0
         ).apply {
             try {
 
                 val backgroundColor = getColor(
-                    R.styleable.MenuOptionView_viewMenuOptionBgColor,
+                    R.styleable.CafeMenuOptionView_viewCafeMenuOptionBgColor,
                     R.color.lightgray.toInt()
                 )
 
-                val optionTitle = getString(R.styleable.MenuOptionView_viewMenuOptionTitleText)
+                val optionTitle = getString(R.styleable.CafeMenuOptionView_viewCafeMenuOptionTitleText)
                 val defaultAmount =
-                    getInt(R.styleable.MenuOptionView_viewMenuOptionDefaultAmount, 0).toString()
+                    getInt(R.styleable.CafeMenuOptionView_viewCafeMenuOptionDefaultAmount, 0).toString()
 
-                val itemType = getString(R.styleable.MenuOptionView_viewMenuOptionItemType)
+                val itemType = getString(R.styleable.CafeMenuOptionView_viewCafeMenuOptionItemType)
 
                 binding.container.setBackgroundColor(backgroundColor)
 
@@ -85,8 +85,8 @@ class MenuOptionView @JvmOverloads constructor(
         binding.textAmount.text = amount.toString()
     }
 
-    fun getChipChecked(): Boolean {
-        return binding.chipDefault.isChecked
+    fun getChipChecked(): Boolean { //기본이 아닐 경우 true
+        return binding.chipRemove.isChecked
     }
 
     fun getAmountValue(): Int {

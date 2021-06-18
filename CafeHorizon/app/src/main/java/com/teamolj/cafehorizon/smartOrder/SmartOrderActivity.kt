@@ -1,15 +1,12 @@
 package com.teamolj.cafehorizon.smartOrder
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -21,10 +18,11 @@ import com.teamolj.cafehorizon.databinding.ActivitySmartOrderBinding
 open class SmartOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySmartOrderBinding
     private lateinit var viewPager: ViewPager2
+
     private lateinit var MENU_ITEMS: Array<String>
 
     companion object {
-        var isCartFilled = false    //Room에서 데이터 사이즈 얻기
+        lateinit var db:AppDatabase
     }
 
 
@@ -33,7 +31,9 @@ open class SmartOrderActivity : AppCompatActivity() {
         binding = ActivitySmartOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        MENU_ITEMS = resources.getStringArray(R.array.array_menu)
+        db = AppDatabase.getInstance(this)
+
+        MENU_ITEMS = resources.getStringArray(R.array.array_cafe_menu)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -71,14 +71,12 @@ open class SmartOrderActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Log.d("toolbar", "<-- onCreateOptionsMenu : ${isCartFilled}")
         menuInflater.inflate(R.menu.menu_smartorder, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Log.d("toolbar", "onPrepareOptionsMenu : ${isCartFilled} -->")
         updateToolbarMenu(menu!!)
         return super.onPrepareOptionsMenu(menu)
     }
@@ -91,12 +89,12 @@ open class SmartOrderActivity : AppCompatActivity() {
 
 
     fun updateToolbarMenu(menu: Menu) {
-        if (isCartFilled) {
-            menu.findItem(R.id.action_filled_cart).setVisible(true)
-            menu.findItem(R.id.action_empty_cart).setVisible(false)
+        if (db.cartDao().getCount()==0) {
+            menu.findItem(R.id.action_filled_cart).isVisible = false
+            menu.findItem(R.id.action_empty_cart).isVisible = true
         } else {
-            menu.findItem(R.id.action_filled_cart).setVisible(false)
-            menu.findItem(R.id.action_empty_cart).setVisible(true)
+            menu.findItem(R.id.action_filled_cart).isVisible = true
+            menu.findItem(R.id.action_empty_cart).isVisible = false
         }
     }
 
@@ -105,7 +103,7 @@ open class SmartOrderActivity : AppCompatActivity() {
         override fun getItemCount(): Int = MENU_ITEMS.size
 
         override fun createFragment(position: Int): Fragment {
-            return MenuRecyclerFragment()
+            return CafeMenuRecyclerFragment()
         }
     }
 }

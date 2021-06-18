@@ -98,10 +98,10 @@
     <string name="btn_whippingcream_remove">없음</string>
     <string name="btn_delete">삭제</string>
 
-    <string name="menu_amount">수량</string>
-    <string name="menu_option">추가옵션</string>
+    <string name="cafe_menu_amount">수량</string>
+    <string name="cafe_menu_option">추가옵션</string>
 
-    <string-array name="array_menu">
+    <string-array name="array_cafe_menu">
         <item>신메뉴</item>
         <item>커피(hot)</item>
         <item>커피(ice)</item>

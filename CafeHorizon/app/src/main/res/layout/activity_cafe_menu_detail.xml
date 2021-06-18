@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".smartOrder.MenuDetailActivity">
+    tools:context=".smartOrder.CafeMenuDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -45,97 +45,97 @@
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutMenuInfo"
+            android:id="@+id/layoutCafeMenuInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space20"
+            android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/imageMenu"
-                android:layout_width="@dimen/size_menu_image_in_detail"
-                android:layout_height="@dimen/size_menu_image_in_detail"
+                android:id="@+id/imageCafeMenu"
+                android:layout_width="@dimen/size_cafe_menu_image_in_detail"
+                android:layout_height="@dimen/size_cafe_menu_image_in_detail"
                 android:src="@drawable/coffee_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/layoutMenuTitle"
+                android:id="@+id/layoutCafeMenuTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/space16"
+                android:layout_marginLeft="16dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toEndOf="@+id/imageMenu"
-                app:layout_constraintTop_toTopOf="@id/imageMenu">
+                app:layout_constraintStart_toEndOf="@+id/imageCafeMenu"
+                app:layout_constraintTop_toTopOf="@id/imageCafeMenu">
 
                 <TextView
-                    android:id="@+id/textMenuName"
+                    android:id="@+id/textCafeMenuName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="가나다라마바사아"
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/textMenuOrglPrice"
+                    android:id="@+id/textCafeMenuOrgPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:gravity="bottom"
-                    android:layout_marginLeft="@dimen/space10"
-                    android:text="5500원"
+                    android:text="5,500원"
                     android:textSize="16dp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textMenuDesc"
+                android:id="@+id/textCafeMenuDesc"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:text="@string/sample_text"
-                android:textSize="16dp"
-                android:layout_marginTop="@dimen/space16"
-                app:layout_constraintBottom_toBottomOf="@+id/imageMenu"
+                android:textSize="14dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCafeMenu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/layoutMenuTitle"
-                app:layout_constraintTop_toBottomOf="@id/layoutMenuTitle" />
+                app:layout_constraintStart_toStartOf="@+id/layoutCafeMenuTitle"
+                app:layout_constraintTop_toBottomOf="@id/layoutCafeMenuTitle" />
 
-            <com.teamolj.cafehorizon.views.MenuOptionView
+            <com.teamolj.cafehorizon.views.CafeMenuOptionView
                 android:id="@+id/customViewAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space20"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageMenu"
-                app:viewMenuOptionBgColor="@color/orangeBackground"
-                app:viewMenuOptionDefaultAmount="1"
-                app:viewMenuOptionItemType="view_amount_buttons"
-                app:viewMenuOptionTitleText="@string/menu_amount" />
+                app:layout_constraintTop_toBottomOf="@id/imageCafeMenu"
+                app:viewCafeMenuOptionBgColor="@color/orangeBackground"
+                app:viewCafeMenuOptionDefaultAmount="1"
+                app:viewCafeMenuOptionItemType="view_amount_buttons"
+                app:viewCafeMenuOptionTitleText="@string/cafe_menu_amount" />
 
             <LinearLayout
                 android:id="@+id/layoutOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space20"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/customViewAmount">
 
-                <com.teamolj.cafehorizon.views.MenuOptionView
+                <com.teamolj.cafehorizon.views.CafeMenuOptionView
                     android:id="@+id/customeViewOptionTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:viewMenuOptionBgColor="@color/lightgray"
-                    app:viewMenuOptionItemType="view_titleOnly"
-                    app:viewMenuOptionTitleText="@string/menu_option" />
+                    app:viewCafeMenuOptionBgColor="@color/lightgray"
+                    app:viewCafeMenuOptionItemType="view_titleOnly"
+                    app:viewCafeMenuOptionTitleText="@string/cafe_menu_option" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textTotalMenuPrice"
+                android:id="@+id/textCafeMenuTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space20"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="28dp"
                 android:text="총합 5,500원"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -149,37 +149,33 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutPrice"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:background="@color/lightgray"
-        android:padding="@dimen/space10"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnAddCart"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
             android:backgroundTint="@color/gray"
             android:text="@string/btn_add_cart"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnOrderNow"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
             android:id="@+id/btnOrderNow"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
             android:text="@string/btn_order_now"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnAddCart"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

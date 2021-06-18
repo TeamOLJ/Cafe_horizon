@@ -3,20 +3,6 @@
     <dimen name="barcode_margin">32dp</dimen>
     <dimen name="barcode_height">100dp</dimen>
 
-    <dimen name="space10">10dp</dimen>
-    <dimen name="space16">16dp</dimen>
-    <dimen name="space20">20dp</dimen>
-
-    <dimen name="height_item">90dp</dimen>
-    <dimen name="height_menu_item">80dp</dimen>
-    <dimen name="height_cart_item">100dp</dimen>
-
-    <dimen name="eventsItem_height">200dp</dimen>
-    <dimen name="eventsImage_padding_left_right">20dp</dimen>
-    <dimen name="eventsImage_padding_top_bottom">10dp</dimen>
-    <dimen name="eventsImage_height">120dp</dimen>
-
-    <dimen name="size_title">18dp</dimen>
-    <dimen name="size_menu_image_in_detail">120dp</dimen>
-    <dimen name="size_menu_image_in_recycler">72dp</dimen>
+    <dimen name="size_cafe_menu_image_in_detail">112dp</dimen>
+    <dimen name="size_cafe_menu_image_in_recyclerview">72dp</dimen>
 </resources>

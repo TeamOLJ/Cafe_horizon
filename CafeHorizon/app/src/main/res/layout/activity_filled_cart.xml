@@ -39,6 +39,7 @@
         android:id="@+id/recyclerViewCart"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toTopOf="@+id/layoutPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,14 +50,14 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="@color/lightgray"
-        android:paddingLeft="@dimen/space20"
-        android:paddingRight="@dimen/space20"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textTotalCartPrice"
+            android:id="@+id/textCartTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="합계 21,600원"
@@ -70,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_order"
-            android:textSize="24dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

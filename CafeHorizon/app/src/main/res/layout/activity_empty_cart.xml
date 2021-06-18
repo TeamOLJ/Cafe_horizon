@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_cart_big"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/textEmptyCart1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,20 +50,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/desc_empty_cart_text1"
-        android:padding="@dimen/space16"
-        android:textSize="30dp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
         android:id="@+id/textEmptyCart2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/desc_empty_cart_text2"
-        android:textSize="20dp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmptyCart1" />
@@ -72,11 +71,12 @@
         android:id="@+id/btnBackToMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginRight="20dp"
         android:text="@string/btn_empty_cart"
         android:textSize="24dp"
+        android:background="@drawable/oval_primary_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmptyCart2" />

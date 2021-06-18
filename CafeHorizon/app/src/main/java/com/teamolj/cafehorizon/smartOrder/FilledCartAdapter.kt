@@ -49,7 +49,7 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
         }
 
         fun setCartItem(cartItem: String) {
-            binding.textMenuName.text = cartItem
+            binding.textCafeMenuName.text = cartItem
         }
 
     }

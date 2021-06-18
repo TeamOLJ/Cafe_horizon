@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:layout_marginLeft="@dimen/space20"
-    android:layout_marginRight="@dimen/space20">
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
 
     <TextView
         android:id="@+id/textOptionTitle"
@@ -16,21 +13,19 @@
         android:layout_height="wrap_content"
         android:text="@string/sample_date"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:layout_marginLeft="@dimen/space20"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/layoutAmount"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="32dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginRight="@dimen/space20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,8 +45,7 @@
             android:layout_weight="1.5"
             android:text="99"
             android:background="@color/white"
-            android:gravity="center"
-            android:padding="@dimen/space10" />
+            android:gravity="center" />
 
         <ImageButton
             android:id="@+id/imageBtnPlus"
@@ -65,8 +59,7 @@
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupOption"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/space20"
+        android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,6 +76,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="기본"
+            android:textSize="14dp"
             android:textColor="@color/white" />
 
         <com.google.android.material.chip.Chip
@@ -95,6 +89,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="없음"
+            android:textSize="14dp"
             android:textColor="@color/white" />
     </com.google.android.material.chip.ChipGroup>
 

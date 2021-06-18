@@ -13,10 +13,8 @@ class EventsDetailActivity : AppCompatActivity() {
         binding = ActivityEventsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val events: Events = intent.getParcelableExtra<Events>("object")!!
+        val events: Events = intent.getSerializableExtra("events") as Events
 
-        binding.textEventsTitle.text = events.title
-        binding.textEventsPeriod.text = events.period
         binding.imageEvents.setImageURI(Uri.parse(events.imageUri))
     }
 }

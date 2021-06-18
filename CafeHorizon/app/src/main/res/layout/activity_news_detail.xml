@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".newsAndEvents.NewsDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,63 +14,61 @@
         android:background="#FFFFFF"
         android:elevation="1dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeNoActionBar">
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/bold"
                 android:text="@string/title_newsAndEvents"
                 android:textColor="@color/colorPrimary"
-                android:fontFamily="@font/bold"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textNewsTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/space10"
-        android:background="@drawable/recycler_item_border"
-        android:orientation="vertical">
+        android:text="Title"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-        <TextView
-            android:id="@+id/textNewsTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="@dimen/size_title" />
+    <TextView
+        android:id="@+id/textNewsDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="period"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@id/textNewsTitle"
+        app:layout_constraintStart_toStartOf="@id/textNewsTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textNewsTitle" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
 
-        <TextView
-            android:id="@+id/textNewsDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="period" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textNewsContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@id/textNewsTitle"
+        app:layout_constraintStart_toStartOf="@id/textNewsTitle"
+        app:layout_constraintTop_toBottomOf="@id/textNewsDate" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/eventsImage_padding_top_bottom"
-        android:paddingBottom="@dimen/eventsImage_padding_top_bottom"
-        android:paddingLeft="@dimen/eventsImage_padding_left_right"
-        android:paddingRight="@dimen/eventsImage_padding_left_right">
 
-        <TextView
-            android:id="@+id/textNewsContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"/>
-
-    </ScrollView>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

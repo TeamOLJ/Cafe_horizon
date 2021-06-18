@@ -33,7 +33,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.newsHolder>() {
         init {
             binding.root.setOnClickListener {
                 var intent = Intent(binding.root.context, NewsDetailActivity::class.java).apply {
-                    putExtra("object", news)
+                    putExtra("news", news)
                 }
 
                 binding.root.context.startActivity(intent)

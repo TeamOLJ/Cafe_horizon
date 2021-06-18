@@ -33,9 +33,9 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.eventsHolder>() {
         private lateinit var events: Events
 
         init {
-            binding.root.setOnClickListener{
+            binding.root.setOnClickListener {
                 var intent = Intent(binding.root.context, EventsDetailActivity::class.java).apply {
-                    putExtra("object", events)
+                    putExtra("events", events)
                 }
 
                 binding.root.context.startActivity(intent)
@@ -46,8 +46,8 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.eventsHolder>() {
             events = e
 
             binding.imageEvents.setImageURI(Uri.parse(events.imageUri))
-            binding.titleEvents.text = events.title
-            binding.periodEvents.text = events.period
+            binding.textTitleEvents.text = events.title
+            binding.textPeriodEvents.text = events.period
         }
     }
 }
