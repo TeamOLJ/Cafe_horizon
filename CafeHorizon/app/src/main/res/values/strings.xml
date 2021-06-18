@@ -79,9 +79,11 @@
     <string name="warning_empty_userpwd">비밀번호를 입력하세요.</string>
     <string name="warning_empty_pwd_confirm">비밀번호를 한 번 더 입력하세요.</string>
     <string name="warning_different_pwd">비밀번호가 일치하지 않습니다.</string>
+    <string name="warning_wrong_pwd_format">비밀번호는 8~15자여야 합니다.</string>
     <string name="warning_empty_phonenum">휴대폰 번호를 입력하세요.</string>
     <string name="warning_empty_confirms">인증번호를 입력하세요.</string>
     <string name="warning_wrong_confirms">잘못된 인증번호입니다.</string>
+    <string name="warning_wrong_format">잘못된 형식입니다. 다시 확인하세요.</string>
 
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>
@@ -96,6 +98,8 @@
     <string name="msg_rcpt">음료를 준비중입니다.</string>
     <string name="msg_wait">음료가 준비되었습니다! \n픽업해주세요.</string>
     <string name="msg_cplt">픽업이 완료되었습니다. \n맛있게 드세요.</string>
+
+    <string name="dialog_no_user">일치하는 회원 정보가 없습니다. 회원가입 후 이용해주세요!</string>
 
     <string name="hello_blank_fragment">hello</string>
 

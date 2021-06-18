@@ -121,9 +121,9 @@ class FindIdFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
-                    binding.textFieldPhoneNum.error = "잘못된 형식입니다. 다시 확인하세요."
+                    binding.textFieldPhoneNum.error = getString(R.string.warning_wrong_format)
                 } else if (e is FirebaseTooManyRequestsException) {
-                    Toast.makeText(requireContext(), "오류가 발생했습니다. 나중에 다시 시도하세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
                 }
 
                 binding.btnSendConfirm.isClickable = true
@@ -190,7 +190,7 @@ class FindIdFragment : Fragment() {
     private fun noUserInfoMsg() {
         val builder = AlertDialog.Builder(requireContext())
 
-        builder.setMessage("일치하는 회원 정보가 없습니다. 회원가입 후 이용해주세요!")
+        builder.setMessage(getString(R.string.dialog_no_user))
             .setNeutralButton("확인", null)
             .setCancelable(true)
 
