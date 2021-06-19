@@ -31,9 +31,8 @@ class BarcodeActivity : AppCompatActivity() {
         }
 
         // SharedPreferences에서 사용자 닉네임 및 바코드 번호 가져오기
-
-        binding.textUserNickname.text = "가져온 닉네임"
-        val userBarcode = "1234567890"
+        binding.textUserNickname.text = App.prefs.getString("userNick", "")
+        val userBarcode = App.prefs.getString("userBarcode", "")
 
         // 바코드 세팅
         displayUserBarcode(userBarcode)

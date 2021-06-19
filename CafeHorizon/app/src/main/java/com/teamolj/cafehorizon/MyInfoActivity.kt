@@ -29,9 +29,9 @@ class MyInfoActivity : AppCompatActivity() {
         }
 
         // 사용자 기본 설정 가져와서 세팅하기
-        binding.itemUserID.setDescText("사용자아이디")
-        binding.itemUserNickname.setDescText("사용자닉네임")
-        binding.itemUserPhoneNum.setDescText("010-1111-2222")
+        binding.itemUserID.setDescText(App.prefs.getString("userID", ""))
+        binding.itemUserNickname.setDescText(App.prefs.getString("userNick", ""))
+        binding.itemUserPhoneNum.setDescText(App.prefs.getString("userPhone", ""))
 
         binding.itemTermMarketing.setSwitch(false)
         binding.itemTermPushMsg.setSwitch(false)

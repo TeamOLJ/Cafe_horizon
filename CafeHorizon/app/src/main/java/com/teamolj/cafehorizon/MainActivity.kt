@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.coupon.CouponActivity
@@ -113,8 +114,8 @@ class MainActivity : AppCompatActivity() {
         val headerView = binding.navigationView.getHeaderView(0)
 
         // SharedPreference에서 가져온 사용자 닉네임 세팅
-        binding.textUserNickname.text = "사용자닉네임"
-        headerView.textUserNickname.text = "사용자닉네임"
+        binding.textUserNickname.text = App.prefs.getString("userNick", "")
+        headerView.textUserNickname.text = App.prefs.getString("userNick", "")
 
         binding.btnBarcode.setOnClickListener {
             val intent = Intent(this, BarcodeActivity::class.java)
@@ -149,6 +150,8 @@ class MainActivity : AppCompatActivity() {
 
         headerView.btnLogOut.setOnClickListener {
             // 로그아웃 처리
+            Firebase.auth.signOut()
+            App.prefs.clear()
 
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
