@@ -33,8 +33,8 @@ class MyInfoActivity : AppCompatActivity() {
         binding.itemUserNickname.setDescText(App.prefs.getString("userNick", ""))
         binding.itemUserPhoneNum.setDescText(App.prefs.getString("userPhone", ""))
 
-        binding.itemTermMarketing.setSwitch(false)
-        binding.itemTermPushMsg.setSwitch(false)
+        binding.itemTermMarketing.setSwitch(App.prefs.getBoolean("userAgreeMarketing"))
+        binding.itemTermPushMsg.setSwitch(App.prefs.getBoolean("userAgreePush"))
 
         // phone number
         binding.itemUserPhoneNum.setOnClickListener {

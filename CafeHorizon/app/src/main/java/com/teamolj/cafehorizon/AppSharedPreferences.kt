@@ -11,9 +11,16 @@ class AppSharedPreferences(context: Context) {
     fun getString(key: String, defValue: String): String {
         return prefs.getString(key, defValue).toString()
     }
+    fun getBoolean(key: String): Boolean {
+        return prefs.getBoolean(key, false)
+    }
 
     fun setString(key: String, str: String) {
         editor.putString(key, str)
+        editor.commit()
+    }
+    fun setBoolean(key: String, bool: Boolean) {
+        editor.putBoolean(key, bool)
         editor.commit()
     }
 

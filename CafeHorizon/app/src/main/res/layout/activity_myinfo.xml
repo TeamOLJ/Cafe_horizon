@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="14dp"
                         android:textSize="14dp"
-                        android:inputType="text" />
+                        android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,7 +151,7 @@
                         android:id="@+id/editConfirmCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:paddingVertical="14dp"
                         android:textSize="14dp" />
 
@@ -224,7 +224,7 @@
                         android:id="@+id/editCurrentPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="4dp"
+                        android:paddingVertical="14dp"
                         android:textSize="14dp"
                         android:inputType="textPassword"
                         app:fontFamily="sans-serif" />
@@ -266,7 +266,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:paddingVertical="4dp"
+                        android:paddingVertical="14dp"
                         android:textSize="14dp"
                         app:fontFamily="sans-serif" />
 
@@ -305,7 +305,7 @@
                         android:id="@+id/editConfirmPwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="4dp"
+                        android:paddingVertical="14dp"
                         android:textSize="14dp"
                         android:inputType="textPassword"
                         app:fontFamily="sans-serif" />

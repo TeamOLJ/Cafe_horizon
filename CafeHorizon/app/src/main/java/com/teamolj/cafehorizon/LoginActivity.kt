@@ -91,6 +91,9 @@ class LoginActivity : AppCompatActivity() {
                                         App.prefs.setString("userBarcode", document.data?.get("userBarcode").toString())
                                         App.prefs.setString("userBday", document.data?.get("userBday").toString())
 
+                                        App.prefs.setBoolean("userAgreeMarketing", document.getBoolean("agreeMarketing")!!)
+                                        App.prefs.setBoolean("userAgreePush", document.getBoolean("agreePush")!!)
+
                                         val intent = Intent(this, MainActivity::class.java)
                                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                         startActivity(intent)
