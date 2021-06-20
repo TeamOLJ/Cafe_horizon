@@ -130,28 +130,59 @@ class TesterFunctions : AppCompatActivity() {
             checkCodeValidation(credential)
         }
 
-        binding.btnSignUp.setOnClickListener {
-            val editEmail = binding.editEmail.text.toString().trim()
-            val editPwd = binding.editPwd.text.toString().trim()
+        binding.btnSendNewConfirm.setOnClickListener {
+            phoneNum = binding.editNewPhoneNum.text.toString().trim()
 
-            val credential = EmailAuthProvider.getCredential(editEmail, editPwd)
+            binding.progressBar.visibility = View.VISIBLE
 
-            auth.currentUser!!.linkWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
+            callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                    Log.d(TAG, "onVerificationCompleted:$credential")
+                }
+
+                override fun onVerificationFailed(e: FirebaseException) {
+                    Log.w(TAG, "onVerificationFailed", e)
+                    binding.progressBar.visibility = View.GONE
+                }
+
+                override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                    binding.progressBar.visibility = View.GONE
+                    mCountDown.start()
+
+                    onVerification = true
+                    storedVerificationId = verificationId
+                    resendToken = token
+                }
+            }
+
+            val options = PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber("+82${phoneNum}")
+                .setTimeout(120L, TimeUnit.SECONDS)
+                .setActivity(this)
+                .setCallbacks(callbacks)
+                .build()
+
+            PhoneAuthProvider.verifyPhoneNumber(options)
+        }
+
+        binding.btnCheckNewConfirm.setOnClickListener {
+            confirmCode = binding.editNewConfirmCode.text.toString().trim()
+
+            val newCredential = PhoneAuthProvider.getCredential(storedVerificationId!!, confirmCode)
+
+            Firebase.auth.currentUser!!.updatePhoneNumber(newCredential)
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d(TAG, "linkWithCredential:success")
-                        Toast.makeText(baseContext, "회원가입 성공", Toast.LENGTH_SHORT).show()
-
-                        Log.d(TAG, "finalSignUp: ${task.result?.user!!.uid}")
-                        Log.d(TAG, "finalSignUp: ${task.result?.user!!.email}")
-
+                        Log.d(TAG, "User phonenumber updated.")
                     } else {
-                        Log.w(TAG, "linkWithCredential:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                            binding.textFieldNewConfirmCode.error = "잘못된 인증번호입니다."
+                        }
                     }
                 }
         }
-
     }
 
     private fun checkCodeValidation(credential: PhoneAuthCredential) {
@@ -169,9 +200,6 @@ class TesterFunctions : AppCompatActivity() {
                     binding.textFieldPhoneNum.isHelperTextEnabled = true
                     binding.textFieldPhoneNum.helperText = "인증되었습니다!"
                     binding.textFieldPhoneNum.setHelperTextColor(ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.textGreen)))
-
-                    binding.btnSignUp.isEnabled = true
-                    binding.btnSignUp.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.gray))
 
                     binding.btnCheckConfirm.isEnabled = false
                     binding.btnCheckConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.lightgray))
