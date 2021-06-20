@@ -9,16 +9,32 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityMyinfoBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
+import java.util.concurrent.TimeUnit
 
 class MyInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyinfoBinding
+
+    private lateinit var auth: FirebaseAuth
+
+    private var storedVerificationId: String? = ""
+    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+
+    private lateinit var newPhoneWithFormat: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyinfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth
 
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
@@ -69,20 +85,33 @@ class MyInfoActivity : AppCompatActivity() {
                 binding.btnSendConfirm.isClickable = true
             }
             else {
-                // 인증문자 보내기
+                val newPhone = binding.editPhoneNum.text.toString().trim()
+                newPhoneWithFormat = "${newPhone.substring(0,3)}-${newPhone.substring(3,7)}-${newPhone.substring(7)}"
 
-                // if 보내는 데에 성공한 경우,
-                binding.btnCheckConfirm.isEnabled = true
+                if (App.prefs.getString("userPhone", "") == newPhoneWithFormat) {
+                    binding.textFieldPhoneNum.error = getString(R.string.warning_same_phonenum)
+                    binding.btnSendConfirm.isClickable = true
+                }
+                else {
+                    binding.textFieldConfirmCode.error = null
+                    binding.textFieldConfirmCode.isErrorEnabled = false
 
-                binding.btnSendConfirm.isEnabled = false
-                binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.lightgray))
-                binding.textFieldPhoneNum.isHelperTextEnabled = true
+                    binding.progressBar.visibility = View.VISIBLE
 
-                mCountDown.start()
+                    initCallbackObject()
 
-                // else 실패한 경우,
-//                Toast.makeText(this, getString(R.string.toast_failed_to_send), Toast.LENGTH_SHORT).show()
-//                binding.btnSendConfirm.isClickable = true
+                    val phoneNum = binding.editPhoneNum.text.toString().trim()
+
+                    val options = PhoneAuthOptions.newBuilder(auth)
+                        .setPhoneNumber("+82${phoneNum}")
+                        .setTimeout(120L, TimeUnit.SECONDS)
+                        .setActivity(this)
+                        .setCallbacks(callbacks)
+                        .build()
+
+                    // 인증문자 보내기
+                    PhoneAuthProvider.verifyPhoneNumber(options)
+                }
             }
         }
 
@@ -98,25 +127,40 @@ class MyInfoActivity : AppCompatActivity() {
                 binding.btnCheckConfirm.isClickable = true
             }
             else {
-                // 인증번호 일치여부 확인
+                binding.progressBar.visibility = View.VISIBLE
 
-                // if 일치하는 경우,
-                // 휴대폰번호 변경 루틴 실행
-                mCountDown.cancel()
+                val confirmCode = binding.editConfirmCode.text.toString().trim()
+                val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, confirmCode)
 
-                binding.itemUserPhoneNum.setDescText("010-new-phone")
+                Firebase.auth.currentUser!!.updatePhoneNumber(credential)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            mCountDown.cancel()
+                            binding.textFieldPhoneNum.isHelperTextEnabled = false
+                            binding.progressBar.visibility = View.GONE
 
-                if (binding.itemUserPhoneNum.isSlideOpen()) {
-                    binding.itemUserPhoneNum.toggleSlider()
-                    binding.layoutChangePhoneNum.visibility = View.GONE
-                }
+                            binding.itemUserPhoneNum.setDescText(newPhoneWithFormat)
+                            App.prefs.setString("userPhone", newPhoneWithFormat)
 
-                Toast.makeText(this, R.string.toast_phone_changed, Toast.LENGTH_SHORT).show()
+                            binding.editPhoneNum.setText("")
+                            binding.editConfirmCode.setText("")
 
-                // else 일치하지 않는 경우,
-                // binding.textFieldConfirmCode.error = getString(R.string.warning_wrong_confirms)
+                            if (binding.itemUserPhoneNum.isSlideOpen()) {
+                                binding.itemUserPhoneNum.toggleSlider()
+                                binding.layoutChangePhoneNum.visibility = View.GONE
+                            }
 
-                binding.btnCheckConfirm.isClickable = true
+                            Toast.makeText(this, R.string.toast_phone_changed, Toast.LENGTH_SHORT).show()
+
+                        } else {
+                            binding.progressBar.visibility = View.GONE
+
+                            if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                                binding.textFieldConfirmCode.error = getString(R.string.warning_wrong_confirms)
+                                binding.btnCheckConfirm.isClickable = true
+                            }
+                        }
+                    }
             }
         }
 
@@ -222,7 +266,39 @@ class MyInfoActivity : AppCompatActivity() {
         }
     }
 
-    private val mCountDown: CountDownTimer = object : CountDownTimer(180000, 1000) {
+    private fun initCallbackObject() {
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) { }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                binding.progressBar.visibility = View.GONE
+
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                    binding.textFieldPhoneNum.error = getString(R.string.warning_wrong_format)
+                } else if (e is FirebaseTooManyRequestsException) {
+                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                }
+
+                binding.btnSendConfirm.isClickable = true
+                binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.gray))
+            }
+
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                binding.progressBar.visibility = View.GONE
+                mCountDown.start()
+
+                binding.btnSendConfirm.isEnabled = false
+                binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.lightgray))
+                binding.btnCheckConfirm.isEnabled = true
+
+                storedVerificationId = verificationId
+                resendToken = token
+            }
+        }
+    }
+
+    private val mCountDown: CountDownTimer = object : CountDownTimer(120000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             val secs = millisUntilFinished / 1000
             binding.textFieldPhoneNum.helperText ="재발송 대기 ${secs / 60}:${String.format("%02d", secs % 60)}"

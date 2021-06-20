@@ -141,7 +141,7 @@
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     android:textStyle="normal"
-                    android:fontFamily="sans-serif" />
+                    app:fontFamily="sans-serif" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

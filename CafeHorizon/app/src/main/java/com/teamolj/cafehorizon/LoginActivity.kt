@@ -80,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val userUID = auth.currentUser!!.uid
+                            val userPhone = auth.currentUser!!.phoneNumber
 
                             val docRef = db.collection("userInformation").document(userUID)
                             docRef.get()
@@ -87,9 +88,10 @@ class LoginActivity : AppCompatActivity() {
                                     if (document.exists()) {
                                         App.prefs.setString("userID", userId)
                                         App.prefs.setString("userNick", document.data?.get("userNick").toString())
-                                        App.prefs.setString("userPhone", document.data?.get("userPhone").toString())
                                         App.prefs.setString("userBarcode", document.data?.get("userBarcode").toString())
                                         App.prefs.setString("userBday", document.data?.get("userBday").toString())
+
+                                        App.prefs.setString("userPhone", "0${userPhone!!.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
 
                                         App.prefs.setBoolean("userAgreeMarketing", document.getBoolean("agreeMarketing")!!)
                                         App.prefs.setBoolean("userAgreePush", document.getBoolean("agreePush")!!)
