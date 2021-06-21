@@ -132,12 +132,14 @@ class MyInfoActivity : AppCompatActivity() {
                 val confirmCode = binding.editConfirmCode.text.toString().trim()
                 val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, confirmCode)
 
-                Firebase.auth.currentUser!!.updatePhoneNumber(credential)
+                auth.currentUser!!.updatePhoneNumber(credential)
                     .addOnCompleteListener { task ->
+                        binding.progressBar.visibility = View.GONE
+                        binding.btnCheckConfirm.isClickable = true
+
                         if (task.isSuccessful) {
                             mCountDown.cancel()
                             binding.textFieldPhoneNum.isHelperTextEnabled = false
-                            binding.progressBar.visibility = View.GONE
 
                             binding.itemUserPhoneNum.setDescText(newPhoneWithFormat)
                             App.prefs.setString("userPhone", newPhoneWithFormat)
@@ -153,11 +155,11 @@ class MyInfoActivity : AppCompatActivity() {
                             Toast.makeText(this, R.string.toast_phone_changed, Toast.LENGTH_SHORT).show()
 
                         } else {
-                            binding.progressBar.visibility = View.GONE
-
                             if (task.exception is FirebaseAuthInvalidCredentialsException) {
                                 binding.textFieldConfirmCode.error = getString(R.string.warning_wrong_confirms)
-                                binding.btnCheckConfirm.isClickable = true
+                            }
+                            else {
+                                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -190,51 +192,75 @@ class MyInfoActivity : AppCompatActivity() {
             binding.textFieldConfirmPwd.isErrorEnabled = false
         }
 
-        binding.btnChagedPwd.setOnClickListener {
-            binding.btnChagedPwd.isClickable = false
+        binding.btnChangePwd.setOnClickListener {
+            binding.btnChangePwd.isClickable = false
 
             if (!InternetConnection.isInternetConnected(this)) {
                 Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
-                binding.btnChagedPwd.isClickable = true
+                binding.btnChangePwd.isClickable = true
             }
             else if (binding.editCurrentPwd.text.toString().trim().isEmpty()) {
                 binding.textFieldCurrentPwd.error = getString(R.string.warning_empty_userpwd)
-                binding.btnChagedPwd.isClickable = true
+                binding.btnChangePwd.isClickable = true
             }
             else if (binding.editNewPwd.text.toString().trim().isEmpty()) {
                 binding.textFieldNewPwd.error = getString(R.string.warning_empty_userpwd)
-                binding.btnChagedPwd.isClickable = true
+                binding.btnChangePwd.isClickable = true
+            }
+            else if (binding.editNewPwd.text.toString().length < 8 || binding.editNewPwd.text.toString().length > 15) {
+                binding.textFieldNewPwd.error = getString(R.string.warning_wrong_pwd_format)
+                binding.btnChangePwd.isClickable = true
             }
             else if (binding.editConfirmPwd.text.toString().trim().isEmpty()) {
                 binding.textFieldConfirmPwd.error = getString(R.string.warning_empty_pwd_confirm)
-                binding.btnChagedPwd.isClickable = true
+                binding.btnChangePwd.isClickable = true
             }
             else if (binding.editNewPwd.text.toString().trim() != binding.editConfirmPwd.text.toString().trim()) {
                 binding.textFieldConfirmPwd.error = getString(R.string.warning_different_pwd)
-                binding.btnChagedPwd.isClickable = true
+                binding.btnChangePwd.isClickable = true
             }
             else {
+                binding.progressBar.visibility = View.VISIBLE
+
+                val email = App.prefs.getString("userID", "") + getString(R.string.email_domain)
                 val newPwd = binding.editNewPwd.text.toString().trim()
 
-                // 입력한 현재 비밀번호와 기존 비밀번호 일치여부 확인
-                // if 일치할 경우,
-                // 비밀번호 변경 루틴 진행
+                val user = auth.currentUser!!
+                val credential = EmailAuthProvider.getCredential(email, binding.editCurrentPwd.text.toString().trim())
 
-                // if 성공한 경우
-                if (binding.itemUserPwd.isSlideOpen()) {
-                    binding.itemUserPwd.toggleSlider()
-                    binding.layoutChangePassword.visibility = View.GONE
-                }
+                user.reauthenticate(credential)
+                    .addOnCompleteListener { authTask ->
+                        if (authTask.isSuccessful) {
 
-                Toast.makeText(this, getString(R.string.toast_pwd_changed), Toast.LENGTH_SHORT).show()
+                            user.updatePassword(newPwd)
+                                .addOnCompleteListener { pwdTask ->
+                                    binding.progressBar.visibility = View.GONE
+                                    binding.btnChangePwd.isClickable = true
 
-                // else 실패한 경우
-                // Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                    if (pwdTask.isSuccessful) {
+                                        binding.editCurrentPwd.setText("")
+                                        binding.editNewPwd.setText("")
+                                        binding.editConfirmPwd.setText("")
 
-                // else 일치하지 않는 경우,
-                // binding.textFieldCurrentPwd.error = "잘못된 비밀번호입니다."
+                                        if (binding.itemUserPwd.isSlideOpen()) {
+                                            binding.itemUserPwd.toggleSlider()
+                                            binding.layoutChangePassword.visibility = View.GONE
+                                        }
 
-                binding.btnChagedPwd.isClickable = true
+                                        Toast.makeText(this, getString(R.string.toast_pwd_changed), Toast.LENGTH_SHORT).show()
+                                    }
+                                    else {
+                                        Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                        }
+                        else {
+                            binding.textFieldCurrentPwd.error = getString(R.string.warning_wrong_pwd)
+
+                            binding.progressBar.visibility = View.GONE
+                            binding.btnChangePwd.isClickable = true
+                        }
+                    }
             }
         }
 
@@ -276,7 +302,7 @@ class MyInfoActivity : AppCompatActivity() {
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     binding.textFieldPhoneNum.error = getString(R.string.warning_wrong_format)
-                } else if (e is FirebaseTooManyRequestsException) {
+                } else {
                     Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
                 }
 
