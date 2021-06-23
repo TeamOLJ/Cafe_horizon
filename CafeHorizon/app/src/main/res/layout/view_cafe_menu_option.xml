@@ -75,7 +75,7 @@
             android:checked="true"
             android:clickable="true"
             android:focusable="true"
-            android:text="기본"
+            android:text="@string/btn_whippingcream_normal"
             android:textSize="14dp"
             android:textColor="@color/white" />
 
@@ -88,7 +88,7 @@
             android:checked="false"
             android:clickable="true"
             android:focusable="true"
-            android:text="없음"
+            android:text="@string/btn_whippingcream_remove"
             android:textSize="14dp"
             android:textColor="@color/white" />
     </com.google.android.material.chip.ChipGroup>

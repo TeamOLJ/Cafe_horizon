@@ -15,10 +15,10 @@ class CafeMenuOptionView @JvmOverloads constructor(
 ) :
     ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private var binding: ViewCafeMenuOptionBinding
+    private var binding: ViewCafeMenuOptionBinding =
+        ViewCafeMenuOptionBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
-        binding = ViewCafeMenuOptionBinding.inflate(LayoutInflater.from(context), this, true)
 
         context.theme.obtainStyledAttributes(
             attrs,

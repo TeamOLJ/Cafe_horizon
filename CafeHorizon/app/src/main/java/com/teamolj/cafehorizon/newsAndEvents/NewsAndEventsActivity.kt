@@ -19,6 +19,14 @@ class NewsAndEventsActivity : FragmentActivity() {
         binding = ActivityNewsAndEventsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
         viewPager = binding.viewPager
         viewPager.offscreenPageLimit = ITEMS_NUM
         val pagerAdapter = NewsAndEventsAdapter(this)

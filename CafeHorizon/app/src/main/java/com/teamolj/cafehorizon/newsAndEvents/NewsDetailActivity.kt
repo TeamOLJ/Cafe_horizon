@@ -13,6 +13,14 @@ class NewsDetailActivity : AppCompatActivity() {
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
         val news: News = intent.getSerializableExtra("news") as News
 
         binding.textNewsTitle.text = news.title

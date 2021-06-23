@@ -14,6 +14,14 @@ class FilledCartActivity : AppCompatActivity() {
         binding = ActivityFilledCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
         var adapter = FilledCartAdapter()
         adapter.cartList = loadCart()
         binding.recyclerViewCart.adapter = adapter

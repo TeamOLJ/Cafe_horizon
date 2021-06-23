@@ -5,14 +5,14 @@
     <item
         android:id="@+id/action_filled_cart"
         android:icon="@drawable/ic_cart_fill"
-        android:title="@string/title_shoppingCart"
+        android:title="@string/title_cart"
         app:showAsAction="always"
         android:visible="true"/>
 
     <item
         android:id="@+id/action_empty_cart"
         android:icon="@drawable/ic_cart_empty"
-        android:title="@string/title_shoppingCart"
+        android:title="@string/title_cart"
         app:showAsAction="always"
         android:visible="true"/>
 

@@ -1,6 +1,8 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
+
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +42,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.newsHolder>() {
             }
         }
 
-        internal fun setNews(n: News) {
+        fun setNews(n: News) {
+            Log.d("test", "setNews : $n")
             this.news = n
 
             binding.imageNewIcon.setImageResource(R.drawable.ic_new_item)

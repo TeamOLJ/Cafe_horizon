@@ -3,6 +3,7 @@ package com.teamolj.cafehorizon.notice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityNoticeBinding
 import java.text.SimpleDateFormat
 
@@ -13,6 +14,14 @@ class NoticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNoticeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
         val data: MutableList<Notice> = loadNotices()
 

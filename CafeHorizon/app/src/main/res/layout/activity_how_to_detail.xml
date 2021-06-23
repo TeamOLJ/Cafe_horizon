@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".smartOrder.EmptyCartActivity">
+    tools:context=".HowToDetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -24,62 +24,62 @@
             android:layout_height="?attr/actionBarSize">
 
             <TextView
+                android:id="@+id/textToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/bold"
-                android:text="@string/title_cart"
+                android:text="@string/title_how_to"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cart_big"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/textEmptyCart1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textEmptyCart1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/desc_empty_cart_text1"
-        android:textSize="24dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerHowToImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="72dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    <TextView
-        android:id="@+id/textEmptyCart2"
+    <com.teamolj.cafehorizon.views.SlideIndicatorView
+        android:id="@+id/slideIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/desc_empty_cart_text2"
-        android:textSize="16dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmptyCart1" />
+        app:layout_constraintTop_toBottomOf="@id/viewPagerHowToImage"
+        app:viewSlideIndicatorDotSize="8dp"
+        app:viewSlideIndicatorMargin="5dp"
+        app:viewSlideIndicatorSize="3" />
 
-    <Button
-        android:id="@+id/btnBackToMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:id="@+id/scrollViewTerms"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="20dp"
-        android:text="@string/btn_select_cafe_menu"
-        android:textSize="24dp"
-        android:background="@drawable/oval_primary_button"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmptyCart2" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
+        <LinearLayout
+            android:id="@+id/layoutTerms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

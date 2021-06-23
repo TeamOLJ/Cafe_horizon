@@ -15,8 +15,17 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         binding = ActivityCafeMenuDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        val topAppBar = binding.toolbar
+
+        setSupportActionBar(topAppBar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
         //Firebase에서 불러오기
         binding.textCafeMenuName.text = intent.getStringExtra("name").toString()

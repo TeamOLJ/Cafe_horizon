@@ -96,9 +96,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_howto -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, HowToActivity::class.java)
-                    // startActivity(intent)
-                    Toast.makeText(this, "이용안내", Toast.LENGTH_SHORT).show()
+                     val intent = Intent(this, HowToActivity::class.java)
+                     startActivity(intent)
                     true
                 }
                 else -> false

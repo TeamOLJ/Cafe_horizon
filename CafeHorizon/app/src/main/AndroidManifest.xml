@@ -12,10 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-        <activity android:name=".smartOrder.CafeMenuDetailActivity"/>
+        <activity android:name=".HowToDetailActivity"/>
+        <activity android:name=".HowToActivity"></activity>
+        <activity android:name=".smartOrder.CafeMenuDetailActivity" />
         <activity android:name=".smartOrder.FilledCartActivity" />
         <activity android:name=".smartOrder.EmptyCartActivity" />
-        <activity android:name=".smartOrder.SmartOrderActivity"></activity>
+        <activity android:name=".smartOrder.SmartOrderActivity" />
         <activity android:name=".newsAndEvents.NewsDetailActivity" />
         <activity android:name=".newsAndEvents.EventsDetailActivity" />
         <activity android:name=".newsAndEvents.NewsAndEventsActivity" />

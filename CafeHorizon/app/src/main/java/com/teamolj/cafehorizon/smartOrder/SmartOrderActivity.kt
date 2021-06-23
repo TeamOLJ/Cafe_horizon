@@ -35,8 +35,17 @@ open class SmartOrderActivity : AppCompatActivity() {
 
         MENU_ITEMS = resources.getStringArray(R.array.array_cafe_menu)
 
-        setSupportActionBar(binding.toolbar)
+        val topAppBar = binding.toolbar
+
+        setSupportActionBar(topAppBar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
         viewPager = binding.viewPager
         viewPager.offscreenPageLimit = MENU_ITEMS.size
@@ -101,9 +110,6 @@ open class SmartOrderActivity : AppCompatActivity() {
 
     private inner class SmartOrderAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = MENU_ITEMS.size
-
-        override fun createFragment(position: Int): Fragment {
-            return CafeMenuRecyclerFragment()
-        }
+        override fun createFragment(position: Int): Fragment = CafeMenuRecyclerFragment()
     }
 }

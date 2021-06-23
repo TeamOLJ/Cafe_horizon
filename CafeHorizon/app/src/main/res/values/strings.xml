@@ -60,8 +60,9 @@
     <string name="title_newsAndEvents">공지사항</string>
     <string name="title_news">새소식</string>
     <string name="title_events">이벤트</string>
-    <string name="title_smartOrder">스마트오더</string>
-    <string name="title_shoppingCart">장바구니</string>
+    <string name="title_smart_order">스마트오더</string>
+    <string name="title_cart">장바구니</string>
+    <string name="title_how_to">이용안내</string>
 
     <string name="welcome">환영합니다</string>
     <string name="nim">님</string>
@@ -86,20 +87,29 @@
     <string name="desc_id_icon">사용자 아이디</string>
     <string name="desc_pwd_icon">사용자 비밀번호</string>
 
+    <string name="how_to_title">앱 이용안내</string>
+    <string name="how_to_stamp">스탬프 이용안내</string>
+    <string name="how_to_coupon">쿠폰 이용안내</string>
+    <string name="how_to_smart_order">스마트오더 이용안내</string>
+    <string name="terms_title">약관 및 정책</string>
+    <string name="terms_service">서비스 이용약관</string>
+    <string name="terms_privacy_policy">개인정보 처리방침</string>
+    <string name="terms_agree_to_use_marketing">마케팅 활용 동의</string>
+    <string name="terms_agree_to_receive_ad_info">광고성 정보 수신동의</string>
 
     <string name="desc_empty_cart_text1">장바구니가 비어있어요!</string>
     <string name="desc_empty_cart_text2">다양한 메뉴가 준비되어 있습니다. :)</string>
-
-    <string name="btn_empty_cart">메뉴 고르기</string>
-    <string name="btn_order">주문하기</string>
-    <string name="btn_add_cart">장바구니 담기</string>
-    <string name="btn_order_now">바로 주문하기</string>
-    <string name="btn_whippingcream_normal">기본</string>
-    <string name="btn_whippingcream_remove">없음</string>
+    <string name="btn_select_cafe_menu">메뉴 고르기</string>
     <string name="btn_delete">삭제</string>
 
     <string name="cafe_menu_amount">수량</string>
     <string name="cafe_menu_option">추가옵션</string>
+
+    <string name="btn_whippingcream_normal">기본</string>
+    <string name="btn_whippingcream_remove">없음</string>
+    <string name="btn_add_cart">장바구니 담기</string>
+    <string name="btn_order_now">바로 주문하기</string>
+    <string name="btn_order">주문하기</string>
 
     <string-array name="array_cafe_menu">
         <item>신메뉴</item>

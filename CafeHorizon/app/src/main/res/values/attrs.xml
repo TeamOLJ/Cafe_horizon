@@ -31,4 +31,13 @@
         <attr name="viewCafeMenuOptionTitleText" format="string" />
         <attr name="viewCafeMenuOptionDefaultAmount" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="HowToItemView">
+        <attr name="viewHowToItemBgColor" format="reference|integer" />
+        <attr name="viewHowToItemText" format="string" />
+        <attr name="viewHowToItemTextSize" format="dimension" />
+        <attr name="viewHowToItemPaddingLeft" format="reference|dimension" />
+        <attr name="viewHowToItemPaddingRight" format="reference|dimension" />
+        <attr name="viewHowToItemShowImage" format="boolean" />
+    </declare-styleable>
 </resources>

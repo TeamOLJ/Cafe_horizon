@@ -22,35 +22,41 @@ class NewsRecyclerFragment : Fragment() {
         _binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val data: MutableList<News> = loadNews()
-
         var adapter = NewsAdapter()
-        adapter.newsList = data
+        adapter.newsList = loadNews()
         binding.recyclerViewNews.adapter = adapter
         binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
 
         return view
     }
 
-    fun loadNews(): MutableList<News> { //데이터 가져와서 리스트에 넣고, 그 리스트를 어댑터 리스트에 넣고 업데이트 하는 것까지!
+    //https://stackoverflow.com/questions/51594772/how-to-return-a-list-from-firestore-database-as-a-result-of-a-function-in-kotlin/59124705#59124705
+    private fun loadNews(): MutableList<News> {
         val db = Firebase.firestore
         val data: MutableList<News> = mutableListOf()
 
-        db.collection("News")
-            .get().addOnSuccessListener { documents ->
-                for (document in documents) {
+        Log.d("test", "Before attaching the listener!")
+
+
+        db.collection("News").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("test", "Inside onComplete function!")
+                for (document in task.result!!) {
                     data.add(
                         News(
-                            document.getString("title")!!,
-                            document.getString("content")!!,
-                            document.getString("date")!!
+                            document.data["title"].toString(),
+                            document.data["content"].toString(),
+                            document.data["date"].toString()
                         )
                     )
                 }
             }
+        }
             .addOnFailureListener { exception ->
                 Log.w("firebase", "Error getting documents.", exception)
             }
+        Log.d("test", "After attaching the listener!")
+
 
         return data
     }

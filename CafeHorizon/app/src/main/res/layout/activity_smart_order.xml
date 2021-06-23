@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/bold"
-                android:text="@string/title_smartOrder"
+                android:text="@string/title_smart_order"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
 

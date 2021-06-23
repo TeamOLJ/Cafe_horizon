@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/bold"
-                android:text="@string/title_shoppingCart"
+                android:text="@string/title_cart"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
 
