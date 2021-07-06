@@ -1,14 +1,22 @@
 package com.teamolj.cafehorizon.smartOrder
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.teamolj.cafehorizon.PayOrderActivity
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityCafeMenuDetailBinding
 import java.text.DecimalFormat
 
 class CafeMenuDetailActivity : SmartOrderActivity() {
     private lateinit var binding: ActivityCafeMenuDetailBinding
+
+    companion object{
+        var price:Int = 0
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +45,25 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
                 binding.customViewAmount.getAmountValue() * intent.getIntExtra("price", 0)
             )
 
-        //https://calvinjmkim.tistory.com/50    나중에 Glide로 이미지 동그랗게 잡아주기
+        Glide.with(this).load(R.drawable.coffee_image).circleCrop().into(binding.imageCafeMenu)
+
+        binding.customViewAmount.setOnClickListener {
+        }
 
         binding.btnAddCart.setOnClickListener {
             val testCart = getInfo()
-            Log.d("test", testCart.toString())
-//            db.cartDao().insertOrUpdate(testCart)
+            db.cartDao().insertOrUpdate(testCart)
             invalidateOptionsMenu()
             Toast.makeText(this, "메뉴를 장바구니에 담았습니다!", Toast.LENGTH_SHORT).show()
         }
+
         binding.btnOrderNow.setOnClickListener {
-            //주문하기 페이지에 현재 메뉴의 Cart 생성해서 보내기
+            val intent = Intent(this, PayOrderActivity::class.java)
+            intent.putExtra("state", PayOrderActivity.ORDER_NOW)
+            intent.putExtra("cafeMenu", getInfo())
+            startActivity(intent)
         }
+
     }
 
     fun getInfo(): Cart {
@@ -60,6 +75,17 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         val optionShot = 0
         val optionSyrup = 0
         val optionWhipping = 0
+
+        when (type) {   //not defined exactly
+            0 -> {    //coffee
+            }
+
+            1 -> {  //beverage
+                optionShot
+            }
+
+            //2 = else = values are not changed.
+        }
 
         return Cart(
             name,

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PayOrderActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_order"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textOrderCafeMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/oval_primary_button"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/text_order_cafe_menu"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/layoutCafeMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:paddingLeft="8dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/textOrderCafeMenu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <View
+                android:id="@+id/viewBottomLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutCafeMenu" />
+
+            <TextView
+                android:id="@+id/textTotalDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="총 주문 금액"
+                app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
+                app:layout_constraintTop_toBottomOf="@id/viewBottomLine" />
+
+            <TextView
+                android:id="@+id/textTotalPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:text="총 00,000원"
+                app:layout_constraintEnd_toEndOf="@+id/viewBottomLine"
+                app:layout_constraintTop_toTopOf="@id/textTotalDesc" />
+
+
+            <TextView
+                android:id="@+id/textCoupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/oval_primary_button"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/text_use_coupon"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/textOrderCafeMenu"
+                app:layout_constraintTop_toBottomOf="@id/textTotalDesc" />
+
+            <Spinner
+                android:id="@+id/spinnerCoupon"
+                android:layout_width="296dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textCoupon" />
+
+            <TextView
+                android:id="@+id/textEatOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/oval_primary_button"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/text_eat_option"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
+                app:layout_constraintTop_toBottomOf="@id/spinnerCoupon" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/groupEatOption"
+                android:layout_width="308dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                app:checkedButton="@+id/btnForHere"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textEatOption"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnForHere"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_for_here" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnToGo"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_to_go" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+            <TextView
+                android:id="@+id/textHowToPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/oval_primary_button"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/text_how_to_pay"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
+                app:layout_constraintTop_toBottomOf="@id/groupEatOption" />
+
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/groupPayOption"
+                android:layout_width="308dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                app:checkedButton="@id/btnCreditCard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textHowToPay"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreditCard"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_credit_card" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEasyPay"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_easy_pay" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBankTransfer"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_bank_transfer" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+            <TextView
+                android:id="@+id/textOrderNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/oval_primary_button"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:text="@string/text_order_notice"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
+                app:layout_constraintTop_toBottomOf="@id/groupPayOption" />
+
+            <TextView
+                android:id="@+id/textOrderNoticeDesc1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/light"
+                android:text="@string/desc_notice_text1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
+                app:layout_constraintTop_toBottomOf="@id/textOrderNotice" />
+
+            <TextView
+                android:id="@+id/textOrderNoticeDesc2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/light"
+                android:text="@string/desc_notice_text2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
+                app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc1" />
+
+            <TextView
+                android:id="@+id/textOrderNoticeDesc3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/light"
+                android:text="@string/desc_notice_text3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
+                app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc2" />
+
+            <Button
+                android:id="@+id/btnPayment"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/oval_primary_button"
+                android:text="@string/btn_payment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textOrderNoticeDesc3" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

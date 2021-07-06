@@ -4,8 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp">
+    android:paddingHorizontal="24dp">
 
     <TextView
         android:id="@+id/textOptionTitle"
@@ -71,10 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_bg_state_list"
-            android:checkable="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:checked="true"
-            android:clickable="true"
-            android:focusable="true"
             android:text="@string/btn_whippingcream_normal"
             android:textSize="14dp"
             android:textColor="@color/white" />
@@ -84,10 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/chip_bg_state_list"
-            android:checkable="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
             android:checked="false"
-            android:clickable="true"
-            android:focusable="true"
             android:text="@string/btn_whippingcream_remove"
             android:textSize="14dp"
             android:textColor="@color/white" />

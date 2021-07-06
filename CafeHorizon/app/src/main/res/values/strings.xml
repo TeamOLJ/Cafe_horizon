@@ -62,6 +62,7 @@
     <string name="title_events">이벤트</string>
     <string name="title_smart_order">스마트오더</string>
     <string name="title_cart">장바구니</string>
+    <string name="title_order">주문하기</string>
     <string name="title_how_to">이용안내</string>
 
     <string name="welcome">환영합니다</string>
@@ -110,6 +111,23 @@
     <string name="btn_add_cart">장바구니 담기</string>
     <string name="btn_order_now">바로 주문하기</string>
     <string name="btn_order">주문하기</string>
+
+    <string name="text_order_cafe_menu">주문 메뉴</string>
+    <string name="text_use_coupon">쿠폰 사용</string>
+    <string name="text_eat_option">옵션</string>
+    <string name="text_how_to_pay">결제 방법</string>
+    <string name="text_order_notice">유의사항</string>
+
+    <string name="desc_notice_text1">1. 어쩌고 저쩌고</string>
+    <string name="desc_notice_text2">2. 이러쿵 저러쿵</string>
+    <string name="desc_notice_text3">3. 그러므로 잘 살펴보고 이용하도록 하자. 우리는 책임지지 않겠다.</string>
+
+    <string name="btn_for_here">매장에서 취식</string>
+    <string name="btn_to_go">포장 주문</string>
+    <string name="btn_credit_card">신용카드</string>
+    <string name="btn_easy_pay">간편페이</string>
+    <string name="btn_bank_transfer">계좌이체</string>
+    <string name="btn_payment">결제하기</string>
 
     <string-array name="array_cafe_menu">
         <item>신메뉴</item>

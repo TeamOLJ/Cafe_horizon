@@ -1,10 +1,14 @@
 package com.teamolj.cafehorizon.smartOrder
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.teamolj.cafehorizon.PayOrderActivity
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityFilledCartBinding
+import java.text.DecimalFormat
 
 class FilledCartActivity : AppCompatActivity() {
     private lateinit var binding:ActivityFilledCartBinding
@@ -22,19 +26,19 @@ class FilledCartActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.textCartTotalPrice.text = DecimalFormat("합계 ###,###원")
+            .format(AppDatabase.getInstance(this).cartDao().getTotalAmount())
+
         var adapter = FilledCartAdapter()
-        adapter.cartList = loadCart()
+        adapter.cartList = AppDatabase.getInstance(this).cartDao().getAllByType() as MutableList<Cart>
         binding.recyclerViewCart.adapter = adapter
         binding.recyclerViewCart.layoutManager = LinearLayoutManager(this)
-    }
 
-    fun loadCart():MutableList<String> {
-        val data = mutableListOf<String>()
-        
-        data.add("첫 번째 메뉴")
-        data.add("두 번째 메뉴")
-        data.add("세 번째 메뉴")
-        
-        return data
+        binding.btnOrder.setOnClickListener {
+            val intent = Intent(this, PayOrderActivity::class.java)
+            intent.putExtra("state", PayOrderActivity.ORDER_CART)
+//            intent.putExtra("cafeMenu", )
+            startActivity(intent)
+        }
     }
 }

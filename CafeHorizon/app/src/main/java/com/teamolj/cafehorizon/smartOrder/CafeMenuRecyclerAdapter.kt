@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
 
 class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
@@ -42,6 +44,8 @@ class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.caf
 
         fun setMenu(cafeMenu: cafeMenuInfo) {
             this.cafeMenu = cafeMenu
+
+            Glide.with(binding.root.context).load(R.drawable.coffee_image).circleCrop().into(binding.imageCafeMenu)
             binding.textCafeMenuName.text = cafeMenu.name
             binding.textCafeMenuOrgPrice.text = cafeMenu.price.toString()
 
