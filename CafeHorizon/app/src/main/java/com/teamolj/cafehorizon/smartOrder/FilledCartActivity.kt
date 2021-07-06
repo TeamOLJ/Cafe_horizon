@@ -26,8 +26,8 @@ class FilledCartActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.textCartTotalPrice.text = DecimalFormat("합계 ###,###원")
-            .format(AppDatabase.getInstance(this).cartDao().getTotalAmount())
+        FilledCartActivity.binding = this.binding
+        changeTotalPrice()
 
         var adapter = FilledCartAdapter()
         adapter.cartList = AppDatabase.getInstance(this).cartDao().getAllByType() as MutableList<Cart>
@@ -39,6 +39,15 @@ class FilledCartActivity : AppCompatActivity() {
             intent.putExtra("state", PayOrderActivity.ORDER_CART)
 //            intent.putExtra("cafeMenu", )
             startActivity(intent)
+        }
+    }
+
+    companion object {
+        lateinit var binding:ActivityFilledCartBinding
+
+        fun changeTotalPrice() {
+            binding.textCartTotalPrice.text = DecimalFormat("합계 ###,###원")
+                .format(AppDatabase.getInstance(binding.root.context).cartDao().getTotalAmount())
         }
     }
 }

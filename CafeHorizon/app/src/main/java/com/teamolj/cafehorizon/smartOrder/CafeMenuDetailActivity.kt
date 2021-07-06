@@ -2,6 +2,8 @@ package com.teamolj.cafehorizon.smartOrder
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -12,11 +14,7 @@ import java.text.DecimalFormat
 
 class CafeMenuDetailActivity : SmartOrderActivity() {
     private lateinit var binding: ActivityCafeMenuDetailBinding
-
-    companion object{
-        var price:Int = 0
-    }
-
+    private val cafeMenu = Cart()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +33,37 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
             finish()
         }
 
-        //Firebase에서 불러오기
-        binding.textCafeMenuName.text = intent.getStringExtra("name").toString()
-        binding.textCafeMenuOrgPrice.text = intent.getIntExtra("price", 0).toString()
-        binding.textCafeMenuDesc.text = resources.getString(R.string.sample_text)
+        //"name" 기준으로 Firebase에서 불러오기
+        with(cafeMenu) {
+            cafeMenuName = intent.getStringExtra("name").toString()
+            menuType = 0
+            eachPrice = intent.getIntExtra("price", 0)
+        }
 
-        binding.textCafeMenuTotalPrice.text = DecimalFormat("총 ###,###원")
-            .format(
-                binding.customViewAmount.getAmountValue() * intent.getIntExtra("price", 0)
-            )
+        binding.textCafeMenuName.text = cafeMenu.cafeMenuName
+        binding.textCafeMenuDesc.text = resources.getString(R.string.sample_text)
+        binding.textCafeMenuOrgPrice.text = cafeMenu.eachPrice.toString()
+        changeTotalPrice()
+
 
         Glide.with(this).load(R.drawable.coffee_image).circleCrop().into(binding.imageCafeMenu)
 
-        binding.customViewAmount.setOnClickListener {
+        binding.customViewAmount.setTextWatcher(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                cafeMenu.cafeMenuAmount = p0.toString().toInt()
+                changeTotalPrice()
+            }
+        })
+
+        when(cafeMenu.menuType) {
+            0-> {
+                //샷, 시럽, 휘핑 TextWatcher 추가, cafeMenu.eachPrice 에 금액 추가
+            }
         }
+
 
         binding.btnAddCart.setOnClickListener {
             val testCart = getInfo()
@@ -66,36 +81,34 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
     }
 
+
+    fun changeTotalPrice() {
+        binding.textCafeMenuTotalPrice.text = DecimalFormat("총 ###,###원").format(cafeMenu.cafeMenuAmount * cafeMenu.eachPrice)
+    }
+
+
     fun getInfo(): Cart {
-        val name = binding.textCafeMenuName.text.toString()
-        val type = 0
-        val amount = binding.customViewAmount.getAmountValue()
-        val cafeMenuTotalPrice =
-            (binding.textCafeMenuTotalPrice.text).replace("\\D".toRegex(), "").toInt()
-        val optionShot = 0
-        val optionSyrup = 0
-        val optionWhipping = 0
+        with(cafeMenu) {
+            cafeMenuAmount = binding.customViewAmount.getAmountValue()
 
-        when (type) {   //not defined exactly
-            0 -> {    //coffee
+            when (menuType) {
+                0 -> {  //coffee
+                    optionShot
+                    optionSyrup
+                    optionWhipping
+                }
+
+                1 -> {  ///beverage
+                    optionShot
+
+                }
+
+                else -> {
+                }
             }
-
-            1 -> {  //beverage
-                optionShot
-            }
-
-            //2 = else = values are not changed.
         }
 
-        return Cart(
-            name,
-            type,
-            optionShot,
-            optionSyrup,
-            optionWhipping,
-            cafeMenuTotalPrice / amount,
-            amount
-        )
+        return cafeMenu
     }
 
 }

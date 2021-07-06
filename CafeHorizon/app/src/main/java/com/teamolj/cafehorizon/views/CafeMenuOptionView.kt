@@ -1,6 +1,7 @@
 package com.teamolj.cafehorizon.views
 
 import android.content.Context
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -91,5 +92,9 @@ class CafeMenuOptionView @JvmOverloads constructor(
 
     fun getAmountValue(): Int {
         return binding.textAmount.text.toString().toInt()
+    }
+
+    fun setTextWatcher(textWatcher: TextWatcher) {
+        binding.textAmount.addTextChangedListener(textWatcher)
     }
 }

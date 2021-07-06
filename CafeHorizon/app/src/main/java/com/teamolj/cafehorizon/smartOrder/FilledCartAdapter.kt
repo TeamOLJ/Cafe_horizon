@@ -1,9 +1,7 @@
 package com.teamolj.cafehorizon.smartOrder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.teamolj.cafehorizon.databinding.RecyclerItemFilledCartBinding
@@ -35,24 +33,27 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
             eachPrice = cartItem.eachPrice
 
             binding.textCafeMenuName.text = cartItem.cafeMenuName
-            binding.textAmount.text = cartItem.cafeMenuAmount.toString()
-            changePriceText(cartItem.cafeMenuAmount)
+            changeAmountAndPrice(cartItem.cafeMenuAmount)
 
 
             binding.imageBtnMinus.setOnClickListener {
                 val amount = binding.textAmount.text.toString().toInt()
 
                 if (amount > 1) {
-                    changePriceText(amount - 1)
-                    binding.textAmount.text = (amount - 1).toString()
+                    cartItem.cafeMenuAmount -= 1
+                    AppDatabase.getInstance(binding.root.context).cartDao().update(cartItem)
+                    notifyDataSetChanged()
+                    FilledCartActivity.changeTotalPrice()
                 }
             }
 
             binding.imageBtnPlus.setOnClickListener {
                 val amount = binding.textAmount.text.toString().toInt()
 
-                changePriceText(amount + 1)
-                binding.textAmount.text = (amount + 1).toString()
+                cartItem.cafeMenuAmount += 1
+                AppDatabase.getInstance(binding.root.context).cartDao().update(cartItem)
+                notifyDataSetChanged()
+                FilledCartActivity.changeTotalPrice()
             }
 
             binding.btnDelete.setOnClickListener {
@@ -62,12 +63,18 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
                     .setNegativeButton("취소") { _, _ -> }
                     .setPositiveButton("삭제") { _, _ ->
                         AppDatabase.getInstance(binding.root.context).cartDao().delete(cartItem)
+                        cartList.removeAt(adapterPosition)
+                        notifyItemRemoved(adapterPosition)
+                        FilledCartActivity.changeTotalPrice()
                     }
                     .show()
+
+
             }
         }
 
-        fun changePriceText(amount: Int) {
+        private fun changeAmountAndPrice(amount: Int) {
+            binding.textAmount.text = amount.toString()
             binding.textCafeMenuTotalPrice.text =
                 DecimalFormat("###,###원").format(eachPrice * amount)
         }
