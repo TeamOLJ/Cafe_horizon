@@ -168,6 +168,7 @@ class MainActivity : AppCompatActivity() {
                     mainImageList.add(document.data?.get("secondImage").toString())
                     mainImageList.add(document.data?.get("thirdImage").toString())
 
+
                     // Main page image slider
                     val imageSlideAdapter = SlideImageAdapter(this)
                     binding.viewPagerMainImage.adapter = imageSlideAdapter
