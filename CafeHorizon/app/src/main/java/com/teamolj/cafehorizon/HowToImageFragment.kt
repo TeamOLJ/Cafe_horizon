@@ -20,6 +20,7 @@ class HowToImageFragment(private val imageUrl : String) : Fragment() {
 
         Glide.with(this)
             .load(imageUrl)
+            .fitCenter()
             .placeholder(R.drawable.img_placeholder)
             .thumbnail(0.1f)
             .into(binding.imageView)

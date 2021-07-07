@@ -23,6 +23,7 @@
         <attr name="viewSlideIndicatorSize" format="string" />
         <attr name="viewSlideIndicatorDotSize" format="reference|dimension" />
         <attr name="viewSlideIndicatorMargin" format="reference|dimension" />
+        <attr name="viewSlideIndicatorInactiveColor" format="reference|integer"/>
     </declare-styleable>
 
     <declare-styleable name="CafeMenuOptionView">

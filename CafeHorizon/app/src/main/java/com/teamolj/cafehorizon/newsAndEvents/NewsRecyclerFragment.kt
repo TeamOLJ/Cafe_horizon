@@ -15,6 +15,8 @@ class NewsRecyclerFragment : Fragment() {
     private var _binding: FragmentNewsRecyclerBinding? = null
     private val binding get() = _binding!!
 
+    private val newsList = mutableListOf<News>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,8 +24,10 @@ class NewsRecyclerFragment : Fragment() {
         _binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        loadNews()
+
         var adapter = NewsAdapter()
-        adapter.newsList = loadNews()
+        adapter.newsList = newsList
         binding.recyclerViewNews.adapter = adapter
         binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
 
@@ -31,18 +35,14 @@ class NewsRecyclerFragment : Fragment() {
     }
 
     //https://stackoverflow.com/questions/51594772/how-to-return-a-list-from-firestore-database-as-a-result-of-a-function-in-kotlin/59124705#59124705
-    private fun loadNews(): MutableList<News> {
+    private fun loadNews() {
         val db = Firebase.firestore
-        val data: MutableList<News> = mutableListOf()
-
-        Log.d("test", "Before attaching the listener!")
-
 
         db.collection("News").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("test", "Inside onComplete function!")
                 for (document in task.result!!) {
-                    data.add(
+                    newsList.add(
                         News(
                             document.data["title"].toString(),
                             document.data["content"].toString(),
@@ -55,9 +55,5 @@ class NewsRecyclerFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.w("firebase", "Error getting documents.", exception)
             }
-        Log.d("test", "After attaching the listener!")
-
-
-        return data
     }
 }

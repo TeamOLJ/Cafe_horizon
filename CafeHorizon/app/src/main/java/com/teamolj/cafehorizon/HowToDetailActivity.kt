@@ -4,6 +4,7 @@ import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -46,17 +47,17 @@ class HowToDetailActivity : AppCompatActivity() {
         when (intent.getStringExtra("category")) {
             "stamp" -> {
                 binding.textToolbar.text = resources.getString(R.string.how_to_stamp)
-                setHowToImage("stamp")
+                setHowToImage("HowToStamp")
             }
 
             "coupon" -> {
                 binding.textToolbar.text = resources.getString(R.string.how_to_coupon)
-                setHowToImage("coupon")
+                setHowToImage("HowToCoupon")
             }
 
             "smartOrder" -> {
                 binding.textToolbar.text = resources.getString(R.string.how_to_smart_order)
-                setHowToImage("smartOrder")
+                setHowToImage("HowToSmartOrder")
             }
 
             "service" -> {
@@ -89,23 +90,29 @@ class HowToDetailActivity : AppCompatActivity() {
         binding.slideIndicator.visibility = View.VISIBLE
         binding.scrollViewTerms.visibility = View.GONE
 
-        /*
-        firebase 테이브명==tag로 접근해
-
         val docRef = db.collection("Operational").document(tag)
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-
+                    for (ind in 1..(document.data?.size?:1)){
+                        Log.d("TAG", "add image$ind")
+                        howToImageList.add(document.data?.get("image$ind").toString())
+                    }
                 }
+
+                viewPager = binding.viewPagerHowToImage
+                viewPager.offscreenPageLimit = howToImageList.size
+                viewPager.adapter = HowToImageAdapter(this)
+
+                viewPager.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        binding.slideIndicator.setCurrentSlide(position)
+                    }
+                })
+
+                binding.slideIndicator.setSlideSize(howToImageList.size)
             }
-*/
-
-        viewPager = binding.viewPagerHowToImage
-        viewPager.offscreenPageLimit = howToImageList.size
-        viewPager.adapter = HowToImageAdapter(this)
-
-        binding.slideIndicator.setSlideSize(howToImageList.size)
     }
 
     private fun setTerms(tag: String) {

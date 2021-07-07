@@ -15,6 +15,7 @@ class SlideIndicatorView @JvmOverloads constructor(
     LinearLayout(context, attrs, defStyleAttr) {
 
     private var defaultSize = 1
+    private var indicatorInactiveColor:Int = 0
 
     init {
         LayoutInflater
@@ -35,6 +36,8 @@ class SlideIndicatorView @JvmOverloads constructor(
 
                     val indicatorDotSize = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorDotSize, 0)
                     val indicatorDotMargin = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorMargin, 0)
+
+                    indicatorInactiveColor = getColor(R.styleable.SlideIndicatorView_viewSlideIndicatorInactiveColor, R.color.white.toInt())
 
                     val indicatorParams = LayoutParams(indicatorDotSize, indicatorDotSize)
                     indicatorParams.setMargins(indicatorDotMargin, 0, indicatorDotMargin, 0)
@@ -61,7 +64,7 @@ class SlideIndicatorView @JvmOverloads constructor(
 
     fun setCurrentSlide(position: Int) {
         for(idx in 0 until defaultSize) {
-            layoutIndicator.getChildAt(idx).backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+            layoutIndicator.getChildAt(idx).backgroundTintList = ColorStateList.valueOf(indicatorInactiveColor)
         }
         layoutIndicator.getChildAt(position).backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorAccent))
     }
