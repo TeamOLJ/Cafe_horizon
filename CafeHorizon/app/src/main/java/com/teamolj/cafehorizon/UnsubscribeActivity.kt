@@ -101,7 +101,7 @@ class UnsubscribeActivity : AppCompatActivity() {
 
                                     if (unsubTask.isSuccessful) {
                                         // DB 문서 삭제
-                                        db.collection("userInformation").document(userUID).delete()
+                                        db.collection("UserInformation").document(userUID).delete()
 
                                         App.prefs.clear()
 
