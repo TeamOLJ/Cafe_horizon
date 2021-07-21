@@ -5,56 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.teamolj.cafehorizon.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.teamolj.cafehorizon.databinding.FragmentCouponListBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CouponListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class CouponListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+        private var _binding: FragmentCouponListBinding? = null
+        private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            _binding = FragmentCouponListBinding.inflate(inflater, container, false)
+            val view = binding.root
+
+            val data: MutableList<Coupons> = loadCoupons()
+
+            var adapter = ListRecyclerAdapter()
+            adapter.datas = data
+            binding.recyclerViewCList.adapter = adapter
+            binding.recyclerViewCList.layoutManager = LinearLayoutManager(this.context)
+
+            return view
+        }
+
+        internal fun loadCoupons() : MutableList<Coupons> {
+
+            val data: MutableList<Coupons> = mutableListOf()
+
+            for (no in 0..10) {
+                val type = "스탬프 무료 적립 쿠폰"
+                val date = System.currentTimeMillis().toString()
+                val status = "현재 쿠폰이라 삭제예정"
+
+                var coupons = Coupons(type, date, status)
+                data.add(coupons)
+            }
+
+            return data
+
         }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coupon_list, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CouponListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CouponListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}

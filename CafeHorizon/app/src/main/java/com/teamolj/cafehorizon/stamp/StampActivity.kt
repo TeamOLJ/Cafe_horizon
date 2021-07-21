@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
 import com.teamolj.cafehorizon.R
-import com.teamolj.cafehorizon.coupon.CouponAdapter
-import com.teamolj.cafehorizon.coupon.CouponHistoryFragment
-import com.teamolj.cafehorizon.coupon.CouponListFragment
 import com.teamolj.cafehorizon.databinding.ActivityStampBinding
 
 class StampActivity : AppCompatActivity() {
