@@ -80,16 +80,24 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
 
         binding.btnAddCart.setOnClickListener {
-            db.cartDao().insertOrUpdate(cafeMenu)
-            invalidateOptionsMenu()
-            Toast.makeText(this, "메뉴를 장바구니에 담았습니다!", Toast.LENGTH_SHORT).show()
+            if(cafeMenu.cafeMenuAmount>0) {
+                db.cartDao().insertOrUpdate(cafeMenu)
+                invalidateOptionsMenu()
+                Toast.makeText(this, "메뉴를 장바구니에 담았습니다!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "수량을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.btnOrderNow.setOnClickListener {
-            val intent = Intent(this, PayOrderActivity::class.java)
-            intent.putExtra("state", PayOrderActivity.ORDER_NOW)
-            intent.putExtra("cafeMenu", cafeMenu)
-            startActivity(intent)
+            if(cafeMenu.cafeMenuAmount>0) {
+                val intent = Intent(this, PayOrderActivity::class.java)
+                intent.putExtra("state", PayOrderActivity.ORDER_NOW)
+                intent.putExtra("cafeMenu", cafeMenu)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "수량을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

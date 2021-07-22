@@ -38,12 +38,18 @@ class PayOrderItemView @JvmOverloads constructor(
     fun setItemType(type:String) {
         when(type) {
             "Menu" -> {
+                val paddingEight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F, resources.displayMetrics).toInt()
+                binding.container.setPadding(0, paddingEight, 0, paddingEight)
+
                 binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
                 binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
                 binding.textPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
             }
 
             "Option" -> {
+                val paddingEight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4F, resources.displayMetrics).toInt()
+                binding.container.setPadding(0, paddingEight, 0, paddingEight)
+
                 binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
                 binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
                 binding.textPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
@@ -56,14 +62,13 @@ class PayOrderItemView @JvmOverloads constructor(
     }
 
     fun setOptionInfo(name:String, amount:Int) {
-        binding.textName.text = name
+        binding.textName.text = "-$name"
         if(amount>0){
             binding.textAmount.text = amount.toString()
-            binding.textPrice.text = DecimalFormat("###,###").format(amount * 500)
         } else {
             binding.textAmount.text = ""
-            binding.textPrice.text = ""
         }
+        binding.textPrice.text = ""
     }
 
     fun setCafeMenuInfo(name:String, amount:Int, eachPrice:Int) {

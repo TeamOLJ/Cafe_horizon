@@ -13,6 +13,11 @@ class PayOrderActivity : AppCompatActivity() {
     companion object {
         val ORDER_NOW = "order now"
         val ORDER_CART = "order cart"
+        val EAT_FOR_HERE = "for here"
+        val EAT_TO_GO = "to go"
+        val PAY_CREDIT = "credit card"
+        val PAY_EASY_PAY = "easy pay"
+        val PAY_BANK_TRANSFER = "bank transfer"
     }
 
     private lateinit var binding: ActivityPayOrderBinding
@@ -36,7 +41,10 @@ class PayOrderActivity : AppCompatActivity() {
 
         val state = intent.getStringExtra("state")
         var cafeMenuList = mutableListOf<Cart>()
-        var listTotalPrice:Int = 0
+        var listTotalPrice = 0
+        var eatOption = EAT_FOR_HERE
+        var payOption = PAY_CREDIT
+
 
         if (state == ORDER_NOW) {
             cafeMenuList = mutableListOf(intent.getSerializableExtra("cafeMenu") as Cart)
@@ -46,10 +54,9 @@ class PayOrderActivity : AppCompatActivity() {
 
         for (menu in cafeMenuList) {
             listTotalPrice += (menu.eachPrice * menu.cafeMenuAmount)
-            val priceExcludeOption = menu.eachPrice - (menu.optionShot*500) - (menu.optionSyrup*500)
 
             val menuView = PayOrderItemView(this)
-            menuView.setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, priceExcludeOption)
+            menuView.setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
             binding.layoutCafeMenu.addView(menuView)
 
             if (menu.optionShot > 0) {
@@ -60,7 +67,7 @@ class PayOrderActivity : AppCompatActivity() {
                 binding.layoutCafeMenu.addView(shotView)
             }
             if (menu.optionSyrup > 0) {
-                val syrupView = PayOrderItemView(this).apply{
+                val syrupView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("시럽 추가", menu.optionSyrup)
                 }
@@ -78,17 +85,36 @@ class PayOrderActivity : AppCompatActivity() {
         binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
 
 
-        binding.groupEatOption.addOnButtonCheckedListener { group, checkedId, isChecked ->
+        binding.groupEatOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
-                when (checkedId) {
-                    binding.btnForHere.id -> {
+                eatOption = when (checkedId) {
+                    binding.btnForHere.id -> EAT_FOR_HERE
+                    binding.btnToGo.id -> EAT_TO_GO
 
-                    }
-                    binding.btnToGo.id -> {
-
-                    }
+                    else -> ""
                 }
             }
+        }
+
+
+        binding.groupPayOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if(isChecked) {
+                payOption = when(checkedId) {
+                    binding.btnCreditCard.id -> PAY_CREDIT
+                    binding.btnEasyPay.id -> PAY_EASY_PAY
+                    binding.btnBankTransfer.id -> PAY_BANK_TRANSFER
+
+                    else -> ""
+                }
+            }
+        }
+
+        binding.btnPayment.setOnClickListener {
+            Toast.makeText(this, "$eatOption $payOption", Toast.LENGTH_SHORT).show()
+            /*
+            취식 옵션 보내기
+            페이 옵션대로 결제 인텐드 실행하기
+             */
         }
     }
 }

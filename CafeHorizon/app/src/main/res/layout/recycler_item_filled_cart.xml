@@ -84,11 +84,12 @@
         android:backgroundTint="@color/gray"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        android:padding="5dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
         android:text="@string/btn_delete"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textCafeMenuName" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textCafeMenuTotalPrice"
