@@ -41,4 +41,8 @@
         <attr name="viewHowToItemPaddingRight" format="reference|dimension" />
         <attr name="viewHowToItemShowImage" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="PayOrderItemView">
+        <attr name="viewPayOrderItemType" format="string"/>
+    </declare-styleable>
 </resources>

@@ -10,15 +10,13 @@ import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.FragmentEventsRecyclerBinding
 
 class EventsRecyclerFragment : Fragment() {
-    private var _binding: FragmentEventsRecyclerBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentEventsRecyclerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false)
 
         val data: MutableList<Events> = loadEvents()
 
@@ -27,7 +25,7 @@ class EventsRecyclerFragment : Fragment() {
         binding.recyclerViewEvents.adapter = adapter
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(this.context)
 
-        return view
+        return binding.root
     }
 
     internal fun loadEvents(): MutableList<Events> {

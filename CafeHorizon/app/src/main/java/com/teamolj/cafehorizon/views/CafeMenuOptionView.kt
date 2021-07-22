@@ -30,50 +30,56 @@ class CafeMenuOptionView @JvmOverloads constructor(
 
                 val backgroundColor = getColor(
                     R.styleable.CafeMenuOptionView_viewCafeMenuOptionBgColor,
-                    R.color.lightgray.toInt()
+                    resources.getColor(R.color.lightgray)
                 )
 
-                val optionTitle = getString(R.styleable.CafeMenuOptionView_viewCafeMenuOptionTitleText)
+                val optionTitle =
+                    getString(R.styleable.CafeMenuOptionView_viewCafeMenuOptionTitleText)
                 val defaultAmount =
-                    getInt(R.styleable.CafeMenuOptionView_viewCafeMenuOptionDefaultAmount, 0).toString()
+                    getInt(
+                        R.styleable.CafeMenuOptionView_viewCafeMenuOptionDefaultAmount,
+                        0
+                    ).toString()
 
                 val itemType = getString(R.styleable.CafeMenuOptionView_viewCafeMenuOptionItemType)
 
                 binding.container.setBackgroundColor(backgroundColor)
-
                 binding.textOptionTitle.text = optionTitle
                 binding.textAmount.text = defaultAmount
+                setItemType(itemType)
 
-                when (itemType) {
-                    "view_amount_buttons" -> {
-                        binding.layoutAmount.visibility = View.VISIBLE
-                        binding.chipGroupOption.visibility = View.GONE
-                    }
 
-                    "view_chip_group" -> {
-                        binding.layoutAmount.visibility = View.GONE
-                        binding.chipGroupOption.visibility = View.VISIBLE
-                    }
-
-                    "view_titleOnly" -> {
-                        binding.layoutAmount.visibility = View.GONE
-                        binding.chipGroupOption.visibility = View.GONE
+                binding.imageBtnMinus.setOnClickListener {
+                    if (getAmountValue() > 0) {
+                        binding.textAmount.text = (getAmountValue() - 1).toString()
                     }
                 }
 
-                if (itemType == "view_amount_buttons") {
-                    binding.imageBtnMinus.setOnClickListener {
-                        if (getAmountValue() > 0) {
-                            binding.textAmount.text = (getAmountValue() - 1).toString()
-                        }
-                    }
-
-                    binding.imageBtnPlus.setOnClickListener {
-                        binding.textAmount.text = (getAmountValue() + 1).toString()
-                    }
+                binding.imageBtnPlus.setOnClickListener {
+                    binding.textAmount.text = (getAmountValue() + 1).toString()
                 }
+
             } finally {
                 recycle()
+            }
+        }
+    }
+
+    fun setItemType(itemType: String?) {
+        when (itemType) {
+            "view_amount_buttons" -> {
+                binding.layoutAmount.visibility = View.VISIBLE
+                binding.chipGroupOption.visibility = View.GONE
+            }
+
+            "view_chip_group" -> {
+                binding.layoutAmount.visibility = View.GONE
+                binding.chipGroupOption.visibility = View.VISIBLE
+            }
+
+            "view_titleOnly" -> {
+                binding.layoutAmount.visibility = View.GONE
+                binding.chipGroupOption.visibility = View.GONE
             }
         }
     }
@@ -84,10 +90,6 @@ class CafeMenuOptionView @JvmOverloads constructor(
 
     fun setDefaultAmount(amount: Int) {
         binding.textAmount.text = amount.toString()
-    }
-
-    fun getChipChecked(): Boolean { //기본이 아닐 경우 true
-        return binding.chipRemove.isChecked
     }
 
     fun getAmountValue(): Int {

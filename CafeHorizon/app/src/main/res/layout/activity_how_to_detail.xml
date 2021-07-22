@@ -58,9 +58,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewPagerHowToImage"
         app:viewSlideIndicatorDotSize="8dp"
+        app:viewSlideIndicatorInactiveColor="@color/lightgray"
         app:viewSlideIndicatorMargin="5dp"
-        app:viewSlideIndicatorSize="3"
-        app:viewSlideIndicatorInactiveColor="@color/lightgray"/>
+        app:viewSlideIndicatorSize="7" />
 
     <ScrollView
         android:id="@+id/scrollViewTerms"
@@ -73,11 +73,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
-        <LinearLayout
-            android:id="@+id/layoutTerms"
+        <TextView
+            android:id="@+id/textTerms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:text="@string/sample_text"
+            android:textSize="16dp" />
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

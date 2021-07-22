@@ -119,16 +119,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/customViewAmount">
-
-                <com.teamolj.cafehorizon.views.CafeMenuOptionView
-                    android:id="@+id/customViewOptionTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:viewCafeMenuOptionBgColor="@color/lightgray"
-                    app:viewCafeMenuOptionItemType="view_titleOnly"
-                    app:viewCafeMenuOptionTitleText="@string/cafe_menu_option" />
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/customViewAmount"/>
 
             <TextView
                 android:id="@+id/textCafeMenuTotalPrice"
@@ -136,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="28dp"
-                android:text="총합 5,500원"
+                android:text="총합 0,000원"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layoutOption" />

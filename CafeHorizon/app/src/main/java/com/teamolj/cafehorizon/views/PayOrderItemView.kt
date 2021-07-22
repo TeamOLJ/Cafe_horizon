@@ -1,0 +1,74 @@
+package com.teamolj.cafehorizon.views
+
+import android.content.Context
+import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
+import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.teamolj.cafehorizon.R
+import com.teamolj.cafehorizon.databinding.ViewPayOrderItemBinding
+import java.text.DecimalFormat
+
+class PayOrderItemView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr) {
+    private var binding:ViewPayOrderItemBinding =
+        ViewPayOrderItemBinding.inflate(LayoutInflater.from(context), this, true)
+
+    init {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.PayOrderItemView,
+            0, 0
+        ).apply{
+            try {
+                val type = getString(R.styleable.PayOrderItemView_viewPayOrderItemType) ?: "Menu"
+
+                setItemType(type)
+
+            } finally{
+                recycle()
+            }
+        }
+    }
+
+    fun setItemType(type:String) {
+        when(type) {
+            "Menu" -> {
+                binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
+                binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
+                binding.textPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
+            }
+
+            "Option" -> {
+                binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
+                binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
+                binding.textPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
+
+
+                val leftPadding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16F, resources.displayMetrics).toInt()
+                binding.textName.setPadding(leftPadding, 0, 0, 0)
+            }
+        }
+    }
+
+    fun setOptionInfo(name:String, amount:Int) {
+        binding.textName.text = name
+        if(amount>0){
+            binding.textAmount.text = amount.toString()
+            binding.textPrice.text = DecimalFormat("###,###").format(amount * 500)
+        } else {
+            binding.textAmount.text = ""
+            binding.textPrice.text = ""
+        }
+    }
+
+    fun setCafeMenuInfo(name:String, amount:Int, eachPrice:Int) {
+        binding.textName.text = name
+        binding.textAmount.text = amount.toString()
+        binding.textPrice.text = DecimalFormat("###,###").format(amount*eachPrice)
+    }
+}

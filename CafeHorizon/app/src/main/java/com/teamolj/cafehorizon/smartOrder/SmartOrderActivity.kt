@@ -110,6 +110,6 @@ open class SmartOrderActivity : AppCompatActivity() {
 
     private inner class SmartOrderAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = MENU_ITEMS.size
-        override fun createFragment(position: Int): Fragment = CafeMenuRecyclerFragment()
+        override fun createFragment(position: Int): Fragment = CafeMenuRecyclerFragment(position)
     }
 }

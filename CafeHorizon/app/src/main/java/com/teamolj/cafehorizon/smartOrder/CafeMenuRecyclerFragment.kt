@@ -8,22 +8,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamolj.cafehorizon.databinding.FragmentCafeMenuRecyclerBinding
 
-class CafeMenuRecyclerFragment : Fragment() {
-    private var _binding: FragmentCafeMenuRecyclerBinding? = null
-    private val binding get() = _binding!!
+class CafeMenuRecyclerFragment(val position:Int) : Fragment() {
+    private lateinit var binding: FragmentCafeMenuRecyclerBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentCafeMenuRecyclerBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentCafeMenuRecyclerBinding.inflate(inflater, container, false)
 
         val data:MutableList<cafeMenuInfo> = loadMenu()
 
-        var adapter = CafeMenuRecyclerAdapter()
+        var adapter = CafeMenuRecyclerAdapter(position)
         adapter.cafeMenuList = data
         binding.recyclerViewCafeMenu.adapter = adapter
         binding.recyclerViewCafeMenu.layoutManager = LinearLayoutManager(this.context)
 
-        return view
+        return binding.root
     }
 
     private fun loadMenu():MutableList<cafeMenuInfo> {

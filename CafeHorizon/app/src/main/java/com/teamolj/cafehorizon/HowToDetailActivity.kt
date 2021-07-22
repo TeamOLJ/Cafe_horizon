@@ -1,14 +1,8 @@
 package com.teamolj.cafehorizon
 
-import android.opengl.Visibility
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -19,11 +13,7 @@ import com.teamolj.cafehorizon.databinding.ActivityHowToDetailBinding
 
 class HowToDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHowToDetailBinding
-    private val CHAPTER_SIZE = 18F
-    private val ARTICLE_SIZE = 16F
-    private val DESC_SIZE = 14F
 
-    private lateinit var layoutTerms: LinearLayout
     private lateinit var viewPager: ViewPager2
     private val howToImageList = mutableListOf<String>()
 
@@ -33,8 +23,6 @@ class HowToDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHowToDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        layoutTerms = binding.layoutTerms
 
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
@@ -62,24 +50,24 @@ class HowToDetailActivity : AppCompatActivity() {
 
             "service" -> {
                 binding.textToolbar.text = resources.getString(R.string.terms_service)
-                setTerms("service")
+                setTerms("TermsService")
             }
 
             "privacyPolicy" -> {
                 binding.textToolbar.text = resources.getString(R.string.terms_privacy_policy)
-                setTerms("privacyPolicy")
+                setTerms("TermsPrivacyPolicy")
             }
 
             "marketing" -> {
                 binding.textToolbar.text =
                     resources.getString(R.string.terms_agree_to_use_marketing)
-                setTerms("marketing")
+                setTerms("TermsMarketing")
             }
 
             "adInfo" -> {
                 binding.textToolbar.text =
                     resources.getString(R.string.terms_agree_to_receive_ad_info)
-                setTerms("adInfo")
+                setTerms("TermsAdInfo")
             }
         }
 
@@ -94,8 +82,7 @@ class HowToDetailActivity : AppCompatActivity() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    for (ind in 1..(document.data?.size?:1)){
-                        Log.d("TAG", "add image$ind")
+                    for (ind in 1..(document.data?.size ?: 1)) {
                         howToImageList.add(document.data?.get("image$ind").toString())
                     }
                 }
@@ -104,7 +91,7 @@ class HowToDetailActivity : AppCompatActivity() {
                 viewPager.offscreenPageLimit = howToImageList.size
                 viewPager.adapter = HowToImageAdapter(this)
 
-                viewPager.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback() {
+                viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
                         binding.slideIndicator.setCurrentSlide(position)
@@ -120,60 +107,18 @@ class HowToDetailActivity : AppCompatActivity() {
         binding.slideIndicator.visibility = View.GONE
         binding.scrollViewTerms.visibility = View.VISIBLE
 
-        /*
-        firebase 테이블명==tag로 접근해
-        장-addTermsChapter
-        조-addTermsArticle
-        내용-addTermsDesc
-        컬럼 값에 따라 뷰 추가하기
-         */
-
-    }
-
-
-    private fun addTermsChapter(str: String) {
-        val textView = TextView(this).apply {
-            text = str
-            setTextSize(TypedValue.COMPLEX_UNIT_DIP, CHAPTER_SIZE)
-            setPadding(0, 16, 0, 16)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                typeface = resources.getFont(R.font.bold)
+        val docRef = db.collection("Operational").document(tag)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    binding.textTerms.text = document.data?.get("terms").toString()
+                }
             }
-        }
-
-        layoutTerms.addView(textView)
-    }
-
-
-    private fun addTermsArticle(str: String) {
-        val textView = TextView(this).apply {
-            text = str
-            setTextSize(TypedValue.COMPLEX_UNIT_DIP, ARTICLE_SIZE)
-            setPadding(8, 8, 0, 8)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                typeface = resources.getFont(R.font.bold)
-            }
-        }
-
-        layoutTerms.addView(textView)
-    }
-
-
-    private fun addTermsDesc(str: String) {
-        val textView = TextView(this).apply {
-            text = str
-            setTextSize(TypedValue.COMPLEX_UNIT_DIP, DESC_SIZE)
-            setPadding(8, 0, 0, 0)
-        }
-
-        layoutTerms.addView(textView)
     }
 
     private inner class HowToImageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = howToImageList.size
         override fun createFragment(position: Int): Fragment =
-            HowToImageFragment(howToImageList.get(position))
+            HowToImageFragment(howToImageList[position])
     }
 }

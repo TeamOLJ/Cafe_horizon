@@ -31,8 +31,21 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
 
         fun setCartItem(cartItem: Cart) {
             eachPrice = cartItem.eachPrice
+            var menuOption = ""
+
+            if(cartItem.optionShot>0) {
+                menuOption += " 샷 ${cartItem.optionShot} "
+            }
+            if(cartItem.optionSyrup>0) {
+                menuOption += " 시럽 ${cartItem.optionSyrup} "
+            }
+            if(!cartItem.optionWhipping) {
+                menuOption += " 휘핑 없음 "
+            }
 
             binding.textCafeMenuName.text = cartItem.cafeMenuName
+            binding.textCafeMenuOption.text = menuOption
+
             changeAmountAndPrice(cartItem.cafeMenuAmount)
 
 

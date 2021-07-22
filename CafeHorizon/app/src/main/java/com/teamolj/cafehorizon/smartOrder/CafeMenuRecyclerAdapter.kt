@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
 
-class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
+class CafeMenuRecyclerAdapter(val menuType:Int) : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
     internal var cafeMenuList: MutableList<cafeMenuInfo> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): cafeMenuHolder =
@@ -35,6 +35,7 @@ class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.caf
                 var intent =
                     Intent(binding.root.context, CafeMenuDetailActivity::class.java).apply {
                         putExtra("name", cafeMenu.name)
+                        putExtra("type", menuType)
                         putExtra("price", cafeMenu.price)
                     }
 

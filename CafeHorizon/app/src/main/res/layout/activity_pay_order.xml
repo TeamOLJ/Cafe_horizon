@@ -45,9 +45,9 @@
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingHorizontal="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp">
 
             <TextView
                 android:id="@+id/textOrderCafeMenu"
@@ -56,9 +56,10 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/oval_primary_button"
                 android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:paddingVertical="8dp"
                 android:text="@string/text_order_cafe_menu"
                 android:textColor="@color/black"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,12 +67,13 @@
                 android:id="@+id/layoutCafeMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:paddingLeft="8dp"
+                android:layout_marginVertical="8dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="12dp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/textOrderCafeMenu"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="@+id/viewBottomLine"
+                app:layout_constraintStart_toStartOf="@+id/textTotalDesc"
+                app:layout_constraintTop_toBottomOf="@id/textOrderCafeMenu" />
 
 
             <View
@@ -89,9 +91,10 @@
                 android:id="@+id/textTotalDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:text="총 주문 금액"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
                 app:layout_constraintTop_toBottomOf="@id/viewBottomLine" />
 
@@ -101,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"
                 android:text="총 00,000원"
+                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/viewBottomLine"
                 app:layout_constraintTop_toTopOf="@id/textTotalDesc" />
 
@@ -115,6 +119,7 @@
                 android:paddingVertical="4dp"
                 android:text="@string/text_use_coupon"
                 android:textColor="@color/black"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@id/textOrderCafeMenu"
                 app:layout_constraintTop_toBottomOf="@id/textTotalDesc" />
 
@@ -138,6 +143,7 @@
                 android:paddingVertical="4dp"
                 android:text="@string/text_eat_option"
                 android:textColor="@color/black"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
                 app:layout_constraintTop_toBottomOf="@id/spinnerCoupon" />
 
@@ -160,7 +166,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/btn_for_here" />
+                    android:text="@string/btn_for_here"
+                    android:textSize="16dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToGo"
@@ -168,7 +175,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/btn_to_go" />
+                    android:text="@string/btn_to_go"
+                    android:textSize="16dp" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -183,6 +191,7 @@
                 android:paddingVertical="4dp"
                 android:text="@string/text_how_to_pay"
                 android:textColor="@color/black"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
                 app:layout_constraintTop_toBottomOf="@id/groupEatOption" />
 
@@ -206,7 +215,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/btn_credit_card" />
+                    android:text="@string/btn_credit_card"
+                    android:textSize="16dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnEasyPay"
@@ -214,7 +224,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/btn_easy_pay" />
+                    android:text="@string/btn_easy_pay"
+                    android:textSize="16dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBankTransfer"
@@ -222,7 +233,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/btn_bank_transfer" />
+                    android:text="@string/btn_bank_transfer"
+                    android:textSize="16dp" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -237,6 +249,7 @@
                 android:paddingVertical="4dp"
                 android:text="@string/text_order_notice"
                 android:textColor="@color/black"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
                 app:layout_constraintTop_toBottomOf="@id/groupPayOption" />
 
@@ -249,6 +262,7 @@
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/light"
                 android:text="@string/desc_notice_text1"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
                 app:layout_constraintTop_toBottomOf="@id/textOrderNotice" />
@@ -262,6 +276,7 @@
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/light"
                 android:text="@string/desc_notice_text2"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
                 app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc1" />
@@ -275,6 +290,7 @@
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/light"
                 android:text="@string/desc_notice_text3"
+                android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
                 app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc2" />
