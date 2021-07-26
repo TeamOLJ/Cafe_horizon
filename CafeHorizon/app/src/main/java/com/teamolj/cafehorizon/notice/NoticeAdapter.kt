@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teamolj.cafehorizon.databinding.RecyclerItemNoticeBinding
 
 class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.noticeHolder>() {
-    internal var noticeList = mutableListOf<Notice>()
+    var noticeList = mutableListOf<Notice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): noticeHolder = noticeHolder(
         RecyclerItemNoticeBinding.inflate(

@@ -20,10 +20,7 @@ open class SmartOrderActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
 
     private lateinit var MENU_ITEMS: Array<String>
-
-    companion object {
-        lateinit var db:AppDatabase
-    }
+    lateinit var db:AppDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

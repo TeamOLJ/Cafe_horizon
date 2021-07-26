@@ -27,7 +27,6 @@ class NewsRecyclerFragment : Fragment() {
 
         db.collection("News").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Log.d("test", "Inside onComplete function!")
                 for (document in task.result!!) {
                     newsList.add(
                         News(

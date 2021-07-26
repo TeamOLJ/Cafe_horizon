@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_ordered -> {
                     binding.drawerLayout.close()
-//                    val intent = Intent(this, OrderedActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this, OrderedListActivity::class.java)
+                    startActivity(intent)
                     Toast.makeText(this, "주문내역", Toast.LENGTH_SHORT).show()
                     true
                 }

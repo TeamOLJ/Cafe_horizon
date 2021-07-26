@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderStateActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_order_state"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_order_state_imageview"
+        android:layout_marginHorizontal="44dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <ImageView
+            android:id="@+id/imageWaitingOrder"
+            android:layout_width="@dimen/size_order_state_imageview"
+            android:layout_height="@dimen/size_order_state_imageview"
+            android:background="@drawable/img_indicator"
+            android:backgroundTint="@color/lightgray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textWaitingOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_waiting_order"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/imageWaitingOrder"
+            app:layout_constraintEnd_toEndOf="@id/imageWaitingOrder"
+            app:layout_constraintStart_toStartOf="@id/imageWaitingOrder"
+            app:layout_constraintTop_toTopOf="@id/imageWaitingOrder" />
+
+        <ImageView
+            android:id="@+id/imageReceiveOrder"
+            android:layout_width="@dimen/size_order_state_imageview"
+            android:layout_height="@dimen/size_order_state_imageview"
+            android:background="@drawable/img_indicator"
+            android:backgroundTint="@color/lightgray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageWaitingPickup"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageWaitingOrder"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textReceiveOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_receive_order"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/imageReceiveOrder"
+            app:layout_constraintEnd_toEndOf="@id/imageReceiveOrder"
+            app:layout_constraintStart_toStartOf="@id/imageReceiveOrder"
+            app:layout_constraintTop_toTopOf="@id/imageReceiveOrder" />
+
+        <ImageView
+            android:id="@+id/imageWaitingPickup"
+            android:layout_width="@dimen/size_order_state_imageview"
+            android:layout_height="@dimen/size_order_state_imageview"
+            android:background="@drawable/img_indicator"
+            android:backgroundTint="@color/lightgray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageFinishPickup"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageReceiveOrder"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textWaitingPickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_waiting_pickup"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/imageWaitingPickup"
+            app:layout_constraintEnd_toEndOf="@id/imageWaitingPickup"
+            app:layout_constraintStart_toStartOf="@id/imageWaitingPickup"
+            app:layout_constraintTop_toTopOf="@id/imageWaitingPickup" />
+
+        <ImageView
+            android:id="@+id/imageFinishPickup"
+            android:layout_width="@dimen/size_order_state_imageview"
+            android:layout_height="@dimen/size_order_state_imageview"
+            android:background="@drawable/img_indicator"
+            android:backgroundTint="@color/lightgray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textFinishPickup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_finish_pickup"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/imageFinishPickup"
+            app:layout_constraintEnd_toEndOf="@id/imageFinishPickup"
+            app:layout_constraintStart_toStartOf="@id/imageFinishPickup"
+            app:layout_constraintTop_toTopOf="@id/imageFinishPickup" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textStateDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="주문 상태 메시지"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textOrderTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="주문일시: "
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textStateDesc" />
+
+    <View
+        android:id="@+id/itemBottomLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textOrderTime" />
+
+    <LinearLayout
+        android:id="@+id/layoutOrderItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemBottomLine" />
+
+    <TextView
+        android:id="@+id/textTotalDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="총 주문 금액"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@id/layoutOrderItems"
+        app:layout_constraintTop_toBottomOf="@id/layoutOrderItems" />
+
+    <TextView
+        android:id="@+id/textTotalPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="총 00,000원"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/layoutOrderItems"
+        app:layout_constraintTop_toTopOf="@id/textTotalDesc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

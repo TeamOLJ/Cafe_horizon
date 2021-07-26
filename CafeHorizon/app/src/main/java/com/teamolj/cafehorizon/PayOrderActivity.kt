@@ -1,8 +1,15 @@
 package com.teamolj.cafehorizon
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityPayOrderBinding
 import com.teamolj.cafehorizon.smartOrder.AppDatabase
 import com.teamolj.cafehorizon.smartOrder.Cart
@@ -24,6 +31,8 @@ class PayOrderActivity : AppCompatActivity() {
 
     private val OPTION = "Option"
     private val MENU = "Menu"
+
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +64,10 @@ class PayOrderActivity : AppCompatActivity() {
         for (menu in cafeMenuList) {
             listTotalPrice += (menu.eachPrice * menu.cafeMenuAmount)
 
-            val menuView = PayOrderItemView(this)
-            menuView.setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
+            val menuView = PayOrderItemView(this).apply {
+                setItemType(MENU)
+                setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
+            }
             binding.layoutCafeMenu.addView(menuView)
 
             if (menu.optionShot > 0) {
@@ -85,6 +96,30 @@ class PayOrderActivity : AppCompatActivity() {
         binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
 
 
+        val userUid = Firebase.auth.currentUser!!.uid
+        val couponArray = ArrayList<CouponSpinner>()
+
+        val docRef = db.collection("UserInfomation").document(userUid).collection("Coupons")
+        docRef.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                val isUsed = document.data["isUsed"] as Boolean
+                val expiryDate: Int = document.data["expiryDate"].toString().toInt()
+
+                Log.d("TAG", "${document.data["couponName"]} ${document.data["discount"]} $expiryDate $isUsed")
+
+                if (!isUsed && System.currentTimeMillis() < expiryDate) {
+                    couponArray.add(CouponSpinner(document.data["couponName"].toString(),
+                        document.data["discount"].toString().toInt()))
+                }
+            }
+        }
+
+        val arrayAdapter = ArrayAdapter<CouponSpinner>(this, android.R.layout.simple_spinner_item, couponArray)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCoupon.adapter = arrayAdapter
+        //https://app-dev.tistory.com/149
+
+
         binding.groupEatOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 eatOption = when (checkedId) {
@@ -98,8 +133,8 @@ class PayOrderActivity : AppCompatActivity() {
 
 
         binding.groupPayOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if(isChecked) {
-                payOption = when(checkedId) {
+            if (isChecked) {
+                payOption = when (checkedId) {
                     binding.btnCreditCard.id -> PAY_CREDIT
                     binding.btnEasyPay.id -> PAY_EASY_PAY
                     binding.btnBankTransfer.id -> PAY_BANK_TRANSFER
@@ -115,6 +150,20 @@ class PayOrderActivity : AppCompatActivity() {
             취식 옵션 보내기
             페이 옵션대로 결제 인텐드 실행하기
              */
+            val intent = Intent(this, OrderStateActivity::class.java).apply {
+                putExtra("orderTime", System.currentTimeMillis())
+            }
+        }
+    }
+
+    class CouponSpinner(private var name:String, private var discount:Int) {
+
+        fun getName():String {
+            return name
+        }
+
+        fun getDiscount():Int {
+            return discount
         }
     }
 }

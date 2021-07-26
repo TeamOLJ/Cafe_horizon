@@ -5,7 +5,9 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.RadioGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.chip.ChipGroup
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ViewCafeMenuOptionBinding
 
@@ -88,15 +90,15 @@ class CafeMenuOptionView @JvmOverloads constructor(
         binding.textOptionTitle.text = text
     }
 
-    fun setDefaultAmount(amount: Int) {
-        binding.textAmount.text = amount.toString()
-    }
-
     fun getAmountValue(): Int {
         return binding.textAmount.text.toString().toInt()
     }
 
     fun setTextWatcher(textWatcher: TextWatcher) {
         binding.textAmount.addTextChangedListener(textWatcher)
+    }
+
+    fun setChipGroupListener(listener: ChipGroup.OnCheckedChangeListener) {
+        binding.chipGroupOption.setOnCheckedChangeListener(listener)
     }
 }

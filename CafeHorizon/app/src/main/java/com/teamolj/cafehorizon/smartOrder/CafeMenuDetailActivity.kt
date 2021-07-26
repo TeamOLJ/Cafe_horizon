@@ -4,15 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.ChipGroup
 import com.teamolj.cafehorizon.PayOrderActivity
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityCafeMenuDetailBinding
-import com.teamolj.cafehorizon.databinding.ViewCafeMenuOptionBinding
 import com.teamolj.cafehorizon.views.CafeMenuOptionView
-import kotlinx.android.synthetic.main.view_cafe_menu_option.view.*
 import java.text.DecimalFormat
 
 class CafeMenuDetailActivity : SmartOrderActivity() {
@@ -80,7 +78,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
 
         binding.btnAddCart.setOnClickListener {
-            if(cafeMenu.cafeMenuAmount>0) {
+            if (cafeMenu.cafeMenuAmount > 0) {
                 db.cartDao().insertOrUpdate(cafeMenu)
                 invalidateOptionsMenu()
                 Toast.makeText(this, "메뉴를 장바구니에 담았습니다!", Toast.LENGTH_SHORT).show()
@@ -90,7 +88,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         }
 
         binding.btnOrderNow.setOnClickListener {
-            if(cafeMenu.cafeMenuAmount>0) {
+            if (cafeMenu.cafeMenuAmount > 0) {
                 val intent = Intent(this, PayOrderActivity::class.java)
                 intent.putExtra("state", PayOrderActivity.ORDER_NOW)
                 intent.putExtra("cafeMenu", cafeMenu)
@@ -102,7 +100,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
     }
 
-    fun createOptionDescView() {
+    private fun createOptionDescView() {
         val view = CafeMenuOptionView(this).apply {
             setItemType(TITLE_ONLY)
             setTitleText("추가 옵션")
@@ -110,7 +108,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         binding.layoutOption.addView(view)
     }
 
-    fun createOptionShotView() {
+    private fun createOptionShotView() {
         val view = CafeMenuOptionView(this).apply {
             setItemType(AMOUNT_BUTTONS)
             setTitleText("샷 추가(500원)")
@@ -131,7 +129,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         binding.layoutOption.addView(view)
     }
 
-    fun createOptionSyrupView() {
+    private fun createOptionSyrupView() {
         val view = CafeMenuOptionView(this).apply {
             setItemType(AMOUNT_BUTTONS)
             setTitleText("시럽 추가(500원)")
@@ -152,22 +150,22 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         binding.layoutOption.addView(view)
     }
 
-    fun createOptionWhippingView() {
+    private fun createOptionWhippingView() {
         val view = CafeMenuOptionView(this).apply {
             setItemType(CHIP_GROUP)
             setTitleText("휘핑")
-        }
-
-        view.chipGroupOption.setOnCheckedChangeListener { _, id ->
-            when (id) {
-                R.id.chipDefault -> {
-                    cafeMenu.optionWhipping = true
-                }
-                R.id.chipRemove -> {
-                    cafeMenu.optionWhipping = false
+            setChipGroupListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.chipDefault -> {
+                        cafeMenu.optionWhipping = true
+                    }
+                    R.id.chipRemove -> {
+                        cafeMenu.optionWhipping = false
+                    }
                 }
             }
         }
+
 
         binding.layoutOption.addView(view)
     }

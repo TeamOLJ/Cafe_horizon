@@ -37,7 +37,6 @@ class FilledCartActivity : AppCompatActivity() {
         binding.btnOrder.setOnClickListener {
             val intent = Intent(this, PayOrderActivity::class.java)
             intent.putExtra("state", PayOrderActivity.ORDER_CART)
-//            intent.putExtra("cafeMenu", )
             startActivity(intent)
         }
     }
