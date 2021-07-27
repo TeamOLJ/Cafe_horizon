@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.teamolj.cafehorizon.coupon.CouponActivity
 import com.teamolj.cafehorizon.databinding.ActivityMainBinding
 import com.teamolj.cafehorizon.newsAndEvents.NewsAndEventsActivity
 import com.teamolj.cafehorizon.notice.NoticeActivity
@@ -63,9 +64,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_coupon -> {
                     binding.drawerLayout.close()
-//                    val intent = Intent(this, CouponActivity::class.java)
-//                    startActivity(intent)
-                    Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CouponActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.item_smart_order -> {
@@ -126,9 +126,8 @@ class MainActivity : AppCompatActivity() {
          }
 
          binding.btnCoupon.setOnClickListener {
-//             val intent = Intent(this, CouponActivity::class.java)
-//             startActivity(intent)
-             Toast.makeText(this, "쿠폰", Toast.LENGTH_SHORT).show()
+             val intent = Intent(this, CouponActivity::class.java)
+             startActivity(intent)
          }
 
          binding.btnOrderMain.setOnClickListener {

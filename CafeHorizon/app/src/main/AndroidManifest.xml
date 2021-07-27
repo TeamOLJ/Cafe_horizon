@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-        <activity android:name=".OrderedListActivity"></activity>
+        <activity android:name=".coupon.CouponActivity"></activity>
+        <activity android:name=".OrderedListActivity" />
         <activity android:name=".OrderStateActivity" />
         <activity android:name=".PayOrderActivity" />
         <activity android:name=".HowToDetailActivity" />

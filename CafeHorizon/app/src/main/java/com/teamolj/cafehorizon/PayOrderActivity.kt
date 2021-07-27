@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.teamolj.cafehorizon.coupon.Coupon
 import com.teamolj.cafehorizon.databinding.ActivityPayOrderBinding
 import com.teamolj.cafehorizon.smartOrder.AppDatabase
 import com.teamolj.cafehorizon.smartOrder.Cart
@@ -97,24 +98,35 @@ class PayOrderActivity : AppCompatActivity() {
 
 
         val userUid = Firebase.auth.currentUser!!.uid
-        val couponArray = ArrayList<CouponSpinner>()
+        val couponArray = ArrayList<Coupon>()
 
-        val docRef = db.collection("UserInfomation").document(userUid).collection("Coupons")
+        val docRef = db.collection("UserInformation").document(userUid).collection("Coupons")
         docRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val isUsed = document.data["isUsed"] as Boolean
                 val expiryDate: Int = document.data["expiryDate"].toString().toInt()
 
-                Log.d("TAG", "${document.data["couponName"]} ${document.data["discount"]} $expiryDate $isUsed")
+                Log.d(
+                    "TAG",
+                    "${document.data["couponName"]} ${document.data["discount"]} $expiryDate $isUsed"
+                )
 
                 if (!isUsed && System.currentTimeMillis() < expiryDate) {
-                    couponArray.add(CouponSpinner(document.data["couponName"].toString(),
-                        document.data["discount"].toString().toInt()))
+                    couponArray.add(
+                        Coupon(
+                            document.data["couponName"].toString(),
+                            expiryDate,
+                            document.data["discount"].toString().toInt(),
+                            isUsed,
+                            null
+                        )
+                    )
                 }
             }
         }
 
-        val arrayAdapter = ArrayAdapter<CouponSpinner>(this, android.R.layout.simple_spinner_item, couponArray)
+        val arrayAdapter =
+            ArrayAdapter<Coupon>(this, android.R.layout.simple_spinner_item, couponArray)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCoupon.adapter = arrayAdapter
         //https://app-dev.tistory.com/149
@@ -153,17 +165,6 @@ class PayOrderActivity : AppCompatActivity() {
             val intent = Intent(this, OrderStateActivity::class.java).apply {
                 putExtra("orderTime", System.currentTimeMillis())
             }
-        }
-    }
-
-    class CouponSpinner(private var name:String, private var discount:Int) {
-
-        fun getName():String {
-            return name
-        }
-
-        fun getDiscount():Int {
-            return discount
         }
     }
 }

@@ -42,10 +42,9 @@ class NewsRecyclerFragment : Fragment() {
                 binding.recyclerViewNews.adapter = adapter
                 binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
             }
+        }.addOnFailureListener { exception ->
+            Log.w("firebase", "Error getting documents.", exception)
         }
-            .addOnFailureListener { exception ->
-                Log.w("firebase", "Error getting documents.", exception)
-            }
 
         return binding.root
     }

@@ -131,7 +131,7 @@
     <string name="btn_easy_pay">간편페이</string>
     <string name="btn_bank_transfer">계좌이체</string>
     <string name="btn_payment">결제하기</string>
-    
+
     <string name="text_waiting_order">주문대기</string>
     <string name="text_receive_order">주문접수</string>
     <string name="text_waiting_pickup">픽업대기</string>
@@ -141,6 +141,9 @@
     <string name="desc_receive_order">주문이 접수되었습니다!</string>
     <string name="desc_waiting_pickup">음료가 준비되었습니다!</string>
     <string name="desc_finish_pickup">감사합니다. 맛있게 드세요!</string>
+
+    <string name="text_coupon_is_used">사용완료</string>
+    <string name="text_coupon_date_expiry">기간만료</string>
 
     <string-array name="array_cafe_menu">
         <item>신메뉴</item>
