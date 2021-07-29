@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.teamolj.cafehorizon.databinding.ActivityOrderStateBinding
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
 
 class OrderStateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderStateBinding

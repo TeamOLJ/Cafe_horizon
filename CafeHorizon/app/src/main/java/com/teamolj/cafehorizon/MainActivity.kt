@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -148,13 +149,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         headerView.btnLogOut.setOnClickListener {
-            // 로그아웃 처리
-            Firebase.auth.signOut()
-            App.prefs.clear()
+            // 재확인
+            val builder = AlertDialog.Builder(this)
 
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            builder.setMessage(getString(R.string.ask_logout))
+                .setPositiveButton(getString(R.string.btn_logout)) { _, _ ->
+                    // 로그아웃 처리
+                    Firebase.auth.signOut()
+                    App.prefs.clear()
+
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+                .setNegativeButton(getString(R.string.btn_cancel), null)
+                .setCancelable(true)
+
+            builder.create().show()
         }
 
         // get images url from Firebase DB

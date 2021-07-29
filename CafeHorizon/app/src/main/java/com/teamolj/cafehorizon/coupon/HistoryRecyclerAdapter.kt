@@ -3,7 +3,7 @@ package com.teamolj.cafehorizon.coupon
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.teamolj.cafehorizon.databinding.RecyclerItemCouponBinding
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemHistoryBinding
 import java.text.SimpleDateFormat
 

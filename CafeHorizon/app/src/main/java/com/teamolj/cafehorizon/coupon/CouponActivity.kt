@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityCouponBinding
 
 class CouponActivity : AppCompatActivity() {
@@ -26,8 +27,8 @@ class CouponActivity : AppCompatActivity() {
         val tabLaout = binding.tabLayout
         TabLayoutMediator(tabLaout, viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "보유 쿠폰"
-                1 -> tab.text = "쿠폰 히스토리 "
+                0 -> tab.text = getString(R.string.title_coupon_list)
+                1 -> tab.text = getString(R.string.title_coupon_history)
             }
         }.attach()
     }

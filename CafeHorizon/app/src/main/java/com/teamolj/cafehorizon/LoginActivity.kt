@@ -82,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                             val userUID = auth.currentUser!!.uid
                             val userPhone = auth.currentUser!!.phoneNumber
 
-                            val docRef = db.collection("userInformation").document(userUID)
+                            val docRef = db.collection("UserInformation").document(userUID)
                             docRef.get()
                                 .addOnSuccessListener { document ->
                                     if (document.exists()) {
