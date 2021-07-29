@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -19,21 +20,25 @@ import java.text.DecimalFormat
 
 class PayOrderActivity : AppCompatActivity() {
     companion object {
-        val ORDER_NOW = "order now"
-        val ORDER_CART = "order cart"
-        val EAT_FOR_HERE = "for here"
-        val EAT_TO_GO = "to go"
-        val PAY_CREDIT = "credit card"
-        val PAY_EASY_PAY = "easy pay"
-        val PAY_BANK_TRANSFER = "bank transfer"
+        const val ORDER_NOW = "order now"
+        const val ORDER_CART = "order cart"
+
+        const val EAT_FOR_HERE = "for here"
+        const val EAT_TO_GO = "to go"
+
+        const val PAY_CREDIT = "credit card"
+        const val PAY_EASY_PAY = "easy pay"
+        const val PAY_BANK_TRANSFER = "bank transfer"
+
+        const val OPTION = "Option"
+        const val MENU = "Menu"
+        const val DISCOUNT = "Discount"
     }
 
     private lateinit var binding: ActivityPayOrderBinding
 
-    private val OPTION = "Option"
-    private val MENU = "Menu"
-
     private val db = Firebase.firestore
+    private var isDiscount: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,11 +130,44 @@ class PayOrderActivity : AppCompatActivity() {
             }
         }
 
-        val arrayAdapter =
-            ArrayAdapter<Coupon>(this, android.R.layout.simple_spinner_item, couponArray)
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, couponArray)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
         binding.spinnerCoupon.adapter = arrayAdapter
         //https://app-dev.tistory.com/149
+
+        val discountView = PayOrderItemView(this)
+        discountView.setItemType(DISCOUNT)
+
+        binding.spinnerCoupon.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                listTotalPrice += discountView.getDiscountPrice()
+
+                if (isDiscount) {
+                    discountView.setDiscountInfo(
+                        couponArray[p2].couponName,
+                        couponArray[p2].discount
+                    )
+
+                } else {
+                    discountView.setDiscountInfo(
+                        couponArray[p2].couponName,
+                        couponArray[p2].discount
+                    )
+                    binding.layoutCafeMenu.addView(discountView)
+                }
+
+                listTotalPrice -= couponArray[p2].discount
+                binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                listTotalPrice += discountView.getDiscountPrice()
+                binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+                binding.layoutCafeMenu.removeView(discountView)
+            }
+        }
 
 
         binding.groupEatOption.addOnButtonCheckedListener { _, checkedId, isChecked ->

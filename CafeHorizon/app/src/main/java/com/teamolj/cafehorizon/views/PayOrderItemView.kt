@@ -47,8 +47,8 @@ class PayOrderItemView @JvmOverloads constructor(
             }
 
             "Option" -> {
-                val paddingEight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4F, resources.displayMetrics).toInt()
-                binding.container.setPadding(0, paddingEight, 0, paddingEight)
+                val paddingFour = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4F, resources.displayMetrics).toInt()
+                binding.container.setPadding(0, paddingFour, 0, paddingFour)
 
                 binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
                 binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14F)
@@ -57,6 +57,15 @@ class PayOrderItemView @JvmOverloads constructor(
 
                 val leftPadding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16F, resources.displayMetrics).toInt()
                 binding.textName.setPadding(leftPadding, 0, 0, 0)
+            }
+
+            "Discount" -> {
+                val paddingEight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8F, resources.displayMetrics).toInt()
+                binding.container.setPadding(0, paddingEight, 0, paddingEight)
+
+                binding.textName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
+                binding.textAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
+                binding.textPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16F)
             }
         }
     }
@@ -75,5 +84,15 @@ class PayOrderItemView @JvmOverloads constructor(
         binding.textName.text = name
         binding.textAmount.text = amount.toString()
         binding.textPrice.text = DecimalFormat("###,###").format(amount*eachPrice)
+    }
+
+    fun setDiscountInfo(name:String, price:Int) {
+        binding.textName.text = name
+        binding.textAmount.text = ""
+        binding.textPrice.text = DecimalFormat("###,###").format(price)
+    }
+
+    fun getDiscountPrice():Int {
+        return binding.textPrice.text.toString().toInt()
     }
 }
