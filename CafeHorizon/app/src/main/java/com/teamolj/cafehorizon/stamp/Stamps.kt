@@ -1,12 +1,12 @@
-package com.teamolj.cafehorizon.coupon
+package com.teamolj.cafehorizon.stamp
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Coupons (
+data class Stamps (
     val type: String,
     val date: String,
-    val status : String
+    val validity : String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -18,19 +18,19 @@ data class Coupons (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(type)
         parcel.writeString(date)
-        parcel.writeString(status)
+        parcel.writeString(validity)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Coupons> {
-        override fun createFromParcel(parcel: Parcel): Coupons {
-            return Coupons(parcel)
+    companion object CREATOR : Parcelable.Creator<Stamps> {
+        override fun createFromParcel(parcel: Parcel): Stamps {
+            return Stamps(parcel)
         }
 
-        override fun newArray(size: Int): Array<Coupons?> {
+        override fun newArray(size: Int): Array<Stamps?> {
             return arrayOfNulls(size)
         }
     }

@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".stamp.StampHistoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="stamp 히스토리" />
+        tools:listitem="@layout/recycler_item_stamp"/>
 
 </FrameLayout>

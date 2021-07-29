@@ -18,7 +18,7 @@ import com.teamolj.cafehorizon.newsAndEvents.News
 import com.teamolj.cafehorizon.newsAndEvents.NewsAdapter
 import com.teamolj.cafehorizon.newsAndEvents.NewsDetailActivity
 
-class HistoryRecyclerAdapter : RecyclerView.Adapter<HistoryRecyclerAdapter.ViewHolder>() {
+class ListRecyclerAdapter : RecyclerView.Adapter<ListRecyclerAdapter.ViewHolder>() {
     internal var datas = mutableListOf<Coupons>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

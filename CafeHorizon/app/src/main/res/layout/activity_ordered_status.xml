@@ -26,7 +26,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/bold"
                 android:text="@string/title_ordered_status"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
@@ -36,78 +35,90 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingVertical="20dp"
-    android:paddingHorizontal="35dp">
 
-    <TextView
-        android:id="@+id/status1"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/shape_circle_gray"
-        android:backgroundTint="#C6C2C2"
-        android:gravity="center_vertical"
-        android:text="@string/order_standby"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp">
 
-    <TextView
-        android:id="@+id/status2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/shape_circle_gray"
-        android:backgroundTint="#C6C2C2"
-        android:gravity="center_vertical"
-        android:text="@string/order_receipt"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:layout_marginHorizontal="10dp"/>
+        <TextView
+            android:id="@+id/status4"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/shape_circle_gray"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:text="@string/order_cplt"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            tools:layout_editor_absoluteX="279dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:id="@+id/status3"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/shape_circle_gray"
-        android:backgroundTint="#C6C2C2"
-        android:gravity="center_vertical"
-        android:text="@string/order_wait"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:layout_marginRight="10dp"/>
+        <TextView
+            android:id="@+id/status1"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_circle_gray"
+            android:backgroundTint="#C6C2C2"
+            android:gravity="center_vertical"
+            android:text="@string/order_standby"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/status2"
+            tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:id="@+id/status4"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/shape_circle_gray"
-        android:backgroundTint="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:text="@string/order_cplt"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/status2"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_circle_gray"
+            android:backgroundTint="#C6C2C2"
+            android:gravity="center_vertical"
+            android:text="@string/order_receipt"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/status3"
+            tools:layout_editor_absoluteY="0dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/status3"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_circle_gray"
+            android:backgroundTint="#C6C2C2"
+            android:gravity="center_vertical"
+            android:text="@string/order_wait"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/status4"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/status_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/light"
         android:text="@string/msg_cplt"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="23dp" />
+        android:textSize="24dp" />
 
     <TextView
             android:id="@+id/date_text"
-            android:layout_margin="20dp"
+            android:layout_margin="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="주문일시 : 2021/04/04 14:30"
@@ -118,9 +129,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:background="#E8E8E8" />
-
+ 
 
 
 
