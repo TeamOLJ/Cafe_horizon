@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="112dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="20dp"
+    android:background="@color/blueBackground"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="16dp">
+
+    <ImageView
+        android:id="@+id/imageCafeMenu"
+        android:layout_width="@dimen/size_cafe_menu_image_in_recyclerview"
+        android:layout_height="@dimen/size_cafe_menu_image_in_recyclerview"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee_image" />
+
+    <TextView
+        android:id="@+id/textCafeMenuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="메뉴 이름"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textCafeMenuOption"
+        app:layout_constraintStart_toEndOf="@id/imageCafeMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textCafeMenuOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:text="메뉴 옵션"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="@+id/textCafeMenuName"
+        app:layout_constraintTop_toBottomOf="@+id/textCafeMenuName" />
+
+    <LinearLayout
+        android:id="@+id/layoutAmount"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textCafeMenuName">
+
+        <ImageButton
+            android:id="@+id/imageBtnMinus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_minus" />
+
+        <TextView
+            android:id="@+id/textAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="1" />
+
+        <ImageButton
+            android:id="@+id/imageBtnPlus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_plus" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="@string/btn_delete"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textCafeMenuTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8,000원"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/layoutAmount"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

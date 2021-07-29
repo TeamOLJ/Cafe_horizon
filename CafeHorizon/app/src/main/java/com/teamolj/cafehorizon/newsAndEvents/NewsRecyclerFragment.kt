@@ -1,47 +1,51 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.FragmentNewsRecyclerBinding
 
 class NewsRecyclerFragment : Fragment() {
-    private var _binding: FragmentNewsRecyclerBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentNewsRecyclerBinding
+
+    private val newsList = mutableListOf<News>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false)
 
-        val data: MutableList<News> = loadNews()
+        val db = Firebase.firestore
 
-        var adapter = NewsAdapter()
-        adapter.newsList = data
-        binding.recyclerViewNews.adapter = adapter
-        binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
 
-        return view
-    }
+        db.collection("News").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                for (document in task.result!!) {
+                    newsList.add(
+                        News(
+                            document.data["title"].toString(),
+                            document.data["content"].toString(),
+                            document.data["date"].toString()
+                        )
+                    )
+                }
 
-    internal fun loadNews(): MutableList<News> {
-        //firebase 연결하기
-        val data: MutableList<News> = mutableListOf()
-
-        for (no in 0..10) {
-            val title = "${no}번째 새소식"
-            val content = "${no}번째 소식의 내용입니다.\n첫번째줄\n두번째줄\n세번째줄\n네번째줄\n다섯번째줄\n여섯번째줄\n일곱번째줄 "
-            val date = System.currentTimeMillis().toString()
-
-            var news = News(title, content, date)
-            data.add(news)
+                var adapter = NewsAdapter()
+                adapter.newsList = newsList
+                binding.recyclerViewNews.adapter = adapter
+                binding.recyclerViewNews.layoutManager = LinearLayoutManager(this.context)
+            }
+        }.addOnFailureListener { exception ->
+            Log.w("firebase", "Error getting documents.", exception)
         }
 
-        return data
+        return binding.root
     }
 }

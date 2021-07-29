@@ -2,37 +2,45 @@ package com.teamolj.cafehorizon.coupon
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityCouponBinding
 
 class CouponActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCouponBinding
-
+    private lateinit var viewPager: ViewPager2
+    private val ITEMS_NUM: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         binding = ActivityCouponBinding.inflate(layoutInflater)
+        super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val fragmentList = listOf(CouponListFragment(),CouponHistoryFragment())
-        val adapter = CouponAdapter(this)
+        viewPager = binding.viewPager
+        viewPager.offscreenPageLimit = ITEMS_NUM
+        viewPager.adapter = CouponAdapter(this)
 
-        val topAppBar = binding.toolbar
-        topAppBar.setNavigationIcon(R.drawable.btn_back)
-        topAppBar.setBackgroundColor(255)
-
-        topAppBar.setNavigationOnClickListener {
-            finish()
-        }
-
-        adapter.fragmentList = fragmentList
-        binding.viewPager.adapter = adapter
-
-        val tabTitles = listOf<String>("보유 쿠폰","쿠폰 히스토리")
-        TabLayoutMediator(binding.tabLayout,binding.viewPager) { tab, position ->
-            tab.text = tabTitles[position]
+        val tabLaout = binding.tabLayout
+        TabLayoutMediator(tabLaout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "보유 쿠폰"
+                1 -> tab.text = "쿠폰 히스토리 "
+            }
         }.attach()
+    }
+
+    private inner class CouponAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = ITEMS_NUM
+
+        override fun createFragment(position: Int): Fragment {
+            if (position == 0) {
+                return CouponRecyclerFragment()
+            } else {
+                return HistoryRecyclerFragment()
+            }
+        }
     }
 }

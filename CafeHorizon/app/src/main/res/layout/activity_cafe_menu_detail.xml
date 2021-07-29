@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".smartOrder.CafeMenuDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_smart_order"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/layoutPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutCafeMenuInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageCafeMenu"
+                android:layout_width="@dimen/size_cafe_menu_image_in_detail"
+                android:layout_height="@dimen/size_cafe_menu_image_in_detail"
+                android:src="@drawable/coffee_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/layoutCafeMenuTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@+id/imageCafeMenu"
+                app:layout_constraintTop_toTopOf="@id/imageCafeMenu">
+
+                <TextView
+                    android:id="@+id/textCafeMenuName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="가나다라마바사아"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textCafeMenuOrgPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="bottom"
+                    android:text="5,500원"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textCafeMenuDesc"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/sample_text"
+                android:textSize="14dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageCafeMenu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/layoutCafeMenuTitle"
+                app:layout_constraintTop_toBottomOf="@id/layoutCafeMenuTitle" />
+
+            <com.teamolj.cafehorizon.views.CafeMenuOptionView
+                android:id="@+id/customViewAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageCafeMenu"
+                app:viewCafeMenuOptionBgColor="@color/orangeBackground"
+                app:viewCafeMenuOptionDefaultAmount="1"
+                app:viewCafeMenuOptionItemType="view_amount_buttons"
+                app:viewCafeMenuOptionTitleText="@string/cafe_menu_amount" />
+
+            <LinearLayout
+                android:id="@+id/layoutOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/customViewAmount"/>
+
+            <TextView
+                android:id="@+id/textCafeMenuTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="28dp"
+                android:text="총합 0,000원"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutOption" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutPrice"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/lightgray"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnAddCart"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/gray"
+            android:text="@string/btn_add_cart"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/btnOrderNow"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
+            android:text="@string/btn_order_now"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

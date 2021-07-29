@@ -1,10 +1,16 @@
  package com.teamolj.cafehorizon.newsAndEvents
 
+
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemNewsBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.newsHolder>() {
@@ -32,18 +38,24 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.newsHolder>() {
         init {
             binding.root.setOnClickListener {
                 var intent = Intent(binding.root.context, NewsDetailActivity::class.java).apply {
-                    putExtra("object", news)
+                    putExtra("news", news)
                 }
 
                 binding.root.context.startActivity(intent)
             }
         }
 
-        internal fun setNews(n: News) {
+        fun setNews(n: News) {
             this.news = n
 
-            binding.imageNewIcon.setImageResource(android.R.color.black)
-//        binding.imageNewIcon.setImageResource(android.R.color.transparent)
+            val newsDate = SimpleDateFormat("yyyy-MM-dd").parse(n.date).time
+            val betweenDays = (System.currentTimeMillis() - newsDate) / (24 * 60 * 60 * 1000)
+
+            if (betweenDays <= 3) {
+                binding.imageNewIcon.setImageResource(R.drawable.ic_new_item)
+            } else {
+                binding.imageNewIcon.setImageResource(android.R.color.transparent)
+            }
             binding.textNewsTitle.text = news.title
             binding.textNewsDate.text = news.date
         }

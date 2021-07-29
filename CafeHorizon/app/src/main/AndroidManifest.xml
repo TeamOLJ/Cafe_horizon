@@ -23,12 +23,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".OrderedStatusActivity" />
-        <activity android:name=".OrderedActivity" />
         <activity android:name=".coupon.CouponActivity" />
         <activity android:name=".stamp.StampActivity" />
         <activity android:name=".sign.SignupActivity" />
-        <activity android:name=".smartOrder.ShoppingCartActivity" />
+        <activity android:name=".OrderedListActivity" />
+        <activity android:name=".OrderStateActivity" />
+        <activity android:name=".PayOrderActivity" />
+        <activity android:name=".HowToDetailActivity" />
+        <activity android:name=".HowToActivity" />
+        <activity android:name=".smartOrder.CafeMenuDetailActivity" />
+        <activity android:name=".smartOrder.FilledCartActivity" />
+        <activity android:name=".smartOrder.EmptyCartActivity" />
         <activity android:name=".smartOrder.SmartOrderActivity" />
         <activity android:name=".newsAndEvents.NewsDetailActivity" />
         <activity android:name=".newsAndEvents.EventsDetailActivity" />
@@ -39,7 +44,6 @@
         <activity android:name=".MyInfoActivity" />
         <activity android:name=".UnsubscribeActivity" />
         <activity android:name=".UnsubDoneActivity" />
-
         <activity android:name=".TesterFunctions" />
     </application>
 

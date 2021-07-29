@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/eventsItem_height"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/eventsImage_padding_left_right"
-    android:paddingTop="@dimen/eventsImage_padding_top_bottom"
-    android:paddingRight="@dimen/eventsImage_padding_left_right"
-    android:paddingBottom="@dimen/eventsImage_padding_top_bottom">
+    android:layout_height="156dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginHorizontal="20dp">
 
     <ImageView
         android:id="@+id/imageEvents"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/eventsImage_height" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/titleEvents"
-        android:layout_width="match_parent"
+        android:id="@+id/textTitleEvents"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/sample_text"
-        android:textSize="@dimen/title_size"
-        android:textStyle="bold" />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/textPeriodEvents"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/periodEvents"
-        android:layout_width="match_parent"
+        android:id="@+id/textPeriodEvents"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sample_date" />
+        android:text="@string/sample_date"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

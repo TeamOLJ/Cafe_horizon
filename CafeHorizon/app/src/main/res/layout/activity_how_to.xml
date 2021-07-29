@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HowToActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_how_to"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textHowToTitle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:viewHowToItemBgColor="@color/blueBackground"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="false"
+        app:viewHowToItemText="@string/how_to_title"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textHowToStamp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="stamp"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHowToTitle"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/how_to_stamp"
+        app:viewHowToItemTextSize="16dp" />
+
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textHowToCoupon"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="coupon"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHowToStamp"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/how_to_coupon"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textHowToSmartOrder"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="smartOrder"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHowToCoupon"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/how_to_smart_order"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textHowToVersion"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHowToSmartOrder"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="false"
+        app:viewHowToItemText="버전 정보"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textTermsTitle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHowToVersion"
+        app:viewHowToItemBgColor="@color/blueBackground"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="false"
+        app:viewHowToItemText="@string/terms_title"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textTermsService"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="service"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTermsTitle"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/terms_service"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textTermsPrivacyPolicy"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="privacyPolicy"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTermsService"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/terms_privacy_policy"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textTermsMarketing"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="marketing"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTermsPrivacyPolicy"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/terms_agree_to_use_marketing"
+        app:viewHowToItemTextSize="16dp" />
+
+    <com.teamolj.cafehorizon.views.HowToItemView
+        android:id="@+id/textTermsAdInfo"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:tag="adInfo"
+        android:onClick="onHowToClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTermsMarketing"
+        app:viewHowToItemPaddingLeft="20dp"
+        app:viewHowToItemPaddingRight="20dp"
+        app:viewHowToItemShowImage="true"
+        app:viewHowToItemText="@string/terms_agree_to_receive_ad_info"
+        app:viewHowToItemTextSize="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

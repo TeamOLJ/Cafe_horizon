@@ -23,5 +23,26 @@
         <attr name="viewSlideIndicatorSize" format="string" />
         <attr name="viewSlideIndicatorDotSize" format="reference|dimension" />
         <attr name="viewSlideIndicatorMargin" format="reference|dimension" />
+        <attr name="viewSlideIndicatorInactiveColor" format="reference|integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="CafeMenuOptionView">
+        <attr name="viewCafeMenuOptionBgColor" format="reference|integer" />
+        <attr name="viewCafeMenuOptionItemType" format="string" />
+        <attr name="viewCafeMenuOptionTitleText" format="string" />
+        <attr name="viewCafeMenuOptionDefaultAmount" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="HowToItemView">
+        <attr name="viewHowToItemBgColor" format="reference|integer" />
+        <attr name="viewHowToItemText" format="string" />
+        <attr name="viewHowToItemTextSize" format="dimension" />
+        <attr name="viewHowToItemPaddingLeft" format="reference|dimension" />
+        <attr name="viewHowToItemPaddingRight" format="reference|dimension" />
+        <attr name="viewHowToItemShowImage" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PayOrderItemView">
+        <attr name="viewPayOrderItemType" format="string"/>
     </declare-styleable>
 </resources>

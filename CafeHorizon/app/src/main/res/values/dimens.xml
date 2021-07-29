@@ -2,4 +2,9 @@
 <resources>
     <dimen name="barcode_margin">32dp</dimen>
     <dimen name="barcode_height">100dp</dimen>
+
+    <dimen name="size_cafe_menu_image_in_detail">112dp</dimen>
+    <dimen name="size_cafe_menu_image_in_recyclerview">72dp</dimen>
+    
+    <dimen name="size_order_state_imageview">64dp</dimen>
 </resources>

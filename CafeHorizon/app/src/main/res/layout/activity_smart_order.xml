@@ -14,7 +14,10 @@
         android:background="#FFFFFF"
         android:elevation="1dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeNoActionBar">
+        android:theme="@style/ThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,7 +27,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_smartOrder" />
+                android:layout_gravity="center"
+                android:fontFamily="@font/bold"
+                android:text="@string/title_smart_order"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -32,11 +39,13 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewMenu"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

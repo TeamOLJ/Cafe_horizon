@@ -10,15 +10,13 @@ import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.FragmentEventsRecyclerBinding
 
 class EventsRecyclerFragment : Fragment() {
-    private var _binding: FragmentEventsRecyclerBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentEventsRecyclerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false)
 
         val data: MutableList<Events> = loadEvents()
 
@@ -27,7 +25,7 @@ class EventsRecyclerFragment : Fragment() {
         binding.recyclerViewEvents.adapter = adapter
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(this.context)
 
-        return view
+        return binding.root
     }
 
     internal fun loadEvents(): MutableList<Events> {
@@ -36,7 +34,7 @@ class EventsRecyclerFragment : Fragment() {
 
         for (no in 0..5) {
             val title = "${no}번째 이벤트"
-            val uri = "android.resource://"+activity?.packageName+"/"+ R.drawable.sample_coffee_image
+            val uri = "android.resource://"+activity?.packageName+"/"+ R.drawable.coffee_image
             val period = "1900-01-01 ~ 2100-01-01"
 
             var events = Events(title, uri, period)

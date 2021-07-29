@@ -3,6 +3,7 @@ package com.teamolj.cafehorizon.newsAndEvents
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityEventsDetailBinding
 
 class EventsDetailActivity : AppCompatActivity() {
@@ -13,10 +14,16 @@ class EventsDetailActivity : AppCompatActivity() {
         binding = ActivityEventsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val events: Events = intent.getParcelableExtra<Events>("object")!!
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
 
-        binding.textEventsTitle.text = events.title
-        binding.textEventsPeriod.text = events.period
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
+        val events: Events = intent.getSerializableExtra("events") as Events
+
         binding.imageEvents.setImageURI(Uri.parse(events.imageUri))
     }
 }

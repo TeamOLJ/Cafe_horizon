@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:paddingHorizontal="20dp"
+    android:background="@drawable/recycler_item_border">
+
+    <ImageView
+        android:id="@+id/imageCafeMenu"
+        android:layout_width="@dimen/size_cafe_menu_image_in_recyclerview"
+        android:layout_height="@dimen/size_cafe_menu_image_in_recyclerview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coffee_image" />
+
+    <TextView
+        android:id="@+id/textCafeMenuName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="메뉴 이름"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textCafeMenuOrgPrice"
+        app:layout_constraintStart_toEndOf="@+id/imageCafeMenu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textCafeMenuOrgPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="가격"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textCafeMenuName"
+        app:layout_constraintTop_toBottomOf="@+id/textCafeMenuName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
