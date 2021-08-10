@@ -93,6 +93,6 @@ class PayOrderItemView @JvmOverloads constructor(
     }
 
     fun getDiscountPrice():Int {
-        return binding.textPrice.text.toString().toInt()
+        return DecimalFormat("###,###").parse(binding.textPrice.text.toString()).toInt()
     }
 }

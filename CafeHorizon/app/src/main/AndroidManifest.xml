@@ -13,16 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_horizon_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
-
         <activity android:name=".MainActivity" />
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ChattingActivity"/>
         <activity android:name=".coupon.CouponActivity" />
         <activity android:name=".stamp.StampActivity" />
         <activity android:name=".sign.SignupActivity" />
@@ -34,7 +33,7 @@
         <activity android:name=".smartOrder.CafeMenuDetailActivity" />
         <activity android:name=".smartOrder.FilledCartActivity" />
         <activity android:name=".smartOrder.EmptyCartActivity" />
-        <activity android:name=".smartOrder.SmartOrderActivity" />
+        <activity android:name=".smartOrder.SmartOrderActivity"/>
         <activity android:name=".newsAndEvents.NewsDetailActivity" />
         <activity android:name=".newsAndEvents.EventsDetailActivity" />
         <activity android:name=".newsAndEvents.NewsAndEventsActivity" />

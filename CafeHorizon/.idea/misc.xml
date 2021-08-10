@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable-anydpi/ic_plus.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable-anydpi/ic_send_chat.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_chatting.xml" value="0.264" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" value="0.175" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_chat_bubble_in.xml" value="0.1" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_pay_order_item.xml" value="0.2552083333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

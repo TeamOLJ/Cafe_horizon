@@ -92,9 +92,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_chats -> {
                     binding.drawerLayout.close()
-                    // val intent = Intent(this, ChattingActivity::class.java)
-                    // startActivity(intent)
-                    Toast.makeText(this, "채팅문의", Toast.LENGTH_SHORT).show()
+                     val intent = Intent(this, ChattingActivity::class.java)
+                     startActivity(intent)
                     true
                 }
                 R.id.item_howto -> {
@@ -138,9 +137,8 @@ class MainActivity : AppCompatActivity() {
          }
 
          binding.btnChatting.setOnClickListener {
-        //     val intent = Intent(this, ChattingActivity::class.java)
-        //     startActivity(intent)
-             Toast.makeText(this, "채팅문의", Toast.LENGTH_SHORT).show()
+             val intent = Intent(this, ChattingActivity::class.java)
+             startActivity(intent)
          }
 
         headerView.btnMyInfo.setOnClickListener {

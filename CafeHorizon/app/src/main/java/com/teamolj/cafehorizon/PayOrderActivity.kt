@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -103,18 +104,16 @@ class PayOrderActivity : AppCompatActivity() {
 
 
         val userUid = Firebase.auth.currentUser!!.uid
-        val couponArray = ArrayList<Coupon>()
+        val couponArray = arrayListOf<Coupon>(Coupon("쿠폰을 선택해주세요.", 0, 0, false))
+
+        val discountView = PayOrderItemView(this)
+        discountView.setItemType(DISCOUNT)
 
         val docRef = db.collection("UserInformation").document(userUid).collection("Coupons")
         docRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val isUsed = document.data["isUsed"] as Boolean
-                val expiryDate: Int = document.data["expiryDate"].toString().toInt()
-
-                Log.d(
-                    "TAG",
-                    "${document.data["couponName"]} ${document.data["discount"]} $expiryDate $isUsed"
-                )
+                val expiryDate = (document.data["expiryDate"] as Timestamp).seconds * 1000
 
                 if (!isUsed && System.currentTimeMillis() < expiryDate) {
                     couponArray.add(
@@ -122,51 +121,54 @@ class PayOrderActivity : AppCompatActivity() {
                             document.data["couponName"].toString(),
                             expiryDate,
                             document.data["discount"].toString().toInt(),
-                            isUsed,
-                            null
+                            isUsed
                         )
                     )
                 }
             }
+            val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, couponArray)
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            binding.spinnerCoupon.adapter = arrayAdapter
+
         }
-
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, couponArray)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-
-        binding.spinnerCoupon.adapter = arrayAdapter
-        //https://app-dev.tistory.com/149
-
-        val discountView = PayOrderItemView(this)
-        discountView.setItemType(DISCOUNT)
 
         binding.spinnerCoupon.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                listTotalPrice += discountView.getDiscountPrice()
 
-                if (isDiscount) {
+                if (isDiscount) { //select coupon already
+
+                    listTotalPrice += discountView.getDiscountPrice()   //cancel old discount applied
+
                     discountView.setDiscountInfo(
                         couponArray[p2].couponName,
                         couponArray[p2].discount
                     )
 
-                } else {
+                    listTotalPrice -= discountView.getDiscountPrice()   //apply new discount value
+
+                    if (p2 == 0) {
+                        binding.layoutCafeMenu.removeView(discountView)
+                        isDiscount = false
+                    }
+
+                } else if (p2 != 0) {   //never select coupon and choose new
+                    
                     discountView.setDiscountInfo(
                         couponArray[p2].couponName,
                         couponArray[p2].discount
                     )
+
+                    listTotalPrice -= discountView.getDiscountPrice()
                     binding.layoutCafeMenu.addView(discountView)
+                    isDiscount = true
+
                 }
-
-                listTotalPrice -= couponArray[p2].discount
                 binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                listTotalPrice += discountView.getDiscountPrice()
-                binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
-                binding.layoutCafeMenu.removeView(discountView)
-            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
 
 
@@ -176,7 +178,7 @@ class PayOrderActivity : AppCompatActivity() {
                     binding.btnForHere.id -> EAT_FOR_HERE
                     binding.btnToGo.id -> EAT_TO_GO
 
-                    else -> ""
+                    else -> EAT_FOR_HERE
                 }
             }
         }
@@ -189,7 +191,7 @@ class PayOrderActivity : AppCompatActivity() {
                     binding.btnEasyPay.id -> PAY_EASY_PAY
                     binding.btnBankTransfer.id -> PAY_BANK_TRANSFER
 
-                    else -> ""
+                    else -> PAY_CREDIT
                 }
             }
         }
@@ -201,6 +203,7 @@ class PayOrderActivity : AppCompatActivity() {
             페이 옵션대로 결제 인텐드 실행하기
              */
             val intent = Intent(this, OrderStateActivity::class.java).apply {
+                //전달해야할 정보 : 메뉴+가격, 시간, 취식옵션?
                 putExtra("orderTime", System.currentTimeMillis())
             }
         }

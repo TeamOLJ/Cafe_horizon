@@ -4,6 +4,7 @@
     android:id="@+id/recyclerViewCafeMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".smartOrder.CafeMenuRecyclerFragment">
+    tools:context=".smartOrder.CafeMenuRecyclerFragment"
+    tools:listitem="@layout/recycler_item_cafe_menu">
 
 </androidx.recyclerview.widget.RecyclerView>

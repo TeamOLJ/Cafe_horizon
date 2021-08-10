@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b45c5a6-3070-4e85-bb91-1accb7fa0d27" name="Default Changelist" comment="" />
+    <list default="true" id="8b45c5a6-3070-4e85-bb91-1accb7fa0d27" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/ChattingActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_chatting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/PayOrderActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/PayOrderActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/Coupon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/Coupon.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/HistoryRecyclerAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/HistoryRecyclerFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_cafe_menu_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_cafe_menu_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_coupon_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_coupon_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_events_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_events_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_history_recycler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_news_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_news_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_history.xml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CafeHorizon" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -33,11 +56,5 @@
       <updated>1625748320902</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1625748360687">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1625748360687" />
   </component>
 </project>

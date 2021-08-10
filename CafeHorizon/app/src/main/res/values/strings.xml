@@ -73,6 +73,7 @@
     <string name="title_coupon">쿠폰</string>
     <string name="title_coupon_list">보유 쿠폰</string>
     <string name="title_coupon_history">쿠폰 히스토리</string>
+    <string name="title_chatting">채팅문의</string>
 
     <string name="welcome">환영합니다</string>
     <string name="nim">님</string>
@@ -158,6 +159,8 @@
 
     <string name="text_coupon_is_used">사용완료</string>
     <string name="text_coupon_date_expiry">기간만료</string>
+
+    <string name="text_chatting_not_enable">현재 채팅이 불가합니다.</string>
 
     <string-array name="array_cafe_menu">
         <item>신메뉴</item>

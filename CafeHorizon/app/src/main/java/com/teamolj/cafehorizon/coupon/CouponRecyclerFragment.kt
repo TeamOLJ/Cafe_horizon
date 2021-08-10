@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.FragmentCouponRecyclerBinding
 
-class CouponRecyclerFragment() : Fragment() {
+class CouponRecyclerFragment(val category: Int) : Fragment() {
     private lateinit var binding: FragmentCouponRecyclerBinding
 
     override fun onCreateView(
@@ -30,34 +31,54 @@ class CouponRecyclerFragment() : Fragment() {
         docRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val isUsed = document.data["isUsed"] as Boolean
-                val expiryDate: Int = document.data["expiryDate"].toString().toInt()
+                val expiryDate = (document.data["expiryDate"] as Timestamp).seconds * 1000
 
-                Log.d(
-                    "TAG",
-                    "${document.data["couponName"]} ${document.data["discount"]} $expiryDate $isUsed"
-                )
+                when (category) {
+                    0 -> {  //Coupon List
+                        if (!isUsed && System.currentTimeMillis() < expiryDate) {
+                            couponList.add(
+                                Coupon(
+                                    document.data["couponName"].toString(),
+                                    expiryDate,
+                                    document.data["discount"].toString().toInt(),
+                                    isUsed
+                                )
+                            )
+                        }
+                    }
 
-                if (!isUsed && System.currentTimeMillis() < expiryDate) {
-                    couponList.add(
-                        Coupon(
-                            document.data["couponName"].toString(),
-                            expiryDate,
-                            document.data["discount"].toString().toInt(),
-                            isUsed,
-                            null
-                        )
-                    )
+                    1 -> {  //Coupon History
+                        if (isUsed) {
+                            couponList.add(
+                                Coupon(
+                                    document.data["couponName"].toString(),
+                                    expiryDate,
+                                    document.data["discount"].toString().toInt(),
+                                    isUsed,
+                                    (document.data["usedDate"] as Timestamp).seconds * 1000
+                                )
+                            )
+                        } else if (System.currentTimeMillis() > expiryDate) {
+                            couponList.add(
+                                Coupon(
+                                    document.data["couponName"].toString(),
+                                    expiryDate,
+                                    document.data["discount"].toString().toInt(),
+                                    isUsed
+                                )
+                            )
+                        }
+                    }
                 }
             }
 
-            var adapter = CouponRecyclerAdapter()
+            var adapter = CouponRecyclerAdapter(category)
             adapter.couponList = couponList
-            binding.recyclerViewCoupon.adapter = adapter
-            binding.recyclerViewCoupon.layoutManager = LinearLayoutManager(this.context)
+            binding.recyclerViewHistory.adapter = adapter
+            binding.recyclerViewHistory.layoutManager = LinearLayoutManager(this.context)
         }.addOnFailureListener { exception ->
             Log.w("firebase", "Error getting documents.", exception)
         }
-
 
         return binding.root
     }
