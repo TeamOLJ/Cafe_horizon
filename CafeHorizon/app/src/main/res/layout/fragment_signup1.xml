@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".signUp.SignFragment1">
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="12dp"
+        android:text="@string/option_agreeall"
+        android:textSize="16dp"
+        android:fontFamily="@font/bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal"
+        android:elevation="1dp" >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/term_service"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:text="@string/option_must"
+            android:textColor="@color/textRed"
+            android:textSize="14dp" />
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_slidedown" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTerm1"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/lightgray"
+        android:justificationMode="inter_word"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:elevation="1dp" >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/term_personal"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:text="@string/option_must"
+            android:textColor="@color/textRed"
+            android:textSize="14dp" />
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_slidedown" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTerm2"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/lightgray"
+        android:justificationMode="inter_word"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:elevation="1dp" >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/term_marketing"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:text="@string/option_optional"
+            android:textColor="@color/gray"
+            android:textSize="14dp" />
+
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/ic_slidedown" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTerm3"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@color/lightgray"
+        android:justificationMode="inter_word"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/semigray"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:text="@string/self_confirmation" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutChangePhoneNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:visibility="gone" >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldPhoneNum"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="8dp"
+            app:placeholderText="@string/user_phone"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnSendConfirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPhoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="14dp"
+                android:textSize="14dp"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSendConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/gray"
+            android:insetTop="1dp"
+            android:insetBottom="1dp"
+            android:paddingHorizontal="8dp"
+            android:text="@string/send_confirm"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum"
+            app:layout_constraintTop_toTopOf="@+id/textFieldPhoneNum" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldConfirmCode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            app:placeholderText="@string/confirm_code"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeWidthFocused="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCheckConfirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldPhoneNum">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:paddingVertical="14dp"
+                android:textSize="14dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnCheckConfirm"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="2dp"
+            android:enabled="false"
+            android:insetTop="1dp"
+            android:insetBottom="1dp"
+            android:paddingHorizontal="8dp"
+            android:text="@string/check_confirm"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btnSendConfirm"
+            app:layout_constraintStart_toStartOf="@+id/btnSendConfirm"
+            app:layout_constraintTop_toTopOf="@+id/textFieldConfirmCode" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.teamolj.cafehorizon.sign
+package com.teamolj.cafehorizon.signUp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -40,7 +40,7 @@ class SignFragment2 : Fragment() {
 
         }
 
-        return inflater.inflate(R.layout.fragment_sign2, container, false)
+        return inflater.inflate(R.layout.fragment_signup2, container, false)
     }
 
 }

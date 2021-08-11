@@ -1,11 +1,12 @@
-package com.teamolj.cafehorizon.sign
+package com.teamolj.cafehorizon.signUp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivitySignupBinding
 
-class SignupActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,14 +19,22 @@ class SignupActivity : AppCompatActivity() {
         topAppBar.setBackgroundColor(255)
 
         topAppBar.setNavigationOnClickListener {
-            finish()
+            showExitMsg()
         }
 
-        val fragmentList = listOf(SignFragment1(), SignFragment2(), SignFragment3())
 
-        val adapter = SignFragmentAdapter(this)
-        adapter.fragmentList = fragmentList
-        binding.viewPager.adapter = adapter
+    }
 
+    private fun showExitMsg() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setMessage(getString(R.string.cancel_signup))
+            .setPositiveButton(getString(R.string.btn_goback)) { _, _ ->
+                finish()
+            }
+            .setNegativeButton(getString(R.string.btn_cancel), null)
+            .setCancelable(true)
+
+        builder.create().show()
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,9 +27,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:contentDescription="@string/desc_app_logo"
                 app:srcCompat="@drawable/main_logo"
-                app:tint="@color/colorPrimary"
-                android:contentDescription="@string/desc_app_logo" />
+                app:tint="@color/colorPrimary" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -57,18 +56,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSignUp"
-        app:viewSlideIndicatorSize="3"
         app:viewSlideIndicatorDotSize="8dp"
-        app:viewSlideIndicatorMargin="5dp" />
+        app:viewSlideIndicatorMargin="5dp"
+        app:viewSlideIndicatorSize="3" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerSignUp"
-        android:name="com.teamolj.cafehorizon.signUp.SignFragment1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <TextView
+        android:id="@+id/textUnsub1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_text1"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textUnsub2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slideIndicator"
+        app:layout_constraintVertical_bias="0.42000002"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textUnsub2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="49dp"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="@string/signup_text2"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/btnClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textUnsub1" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="48dp"
+        android:paddingVertical="12dp"
+        android:text="@string/btn_gomain"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:cornerRadius="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slideIndicator" />
+        app:layout_constraintTop_toBottomOf="@+id/textUnsub2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

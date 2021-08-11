@@ -17,7 +17,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityLoginBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
-import com.teamolj.cafehorizon.sign.SignupActivity
+import com.teamolj.cafehorizon.signUp.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -124,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 

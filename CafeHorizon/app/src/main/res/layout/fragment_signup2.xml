@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".signUp.SignFragment2">
+
+    <TextView
+        android:id="@+id/txtUserID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/user_id"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/star"
+        android:textColor="@color/textRed"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/txtUserID"
+        app:layout_constraintTop_toTopOf="@id/txtUserID" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldUserID"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:boxStrokeWidthFocused="1dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnCheckDuple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUserID">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnCheckDuple"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/gray"
+        android:insetTop="1dp"
+        android:insetBottom="1dp"
+        android:paddingHorizontal="8dp"
+        android:text="@string/check_duplication"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textFieldUserID"
+        app:layout_constraintTop_toTopOf="@+id/textFieldUserID" />
+
+    <TextView
+        android:id="@+id/txtUserNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_nickname"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textFieldUserID"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/star"
+        android:textColor="@color/textRed"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/txtUserNick"
+        app:layout_constraintTop_toTopOf="@id/txtUserNick" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldUserNick"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        app:boxStrokeWidthFocused="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUserNick">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserNick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtUserPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_pwd"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textFieldUserNick"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/star"
+        android:textColor="@color/textRed"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+        app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldUserPwd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        app:boxStrokeWidthFocused="1dp"
+        app:helperText="@string/pwd_requirement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUserPwd">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editUserPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldConfirmPwd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="8dp"
+        app:boxStrokeWidthFocused="1dp"
+        android:hint="@string/confirm_pwd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFieldUserPwd">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editConfirmPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"  />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtUserBday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/birthday"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textFieldConfirmPwd"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUserBday">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldYear"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            app:boxStrokeWidthFocused="1dp"
+            android:textColor="@color/black"
+            android:textSize="14dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/year"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+            app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldMonth"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:boxStrokeWidthFocused="1dp"
+            android:textColor="@color/black"
+            android:textSize="14dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/month"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+            app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:boxStrokeWidthFocused="1dp"
+            android:textColor="@color/black"
+            android:textSize="14dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editConfirmDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/date"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+            app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/birthday_offer"
+        android:textColor="@android:color/black"
+        android:textSize="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:enabled="false"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="32dp"
+        android:background="@drawable/round_button"
+        android:text="@string/sign_up"
+        android:textSize="24dp"
+        android:fontFamily="@font/bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

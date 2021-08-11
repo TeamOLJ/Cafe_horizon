@@ -25,7 +25,7 @@
 
         <activity android:name=".coupon.CouponActivity" />
         <activity android:name=".stamp.StampActivity" />
-        <activity android:name=".sign.SignupActivity" />
+        <activity android:name=".signUp.SignUpActivity" />
         <activity android:name=".OrderedListActivity" />
         <activity android:name=".OrderStateActivity" />
         <activity android:name=".PayOrderActivity" />
