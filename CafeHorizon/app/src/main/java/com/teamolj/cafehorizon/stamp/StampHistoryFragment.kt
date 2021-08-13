@@ -8,17 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamolj.cafehorizon.databinding.FragmentStampHistoryBinding
 
-
 class StampHistoryFragment : Fragment() {
-    private var _binding: FragmentStampHistoryBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentStampHistoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentStampHistoryBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentStampHistoryBinding.inflate(inflater, container, false)
 
         val data: MutableList<Stamps> = loadCoupons()
 
@@ -27,7 +24,7 @@ class StampHistoryFragment : Fragment() {
         binding.recyclerViewSHistory.adapter = adapter
         binding.recyclerViewSHistory.layoutManager = LinearLayoutManager(this.context)
 
-        return view
+        return binding.root
     }
 
     internal fun loadCoupons() : MutableList<Stamps> {

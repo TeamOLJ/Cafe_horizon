@@ -2,7 +2,7 @@ package com.teamolj.cafehorizon.stamp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayout
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityStampBinding
 
@@ -14,10 +14,6 @@ class StampActivity : AppCompatActivity() {
         binding = ActivityStampBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        val fragmentList = listOf(StampFragment(), StampHistoryFragment())
-        val adapter = StampAdapter(this)
-
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
         topAppBar.setBackgroundColor(255)
@@ -26,12 +22,25 @@ class StampActivity : AppCompatActivity() {
             finish()
         }
 
-        adapter.fragmentList = fragmentList
-        binding.viewPager.adapter = adapter
+        binding.tabLayoutStamp.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
-        val tabTitles = listOf<String>("스탬프","스탬프 히스토리")
-        TabLayoutMediator(binding.tabLayout,binding.viewPager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab!!.position) {
+                    0 -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.containerStamp, StampFragment())
+                            .commit()
+                    }
+                    1 -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.containerStamp, StampHistoryFragment())
+                            .commit()
+                    }
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) { }
+            override fun onTabUnselected(tab: TabLayout.Tab?) { }
+        })
     }
 }

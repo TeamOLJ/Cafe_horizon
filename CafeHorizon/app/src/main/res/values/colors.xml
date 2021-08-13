@@ -16,4 +16,6 @@
 
     <color name="textGreen">#00C853</color>
     <color name="textRed">#EB1313</color>
+
+    <color name="stampCounter">#FFBB63</color>
 </resources>
