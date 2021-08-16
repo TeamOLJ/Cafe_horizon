@@ -37,7 +37,7 @@ class SlideIndicatorView @JvmOverloads constructor(
                     val indicatorDotSize = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorDotSize, 0)
                     val indicatorDotMargin = getDimensionPixelSize(R.styleable.SlideIndicatorView_viewSlideIndicatorMargin, 0)
 
-                    indicatorInactiveColor = getColor(R.styleable.SlideIndicatorView_viewSlideIndicatorInactiveColor, resources.getColor(R.color.white))
+                    indicatorInactiveColor = getColor(R.styleable.SlideIndicatorView_viewSlideIndicatorInactiveColor, resources.getColor(R.color.semigray))
 
                     val indicatorParams = LayoutParams(indicatorDotSize, indicatorDotSize)
                     indicatorParams.setMargins(indicatorDotMargin, 0, indicatorDotMargin, 0)

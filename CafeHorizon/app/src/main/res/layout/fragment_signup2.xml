@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp"
     android:orientation="vertical"
-    tools:context=".signUp.SignFragment2">
+    tools:context=".signUp.SignUpFragment2">
 
     <TextView
         android:id="@+id/txtUserID"
@@ -145,7 +146,8 @@
             android:id="@+id/editUserPwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            app:fontFamily="sans-serif" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,7 +168,8 @@
             android:id="@+id/editConfirmPwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"  />
+            android:inputType="textPassword"
+            app:fontFamily="sans-serif" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -296,7 +299,6 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:enabled="false"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
