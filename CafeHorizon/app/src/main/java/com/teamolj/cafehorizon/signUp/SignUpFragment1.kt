@@ -166,6 +166,7 @@ class SignUpFragment1 : Fragment() {
 
         binding.btnSendConfirm.setOnClickListener {
             binding.btnSendConfirm.isClickable = false
+            closeKeyboard()
 
             if (!InternetConnection.isInternetConnected(requireContext())) {
                 Toast.makeText(requireContext(), getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
@@ -258,25 +259,29 @@ class SignUpFragment1 : Fragment() {
     private fun checkCodeValidation(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {    // 인증번호가 일치하는 경우
+                // 인증번호가 일치하는 경우
+                if (task.isSuccessful) {
                     mCountDown.cancel()
                     binding.progressBar.visibility = View.GONE
 
                     // 이미 가입되어 있는 전화번호인지 먼저 확인
                     if (!auth.currentUser!!.email.isNullOrEmpty()) {
+                        // 이미 존재하는 경우, 해당 번호 로그인 상태 먼저 해제
+                        auth.signOut()
+                        binding.editPhoneNum.setText("")
+                        binding.editConfirmCode.setText("")
+                        // 안내 메시지 출력
                         userExistMsg()
                     }
                     else
                         // 아닐 경우, 다음 프래그먼트로 전환
-                        (activity as SignUpActivity).switchFragment()
+                        (activity as SignUpActivity).switchFragment(binding.checkTermMarketing.isChecked, binding.checkPushMsg.isChecked)
 
                 } else {
                     binding.progressBar.visibility = View.GONE
 
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        binding.textFieldConfirmCode.error = getString(R.string.warning_wrong_confirms)
-                        binding.btnCheckConfirm.isClickable = true
-                    }
+                    binding.textFieldConfirmCode.error = getString(R.string.warning_wrong_confirms)
+                    binding.btnCheckConfirm.isClickable = true
                 }
             }
     }
@@ -304,22 +309,10 @@ class SignUpFragment1 : Fragment() {
 
         builder.setMessage(getString(R.string.dialog_user_exist))
             .setPositiveButton(getString(R.string.btn_go_login)) { _, _ ->
-                auth.signOut()
                 (activity as SignUpActivity).closeActivity()
             }
             .setNegativeButton(getString(R.string.btn_cancel)) { _, _ ->
-                auth.signOut()
-                binding.editPhoneNum.setText("")
-                binding.editConfirmCode.setText("")
-
-                binding.textFieldPhoneNum.isHelperTextEnabled = false
-
-                binding.btnSendConfirm.isEnabled = true
-                binding.btnSendConfirm.isClickable = true
-                binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
-
-                binding.btnCheckConfirm.isClickable = true
-                binding.btnCheckConfirm.isEnabled = false
+                mCountDown.onFinish()
             }
             .setCancelable(true)
 

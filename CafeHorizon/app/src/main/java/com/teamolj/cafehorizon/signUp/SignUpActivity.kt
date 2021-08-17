@@ -15,6 +15,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    private var agreedMarketing: Boolean = false
+    private var agreedPush: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
@@ -33,7 +36,10 @@ class SignUpActivity : AppCompatActivity() {
         binding.slideIndicator.setCurrentSlide(0)
     }
 
-    fun switchFragment() {
+    fun switchFragment(termMarketing : Boolean, termPush : Boolean) {
+        agreedMarketing = termMarketing
+        agreedPush = termPush
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerSignUp, SignUpFragment2())
             .commit()
@@ -47,6 +53,7 @@ class SignUpActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // frag1에서, 이미 가입한 정보일 때 호출하는 함수
     fun closeActivity() {
         finish()
     }
@@ -56,8 +63,10 @@ class SignUpActivity : AppCompatActivity() {
 
         builder.setMessage(getString(R.string.cancel_signup))
             .setPositiveButton(getString(R.string.btn_goback)) { _, _ ->
+                // 인증 정보가 있을 경우(+미가입상태) 해당 정보 삭제
                 if (auth.currentUser != null)
                     auth.currentUser!!.delete()
+
                 finish()
             }
             .setNegativeButton(getString(R.string.btn_cancel), null)
