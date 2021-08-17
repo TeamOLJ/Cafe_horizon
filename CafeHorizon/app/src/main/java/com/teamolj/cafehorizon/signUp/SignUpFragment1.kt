@@ -46,6 +46,7 @@ class SignUpFragment1 : Fragment() {
                 binding.checkTermService.isChecked = true
                 binding.checkTermPersonal.isChecked = true
                 binding.checkTermMarketing.isChecked = true
+                binding.checkPushMsg.isChecked = true
 
                 binding.tvConfirmUser.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
                 binding.layoutConfirmUser.visibility = View.VISIBLE
@@ -54,6 +55,7 @@ class SignUpFragment1 : Fragment() {
                 binding.checkTermService.isChecked = false
                 binding.checkTermPersonal.isChecked = false
                 binding.checkTermMarketing.isChecked = false
+                binding.checkPushMsg.isChecked = false
 
                 binding.tvConfirmUser.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.semigray))
                 binding.layoutConfirmUser.visibility = View.GONE
@@ -65,6 +67,7 @@ class SignUpFragment1 : Fragment() {
                 binding.checkTermService.isChecked
                     && binding.checkTermPersonal.isChecked
                     && binding.checkTermMarketing.isChecked
+                    && binding.checkPushMsg.isChecked
 
             if (binding.checkTermService.isChecked && binding.checkTermPersonal.isChecked) {
                 binding.tvConfirmUser.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
@@ -81,6 +84,7 @@ class SignUpFragment1 : Fragment() {
                 binding.checkTermService.isChecked
                         && binding.checkTermPersonal.isChecked
                         && binding.checkTermMarketing.isChecked
+                        && binding.checkPushMsg.isChecked
 
             if (binding.checkTermService.isChecked && binding.checkTermPersonal.isChecked) {
                 binding.tvConfirmUser.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
@@ -97,6 +101,15 @@ class SignUpFragment1 : Fragment() {
                 binding.checkTermService.isChecked
                         && binding.checkTermPersonal.isChecked
                         && binding.checkTermMarketing.isChecked
+                        && binding.checkPushMsg.isChecked
+        }
+
+        binding.checkPushMsg.setOnClickListener {
+            binding.checkAllTerm.isChecked =
+                binding.checkTermService.isChecked
+                        && binding.checkTermPersonal.isChecked
+                        && binding.checkTermMarketing.isChecked
+                        && binding.checkPushMsg.isChecked
         }
 
         binding.btnTermService.setOnClickListener {
@@ -135,6 +148,19 @@ class SignUpFragment1 : Fragment() {
                 binding.btnTermMarketing.tag = "not_open"
                 binding.btnTermMarketing.setImageResource(R.drawable.ic_slidedown)
                 binding.textTermMarketing.visibility = View.GONE
+            }
+        }
+
+        binding.btnPushMsg.setOnClickListener {
+            if (binding.btnPushMsg.tag == "not_open") {
+                binding.btnPushMsg.tag = "open"
+                binding.btnPushMsg.setImageResource(R.drawable.ic_slideup)
+                binding.textPushMsg.visibility = View.VISIBLE
+            }
+            else {
+                binding.btnPushMsg.tag = "not_open"
+                binding.btnPushMsg.setImageResource(R.drawable.ic_slidedown)
+                binding.textPushMsg.visibility = View.GONE
             }
         }
 

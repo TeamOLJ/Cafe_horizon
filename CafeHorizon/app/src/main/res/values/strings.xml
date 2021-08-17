@@ -44,7 +44,7 @@
     <string name="term_service">서비스 이용 약관 동의</string>
     <string name="term_personal">개인정보 수집 동의</string>
     <string name="term_marketing">마케팅 정보 수신 동의</string>
-    <string name="term_push_msg">푸시알림</string>
+    <string name="term_push_msg">푸시알림 수신 동의</string>
 
     <string name="option_agreeall">전체 동의 (선택사항 포함)</string>
     <string name="option_must">(필수)</string>
