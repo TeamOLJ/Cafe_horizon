@@ -47,6 +47,10 @@ class SignUpActivity : AppCompatActivity() {
         binding.slideIndicator.setCurrentSlide(1)
     }
 
+    fun termAgreedStates(): Pair<Boolean, Boolean> {
+        return Pair(agreedMarketing, agreedPush)
+    }
+
     fun callSignupSuccess() {
         val intent = Intent(this, SignUpDoneActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

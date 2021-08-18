@@ -40,6 +40,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:boxStrokeWidthFocused="1dp"
+        app:helperTextTextColor="@color/textGreen"
         app:layout_constraintEnd_toStartOf="@+id/btnCheckDuple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtUserID">
@@ -186,7 +187,7 @@
         app:layout_constraintTop_toBottomOf="@id/textFieldConfirmPwd"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
+        android:id="@+id/linearLayoutBday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -201,11 +202,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             app:boxStrokeWidthFocused="1dp"
+            app:errorIconDrawable="@null"
             android:textColor="@color/black"
             android:textSize="14dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editConfirmYear"
+                android:id="@+id/editYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -231,11 +233,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:boxStrokeWidthFocused="1dp"
+            app:errorIconDrawable="@null"
             android:textColor="@color/black"
             android:textSize="14dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editConfirmMonth"
+                android:id="@+id/editMonth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -261,11 +264,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:boxStrokeWidthFocused="1dp"
+            app:errorIconDrawable="@null"
             android:textColor="@color/black"
             android:textSize="14dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editConfirmDate"
+                android:id="@+id/editDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -289,13 +293,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
         android:text="@string/birthday_offer"
-        android:textColor="@android:color/black"
+        android:textColor="@color/gray"
         android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtUserBday"
+        app:layout_constraintStart_toEndOf="@+id/txtUserBday" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -310,7 +313,18 @@
         android:fontFamily="@font/bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBday" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/custom_progressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
