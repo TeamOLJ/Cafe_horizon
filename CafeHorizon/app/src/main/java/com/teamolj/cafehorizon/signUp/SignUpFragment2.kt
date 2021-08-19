@@ -1,6 +1,7 @@
 package com.teamolj.cafehorizon.signUp
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.EmailAuthProvider
@@ -40,21 +42,23 @@ class SignUpFragment2 : Fragment() {
         auth = Firebase.auth
         db = Firebase.firestore
 
-        var checkedNick = ""
-
         binding = FragmentSignup2Binding.inflate(inflater, container, false)
 
-        binding.btnCheckDuple.setOnClickListener {
-            binding.textFieldUserID.error = null
-            binding.textFieldUserID.isErrorEnabled = false
-            binding.textFieldUserID.helperText = null
-            binding.textFieldUserID.isHelperTextEnabled = false
+        var checkedNick = ""
+        val regID = "[a-zA-Z0-9]{4,10}".toRegex()
+        val regNick = "[가-힣a-zA-Z0-9]{2,7}".toRegex()
 
+        binding.btnCheckDuple.setOnClickListener {
             val userID = binding.editUserID.text.toString().trim()
 
             if (userID.isEmpty()) {
                 binding.editUserID.requestFocus()
                 binding.textFieldUserID.error = getString(R.string.warning_empty_userid)
+                binding.btnSignUp.isClickable = true
+            }
+            else if (!userID.matches(regID)) {
+                binding.editUserID.requestFocus()
+                binding.textFieldUserID.error = getString(R.string.id_requirement)
                 binding.btnSignUp.isClickable = true
             }
             else {
@@ -65,6 +69,8 @@ class SignUpFragment2 : Fragment() {
                         if (documents.isEmpty) {
                             checkedNick = userID
                             binding.textFieldUserID.helperText = getString(R.string.warning_usable_userid)
+                            binding.textFieldUserID.setHelperTextColor(
+                                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.textGreen)))
                         }
                         else {
                             checkedNick = ""
@@ -77,8 +83,8 @@ class SignUpFragment2 : Fragment() {
         binding.editUserID.doOnTextChanged { _, _, _, _ ->
             binding.textFieldUserID.error = null
             binding.textFieldUserID.isErrorEnabled = false
-            binding.textFieldUserID.helperText = null
-            binding.textFieldUserID.isHelperTextEnabled = false
+            binding.textFieldUserID.helperText = getString(R.string.id_requirement)
+            binding.textFieldUserID.setHelperTextColor(ColorStateList.valueOf(binding.textFieldUserNick.helperTextCurrentTextColor))
         }
 
         binding.editUserNick.doOnTextChanged { _, _, _, _ ->
@@ -139,6 +145,11 @@ class SignUpFragment2 : Fragment() {
             else if (binding.editUserNick.text.toString().trim().isEmpty()) {
                 binding.editUserNick.requestFocus()
                 binding.textFieldUserNick.error = getString(R.string.warning_empty_usernick)
+                binding.btnSignUp.isClickable = true
+            }
+            else if (!binding.editUserNick.text.toString().trim().matches(regNick)) {
+                binding.editUserNick.requestFocus()
+                binding.textFieldUserNick.error = getString(R.string.warning_wrong_nick_format)
                 binding.btnSignUp.isClickable = true
             }
             else if (binding.editUserPwd.text.toString().trim().isEmpty()) {
