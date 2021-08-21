@@ -1,16 +1,18 @@
 package com.teamolj.cafehorizon
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +20,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityMyinfoBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MyInfoActivity : AppCompatActivity() {
@@ -31,6 +35,7 @@ class MyInfoActivity : AppCompatActivity() {
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
     private lateinit var newPhoneWithFormat: String
+    private val yearToday = Calendar.getInstance().get(Calendar.YEAR)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +57,7 @@ class MyInfoActivity : AppCompatActivity() {
         binding.itemUserID.setDescText(App.prefs.getString("userID", ""))
         binding.itemUserNickname.setDescText(App.prefs.getString("userNick", ""))
         binding.itemUserPhoneNum.setDescText(App.prefs.getString("userPhone", ""))
+        binding.itemUserBday.setDescText(App.prefs.getDateAsString("userBday"))
 
         binding.itemTermMarketing.setSwitch(App.prefs.getBoolean("userAgreeMarketing"))
         binding.itemTermPushMsg.setSwitch(App.prefs.getBoolean("userAgreePush"))
@@ -79,6 +85,7 @@ class MyInfoActivity : AppCompatActivity() {
 
         binding.btnSendConfirm.setOnClickListener {
             binding.btnSendConfirm.isClickable = false
+            closeKeyboard()
 
             if (!InternetConnection.isInternetConnected(this)) {
                 Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
@@ -121,6 +128,7 @@ class MyInfoActivity : AppCompatActivity() {
 
         binding.btnCheckConfirm.setOnClickListener {
             binding.btnCheckConfirm.isClickable = false
+            closeKeyboard()
 
             if (!InternetConnection.isInternetConnected(this)) {
                 Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
@@ -159,7 +167,8 @@ class MyInfoActivity : AppCompatActivity() {
                             // 바코드 번호도 함께 변경
                             val newBarcode = createBarcode("0${newPhoneWithFormat.substring(3)}")
                             db.collection("UserInformation").document(auth.currentUser!!.uid).update("userBarcode", newBarcode)
-                            
+                            App.prefs.setString("userBarcode", newBarcode)
+
                             Toast.makeText(this, R.string.toast_phone_changed, Toast.LENGTH_SHORT).show()
 
                         } else {
@@ -202,6 +211,7 @@ class MyInfoActivity : AppCompatActivity() {
 
         binding.btnChangePwd.setOnClickListener {
             binding.btnChangePwd.isClickable = false
+            closeKeyboard()
 
             if (!InternetConnection.isInternetConnected(this)) {
                 Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
@@ -272,6 +282,104 @@ class MyInfoActivity : AppCompatActivity() {
             }
         }
 
+        // birthday
+        binding.itemUserBday.setOnClickListener {
+            binding.itemUserBday.toggleSlider()
+            if (binding.itemUserBday.isSlideOpen()) {
+                binding.layoutChangeBday.visibility = View.VISIBLE
+            }
+            else {
+                binding.layoutChangeBday.visibility = View.GONE
+            }
+        }
+
+        binding.editYear.doOnTextChanged { _, _, _, _ ->
+            binding.textFieldYear.error = null
+            binding.textFieldYear.isErrorEnabled = false
+        }
+
+        binding.editMonth.doOnTextChanged { _, _, _, _ ->
+            binding.textFieldMonth.error = null
+            binding.textFieldMonth.isErrorEnabled = false
+        }
+
+        binding.editDate.doOnTextChanged { _, _, _, _ ->
+            binding.textFieldDate.error = null
+            binding.textFieldDate.isErrorEnabled = false
+        }
+
+        binding.btnChangeBday.setOnClickListener {
+            binding.btnChangeBday.isClickable = false
+            closeKeyboard()
+
+            if (!InternetConnection.isInternetConnected(this)) {
+                Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
+                binding.btnChangeBday.isClickable = true
+            }
+            else if(!checkBdayValidation()) {
+                binding.btnChangeBday.isClickable = true
+            }
+            else {
+                val year = binding.editYear.text.toString().trim()
+                val month = binding.editMonth.text.toString().trim()
+                val date = binding.editDate.text.toString().trim()
+
+                val bdayBefore = App.prefs.getString("userBday", "")
+                val bdayNew = "$year/${month.padStart(2, '0')}/${date.padStart(2, '0')}"
+
+                if (bdayBefore == bdayNew) {
+                    Toast.makeText(this, getString(R.string.warning_no_changes), Toast.LENGTH_SHORT).show()
+                    binding.btnChangeBday.isClickable = true
+                }
+                else {
+                    val userUID = auth.currentUser!!.uid
+
+                    // 마지막 변경 날짜 확인
+                    var lastModified: Date? = null
+                    if (App.prefs.getDateAsString("lastBdayMod") != "")
+                        lastModified = Date(SimpleDateFormat("yyyy/MM/dd").parse(App.prefs.getDateAsString("lastBdayMod")).time)
+
+                    // 변경일로부터 1년 이상 지났으면 생일 변경
+                    if (lastModified == null || Date().time - lastModified.time >= 60 * 60 * 24 * 365) {
+                        binding.progressBar.visibility = View.VISIBLE
+
+                        val newUserBday = Timestamp(Date(SimpleDateFormat("yyyy/MM/dd").parse(bdayNew).time))
+                        db.collection("UserInformation").document(userUID)
+                            .update("userBday", newUserBday, "lastBdayModified", Timestamp(Date()))
+                            .addOnCompleteListener { task ->
+                                binding.progressBar.visibility = View.GONE
+                                binding.btnChangeBday.isClickable = true
+
+                                if (task.isSuccessful) {
+                                    App.prefs.setString("userBday", bdayNew)
+                                    App.prefs.setDateAsString("lastBdayMod", Date())
+
+                                    binding.editYear.setText("")
+                                    binding.editMonth.setText("")
+                                    binding.editDate.setText("")
+
+                                    binding.itemUserBday.setDescText(bdayNew)
+
+                                    if (binding.itemUserBday.isSlideOpen()) {
+                                        binding.itemUserBday.toggleSlider()
+                                        binding.layoutChangeBday.visibility = View.GONE
+                                    }
+
+                                    Toast.makeText(this, getString(R.string.toast_birthday_changed), Toast.LENGTH_SHORT).show()
+
+                                } else {
+                                    Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                    }
+                    else {
+                        Toast.makeText(this, getString(R.string.warning_year_not_past), Toast.LENGTH_SHORT).show()
+                        binding.btnChangeBday.isClickable = true
+                    }
+                }
+            }
+        }
+
         binding.itemTermMarketing.setOnClickListener {
             if (binding.itemTermMarketing.isSwitchChecked()) {
                 Toast.makeText(this, "마케팅 정보 수신 설정", Toast.LENGTH_SHORT).show()
@@ -294,7 +402,7 @@ class MyInfoActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSignUp.setOnClickListener {
+        binding.btnUnsubscribe.setOnClickListener {
             val intent = Intent(this, UnsubscribeActivity::class.java)
             startActivity(intent)
         }
@@ -346,6 +454,51 @@ class MyInfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkBdayValidation() : Boolean {
+
+        val year = binding.editYear.text.toString().trim()
+        val month = binding.editMonth.text.toString().trim()
+        val date = binding.editDate.text.toString().trim()
+
+        val dateArray = arrayOf(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+        if (year.isNotEmpty() && year.toInt() % 4 == 0)
+            dateArray[2] += 1
+
+        // 생일 칸이 전부 비어있는 경우
+        if (year.isEmpty() && month.isEmpty() && date.isEmpty()) {
+            return true
+        }
+        // 모두 채운 경우
+        else if (year.isNotEmpty() && month.isNotEmpty() && date.isNotEmpty()) {
+            if (year.toInt() > yearToday || year.toInt() < yearToday - 150) {
+                binding.textFieldYear.requestFocus()
+                binding.textFieldYear.error = " "
+                return false
+            }
+            else if (month.toInt() < 1 || month.toInt() > 12) {
+                binding.textFieldMonth.requestFocus()
+                binding.textFieldMonth.error = " "
+                return false
+            }
+            else if (date.toInt() < 1 || date.toInt() > dateArray[month.toInt()]) {
+                binding.textFieldDate.requestFocus()
+                binding.textFieldDate.error = " "
+                return false
+            }
+            return true
+        }
+        // 채우다 만 경우
+        else {
+            if (year.isEmpty())
+                binding.textFieldYear.error = " "
+            if (month.isEmpty())
+                binding.textFieldMonth.error = " "
+            if (date.isEmpty())
+                binding.textFieldDate.error = " "
+            return false
+        }
+    }
+
     private fun createBarcode(phoneNum : String) : String {
         val result = StringBuilder()
         val key = getString(R.string.barcode_key)
@@ -360,5 +513,13 @@ class MyInfoActivity : AppCompatActivity() {
         }
 
         return result.toString()
+    }
+
+    private fun closeKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
+        }
     }
 }

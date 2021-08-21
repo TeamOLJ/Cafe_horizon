@@ -329,6 +329,160 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.teamolj.cafehorizon.views.ListItemView
+                android:id="@+id/itemUserBday"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:viewListItemType="view_title_description_slider"
+                app:viewListItemTitleText="@string/birthday"
+                app:viewListItemTitleTextSize="16dp"
+                app:viewListItemDescText=""
+                app:viewListItemDescTextSize="16dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutChangeBday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blueBackground"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/txtBdayWarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/birthday_edit_limit"
+                    android:textColor="@color/textRed"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"  />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutBday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtBdayWarning">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textFieldYear"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:errorIconDrawable="@null"
+                        android:textColor="@color/black"
+                        android:textSize="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editYear"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:backgroundTintMode="add"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/year"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+                        app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textFieldMonth"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:errorIconDrawable="@null"
+                        android:textColor="@color/black"
+                        android:textSize="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:backgroundTintMode="add"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/month"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+                        app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textFieldDate"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:errorIconDrawable="@null"
+                        android:textColor="@color/black"
+                        android:textSize="14dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/white"
+                            android:backgroundTintMode="add"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/date"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        app:layout_constraintStart_toEndOf="@id/txtUserPwd"
+                        app:layout_constraintTop_toTopOf="@id/txtUserPwd" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnChangeBday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/btn_change_birthday"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayoutBday"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.teamolj.cafehorizon.views.ListItemView
                 android:id="@+id/itemTermMarketing"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -345,7 +499,7 @@
                 app:viewListItemTitleTextSize="16dp"/>
 
             <Button
-                android:id="@+id/btnSignUp"
+                android:id="@+id/btnUnsubscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

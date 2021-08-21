@@ -94,7 +94,16 @@ class LoginActivity : AppCompatActivity() {
                                         App.prefs.setString("userID", userId)
                                         App.prefs.setString("userNick", document.data?.get("userNick").toString())
                                         App.prefs.setString("userBarcode", document.data?.get("userBarcode").toString())
-                                        App.prefs.setString("userBday", document.data?.get("userBday").toString())
+
+                                        if (document.getTimestamp("userBday") != null)
+                                            App.prefs.setDateAsString("userBday", document.getTimestamp("userBday")!!.toDate())
+                                        else
+                                            App.prefs.setDateAsString("userBday", null)
+
+                                        if (document.getTimestamp("lastBdayModified") != null)
+                                            App.prefs.setDateAsString("lastBdayMod", document.getTimestamp("lastBdayModified")!!.toDate())
+                                        else
+                                            App.prefs.setDateAsString("lastBdayMod", null)
 
                                         App.prefs.setString("userPhone", "0${userPhone!!.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
 

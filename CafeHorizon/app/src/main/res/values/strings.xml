@@ -29,6 +29,8 @@
     <string name="check_confirm">인증하기</string>
     <string name="self_confirmation">본인 인증</string>
 
+    <string name="btn_change_birthday">생일 변경하기</string>
+
     <string name="find_id_text1">고객님의 아이디는</string>
     <string name="find_id_text2">입니다.</string>
 
@@ -101,11 +103,13 @@
     <string name="toast_phone_changed">휴대폰 번호가 변경되었습니다.</string>
     <string name="toast_pwd_changed">비밀번호가 변경되었습니다.</string>
     <string name="toast_pwd_changed_relogin">비밀번호가 변경되었습니다. 다시 로그인하세요.</string>
+    <string name="toast_birthday_changed">생일이 변경되었습니다.</string>
     <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
 
     <string name="id_requirement">4~10자의 영문자/숫자</string>
     <string name="nickname_requirement">2~7자의 한글</string>
     <string name="pwd_requirement">8~15자의 영문자/숫자/특수문자</string>
+    <string name="birthday_edit_limit">생일은 연 최대 1회 변경 가능합니다.</string>
 
     <string name="warning_empty_userid">아이디를 입력하세요.</string>
     <string name="warning_check_userid">아이디 중복 여부를 확인해 주세요.</string>
@@ -123,6 +127,8 @@
     <string name="warning_empty_confirms">인증번호를 입력하세요.</string>
     <string name="warning_wrong_confirms">잘못된 인증번호입니다.</string>
     <string name="warning_wrong_format">잘못된 형식입니다. 다시 확인하세요.</string>
+    <string name="warning_no_changes">변경 정보가 없습니다.</string>
+    <string name="warning_year_not_past">생일이 변경된 지 일 년이 지나지 않았습니다.</string>
 
     <string name="desc_app_logo">어플리케이션 로고</string>
     <string name="desc_id_icon">사용자 아이디</string>

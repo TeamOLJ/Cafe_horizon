@@ -199,7 +199,7 @@ class SignUpFragment2 : Fragment() {
 
                 if (year.isNotEmpty() && month.isNotEmpty() && date.isNotEmpty()) {
                     userBdayString = "$year-$month-$date"
-                    userBday = Timestamp(Date(SimpleDateFormat("yyyy-MM-dd").parse(userBdayString).time))
+                    userBday = Timestamp(Date(SimpleDateFormat("yyyy/MM/dd").parse(userBdayString).time))
                 } else {
                     userBdayString = ""
                     userBday = null
@@ -233,7 +233,7 @@ class SignUpFragment2 : Fragment() {
                                     App.prefs.setString("userBarcode", userBarcode)
                                     App.prefs.setString("userBday", userBdayString)
 
-                                    App.prefs.setString("userPhone", "0${userPhone!!.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
+                                    App.prefs.setString("userPhone", "0${userPhone.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
 
                                     App.prefs.setBoolean("userAgreeMarketing", termPair.first)
                                     App.prefs.setBoolean("userAgreePush", termPair.second)
