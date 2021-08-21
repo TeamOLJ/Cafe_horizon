@@ -13,6 +13,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityMyinfoBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
@@ -22,6 +24,7 @@ class MyInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyinfoBinding
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
@@ -35,6 +38,7 @@ class MyInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
+        db = Firebase.firestore
 
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
@@ -152,6 +156,10 @@ class MyInfoActivity : AppCompatActivity() {
                                 binding.layoutChangePhoneNum.visibility = View.GONE
                             }
 
+                            // 바코드 번호도 함께 변경
+                            val newBarcode = createBarcode("0${newPhoneWithFormat.substring(3)}")
+                            db.collection("UserInformation").document(auth.currentUser!!.uid).update("userBarcode", newBarcode)
+                            
                             Toast.makeText(this, R.string.toast_phone_changed, Toast.LENGTH_SHORT).show()
 
                         } else {
@@ -336,5 +344,21 @@ class MyInfoActivity : AppCompatActivity() {
             binding.btnSendConfirm.isEnabled = true
             binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.gray))
         }
+    }
+
+    private fun createBarcode(phoneNum : String) : String {
+        val result = StringBuilder()
+        val key = getString(R.string.barcode_key)
+
+        var temp = 0
+
+        for (idx in 0..10) {
+            temp = phoneNum[idx].digitToInt() + key[idx].digitToInt()
+            if (temp >= 10)
+                temp -= 10
+            result.append(temp)
+        }
+
+        return result.toString()
     }
 }
