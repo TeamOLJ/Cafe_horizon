@@ -46,7 +46,7 @@ class SignUpFragment2 : Fragment() {
 
         var checkedNick = ""
         val regID = "[a-zA-Z0-9]{4,10}".toRegex()
-        val regNick = "[가-힣a-zA-Z0-9]{2,7}".toRegex()
+        val regNick = "[가-힣]{2,7}".toRegex()
 
         binding.btnCheckDuple.setOnClickListener {
             val userID = binding.editUserID.text.toString().trim()
@@ -183,7 +183,7 @@ class SignUpFragment2 : Fragment() {
 
                 val ID = binding.editUserID.text.toString().trim()
                 val userNick = binding.editUserNick.text.toString().trim()
-                val userBarcode = "214789630"   // !! 바코드 생성 방법 고민 필요 !!
+                val userBarcode = createBarcode("0${userPhone!!.substring(3)}")
 
                 val email = binding.editUserID.text.toString().trim() + getString(R.string.email_domain)
                 val password = binding.editUserPwd.text.toString().trim()
@@ -308,6 +308,22 @@ class SignUpFragment2 : Fragment() {
                 binding.textFieldDate.error = " "
             return false
         }
+    }
+
+    private fun createBarcode(phoneNum : String) : String {
+        val result = StringBuilder()
+        val key = getString(R.string.barcode_key)
+
+        var temp = 0
+
+        for (idx in 0..10) {
+            temp = phoneNum[idx].digitToInt() + key[idx].digitToInt()
+            if (temp >= 10)
+                temp -= 10
+            result.append(temp)
+        }
+
+        return result.toString()
     }
 
     private fun closeKeyboard() {

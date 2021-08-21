@@ -104,7 +104,7 @@
     <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
 
     <string name="id_requirement">4~10자의 영문자/숫자</string>
-    <string name="nickname_requirement">2~7자의 한글/영문자/숫자</string>
+    <string name="nickname_requirement">2~7자의 한글</string>
     <string name="pwd_requirement">8~15자의 영문자/숫자/특수문자</string>
 
     <string name="warning_empty_userid">아이디를 입력하세요.</string>
@@ -112,7 +112,7 @@
     <string name="warning_duplicated_userid">이미 존재하는 아이디입니다.</string>
     <string name="warning_usable_userid">사용할 수 있는 아이디입니다!</string>
     <string name="warning_empty_usernick">닉네임을 입력하세요.</string>
-    <string name="warning_wrong_nick_format">2~7자의 한글/영문자/숫자여야 합니다.</string>
+    <string name="warning_wrong_nick_format">2~7자의 한글이어야 합니다.</string>
     <string name="warning_empty_userpwd">비밀번호를 입력하세요.</string>
     <string name="warning_empty_pwd_confirm">비밀번호를 한 번 더 입력하세요.</string>
     <string name="warning_wrong_pwd">비밀번호를 다시 확인하세요.</string>
