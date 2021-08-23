@@ -29,6 +29,8 @@
     <string name="check_confirm">인증하기</string>
     <string name="self_confirmation">본인 인증</string>
 
+    <string name="new_nickname">변경할 닉네임 (한글 2~7자)</string>
+    <string name="btn_change_nickname">변경하기</string>
     <string name="btn_change_birthday">생일 변경하기</string>
 
     <string name="find_id_text1">고객님의 아이디는</string>
@@ -104,6 +106,7 @@
     <string name="toast_pwd_changed">비밀번호가 변경되었습니다.</string>
     <string name="toast_pwd_changed_relogin">비밀번호가 변경되었습니다. 다시 로그인하세요.</string>
     <string name="toast_birthday_changed">생일이 변경되었습니다.</string>
+    <string name="toast_nickname_changed">닉네임이 변경되었습니다.</string>
     <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
 
     <string name="id_requirement">4~10자의 영문자/숫자</string>
@@ -116,6 +119,7 @@
     <string name="warning_duplicated_userid">이미 존재하는 아이디입니다.</string>
     <string name="warning_usable_userid">사용할 수 있는 아이디입니다!</string>
     <string name="warning_empty_usernick">닉네임을 입력하세요.</string>
+    <string name="warning_same_usernick">동일한 닉네임입니다.</string>
     <string name="warning_wrong_nick_format">2~7자의 한글이어야 합니다.</string>
     <string name="warning_empty_userpwd">비밀번호를 입력하세요.</string>
     <string name="warning_empty_pwd_confirm">비밀번호를 한 번 더 입력하세요.</string>

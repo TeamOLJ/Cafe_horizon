@@ -1,5 +1,6 @@
 package com.teamolj.cafehorizon
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -61,6 +62,77 @@ class MyInfoActivity : AppCompatActivity() {
 
         binding.itemTermMarketing.setSwitch(App.prefs.getBoolean("userAgreeMarketing"))
         binding.itemTermPushMsg.setSwitch(App.prefs.getBoolean("userAgreePush"))
+
+        // nickname
+        binding.itemUserNickname.setOnClickListener {
+            binding.itemUserNickname.toggleSlider()
+            if (binding.itemUserNickname.isSlideOpen()) {
+                binding.layoutChangeNickname.visibility = View.VISIBLE
+            }
+            else {
+                binding.layoutChangeNickname.visibility = View.GONE
+            }
+        }
+
+        binding.editNewNick.doOnTextChanged { _, _, _, _ ->
+            binding.textFieldNewNick.error = null
+            binding.textFieldNewNick.isErrorEnabled = false
+        }
+
+        binding.btnChangeNick.setOnClickListener {
+            binding.btnChangeNick.isClickable = false
+            closeKeyboard()
+
+            if (!InternetConnection.isInternetConnected(this)) {
+                Toast.makeText(this, getString(R.string.toast_check_internet), Toast.LENGTH_SHORT).show()
+                binding.btnChangeNick.isClickable = true
+            }
+            else if (binding.editNewNick.text.toString().trim().isEmpty()) {
+                binding.textFieldNewNick.error = getString(R.string.warning_empty_usernick)
+                binding.btnChangeNick.isClickable = true
+            }
+            else if (!binding.editNewNick.text.toString().trim().matches("[가-힣]{2,7}".toRegex())) {
+                binding.textFieldNewNick.error = getString(R.string.warning_wrong_nick_format)
+                binding.btnChangeNick.isClickable = true
+            }
+            else if (binding.editNewNick.text.toString().trim() == App.prefs.getString("userNick", "")) {
+                binding.textFieldNewNick.error = getString(R.string.warning_same_usernick)
+                binding.btnChangeNick.isClickable = true
+            }
+            else {
+                binding.progressBar.visibility = View.VISIBLE
+
+                val newNick = binding.editNewNick.text.toString().trim()
+
+                db.collection("UserInformation").document(auth.currentUser!!.uid)
+                    .update("userNick", newNick)
+                    .addOnCompleteListener { task ->
+                        binding.progressBar.visibility = View.GONE
+                        binding.btnChangeNick.isClickable = true
+
+                        if (task.isSuccessful) {
+                            App.prefs.setString("userNick", newNick)
+                            binding.itemUserNickname.setDescText(newNick)
+
+                            binding.editNewNick.setText("")
+
+                            if (binding.itemUserNickname.isSlideOpen()) {
+                                binding.itemUserNickname.toggleSlider()
+                                binding.layoutChangeNickname.visibility = View.GONE
+                            }
+
+                            // 메인에 변경 사항 발생 알림
+                            val mIntent = Intent(this, MainActivity::class.java)
+                            setResult(Activity.RESULT_OK, mIntent)
+
+                            Toast.makeText(this, getString(R.string.toast_nickname_changed), Toast.LENGTH_SHORT).show()
+
+                        } else {
+                            Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+        }
 
         // phone number
         binding.itemUserPhoneNum.setOnClickListener {

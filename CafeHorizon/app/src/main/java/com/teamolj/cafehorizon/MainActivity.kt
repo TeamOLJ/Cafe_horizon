@@ -1,5 +1,6 @@
 package com.teamolj.cafehorizon
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -143,9 +146,17 @@ class MainActivity : AppCompatActivity() {
              Toast.makeText(this, "채팅문의", Toast.LENGTH_SHORT).show()
          }
 
+        // 정보 변경 발생 시 닉네임 필드 업데이트
+        val myinfoForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                binding.textUserNickname.text = App.prefs.getString("userNick", "")
+                headerView.textUserNickname.text = App.prefs.getString("userNick", "")
+            }
+        }
+
         headerView.btnMyInfo.setOnClickListener {
-            val intent = Intent(this, MyInfoActivity::class.java)
-            startActivityForResult(intent, 1111)
+            binding.drawerLayout.close()
+            myinfoForResult.launch(Intent(this, MyInfoActivity::class.java))
         }
 
         headerView.btnLogOut.setOnClickListener {
