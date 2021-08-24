@@ -52,6 +52,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMyStamp" />
 
+    <ImageView
+        android:id="@+id/imgEachStamp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/stamp1"
+        app:layout_constraintEnd_toEndOf="@+id/imgStampCard"
+        app:layout_constraintStart_toStartOf="@+id/imgStampCard"
+        app:layout_constraintTop_toTopOf="@+id/imgStampCard"
+        app:layout_constraintBottom_toBottomOf="@+id/imgStampCard" />
+
     <TextView
         android:id="@+id/txtStampUsageTitle"
         android:layout_width="wrap_content"
@@ -66,13 +77,14 @@
 
     <TextView
         android:id="@+id/txtStampUsage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:text="1. 음료 한 잔 당 한 개의 스탬프 어쩌고 저쩌고"
         android:textColor="@color/black"
         android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtStampUsageTitle" />
 
