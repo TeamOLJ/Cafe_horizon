@@ -125,9 +125,11 @@
 
             <Spinner
                 android:id="@+id/spinnerCoupon"
-                android:layout_width="296dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,9 +151,11 @@
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/groupEatOption"
-                android:layout_width="308dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
                 android:gravity="center"
                 app:checkedButton="@+id/btnForHere"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -198,9 +202,11 @@
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/groupPayOption"
-                android:layout_width="308dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
                 android:gravity="center"
                 app:checkedButton="@id/btnCreditCard"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -264,7 +270,7 @@
                 android:text="@string/desc_notice_text1"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textOrderNotice" />
 
             <TextView

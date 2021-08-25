@@ -2,6 +2,7 @@ package com.teamolj.cafehorizon
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamolj.cafehorizon.databinding.ActivityOrderedListBinding
 
 class OrderedListActivity : AppCompatActivity() {
@@ -23,5 +24,11 @@ class OrderedListActivity : AppCompatActivity() {
         topAppBar.setNavigationOnClickListener {
             finish()
         }
+
+
+        var adapter = OrderedListAdapter()
+//        adapter.orderedList = data;
+        binding.recyclerViewOrderedList.adapter = adapter
+        binding.recyclerViewOrderedList.layoutManager = LinearLayoutManager(this)
     }
 }

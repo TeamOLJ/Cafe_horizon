@@ -3,6 +3,8 @@
     package="com.teamolj.cafehorizon">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".App"
@@ -21,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChattingActivity"/>
+        <activity android:name=".chat.ChatActivity"/>
         <activity android:name=".coupon.CouponActivity" />
         <activity android:name=".stamp.StampActivity" />
         <activity android:name=".sign.SignupActivity" />

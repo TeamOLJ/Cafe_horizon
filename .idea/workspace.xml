@@ -5,27 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b45c5a6-3070-4e85-bb91-1accb7fa0d27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/ChattingActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_chatting.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/Order.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/chat/ChatRecyclerAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/chat/ChatRecyclerHolder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/chat/Message.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable-anydpi/btn_insert_photo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable-hdpi/btn_insert_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable-mdpi/btn_insert_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable-xhdpi/btn_insert_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable-xxhdpi/btn_insert_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/drawable/rounded_textview.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_chat_bubble_out.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_chat_photo_in.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_chat_photo_out.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/ChattingActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/chat/ChatActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/PayOrderActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/PayOrderActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/Coupon.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/Coupon.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderStateActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderStateActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderedListActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderedListActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderedListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/OrderedListAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/CouponRecyclerFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/HistoryRecyclerAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/coupon/HistoryRecyclerFragment.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_cafe_menu_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_cafe_menu_recycler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_coupon_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_coupon_recycler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_events_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_events_recycler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_history_recycler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_news_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/fragment_news_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_chatting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_chat.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_news_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_news_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_order_state.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_order_state.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_pay_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/activity_pay_order.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_cafe_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_cafe_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_history.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_events.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_events.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_filled_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_filled_cart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_news.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_ordered.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_ordered_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_ordered_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/view_chat_bubble_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/layout/recycler_item_chat_bubble_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CafeHorizon/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CafeHorizon/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

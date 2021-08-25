@@ -35,7 +35,7 @@ class CouponRecyclerAdapter(val category:Int) : RecyclerView.Adapter<CouponRecyc
         RecyclerView.ViewHolder(binding.root) {
 
         fun setCouponList(coupon: Coupon) {
-            binding.imageCouponState.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.colorAccent))
+            binding.textCouponState.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.colorAccent))
             binding.textCouponState.text = SimpleDateFormat("'D'-D").format(coupon.expiryDate-System.currentTimeMillis())
             binding.textCouponName.text = coupon.couponName
             binding.textCouponDate.text = SimpleDateFormat("사용기한 : yyyy-MM-dd hh:mm").format(coupon.expiryDate)

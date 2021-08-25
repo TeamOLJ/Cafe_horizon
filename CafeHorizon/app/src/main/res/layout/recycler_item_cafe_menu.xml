@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="wrap_content"
     android:paddingHorizontal="20dp"
     android:background="@drawable/recycler_item_border">
 
@@ -11,6 +11,8 @@
         android:id="@+id/imageCafeMenu"
         android:layout_width="@dimen/size_cafe_menu_image_in_recyclerview"
         android:layout_height="@dimen/size_cafe_menu_image_in_recyclerview"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

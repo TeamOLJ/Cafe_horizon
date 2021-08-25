@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.teamolj.cafehorizon.chat.ChatActivity
 import com.teamolj.cafehorizon.coupon.CouponActivity
 import com.teamolj.cafehorizon.databinding.ActivityMainBinding
 import com.teamolj.cafehorizon.newsAndEvents.NewsAndEventsActivity
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_chats -> {
                     binding.drawerLayout.close()
-                     val intent = Intent(this, ChattingActivity::class.java)
+                     val intent = Intent(this, ChatActivity::class.java)
                      startActivity(intent)
                     true
                 }
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity() {
          }
 
          binding.btnChatting.setOnClickListener {
-             val intent = Intent(this, ChattingActivity::class.java)
+             val intent = Intent(this, ChatActivity::class.java)
              startActivity(intent)
          }
 

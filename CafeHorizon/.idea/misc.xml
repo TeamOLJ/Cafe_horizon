@@ -5,10 +5,52 @@
       <map>
         <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable-anydpi/ic_plus.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable-anydpi/ic_send_chat.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable/img_indicator.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable/oval_primary_button.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable/round_button.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable/rounded_textview.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/drawable/shape_circle_gray.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_barcode.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_cafe_menu_detail.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_chat.xml" value="0.1" />
         <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_chatting.xml" value="0.264" />
         <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_coupon.xml" value="0.175" />
-        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" value="0.2552083333333333" />
-        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_chat_bubble_in.xml" value="0.1" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_empty_cart.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_events_detail.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_filled_cart.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_find_info.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_how_to.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_login.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_myinfo.xml" value="0.2" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_news_and_events.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_news_detail.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_notice.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_order_state.xml" value="0.264" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_ordered_list.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_pay_order.xml" value="0.264" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_smart_order.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/activity_unsub_done.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/fragment_cafe_menu_recycler.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/header_navigation_drawer.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_cafe_menu.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_chat_bubble_in.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_chat_bubble_out.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_chat_photo_in.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_chat_photo_out.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_coupon.xml" value="0.264" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_events.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_filled_cart.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_news.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_notice.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_ordered.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_ordered_list.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/recycler_item_stamp.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/tester_functions.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_cafe_menu_option.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_chat_bubble_in.xml" value="0.264" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_chat_bubble_out.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_list_item.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_main_button.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/wkdgp/Desktop/[Project]Cafe_horizon/CafeHorizon/app/src/main/res/layout/view_pay_order_item.xml" value="0.2552083333333333" />
       </map>
     </option>
