@@ -44,8 +44,7 @@ class UnsubscribeActivity : AppCompatActivity() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val unsubMsg = document.data?.get("warningText").toString().replace("\\\\n", "\n\n")
-
+                    val unsubMsg = document.data?.get("warningText").toString().replace("\\\\n", "\n")
                     binding.textUnsubscribeWarnings.text = unsubMsg
 
                 } else {

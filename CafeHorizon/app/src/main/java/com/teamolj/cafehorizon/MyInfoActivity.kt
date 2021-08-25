@@ -454,23 +454,23 @@ class MyInfoActivity : AppCompatActivity() {
 
         binding.itemTermMarketing.setOnClickListener {
             if (binding.itemTermMarketing.isSwitchChecked()) {
-                Toast.makeText(this, "마케팅 정보 수신 설정", Toast.LENGTH_SHORT).show()
-                // 마케팅 정보 수신 설정
+                Toast.makeText(this, getString(R.string.toast_marketing_agreed), Toast.LENGTH_SHORT).show()
+                db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreeMarketing", true)
             }
             else {
-                Toast.makeText(this, "마케팅 정보 수신 거부", Toast.LENGTH_SHORT).show()
-                // 마케팅 정보 수신 거부
+                Toast.makeText(this, getString(R.string.toast_marketing_disagreed), Toast.LENGTH_SHORT).show()
+                db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreeMarketing", false)
             }
         }
 
         binding.itemTermPushMsg.setOnClickListener {
             if (binding.itemTermPushMsg.isSwitchChecked()) {
-                Toast.makeText(this, "푸시메시지 허용", Toast.LENGTH_SHORT).show()
-                // 푸시메시지 허용
+                Toast.makeText(this, getString(R.string.toast_push_agreed), Toast.LENGTH_SHORT).show()
+                db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreePush", true)
             }
             else {
-                Toast.makeText(this, "푸시메시지 거부", Toast.LENGTH_SHORT).show()
-                // 푸시메시지 거부
+                Toast.makeText(this, getString(R.string.toast_push_disagreed), Toast.LENGTH_SHORT).show()
+                db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreePush", false)
             }
         }
 

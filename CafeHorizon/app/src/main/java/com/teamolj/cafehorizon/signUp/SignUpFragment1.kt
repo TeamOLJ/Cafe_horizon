@@ -16,6 +16,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.FragmentSignup1Binding
@@ -26,6 +28,7 @@ class SignUpFragment1 : Fragment() {
     private lateinit var binding: FragmentSignup1Binding
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
@@ -38,8 +41,37 @@ class SignUpFragment1 : Fragment() {
     ): View {
 
         auth = Firebase.auth
+        db = Firebase.firestore
 
         binding = FragmentSignup1Binding.inflate(inflater, container, false)
+
+        db.collection("Operational").document("SignUpTerms")
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val termService = document.data?.get("termService").toString().replace("\\\\n", "\n")
+                    val termPersonalInfo = document.data?.get("termPersonalInfo").toString().replace("\\\\n", "\n")
+                    val termMarketingMessage = document.data?.get("termMarketingMessage").toString().replace("\\\\n", "\n")
+                    val termPushMessage = document.data?.get("termPushMessage").toString().replace("\\\\n", "\n")
+
+                    binding.textTermService.text = termService
+                    binding.textTermPersonal.text = termPersonalInfo
+                    binding.textTermMarketing.text = termMarketingMessage
+                    binding.textPushMsg.text = termPushMessage
+
+                } else {
+                    binding.textTermService.text = getString(R.string.toast_error_occurred)
+                    binding.textTermPersonal.text = getString(R.string.toast_error_occurred)
+                    binding.textTermMarketing.text = getString(R.string.toast_error_occurred)
+                    binding.textPushMsg.text = getString(R.string.toast_error_occurred)
+                }
+            }
+            .addOnFailureListener {
+                binding.textTermService.text = getString(R.string.toast_error_occurred)
+                binding.textTermPersonal.text = getString(R.string.toast_error_occurred)
+                binding.textTermMarketing.text = getString(R.string.toast_error_occurred)
+                binding.textPushMsg.text = getString(R.string.toast_error_occurred)
+            }
 
         binding.checkAllTerm.setOnClickListener {
             if (binding.checkAllTerm.isChecked) {

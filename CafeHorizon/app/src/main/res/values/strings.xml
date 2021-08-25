@@ -108,6 +108,10 @@
     <string name="toast_birthday_changed">생일이 변경되었습니다.</string>
     <string name="toast_nickname_changed">닉네임이 변경되었습니다.</string>
     <string name="toast_backpress_close">\'뒤로\' 버튼을 한 번 더 누르시면 종료됩니다.</string>
+    <string name="toast_marketing_agreed">마케팅 정보를 수신을 허용하셨습니다.</string>
+    <string name="toast_marketing_disagreed">마케팅 정보를 수신을 거부하셨습니다.</string>
+    <string name="toast_push_agreed">푸시 메시지 수신을 허용하셨습니다.</string>
+    <string name="toast_push_disagreed">푸시메시지 수신을 거부하셨습니다.</string>
 
     <string name="id_requirement">4~10자의 영문자/숫자</string>
     <string name="nickname_requirement">2~7자의 한글</string>
