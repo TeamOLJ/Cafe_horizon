@@ -173,7 +173,6 @@ class FindIdFragment : Fragment() {
                         binding.editPhoneNum.setText("")
                         binding.editConfirmCode.setText("")
 
-                        binding.btnFindID.isClickable = true
                         mCountDown.onFinish()
                     }
                 } else {
@@ -210,6 +209,7 @@ class FindIdFragment : Fragment() {
             binding.btnSendConfirm.isClickable = true
             binding.btnSendConfirm.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
 
+            binding.btnFindID.isClickable = true
             binding.btnFindID.isEnabled = false
         }
     }
