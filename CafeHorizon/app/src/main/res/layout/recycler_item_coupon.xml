@@ -3,30 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="84dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recycler_item_border"
     android:paddingHorizontal="20dp">
 
+    <TextView
+        android:id="@+id/textCouponState"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rounded_textview"
+        android:backgroundTint="@color/gray"
+        android:gravity="center"
+        android:text="사용상태"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textCouponName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:text="쿠폰 이름"
         android:textSize="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textCouponExpiryDate"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textCouponDate"
+        app:layout_constraintStart_toEndOf="@id/textCouponState"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textCouponExpiryDate"
+        android:id="@+id/textCouponDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sample_date"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textCouponName"
         app:layout_constraintTop_toBottomOf="@+id/textCouponName" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,15 +20,23 @@ class CouponActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val topAppBar = binding.toolbar
+        topAppBar.setNavigationIcon(R.drawable.btn_back)
+        topAppBar.setBackgroundColor(255)
+
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
         viewPager = binding.viewPager
         viewPager.offscreenPageLimit = ITEMS_NUM
         viewPager.adapter = CouponAdapter(this)
 
-        val tabLaout = binding.tabLayout
-        TabLayoutMediator(tabLaout, viewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = getString(R.string.title_coupon_list)
-                1 -> tab.text = getString(R.string.title_coupon_history)
+         val tabLayout = binding.tabLayout
+                TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                    when (position) {
+                        0 -> tab.text = getString(R.string.title_coupon_list)
+                        1 ->tab.text = getString(R.string.title_coupon_history)
             }
         }.attach()
     }
@@ -37,11 +45,7 @@ class CouponActivity : AppCompatActivity() {
         override fun getItemCount(): Int = ITEMS_NUM
 
         override fun createFragment(position: Int): Fragment {
-            if (position == 0) {
-                return CouponRecyclerFragment()
-            } else {
-                return HistoryRecyclerFragment()
-            }
+            return CouponRecyclerFragment(position)
         }
     }
 }

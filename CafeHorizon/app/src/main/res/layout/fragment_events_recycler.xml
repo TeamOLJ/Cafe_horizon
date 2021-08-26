@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="24dp"
-    tools:context=".newsAndEvents.EventsRecyclerFragment">
+    tools:context=".newsAndEvents.EventsRecyclerFragment"
+    tools:listitem="@layout/recycler_item_events">
 
 
 </androidx.recyclerview.widget.RecyclerView>

@@ -45,99 +45,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-        <ImageView
-            android:id="@+id/imageWaitingOrder"
-            android:layout_width="@dimen/size_order_state_imageview"
-            android:layout_height="@dimen/size_order_state_imageview"
-            android:background="@drawable/img_indicator"
+        <TextView
+            android:id="@+id/textWaitingOrder"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/rounded_textview"
             android:backgroundTint="@color/lightgray"
+            android:gravity="center"
+            android:text="@string/text_order_standby"
+            android:textColor="@color/black"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textReceiveOrder"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textWaitingOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_order_standby"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/imageWaitingOrder"
-            app:layout_constraintEnd_toEndOf="@id/imageWaitingOrder"
-            app:layout_constraintStart_toStartOf="@id/imageWaitingOrder"
-            app:layout_constraintTop_toTopOf="@id/imageWaitingOrder" />
-
-        <ImageView
-            android:id="@+id/imageReceiveOrder"
-            android:layout_width="@dimen/size_order_state_imageview"
-            android:layout_height="@dimen/size_order_state_imageview"
-            android:background="@drawable/img_indicator"
-            android:backgroundTint="@color/lightgray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageWaitingPickup"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageWaitingOrder"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/textReceiveOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_order_receipt"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/imageReceiveOrder"
-            app:layout_constraintEnd_toEndOf="@id/imageReceiveOrder"
-            app:layout_constraintStart_toStartOf="@id/imageReceiveOrder"
-            app:layout_constraintTop_toTopOf="@id/imageReceiveOrder" />
-
-        <ImageView
-            android:id="@+id/imageWaitingPickup"
-            android:layout_width="@dimen/size_order_state_imageview"
-            android:layout_height="@dimen/size_order_state_imageview"
-            android:background="@drawable/img_indicator"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/rounded_textview"
             android:backgroundTint="@color/lightgray"
+            android:gravity="center"
+            android:text="@string/text_order_receipt"
+            android:textColor="@color/black"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageFinishPickup"
+            app:layout_constraintEnd_toStartOf="@+id/textWaitingPickup"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageReceiveOrder"
+            app:layout_constraintStart_toEndOf="@+id/textWaitingOrder"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/textWaitingPickup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_pickup_wait"
-            android:textSize="14dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/imageWaitingPickup"
-            app:layout_constraintEnd_toEndOf="@id/imageWaitingPickup"
-            app:layout_constraintStart_toStartOf="@id/imageWaitingPickup"
-            app:layout_constraintTop_toTopOf="@id/imageWaitingPickup" />
-
-        <ImageView
-            android:id="@+id/imageFinishPickup"
-            android:layout_width="@dimen/size_order_state_imageview"
-            android:layout_height="@dimen/size_order_state_imageview"
-            android:background="@drawable/img_indicator"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/rounded_textview"
             android:backgroundTint="@color/lightgray"
+            android:gravity="center"
+            android:text="@string/text_pickup_wait"
+            android:textColor="@color/black"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textFinishPickup"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textReceiveOrder"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textFinishPickup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/rounded_textview"
+            android:backgroundTint="@color/lightgray"
+            android:gravity="center"
             android:text="@string/text_pickup_finish"
-            android:textSize="14dp"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/imageFinishPickup"
-            app:layout_constraintEnd_toEndOf="@id/imageFinishPickup"
-            app:layout_constraintStart_toStartOf="@id/imageFinishPickup"
-            app:layout_constraintTop_toTopOf="@id/imageFinishPickup" />
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textWaitingPickup"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

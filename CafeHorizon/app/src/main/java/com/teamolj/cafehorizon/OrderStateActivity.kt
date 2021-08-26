@@ -27,7 +27,7 @@ class OrderStateActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.imageWaitingOrder.backgroundTintList =
+        binding.textWaitingOrder.backgroundTintList =
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccent))
         binding.textStateDesc.text = getString(R.string.desc_waiting_order)
 
