@@ -1,7 +1,4 @@
 CafeHorizon/app/google-services.json
 CafeHorizon/app/src/main/res/values/sensitive.xml
-CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/smartOrder/AppDatabase.kt
-CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/smartOrder/Cart.kt
-CafeHorizon/app/src/main/java/com/teamolj/cafehorizon/smartOrder/CartDao.kt
 .idea/workspace.xml
 CafeHorizon/.idea/gradle.xml
