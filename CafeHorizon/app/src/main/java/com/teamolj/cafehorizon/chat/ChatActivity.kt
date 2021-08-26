@@ -21,32 +21,50 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityChatBinding
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
-    private val PERMISSION_REQUEST_CODE: Int = 1000
 
-    private var enable: Boolean = true;
+    //Firebase Auth
+    private lateinit var auth: FirebaseAuth
     private lateinit var userName: String
 
-    private lateinit var chatAdapter: ChatRecyclerAdapter
-    private val messageList = mutableListOf<Message>()
-
-    private lateinit var auth: FirebaseAuth
+    //Firebase Database
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     private var childEventListener: ChildEventListener? = null
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode== RESULT_OK) {
-                val uri = result.data!!.data
+    //Firebase Storage
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageReference: StorageReference
 
-            }
+    private lateinit var chatAdapter: ChatRecyclerAdapter
+    private val messageList = mutableListOf<Message>()
+
+    private var enable: Boolean = true;
+
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val uri: Uri? = result.data?.data ?: GetImageFunc.realUri
+            val message = Message(userName, System.currentTimeMillis(), null, uri.toString(), false)
+
+            storageReference.child(auth.uid.toString())
+                .putFile(uri!!)
+                .addOnSuccessListener { taskSnapshot -> {
+
+                } }
+
+            chatAdapter.addNewData(message)
+            databaseReference.push().setValue(message)
         }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +80,18 @@ class ChatActivity : AppCompatActivity() {
         }
 
         auth = FirebaseAuth.getInstance()
+        userName = auth.currentUser!!.displayName.toString()
+
         database =
             FirebaseDatabase.getInstance("https://cafehorizon-cd14d-default-rtdb.asia-southeast1.firebasedatabase.app/")
         databaseReference = database.reference.child(auth.currentUser!!.uid)
         attachDatabaseReadListener()
 
-        userName = auth.currentUser!!.displayName.toString()
-        Log.d("TAG", "user nickname : $userName")
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage.getReference().child("chat_photos")
+
+
+        GetImageFunc.getInstance(this)
 
         // Initialize recycler Adapter
         chatAdapter = ChatRecyclerAdapter(userName)
@@ -78,6 +101,7 @@ class ChatActivity : AppCompatActivity() {
 
 
         if (enable) {
+            //영업시간 X
             binding.editTextChat.keyListener = null
             binding.editTextChat.setText(R.string.text_chatting_not_enable)
             binding.editTextChat.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -90,9 +114,13 @@ class ChatActivity : AppCompatActivity() {
             binding.btnSendChat.isEnabled = false
 
         } else {
+            // 영업시간 O
             binding.btnPhotoPicker.setOnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    checkPermissions()
+                    GetImageFunc.requirePermissions()
+                } else {
+                    // 버전이 낮은 경우 권한 확인하지 않음.
+                    pickImageLauncher.launch(GetImageFunc.getPickIntent())
                 }
             }
 
@@ -131,7 +159,7 @@ class ChatActivity : AppCompatActivity() {
                 ) {
                     val newMessage: Message = snapshot.getValue(Message::class.java)!!
                     chatAdapter.addNewData(newMessage)
-//                    chatAdapter.notifyDataSetChanged()
+                    chatAdapter.notifyDataSetChanged()
                 }
 
                 override fun onChildChanged(
@@ -162,39 +190,32 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(
-                applicationContext,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
-        }
+    private fun showToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when(requestCode) {
-            PERMISSION_REQUEST_CODE -> {
+        when (requestCode) {
+            GetImageFunc.PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isEmpty()) {
                     throw RuntimeException("Empty permission result")
                 }
-                if (grantResults[0]==PackageManager.PERMISSION_GRANTED) {
-                    // 권한 허락됨
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    pickImageLauncher.launch(GetImageFunc.getPickIntent())
                 } else {
-                    // 권한 허락되지 않음
-                    if(shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        // 권한 거절. 대신 다시 물어봐도 됨.
-                        Toast.makeText(this, "권한이 거절되었습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
-                        //다신 물어보지 않기
-//                        showDialogToGetPermission()
+                    // 권한 거부
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        showToast("권한이 거부되었습니다. 권한을 허용해야 사용할 수 있습니다.")
+                    } else {
+                        // +다신 물어보지 않기
+                        GetImageFunc.showDialogToGetPermission()
                     }
                 }
             }

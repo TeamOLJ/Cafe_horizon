@@ -162,9 +162,11 @@
 
     <string name="text_chatting_not_enable">현재 채팅이 불가합니다.</string>
 
-    <string name="text_permission_request">저장공간에 대한 권한 사용을 거부하였습니다. 기능 사용을 원하실 경우 휴대폰설정 > 애플리케이션 관리자에서 해당 앱의 권한을 허용해주세요.</string>
+    <string name="text_permission_request">권한 사용을 거부하였습니다. 기능 사용을 원하실 경우 휴대폰설정 > 애플리케이션 관리자에서 해당 앱의 권한을 허용해주세요.</string>
     <string name="btn_positive_permission_request">설정하러 가기</string>
     <string name="btn_negative_permission_request">닫기</string>
+
+    <string name="text_select_image">사진 선택</string>
 
     <string-array name="array_cafe_menu">
         <item>신메뉴</item>
