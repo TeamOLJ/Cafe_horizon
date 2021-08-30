@@ -15,6 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.teamolj.cafehorizon.databinding.ActivityLoginBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
 import com.teamolj.cafehorizon.signUp.SignUpActivity
@@ -109,6 +110,9 @@ class LoginActivity : AppCompatActivity() {
 
                                         App.prefs.setBoolean("userAgreeMarketing", document.getBoolean("agreeMarketing")!!)
                                         App.prefs.setBoolean("userAgreePush", document.getBoolean("agreePush")!!)
+
+                                        if (document.getBoolean("agreePush")!!)
+                                            FirebaseMessaging.getInstance().token
 
                                         val intent = Intent(this, MainActivity::class.java)
                                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

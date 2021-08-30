@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.teamolj.cafehorizon.App
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.FragmentSignup2Binding
@@ -237,6 +238,10 @@ class SignUpFragment2 : Fragment() {
 
                                     App.prefs.setBoolean("userAgreeMarketing", termPair.first)
                                     App.prefs.setBoolean("userAgreePush", termPair.second)
+
+                                    // 푸시메시지에 동의한 경우 토큰 생성
+                                    if (termPair.second)
+                                        FirebaseMessaging.getInstance().token
 
                                     // 다음 화면으로 전환
                                     binding.progressBar.visibility = View.GONE

@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.teamolj.cafehorizon.databinding.ActivityMyinfoBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
 import java.text.SimpleDateFormat
@@ -456,10 +457,13 @@ class MyInfoActivity : AppCompatActivity() {
             if (binding.itemTermMarketing.isSwitchChecked()) {
                 Toast.makeText(this, getString(R.string.toast_marketing_agreed), Toast.LENGTH_SHORT).show()
                 db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreeMarketing", true)
+                App.prefs.setBoolean("userAgreeMarketing", true)
+                FirebaseMessaging.getInstance().token
             }
             else {
                 Toast.makeText(this, getString(R.string.toast_marketing_disagreed), Toast.LENGTH_SHORT).show()
                 db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreeMarketing", false)
+                App.prefs.setBoolean("userAgreeMarketing", false)
             }
         }
 
@@ -467,10 +471,13 @@ class MyInfoActivity : AppCompatActivity() {
             if (binding.itemTermPushMsg.isSwitchChecked()) {
                 Toast.makeText(this, getString(R.string.toast_push_agreed), Toast.LENGTH_SHORT).show()
                 db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreePush", true)
+                App.prefs.setBoolean("userAgreePush", true)
+                FirebaseMessaging.getInstance().token
             }
             else {
                 Toast.makeText(this, getString(R.string.toast_push_disagreed), Toast.LENGTH_SHORT).show()
                 db.collection("UserInformation").document(auth.currentUser!!.uid).update("agreePush", false)
+                App.prefs.setBoolean("userAgreePush", false)
             }
         }
 
