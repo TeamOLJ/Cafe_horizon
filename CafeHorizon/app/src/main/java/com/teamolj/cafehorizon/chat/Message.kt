@@ -9,7 +9,9 @@ data class Message(
     var photoUrl:String?,
     var readState:Boolean
 ){
-    fun getTime():String {
+    constructor() : this("", 0, null, null, false) {}
+
+    fun timeToString():String {
         return SimpleDateFormat("HH:mm").format(time)
     }
 
