@@ -151,8 +151,8 @@ class FindIdFragment : Fragment() {
                     mCountDown.cancel()
                     binding.progressBar.visibility = View.GONE
 
-                    // 1. 아이디 확인... 아이디가 존재하는 경우, 다음 단계로
-                    if (!auth.currentUser!!.email.isNullOrEmpty()) {
+                    // 1. 아이디 확인... 아이디가 존재하는 경우(아이디로 가입한 경우),
+                    if (auth.currentUser!!.displayName == "PreMember") {
                         binding.layoutFindIdUserInput.visibility = View.GONE
                         binding.layoutFoundUserID.visibility = View.VISIBLE
                         binding.textFoundUserID.text = auth.currentUser!!.email!!.split("@")[0]
@@ -164,7 +164,23 @@ class FindIdFragment : Fragment() {
 
                         auth.signOut()
                     }
-                    // 2. 존재하지 않는 경우, 다이얼로그 띄우고 입력값 모두 초기화시키기
+                    // 2. 소셜 로그인으로 가입한 경우,
+                    if (auth.currentUser!!.displayName == "SocialMember") {
+                        binding.layoutFindIdUserInput.visibility = View.GONE
+                        binding.layoutFoundUserID.visibility = View.VISIBLE
+
+                        binding.textFindID1.text = "소셜 로그인으로"
+                        binding.textFindID2.text = "가입하셨습니다."
+                        binding.textFoundUserID.visibility = View.GONE
+                        binding.btnFindID.text = getText(R.string.btn_go_login)
+
+                        binding.btnFindID.setOnClickListener {
+                            activity?.finish()
+                        }
+
+                        auth.signOut()
+                    }
+                    // 3. 존재하지 않는 경우, 다이얼로그 띄우고 입력값 모두 초기화시키기
                     else {
                         noUserInfoMsg()
 

@@ -297,7 +297,7 @@ class SignUpFragment1 : Fragment() {
                     binding.progressBar.visibility = View.GONE
 
                     // 이미 가입되어 있는 전화번호인지 먼저 확인
-                    if (!auth.currentUser!!.email.isNullOrEmpty()) {
+                    if (!auth.currentUser!!.displayName.isNullOrEmpty()) {
                         // 이미 존재하는 경우, 해당 번호 로그인 상태 먼저 해제
                         auth.signOut()
                         binding.editPhoneNum.setText("")

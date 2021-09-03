@@ -93,14 +93,14 @@ class UnsubscribeActivity : AppCompatActivity() {
                         if(reauthTask.isSuccessful){
                             binding.progressBar.visibility = View.VISIBLE
 
-                            // 회원탈퇴
-                            user.delete()
+                            // DB 문서 삭제 먼저 (rule 때문)
+                            db.collection("UserInformation").document(userUID).delete()
                                 .addOnCompleteListener { unsubTask ->
                                     binding.progressBar.visibility = View.GONE
 
                                     if (unsubTask.isSuccessful) {
-                                        // DB 문서 삭제
-                                        db.collection("UserInformation").document(userUID).delete()
+                                        // 회원탈퇴
+                                        user.delete()
 
                                         App.prefs.clear()
 

@@ -10,6 +10,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +23,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.teamolj.cafehorizon.databinding.ActivityLoginBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
 import com.teamolj.cafehorizon.signUp.SignUpActivity
+import com.teamolj.cafehorizon.signUp.SignUpSocialActivity
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -28,6 +34,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
+    private lateinit var facebookCallbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,49 +93,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val userUID = auth.currentUser!!.uid
-                            val userPhone = auth.currentUser!!.phoneNumber
-
-                            val docRef = db.collection("UserInformation").document(userUID)
-                            docRef.get()
-                                .addOnSuccessListener { document ->
-                                    if (document.exists()) {
-                                        App.prefs.setString("userID", userId)
-                                        App.prefs.setString("userNick", document.data?.get("userNick").toString())
-                                        App.prefs.setString("userBarcode", document.data?.get("userBarcode").toString())
-
-                                        if (document.getTimestamp("userBday") != null)
-                                            App.prefs.setDateAsString("userBday", document.getTimestamp("userBday")!!.toDate())
-                                        else
-                                            App.prefs.setDateAsString("userBday", null)
-
-                                        if (document.getTimestamp("lastBdayModified") != null)
-                                            App.prefs.setDateAsString("lastBdayMod", document.getTimestamp("lastBdayModified")!!.toDate())
-                                        else
-                                            App.prefs.setDateAsString("lastBdayMod", null)
-
-                                        App.prefs.setString("userPhone", "0${userPhone!!.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
-
-                                        App.prefs.setBoolean("userAgreeMarketing", document.getBoolean("agreeMarketing")!!)
-                                        App.prefs.setBoolean("userAgreePush", document.getBoolean("agreePush")!!)
-
-                                        if (document.getBoolean("agreePush")!!)
-                                            FirebaseMessaging.getInstance().token
-
-                                        val intent = Intent(this, MainActivity::class.java)
-                                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        startActivity(intent)
-                                    } else {
-                                        Firebase.auth.signOut()
-                                        Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-                                        binding.btnLogin.isClickable = true
-                                    }
-                                }
-                                .addOnFailureListener { exception ->
-                                    Firebase.auth.signOut()
-                                    Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-                                    binding.btnLogin.isClickable = true
-                                }
+                            fetchUserInformation()
                         } else {
                             Toast.makeText(this, getString(R.string.toast_failed_verification), Toast.LENGTH_SHORT).show()
                             binding.btnLogin.isClickable = true
@@ -148,10 +114,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnKakaoLogin.setOnClickListener(loginWithKakao)
         binding.btnNaverLogin.setOnClickListener(loginWithNaver)
+
+        // 소셜 로그인3: 페이스북
+        facebookCallbackManager = CallbackManager.Factory.create()
         binding.btnFacebookLogin.setOnClickListener(loginWithFacebook)
     }
 
-    // 각 로그인 성공 시 sharedPreferences에 로그인 타입 저장 필요: 추후 로그아웃 처리를 위함
     private val loginWithKakao = View.OnClickListener {
         // TODO
     }
@@ -161,7 +129,129 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val loginWithFacebook = View.OnClickListener {
-        // TODO
+        binding.btnFacebookLogin.isClickable = false
+        binding.progressBar.visibility = View.VISIBLE
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_birthday"))
+        LoginManager.getInstance().registerCallback(facebookCallbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                // 회원 생일 확인 (API에서 user_birthday 항목을 승인 받았다고 가정하는 상태로 작성한 코드)
+                var fbUserBday: String?
+                val fbRequest = GraphRequest.newMeRequest(result.accessToken) { json, response ->
+                    fbUserBday = if (response?.error != null)
+                        null
+                    else
+                        json?.opt("birthday").toString()
+
+                    handleFacebookAccessToken(result.accessToken, fbUserBday)
+                }
+                val parameters = Bundle()
+                parameters.putString("fields", "birthday")
+                fbRequest.parameters = parameters
+                fbRequest.executeAsync()
+            }
+
+            override fun onCancel() {
+                LoginManager.getInstance().logOut()
+                binding.btnFacebookLogin.isClickable = true
+                binding.progressBar.visibility = View.GONE
+            }
+
+            override fun onError(error: FacebookException?) {
+                LoginManager.getInstance().logOut()
+                Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                binding.btnFacebookLogin.isClickable = true
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+    }
+
+    private fun fetchUserInformation() {
+        val userUID = auth.currentUser!!.uid
+        val userPhone = auth.currentUser!!.phoneNumber
+
+        val docRef = db.collection("UserInformation").document(userUID)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    App.prefs.setString("userID", document.data?.get("userID").toString())
+                    App.prefs.setString("userNick", document.data?.get("userNick").toString())
+                    App.prefs.setString("userBarcode", document.data?.get("userBarcode").toString())
+
+                    if (document.getTimestamp("userBday") != null)
+                        App.prefs.setDateAsString("userBday", document.getTimestamp("userBday")!!.toDate())
+                    else
+                        App.prefs.setDateAsString("userBday", null)
+
+                    if (document.getTimestamp("lastBdayModified") != null)
+                        App.prefs.setDateAsString("lastBdayMod", document.getTimestamp("lastBdayModified")!!.toDate())
+                    else
+                        App.prefs.setDateAsString("lastBdayMod", null)
+
+                    App.prefs.setString("userPhone", "0${userPhone!!.substring(3,5)}-${userPhone.substring(5,9)}-${userPhone.substring(9)}")
+
+                    App.prefs.setBoolean("userAgreeMarketing", document.getBoolean("agreeMarketing")!!)
+                    App.prefs.setBoolean("userAgreePush", document.getBoolean("agreePush")!!)
+
+                    if (document.getBoolean("agreeMarketing")!! || document.getBoolean("agreePush")!!)
+                        FirebaseMessaging.getInstance().token
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                } else {
+                    Firebase.auth.signOut()
+                    LoginManager.getInstance().logOut()
+                    Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                    binding.btnLogin.isClickable = true
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener { exception ->
+                Firebase.auth.signOut()
+                LoginManager.getInstance().logOut()
+                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                binding.btnLogin.isClickable = true
+                binding.progressBar.visibility = View.GONE
+            }
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken, fbUserBday: String?) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // 기존 유저인지 신규(또는 페이스북 신규 연동) 유저인지 확인
+                    if (!auth.currentUser!!.phoneNumber.isNullOrEmpty()) {
+                        // 로그인 절차 수행
+                        fetchUserInformation()
+                    }
+                    else {
+                        // 페이스북 단독 계정 삭제
+                        auth.currentUser!!.delete()
+
+                        // SignUpSocialActivity에 credential 전달: 전화번호 로그인 후 계정 링크 위함
+                        val intent = Intent(this, SignUpSocialActivity::class.java)
+                        intent.putExtra("authProvider", "Facebook")
+                        intent.putExtra("facebookToken", token.token)
+                        intent.putExtra("facebookUserBday", fbUserBday)
+                        startActivity(intent)
+                    }
+                } else {
+                    LoginManager.getInstance().logOut()
+                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                    binding.btnFacebookLogin.isClickable = true
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Pass the activity result back to the Facebook SDK
+        facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun closeKeyboard() {

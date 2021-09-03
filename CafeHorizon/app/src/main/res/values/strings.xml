@@ -17,6 +17,7 @@
     <string name="find_user_info">아이디/비밀번호 찾기</string>
     <string name="sign_up">회원가입</string>
     <string name="social_login">─ 소셜 로그인 ─</string>
+    <string name="additional_info">추가 정보</string>
 
     <string name="tab_find_id">아이디 찾기</string>
     <string name="tab_find_pwd">비밀번호 찾기</string>
@@ -29,6 +30,7 @@
     <string name="send_confirm">인증번호 받기</string>
     <string name="check_confirm">인증하기</string>
     <string name="self_confirmation">본인 인증</string>
+    <string name="check_confirm_and_signup">인증 및 로그인하기</string>
 
     <string name="new_nickname">변경할 닉네임 (한글 2~7자)</string>
     <string name="btn_change_nickname">변경하기</string>

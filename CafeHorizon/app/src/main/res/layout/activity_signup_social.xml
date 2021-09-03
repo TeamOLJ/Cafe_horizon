@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".signUp.SignUpActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="1dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeNoActionBar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/main_logo"
+                app:tint="@color/colorPrimary"
+                android:contentDescription="@string/desc_app_logo" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/txtSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/additional_info"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSignUp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".signUp.SignUpFragment1">
+
+            <CheckBox
+                android:id="@+id/checkAllTerm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="12dp"
+                android:text="@string/option_agreeall"
+                android:textSize="16dp"
+                android:fontFamily="@font/bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal"
+                android:elevation="1dp" >
+
+                <CheckBox
+                    android:id="@+id/checkTermService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_service"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/option_must"
+                    android:textColor="@color/textRed"
+                    android:textSize="14dp" />
+
+                <ImageButton
+                    android:id="@+id/btnTermService"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_slidedown"
+                    android:tag="not_open" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textTermService"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/lightgray"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:elevation="1dp" >
+
+                <CheckBox
+                    android:id="@+id/checkTermPersonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_personal"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/option_must"
+                    android:textColor="@color/textRed"
+                    android:textSize="14dp" />
+
+                <ImageButton
+                    android:id="@+id/btnTermPersonal"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_slidedown"
+                    android:tag="not_open" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textTermPersonal"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/lightgray"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:elevation="1dp" >
+
+                <CheckBox
+                    android:id="@+id/checkTermMarketing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_marketing"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/option_optional"
+                    android:textColor="@color/gray"
+                    android:textSize="14dp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnTermMarketing"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_slidedown"
+                    android:tag="not_open" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textTermMarketing"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/lightgray"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:elevation="1dp" >
+
+                <CheckBox
+                    android:id="@+id/checkPushMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_push_msg"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/option_optional"
+                    android:textColor="@color/gray"
+                    android:textSize="14dp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnPushMsg"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_slidedown"
+                    android:tag="not_open" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textPushMsg"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/lightgray"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvConfirmUser"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
+                android:paddingHorizontal="8dp"
+                android:gravity="center_vertical"
+                android:background="@color/semigray"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:text="@string/self_confirmation" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutConfirmUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:visibility="gone" >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textFieldPhoneNum"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginHorizontal="8dp"
+                    app:placeholderText="@string/user_phone"
+                    app:expandedHintEnabled="false"
+                    app:hintEnabled="false"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnSendConfirm"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editPhoneNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="14dp"
+                        android:textSize="14dp"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnSendConfirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/gray"
+                    android:insetTop="1dp"
+                    android:insetBottom="1dp"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/send_confirm"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textFieldPhoneNum"
+                    app:layout_constraintTop_toTopOf="@+id/textFieldPhoneNum" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textFieldConfirmCode"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:expandedHintEnabled="false"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textFieldPhoneNum"
+                    app:placeholderText="@string/confirm_code">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editConfirmCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:paddingVertical="14dp"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="16dp"
+                    android:enabled="false"
+                    android:paddingVertical="12dp"
+                    android:text="@string/check_confirm_and_signup"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    app:cornerRadius="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textFieldConfirmCode" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/custom_progressbar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="gone" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

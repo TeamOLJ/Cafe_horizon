@@ -15,6 +15,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -199,7 +200,7 @@ class SignUpFragment2 : Fragment() {
                 val userBday : Timestamp?
 
                 if (year.isNotEmpty() && month.isNotEmpty() && date.isNotEmpty()) {
-                    userBdayString = "$year-$month-$date"
+                    userBdayString = "$year/$month/$date"
                     userBday = Timestamp(Date(SimpleDateFormat("yyyy/MM/dd").parse(userBdayString).time))
                 } else {
                     userBdayString = ""
@@ -213,6 +214,9 @@ class SignUpFragment2 : Fragment() {
                     .addOnCompleteListener { task ->
                         // 가입 처리에 성공한 경우
                         if (task.isSuccessful) {
+                            // 추후 계정 연동 처리를 위한 키값 설정: 아이디 가입 유저 PreMember
+                            auth.currentUser!!.updateProfile(userProfileChangeRequest { displayName = "PreMember" })
+
                             // 사용자 정보를 DB에 문서화
                             val userData = hashMapOf(
                                 "userID" to ID,
@@ -240,7 +244,7 @@ class SignUpFragment2 : Fragment() {
                                     App.prefs.setBoolean("userAgreePush", termPair.second)
 
                                     // 푸시메시지에 동의한 경우 토큰 생성
-                                    if (termPair.second)
+                                    if (termPair.first || termPair.second)
                                         FirebaseMessaging.getInstance().token
 
                                     // 다음 화면으로 전환
