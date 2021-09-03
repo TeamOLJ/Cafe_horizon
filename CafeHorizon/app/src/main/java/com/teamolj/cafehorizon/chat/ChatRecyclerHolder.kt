@@ -37,6 +37,12 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
                 .load(message.photoUrl)
                 .into(binding.imageChat)
 
+            binding.imageChat.setOnClickListener {
+                val intent = Intent(binding.root.context, ImageDetailActivity::class.java)
+                intent.putExtra("photoUrl", message.photoUrl)
+                binding.root.context.startActivity(intent)
+            }
+
             binding.textSendTime.text = message.timeToString()
             binding.textReadState.text = message.getReadStateAsString()
         }
@@ -48,6 +54,12 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
             Glide.with(binding.root)
                 .load(message.photoUrl)
                 .into(binding.imageChat)
+
+            binding.imageChat.setOnClickListener {
+                val intent = Intent(binding.root.context, ImageDetailActivity::class.java)
+                intent.putExtra("photoUrl", message.photoUrl)
+                binding.root.context.startActivity(intent)
+            }
 
             binding.textSendTime.text = message.timeToString()
             binding.textReadState.text = message.getReadStateAsString()
