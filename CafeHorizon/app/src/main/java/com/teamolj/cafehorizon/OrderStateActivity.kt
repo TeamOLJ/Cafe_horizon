@@ -3,6 +3,7 @@ package com.teamolj.cafehorizon
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.teamolj.cafehorizon.databinding.ActivityOrderStateBinding
 import java.text.SimpleDateFormat
@@ -25,6 +26,12 @@ class OrderStateActivity : AppCompatActivity() {
 
         topAppBar.setNavigationOnClickListener {
             finish()
+        }
+
+        when(intent.getStringExtra("from")) {
+            "OrderedListActivity" -> {
+                Toast.makeText(this, "OrderedListActivity", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.textWaitingOrder.backgroundTintList =
