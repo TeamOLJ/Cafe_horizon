@@ -12,6 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -99,6 +100,10 @@ class UnsubscribeActivity : AppCompatActivity() {
                                     binding.progressBar.visibility = View.GONE
 
                                     if (unsubTask.isSuccessful) {
+                                        // uid 기재: 이후 서버에서 subcollection 삭제 처리 위함
+                                        db.collection("Operational").document("RemovedUsers")
+                                            .update("uids", FieldValue.arrayUnion(userUID))
+
                                         // 회원탈퇴
                                         user.delete()
 
