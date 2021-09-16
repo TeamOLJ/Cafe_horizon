@@ -9,19 +9,21 @@ data class Order(
     var orderTitle: String = "",
     var orderTime: Date = Date(),
     var state: String = "",
-    var orderMenu: MutableList<Cart> = mutableListOf()):Parcelable {
-
+    var couponPath: String = "",
+    var orderMenu: MutableList<Cart> = mutableListOf()
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readDate()!!,
-        parcel.readString()!!,
+        parcel.readString().toString(),
+        parcel.readDate(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
         mutableListOf<Cart>().apply {
             parcel.readList(this, Cart::class.java.classLoader)
         }
     ) {
     }
 
-    fun isPickedUp(): Boolean {
+    fun isPickedup(): Boolean {
         return when (state) {
             "픽업완료" -> true
             else -> false
@@ -30,8 +32,10 @@ data class Order(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(orderTitle)
-        parcel.writeSerializable(orderTime)
+        parcel.writeLong(orderTime.time)
         parcel.writeString(state)
+        parcel.writeString(couponPath)
+        parcel.writeList(orderMenu)
     }
 
     override fun describeContents(): Int {
@@ -47,9 +51,10 @@ data class Order(
             return arrayOfNulls(size)
         }
 
-        fun Parcel.readDate(): Date? {
+        fun Parcel.readDate(): Date {
             val long = readLong()
-            return if (long != -1L) Date(long) else null
+            return Date(long)
         }
     }
+
 }

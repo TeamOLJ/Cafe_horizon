@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <TextView
-            android:id="@+id/textWaitingOrder"
+            android:id="@+id/textOrderStandby"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/rounded_textview"
@@ -56,13 +56,13 @@
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textReceiveOrder"
+            app:layout_constraintEnd_toStartOf="@+id/textOrderReceipt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textReceiveOrder"
+            android:id="@+id/textOrderReceipt"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/rounded_textview"
@@ -72,14 +72,14 @@
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textWaitingPickup"
+            app:layout_constraintEnd_toStartOf="@+id/textPickupWait"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textWaitingOrder"
+            app:layout_constraintStart_toEndOf="@+id/textOrderStandby"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/textWaitingPickup"
+            android:id="@+id/textPickupWait"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/rounded_textview"
@@ -89,13 +89,13 @@
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textFinishPickup"
+            app:layout_constraintEnd_toStartOf="@+id/textPickupFinish"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textReceiveOrder"
+            app:layout_constraintStart_toEndOf="@+id/textOrderReceipt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textFinishPickup"
+            android:id="@+id/textPickupFinish"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:background="@drawable/rounded_textview"
@@ -107,7 +107,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textWaitingPickup"
+            app:layout_constraintStart_toEndOf="@+id/textPickupWait"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -118,6 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:gravity="center"
         android:text="주문 상태 메시지"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingVertical="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

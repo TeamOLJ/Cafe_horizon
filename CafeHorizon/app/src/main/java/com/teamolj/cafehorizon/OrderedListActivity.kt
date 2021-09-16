@@ -39,24 +39,29 @@ class OrderedListActivity : AppCompatActivity() {
         val orderedList = mutableListOf<Order>()
 
         docRef.get().addOnSuccessListener { documents ->
-            for(document in documents) {
-                val inputOrder = Order(document.data["orderTitle"].toString(),
-                document.getTimestamp("orderTime")!!.toDate(),
-                document.data["orderState"].toString())
-
+            for (document in documents) {
                 // 주문메뉴 리스트 가져오기
-                for(orderMenu in document.data["orderMenu"] as List<HashMap<String, Any>>) {
+                val cartList = mutableListOf<Cart>()
+                for (orderMenu in document.data["orderMenu"] as List<HashMap<String, Any>>) {
                     val cart = Cart(
-                        orderMenu.get("cafeMenuName").toString(),
-                        orderMenu.get("menuType").toString().toInt(),
-                        orderMenu.get("optionShot").toString().toInt(),
-                        orderMenu.get("optionSyrup").toString().toInt(),
-                        orderMenu.get("optionWhipping").toString()=="true",
-                        orderMenu.get("eachPrice").toString().toInt(),
-                        orderMenu.get("cafeMenuAmount").toString().toInt(),
+                        orderMenu["cafeMenuName"].toString(),
+                        orderMenu["menuType"].toString().toInt(),
+                        orderMenu["optionShot"].toString().toInt(),
+                        orderMenu["optionSyrup"].toString().toInt(),
+                        orderMenu["optionWhipping"].toString() == "true",
+                        orderMenu["eachPrice"].toString().toInt(),
+                        orderMenu["cafeMenuAmount"].toString().toInt(),
                     )
-                    inputOrder.orderMenu.add(cart)
+                    cartList.add(cart)
                 }
+
+                val inputOrder = Order(
+                    document.data["orderTitle"].toString(),
+                    document.getTimestamp("orderTime")!!.toDate(),
+                    document.data["orderState"].toString(),
+                    document.data["couponPath"].toString(),
+                    cartList
+                )
 
                 // 주문목록 리스트에 추가
                 orderedList.add(inputOrder)
@@ -71,7 +76,8 @@ class OrderedListActivity : AppCompatActivity() {
         }
             .addOnFailureListener {
                 Log.w("firebase", "Error getting documents.", it)
-                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT)
+                    .show()
             }
 
 

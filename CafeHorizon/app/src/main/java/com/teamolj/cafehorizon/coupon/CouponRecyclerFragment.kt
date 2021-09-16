@@ -40,6 +40,7 @@ class CouponRecyclerFragment(val category: Int) : Fragment() {
                         if (!isUsed && System.currentTimeMillis() < expiryDate) {
                             couponList.add(
                                 Coupon(
+                                    document.id,
                                     document.data["couponName"].toString(),
                                     expiryDate,
                                     document.data["discount"].toString().toInt(),
@@ -53,6 +54,7 @@ class CouponRecyclerFragment(val category: Int) : Fragment() {
                         if (isUsed) {
                             couponList.add(
                                 Coupon(
+                                    document.id,
                                     document.data["couponName"].toString(),
                                     expiryDate,
                                     document.data["discount"].toString().toInt(),
@@ -63,6 +65,7 @@ class CouponRecyclerFragment(val category: Int) : Fragment() {
                         } else if (System.currentTimeMillis() > expiryDate) {
                             couponList.add(
                                 Coupon(
+                                    document.id,
                                     document.data["couponName"].toString(),
                                     expiryDate,
                                     document.data["discount"].toString().toInt(),

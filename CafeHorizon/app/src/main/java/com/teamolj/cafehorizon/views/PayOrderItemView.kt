@@ -89,10 +89,10 @@ class PayOrderItemView @JvmOverloads constructor(
     fun setDiscountInfo(name:String, price:Int) {
         binding.textName.text = name
         binding.textAmount.text = ""
-        binding.textPrice.text = DecimalFormat("###,###").format(price)
+        binding.textPrice.text = DecimalFormat("-###,###").format(price)
     }
 
     fun getDiscountPrice():Int {
-        return DecimalFormat("###,###").parse(binding.textPrice.text.toString()).toInt()
+        return DecimalFormat("-###,###").parse(binding.textPrice.text.toString()).toInt()
     }
 }

@@ -55,7 +55,7 @@ class OrderedListAdapter : RecyclerView.Adapter<OrderedListAdapter.listHolder>()
             binding.textOrderTitle.text = order.orderTitle
             binding.textState.text = order.state
 
-            if(!order.isPickedUp()) {
+            if(!order.isPickedup()) {
                 binding.textState.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.colorAccent))
             }
         }

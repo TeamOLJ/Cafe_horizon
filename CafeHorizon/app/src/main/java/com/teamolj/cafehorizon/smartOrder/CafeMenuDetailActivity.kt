@@ -90,7 +90,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         binding.btnOrderNow.setOnClickListener {
             if (cafeMenu.cafeMenuAmount > 0) {
                 val intent = Intent(this, PayOrderActivity::class.java)
-                intent.putExtra("state", PayOrderActivity.ORDER_NOW)
+                intent.putExtra("from", PayOrderActivity.ORDER_NOW)
                 intent.putExtra("cafeMenu", cafeMenu)
                 startActivity(intent)
             } else {
