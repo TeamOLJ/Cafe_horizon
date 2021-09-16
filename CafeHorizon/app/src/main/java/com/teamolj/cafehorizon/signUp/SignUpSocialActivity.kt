@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.facebook.Profile
 import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.Timestamp
@@ -36,7 +38,7 @@ class SignUpSocialActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupSocialBinding
 
     private var authProvider: String? = null
-    private var facebookToken: String? = null
+    private var snsUserToken: String? = null
     private var facebookUserBday: String? = null
 
     private lateinit var auth: FirebaseAuth
@@ -52,8 +54,14 @@ class SignUpSocialActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         authProvider = intent.getStringExtra("authProvider")
-        facebookToken = intent.getStringExtra("facebookToken")
-        facebookUserBday = intent.getStringExtra("facebookUserBday")
+
+        if (authProvider == "Google") {
+            snsUserToken = intent.getStringExtra("googleToken")
+        }
+        else if (authProvider == "Facebook") {
+            snsUserToken = intent.getStringExtra("facebookToken")
+            facebookUserBday = intent.getStringExtra("facebookUserBday")
+        }
 
         val topAppBar = binding.toolbar
         topAppBar.setNavigationIcon(R.drawable.btn_back)
@@ -316,94 +324,181 @@ class SignUpSocialActivity : AppCompatActivity() {
 
                     val user = auth.currentUser!!
 
-                    // 1. 현재 계정(전화번호 로그인)과 페이스북 계정 연결
-                    val facebookCredential = FacebookAuthProvider.getCredential(facebookToken!!)
-                    user.linkWithCredential(facebookCredential)
-                        .addOnCompleteListener { _task ->
-                            // 연결에 성공한 경우
-                            if (_task.isSuccessful) {
-                                // 2. 기존 유저의 신규 연동인지 최초 유저 가입인지 확인
-                                if (!user.displayName.isNullOrEmpty()) {
-                                    // 2-1. 기존 유저면 로그인 절차만 수행
-                                    fetchUserInformation()
+                    // 구글 연동인 경우
+                    if (authProvider == "Google") {
+                        // 1. 현재 계정(전화번호 로그인)과 구글 계정 연결
+                        val googleCredential = GoogleAuthProvider.getCredential(snsUserToken, null)
+                        user.linkWithCredential(googleCredential)
+                            .addOnCompleteListener { _task ->
+                                // 연결에 성공한 경우
+                                if (_task.isSuccessful) {
+                                    // 2. 기존 유저의 신규 연동인지 최초 유저 가입인지 확인
+                                    if (!user.displayName.isNullOrEmpty()) {
+                                        // 2-1. 기존 유저면 로그인 절차만 수행
+                                        App.prefs.setString("LoginType", "Google")
+                                        fetchUserInformation()
+                                    }
+                                    else {
+                                        val acct = GoogleSignIn.getLastSignedInAccount(this)
+
+                                        // 2-2. 최초 가입 유저면 사용자 정보 DB 업로드 후 로그인 수행
+                                        user.updateProfile(userProfileChangeRequest { displayName = "SocialMember" })
+
+                                        // 사용자 정보를 DB에 문서화
+                                        val userBarcode = createBarcode("0${user.phoneNumber!!.substring(3)}")
+                                        val agreeMarketing = binding.checkTermMarketing.isChecked
+                                        val agreePush = binding.checkPushMsg.isChecked
+
+                                        val userNick = acct.displayName
+
+                                        val userBdayString = ""
+                                        val userBday = null
+
+                                        val userData = hashMapOf(
+                                            "userID" to " ",
+                                            "userNick" to userNick,
+                                            "userBarcode" to userBarcode,
+                                            "userBday" to userBday,
+                                            "lastBdayModified" to null,
+                                            "agreeMarketing" to agreeMarketing,
+                                            "agreePush" to agreePush,
+                                            "deviceToken" to null
+                                        )
+
+                                        db.collection("UserInformation").document(user.uid)
+                                            .set(userData)
+                                            .addOnSuccessListener {
+                                                // 로그인 처리 (sharedPreference 설정 등)
+                                                App.prefs.setString("userID", " ")
+                                                App.prefs.setString("userNick", userNick)
+                                                App.prefs.setString("userBarcode", userBarcode)
+                                                App.prefs.setString("userBday", userBdayString)
+
+                                                App.prefs.setString("userPhone", "0${user.phoneNumber!!.substring(3,5)}-${user.phoneNumber!!.substring(5,9)}-${user.phoneNumber!!.substring(9)}")
+
+                                                App.prefs.setBoolean("userAgreeMarketing", agreeMarketing)
+                                                App.prefs.setBoolean("userAgreePush", agreePush)
+
+                                                // 푸시메시지에 동의한 경우 토큰 생성
+                                                if (agreeMarketing || agreePush)
+                                                    FirebaseMessaging.getInstance().token
+
+                                                App.prefs.setString("LoginType", "Google")
+
+                                                // 로그인 완료
+                                                val intent = Intent(this, MainActivity::class.java)
+                                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                startActivity(intent)
+                                            }
+                                            .addOnFailureListener {
+                                                // 연결 해제
+                                                Firebase.auth.currentUser!!.unlink(GoogleAuthProvider.PROVIDER_ID)
+
+                                                binding.progressBar.visibility = View.GONE
+                                                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                                binding.btnSignUp.isClickable = true
+                                            }
+                                    }
                                 }
                                 else {
-                                    // 2-2. 최초 가입 유저면 사용자 정보 DB 업로드 후 로그인 수행
-                                    user.updateProfile(userProfileChangeRequest { displayName = "SocialMember" })
-
-                                    // 사용자 정보를 DB에 문서화
-                                    val userBarcode = createBarcode("0${user.phoneNumber!!.substring(3)}")
-                                    val agreeMarketing = binding.checkTermMarketing.isChecked
-                                    val agreePush = binding.checkPushMsg.isChecked
-
-                                    val userNick = Profile.getCurrentProfile().firstName
-
-                                    val userBdayString : String
-                                    val userBday : Timestamp?
-
-                                    if (facebookUserBday != null) {
-                                        val year = facebookUserBday!!.split("/")[2]
-                                        var month = facebookUserBday!!.split("/")[0]
-                                        if (month.length == 1) month = "0$month"
-                                        var date = facebookUserBday!!.split("/")[1]
-                                        if (date.length == 1) date = "0$date"
-                                        userBdayString = "$year/$month/$date"
-                                        userBday = Timestamp(Date(SimpleDateFormat("yyyy/MM/dd").parse(userBdayString).time))
-                                    } else {
-                                        userBdayString = ""
-                                        userBday = null
-                                    }
-
-                                    val userData = hashMapOf(
-                                        "userID" to " ",
-                                        "userNick" to userNick,
-                                        "userBarcode" to userBarcode,
-                                        "userBday" to userBday,
-                                        "lastBdayModified" to null,
-                                        "agreeMarketing" to agreeMarketing,
-                                        "agreePush" to agreePush,
-                                        "deviceToken" to null
-                                    )
-
-                                    db.collection("UserInformation").document(user.uid)
-                                        .set(userData)
-                                        .addOnSuccessListener {
-                                            // 로그인 처리 (sharedPreference 설정 등)
-                                            App.prefs.setString("userID", " ")
-                                            App.prefs.setString("userNick", userNick)
-                                            App.prefs.setString("userBarcode", userBarcode)
-                                            App.prefs.setString("userBday", userBdayString)
-
-                                            App.prefs.setString("userPhone", "0${user.phoneNumber!!.substring(3,5)}-${user.phoneNumber!!.substring(5,9)}-${user.phoneNumber!!.substring(9)}")
-
-                                            App.prefs.setBoolean("userAgreeMarketing", agreeMarketing)
-                                            App.prefs.setBoolean("userAgreePush", agreePush)
-
-                                            // 푸시메시지에 동의한 경우 토큰 생성
-                                            if (agreeMarketing || agreePush)
-                                                FirebaseMessaging.getInstance().token
-
-                                            // 로그인 완료
-                                            val intent = Intent(this, MainActivity::class.java)
-                                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            startActivity(intent)
-                                        }
-                                        .addOnFailureListener {
-                                            // 연결 해제
-                                            Firebase.auth.currentUser!!.unlink(FacebookAuthProvider.PROVIDER_ID)
-
-                                            binding.progressBar.visibility = View.GONE
-                                            Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-                                            binding.btnSignUp.isClickable = true
-                                        }
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                    binding.btnSignUp.isClickable = true
                                 }
                             }
-                            else {
-                                binding.progressBar.visibility = View.GONE
-                                Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-                                binding.btnSignUp.isClickable = true
+                    }
+                    // 페이스북 연동인 경우
+                    else if (authProvider == "Facebook") {
+                        // 1. 현재 계정(전화번호 로그인)과 페이스북 계정 연결
+                        val facebookCredential = FacebookAuthProvider.getCredential(snsUserToken!!)
+                        user.linkWithCredential(facebookCredential)
+                            .addOnCompleteListener { _task ->
+                                // 연결에 성공한 경우
+                                if (_task.isSuccessful) {
+                                    // 2. 기존 유저의 신규 연동인지 최초 유저 가입인지 확인
+                                    if (!user.displayName.isNullOrEmpty()) {
+                                        App.prefs.setString("LoginType", "Facebook")
+                                        fetchUserInformation()
+                                    }
+                                    else {
+                                        user.updateProfile(userProfileChangeRequest { displayName = "SocialMember" })
+
+                                        // 사용자 정보를 DB에 문서화
+                                        val userBarcode = createBarcode("0${user.phoneNumber!!.substring(3)}")
+                                        val agreeMarketing = binding.checkTermMarketing.isChecked
+                                        val agreePush = binding.checkPushMsg.isChecked
+
+                                        val userNick = Profile.getCurrentProfile().firstName
+
+                                        val userBdayString : String
+                                        val userBday : Timestamp?
+
+                                        if (facebookUserBday != null) {
+                                            val year = facebookUserBday!!.split("/")[2]
+                                            var month = facebookUserBday!!.split("/")[0]
+                                            if (month.length == 1) month = "0$month"
+                                            var date = facebookUserBday!!.split("/")[1]
+                                            if (date.length == 1) date = "0$date"
+                                            userBdayString = "$year/$month/$date"
+                                            userBday = Timestamp(Date(SimpleDateFormat("yyyy/MM/dd").parse(userBdayString).time))
+                                        } else {
+                                            userBdayString = ""
+                                            userBday = null
+                                        }
+
+                                        val userData = hashMapOf(
+                                            "userID" to " ",
+                                            "userNick" to userNick,
+                                            "userBarcode" to userBarcode,
+                                            "userBday" to userBday,
+                                            "lastBdayModified" to null,
+                                            "agreeMarketing" to agreeMarketing,
+                                            "agreePush" to agreePush,
+                                            "deviceToken" to null
+                                        )
+
+                                        db.collection("UserInformation").document(user.uid)
+                                            .set(userData)
+                                            .addOnSuccessListener {
+                                                // 로그인 처리 (sharedPreference 설정 등)
+                                                App.prefs.setString("userID", " ")
+                                                App.prefs.setString("userNick", userNick)
+                                                App.prefs.setString("userBarcode", userBarcode)
+                                                App.prefs.setString("userBday", userBdayString)
+
+                                                App.prefs.setString("userPhone", "0${user.phoneNumber!!.substring(3,5)}-${user.phoneNumber!!.substring(5,9)}-${user.phoneNumber!!.substring(9)}")
+
+                                                App.prefs.setBoolean("userAgreeMarketing", agreeMarketing)
+                                                App.prefs.setBoolean("userAgreePush", agreePush)
+
+                                                // 푸시메시지에 동의한 경우 토큰 생성
+                                                if (agreeMarketing || agreePush)
+                                                    FirebaseMessaging.getInstance().token
+
+                                                App.prefs.setString("LoginType", "Facebook")
+
+                                                // 로그인 완료
+                                                val intent = Intent(this, MainActivity::class.java)
+                                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                startActivity(intent)
+                                            }
+                                            .addOnFailureListener {
+                                                // 연결 해제
+                                                Firebase.auth.currentUser!!.unlink(FacebookAuthProvider.PROVIDER_ID)
+
+                                                binding.progressBar.visibility = View.GONE
+                                                Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                                binding.btnSignUp.isClickable = true
+                                            }
+                                    }
+                                }
+                                else {
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                                    binding.btnSignUp.isClickable = true
+                                }
                             }
-                        }
+                    }
                 } else {
                     binding.progressBar.visibility = View.GONE
 
@@ -506,7 +601,14 @@ class SignUpSocialActivity : AppCompatActivity() {
         builder.setMessage(getString(R.string.cancel_signup))
             .setPositiveButton(getString(R.string.btn_goback)) { _, _ ->
                 // 인증 정보 삭제
-                if (authProvider == "Facebook")
+                if (authProvider == "Google") {
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.google_web_client_id))
+                        .requestEmail()
+                        .build()
+                    GoogleSignIn.getClient(this, gso).signOut()
+                }
+                else if (authProvider == "Facebook")
                     LoginManager.getInstance().logOut()
 
                 finish()

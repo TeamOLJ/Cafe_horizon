@@ -13,8 +13,13 @@ import androidx.core.widget.doOnTextChanged
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -35,7 +40,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
 
+    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var facebookCallbackManager: CallbackManager
+
+    private val GOOGLE_SIGN_IN_CODE = 951753
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +101,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            App.prefs.setString("LoginType", "phoneNumber")
                             fetchUserInformation()
                         } else {
                             Toast.makeText(this, getString(R.string.toast_failed_verification), Toast.LENGTH_SHORT).show()
@@ -112,20 +121,53 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnKakaoLogin.setOnClickListener(loginWithKakao)
-        binding.btnNaverLogin.setOnClickListener(loginWithNaver)
+        // 소셜 로그인: 구글, 페이스북
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.google_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        binding.btnGoogleLogin.setOnClickListener(loginWithGoogle)
 
-        // 소셜 로그인3: 페이스북
         facebookCallbackManager = CallbackManager.Factory.create()
         binding.btnFacebookLogin.setOnClickListener(loginWithFacebook)
     }
 
-    private val loginWithKakao = View.OnClickListener {
-        // TODO
+    private val loginWithGoogle = View.OnClickListener {
+        binding.btnGoogleLogin.isClickable = false
+        binding.progressBar.visibility = View.VISIBLE
+
+        val googleIntent = googleSignInClient.signInIntent
+        startActivityForResult(googleIntent, GOOGLE_SIGN_IN_CODE)
     }
 
-    private val loginWithNaver = View.OnClickListener {
-        // TODO
+    private fun handleGoogleIdToken(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // 기존 유저인지 신규 유저인지 확인
+                    if (!auth.currentUser!!.phoneNumber.isNullOrEmpty()) {
+                        App.prefs.setString("LoginType", "Google")
+                        fetchUserInformation()
+                    }
+                    else {
+                        // 구글 단독 계정 삭제
+                        auth.currentUser!!.delete()
+
+                        // SignUpSocialActivity에 credential 전달
+                        val intent = Intent(this, SignUpSocialActivity::class.java)
+                        intent.putExtra("authProvider", "Google")
+                        intent.putExtra("googleToken", idToken)
+                        startActivity(intent)
+                    }
+                } else {googleSignInClient.signOut()
+                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                    binding.btnGoogleLogin.isClickable = true
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
     }
 
     private val loginWithFacebook = View.OnClickListener {
@@ -135,7 +177,7 @@ class LoginActivity : AppCompatActivity() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_birthday"))
         LoginManager.getInstance().registerCallback(facebookCallbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
-                // 회원 생일 확인 (API에서 user_birthday 항목을 승인 받았다고 가정하는 상태로 작성한 코드)
+                // 회원 생일 확인
                 var fbUserBday: String?
                 val fbRequest = GraphRequest.newMeRequest(result.accessToken) { json, response ->
                     fbUserBday = if (response?.error != null)
@@ -164,6 +206,38 @@ class LoginActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.GONE
             }
         })
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken, fbUserBday: String?) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // 기존 유저인지 신규(또는 페이스북 신규 연동) 유저인지 확인
+                    if (!auth.currentUser!!.phoneNumber.isNullOrEmpty()) {
+                        // 로그인 절차 수행
+                        App.prefs.setString("LoginType", "Facebook")
+                        fetchUserInformation()
+                    }
+                    else {
+                        // 페이스북 단독 계정 삭제
+                        auth.currentUser!!.delete()
+
+                        // SignUpSocialActivity에 credential 전달: 전화번호 로그인 후 계정 링크 위함
+                        val intent = Intent(this, SignUpSocialActivity::class.java)
+                        intent.putExtra("authProvider", "Facebook")
+                        intent.putExtra("facebookToken", token.token)
+                        intent.putExtra("facebookUserBday", fbUserBday)
+                        startActivity(intent)
+                    }
+                } else {
+                    LoginManager.getInstance().logOut()
+                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                    binding.btnFacebookLogin.isClickable = true
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
     }
 
     private fun fetchUserInformation() {
@@ -216,42 +290,27 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun handleFacebookAccessToken(token: AccessToken, fbUserBday: String?) {
-        val credential = FacebookAuthProvider.getCredential(token.token)
-
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // 기존 유저인지 신규(또는 페이스북 신규 연동) 유저인지 확인
-                    if (!auth.currentUser!!.phoneNumber.isNullOrEmpty()) {
-                        // 로그인 절차 수행
-                        fetchUserInformation()
-                    }
-                    else {
-                        // 페이스북 단독 계정 삭제
-                        auth.currentUser!!.delete()
-
-                        // SignUpSocialActivity에 credential 전달: 전화번호 로그인 후 계정 링크 위함
-                        val intent = Intent(this, SignUpSocialActivity::class.java)
-                        intent.putExtra("authProvider", "Facebook")
-                        intent.putExtra("facebookToken", token.token)
-                        intent.putExtra("facebookUserBday", fbUserBday)
-                        startActivity(intent)
-                    }
-                } else {
-                    LoginManager.getInstance().logOut()
-                    Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-                    binding.btnFacebookLogin.isClickable = true
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Pass the activity result back to the Facebook SDK
-        facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
+        // Result from Google
+        if (requestCode == GOOGLE_SIGN_IN_CODE) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful
+                val account = task.getResult(ApiException::class.java)!!
+                handleGoogleIdToken(account.idToken!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed
+                Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                binding.btnGoogleLogin.isClickable = true
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+        // Result from Facebook
+        else {
+            facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun closeKeyboard() {

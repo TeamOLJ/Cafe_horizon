@@ -38,6 +38,8 @@
             android:id="@+id/txtUserID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
             app:fontFamily="sans-serif" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -113,66 +115,42 @@
         android:textColor="#8C8C8C" />
 
     <Button
-        android:id="@+id/btnKakaoLogin"
-        style="@style/IconOnlyButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="0dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:layout_marginEnd="8dp"
-        app:backgroundTint="#FEE500"
-        app:icon="@drawable/ic_kakao"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/btnNaverLogin"
-        app:layout_constraintEnd_toStartOf="@+id/btnNaverLogin"
-        app:layout_constraintTop_toTopOf="@+id/btnNaverLogin" />
-
-    <Button
-        android:id="@+id/btnNaverLogin"
-        style="@style/IconOnlyButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="56dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:padding="0dp"
-        app:backgroundTint="#03C75A"
-        app:icon="@drawable/ic_naver"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/btnGoogleLogin"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="64dp"
+        android:backgroundTint="@color/white"
+        app:icon="@drawable/logo_google"
+        app:iconTint="@null"
+        android:text="구글로 로그인하기"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnFacebookLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnFacebookLogin"
-        style="@style/IconOnlyButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="0dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_marginHorizontal="64dp"
         app:backgroundTint="#1877F2"
-        app:icon="@drawable/ic_facebook"
+        app:icon="@drawable/logo_facebook"
         app:iconTint="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/btnNaverLogin"
-        app:layout_constraintStart_toEndOf="@+id/btnNaverLogin"
-        app:layout_constraintTop_toTopOf="@+id/btnNaverLogin" />
+        android:text="페이스북으로 로그인하기"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/social_login"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btnNaverLogin"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/btnGoogleLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

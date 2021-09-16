@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
     // social login
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.facebook.android:facebook-login:[8,9)'
 
     // Room

@@ -17,6 +17,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -164,9 +167,22 @@ class MainActivity : AppCompatActivity() {
 
             builder.setMessage(getString(R.string.ask_logout))
                 .setPositiveButton(getString(R.string.btn_logout)) { _, _ ->
+                    val loginType = App.prefs.getString("LoginType", "")
+
                     // 로그아웃 처리
                     Firebase.auth.signOut()
                     App.prefs.clear()
+
+                    if (loginType == "Google") {
+                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(getString(R.string.google_web_client_id))
+                            .requestEmail()
+                            .build()
+                        GoogleSignIn.getClient(this, gso).signOut()
+                    }
+                    else if (loginType == "Facebook") {
+                        LoginManager.getInstance().logOut()
+                    }
 
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
