@@ -15,76 +15,17 @@ import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.FragmentCouponRecyclerBinding
 
-class CouponRecyclerFragment(val category: Int) : Fragment() {
+class CouponRecyclerFragment(val position: Int) : Fragment() {
     private lateinit var binding: FragmentCouponRecyclerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentCouponRecyclerBinding.inflate(inflater, container, false)
 
-        val db = Firebase.firestore
-        val userUid = Firebase.auth.currentUser!!.uid
-        val docRef = db.collection("UserInformation").document(userUid).collection("Coupons")
-
-        val couponList = mutableListOf<Coupon>()
-
-        docRef.get().addOnSuccessListener { documents ->
-            for (document in documents) {
-                val isUsed = document.data["isUsed"] as Boolean
-                val expiryDate = (document.data["expiryDate"] as Timestamp).seconds * 1000
-
-                when (category) {
-                    0 -> {  //Coupon List
-                        if (!isUsed && System.currentTimeMillis() < expiryDate) {
-                            couponList.add(
-                                Coupon(
-                                    document.id,
-                                    document.data["couponName"].toString(),
-                                    expiryDate,
-                                    document.data["discount"].toString().toInt(),
-                                    isUsed
-                                )
-                            )
-                        }
-                    }
-
-                    1 -> {  //Coupon History
-                        if (isUsed) {
-                            couponList.add(
-                                Coupon(
-                                    document.id,
-                                    document.data["couponName"].toString(),
-                                    expiryDate,
-                                    document.data["discount"].toString().toInt(),
-                                    isUsed,
-                                    (document.data["usedDate"] as Timestamp).seconds * 1000
-                                )
-                            )
-                        } else if (System.currentTimeMillis() > expiryDate) {
-                            couponList.add(
-                                Coupon(
-                                    document.id,
-                                    document.data["couponName"].toString(),
-                                    expiryDate,
-                                    document.data["discount"].toString().toInt(),
-                                    isUsed
-                                )
-                            )
-                        }
-                    }
-                }
-            }
-
-            var adapter = CouponRecyclerAdapter(category)
-            adapter.couponList = couponList
-            binding.recyclerViewHistory.adapter = adapter
-            binding.recyclerViewHistory.layoutManager = LinearLayoutManager(this.context)
-        }.addOnFailureListener { exception ->
-            Log.w("firebase", "Error getting documents.", exception)
-            Toast.makeText(binding.root.context, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
-        }
+        binding.recyclerViewHistory.adapter = (activity as CouponActivity).getAdapter(position)
+        binding.recyclerViewHistory.layoutManager = LinearLayoutManager(this.context)
 
         return binding.root
     }

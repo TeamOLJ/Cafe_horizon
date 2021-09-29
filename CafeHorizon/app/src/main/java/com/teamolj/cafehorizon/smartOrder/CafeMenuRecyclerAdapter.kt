@@ -25,7 +25,6 @@ class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.c
     }
 
     override fun getItemCount(): Int {
-        Log.d("TAG", "개수 : ${menuList[category].size}")
         return menuList[category].size
     }
 
