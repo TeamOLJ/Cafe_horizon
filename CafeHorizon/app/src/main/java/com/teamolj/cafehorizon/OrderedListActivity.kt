@@ -10,7 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityOrderedListBinding
-import com.teamolj.cafehorizon.smartOrder.Cart
+import com.teamolj.cafehorizon.smartOrder.MenuInfo
 
 class OrderedListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderedListBinding
@@ -41,18 +41,19 @@ class OrderedListActivity : AppCompatActivity() {
         docRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 // 주문메뉴 리스트 가져오기
-                val cartList = mutableListOf<Cart>()
+                val menuList = mutableListOf<MenuInfo>()
                 for (orderMenu in document.data["orderMenu"] as List<HashMap<String, Any>>) {
-                    val cart = Cart(
-                        orderMenu["cafeMenuName"].toString(),
-                        orderMenu["menuType"].toString().toInt(),
-                        orderMenu["optionShot"].toString().toInt(),
-                        orderMenu["optionSyrup"].toString().toInt(),
-                        orderMenu["optionWhipping"].toString() == "true",
-                        orderMenu["eachPrice"].toString().toInt(),
-                        orderMenu["cafeMenuAmount"].toString().toInt(),
-                    )
-                    cartList.add(cart)
+                    val menuInfo = MenuInfo()
+                    with(menuInfo){
+                        name=orderMenu["name"].toString()
+                        price = orderMenu["price"].toString().toInt()
+                        category = orderMenu["category"].toString().toByte()
+                        amount = orderMenu["amount"].toString().toInt()
+                        optionShot = orderMenu["optionShot"].toString().toInt()
+                        optionSyrup = orderMenu["optionSyrup"].toString().toInt()
+                        optionWhipping = orderMenu["optionWhipping"].toString()=="true"
+                    }
+                    menuList.add(menuInfo)
                 }
 
                 val inputOrder = Order(
@@ -60,7 +61,7 @@ class OrderedListActivity : AppCompatActivity() {
                     document.getTimestamp("orderTime")!!.toDate(),
                     document.data["orderState"].toString(),
                     document.data["couponPath"].toString(),
-                    cartList
+                    menuList
                 )
 
                 // 주문목록 리스트에 추가

@@ -14,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.coupon.Coupon
 import com.teamolj.cafehorizon.databinding.ActivityPayOrderBinding
 import com.teamolj.cafehorizon.smartOrder.AppDatabase
-import com.teamolj.cafehorizon.smartOrder.Cart
+import com.teamolj.cafehorizon.smartOrder.MenuInfo
 import com.teamolj.cafehorizon.views.PayOrderItemView
 import java.text.DecimalFormat
 import java.util.*
@@ -54,7 +54,7 @@ class PayOrderActivity : AppCompatActivity() {
         }
 
         val from = intent.getStringExtra("from")
-        var cafeMenuList = mutableListOf<Cart>()
+        var menuList = mutableListOf<MenuInfo>()
         var listTotalPrice = 0
         var couponIndex = 0
         var eatOption = EAT_FOR_HERE
@@ -63,36 +63,39 @@ class PayOrderActivity : AppCompatActivity() {
 
         // 바로 주문하기 or 장바구니 로부터 메뉴 리스트 가져오기
         if (from == ORDER_NOW) {
-            cafeMenuList = mutableListOf(intent.getParcelableExtra("cafeMenu")!!)
+            menuList = mutableListOf(intent.getParcelableExtra("menuInfo")!!)
         } else if (from == ORDER_CART) {
-            cafeMenuList = AppDatabase.getInstance(this).cartDao().getAllByType().toMutableList()
+            menuList = AppDatabase.getInstance(this).cartDao().getAllByCategory().toMutableList()
         }
 
         // 결제할 메뉴 리스트 표시하기
-        for (menu in cafeMenuList) {
-            listTotalPrice += (menu.eachPrice * menu.cafeMenuAmount)
+        for (menu in menuList) {
+            listTotalPrice += (menu.price * menu.amount)
 
             val menuView = PayOrderItemView(this).apply {
                 setItemType(MENU)
-                setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
+                setCafeMenuInfo(menu.name, menu.amount, menu.price)
             }
             binding.layoutMenuItems.addView(menuView)
 
-            if (menu.optionShot > 0) {
+
+            if ((menu.optionType / 100 == 1) && (menu.optionShot > 0)) {
                 val shotView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("샷 추가", menu.optionShot)
                 }
                 binding.layoutMenuItems.addView(shotView)
             }
-            if (menu.optionSyrup > 0) {
+
+            if ((menu.optionType % 100 / 10 == 1) && (menu.optionSyrup > 0)) {
                 val syrupView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("시럽 추가", menu.optionSyrup)
                 }
                 binding.layoutMenuItems.addView(syrupView)
             }
-            if (!menu.optionWhipping) {
+
+            if ((menu.optionType % 10 == 1) && !menu.optionWhipping) {
                 val whippingView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("휘핑 X", 0)
@@ -207,10 +210,10 @@ class PayOrderActivity : AppCompatActivity() {
             실제로는 payOption을 먼저 수행해야 합니다.
             카페에 eatOption도 전송해야 합니다.
              */
-            val title = if (cafeMenuList.size > 1) {
-                cafeMenuList[0].cafeMenuName
+            val title = if (menuList.size > 1) {
+                menuList[0].name
             } else {
-                cafeMenuList[0].cafeMenuName + " 외"
+                menuList[0].name + " 외"
             }
 
             val order = Order(
@@ -218,7 +221,7 @@ class PayOrderActivity : AppCompatActivity() {
                 Date(System.currentTimeMillis()),
                 getString(R.string.text_order_standby),
                 couponArray[couponIndex].couponPath,
-                cafeMenuList
+                menuList
             )
 
             val bundle = Bundle()

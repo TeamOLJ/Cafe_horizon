@@ -3,12 +3,9 @@ package com.teamolj.cafehorizon
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.databinding.ActivityOrderStateBinding
@@ -95,30 +92,32 @@ class OrderStateActivity : AppCompatActivity() {
 
         // 주문목록의 메뉴 출력
         var listTotalPrice = 0;
-        for (menu in orderedList.orderMenu) {
-            listTotalPrice += (menu.eachPrice * menu.cafeMenuAmount)
+        for (menu in orderedList.orderMenuList) {
+            listTotalPrice += (menu.price * menu.amount)
 
             val menuView = PayOrderItemView(this).apply {
                 setItemType(PayOrderActivity.MENU)
-                setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
+                setCafeMenuInfo(menu.name, menu.amount, menu.price)
             }
             binding.layoutOrderItems.addView(menuView)
 
-            if (menu.optionShot > 0) {
+            if ((menu.optionType / 100 == 1) && (menu.optionShot > 0)) {
                 val shotView = PayOrderItemView(this).apply {
                     setItemType(PayOrderActivity.OPTION)
                     setOptionInfo("샷 추가", menu.optionShot)
                 }
                 binding.layoutOrderItems.addView(shotView)
             }
-            if (menu.optionSyrup > 0) {
+
+            if ((menu.optionType % 100 / 10 == 1) && (menu.optionSyrup > 0)) {
                 val syrupView = PayOrderItemView(this).apply {
                     setItemType(PayOrderActivity.OPTION)
                     setOptionInfo("시럽 추가", menu.optionSyrup)
                 }
                 binding.layoutOrderItems.addView(syrupView)
             }
-            if (!menu.optionWhipping) {
+
+            if ((menu.optionType % 10 == 1) && !menu.optionWhipping) {
                 val whippingView = PayOrderItemView(this).apply {
                     setItemType(PayOrderActivity.OPTION)
                     setOptionInfo("휘핑 X", 0)

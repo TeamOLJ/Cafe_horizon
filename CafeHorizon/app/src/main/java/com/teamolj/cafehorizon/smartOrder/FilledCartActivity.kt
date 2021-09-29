@@ -3,7 +3,6 @@ package com.teamolj.cafehorizon.smartOrder
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamolj.cafehorizon.PayOrderActivity
 import com.teamolj.cafehorizon.R
@@ -30,7 +29,7 @@ class FilledCartActivity : AppCompatActivity() {
         changeTotalPrice()
 
         var adapter = FilledCartAdapter()
-        adapter.cartList = AppDatabase.getInstance(this).cartDao().getAllByType() as MutableList<Cart>
+        adapter.menuList = AppDatabase.getInstance(this).cartDao().getAllByCategory() as MutableList<MenuInfo>
         binding.recyclerViewCart.adapter = adapter
         binding.recyclerViewCart.layoutManager = LinearLayoutManager(this)
 

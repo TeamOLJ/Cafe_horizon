@@ -2,7 +2,7 @@ package com.teamolj.cafehorizon
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.teamolj.cafehorizon.smartOrder.Cart
+import com.teamolj.cafehorizon.smartOrder.MenuInfo
 import java.util.*
 
 data class Order(
@@ -10,15 +10,15 @@ data class Order(
     var orderTime: Date = Date(),
     var state: String = "",
     var couponPath: String = "",
-    var orderMenu: MutableList<Cart> = mutableListOf()
+    var orderMenuList: MutableList<MenuInfo> = mutableListOf()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readDate(),
         parcel.readString().toString(),
         parcel.readString().toString(),
-        mutableListOf<Cart>().apply {
-            parcel.readList(this, Cart::class.java.classLoader)
+        mutableListOf<MenuInfo>().apply {
+            parcel.readList(this, MenuInfo::class.java.classLoader)
         }
     ) {
     }
@@ -35,7 +35,7 @@ data class Order(
         parcel.writeLong(orderTime.time)
         parcel.writeString(state)
         parcel.writeString(couponPath)
-        parcel.writeList(orderMenu)
+        parcel.writeList(orderMenuList)
     }
 
     override fun describeContents(): Int {
