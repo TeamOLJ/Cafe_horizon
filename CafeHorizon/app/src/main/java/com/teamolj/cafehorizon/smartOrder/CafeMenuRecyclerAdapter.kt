@@ -1,15 +1,17 @@
 package com.teamolj.cafehorizon.smartOrder
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
 
-class CafeMenuRecyclerAdapter(val menuType:Int) : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
-    internal var cafeMenuList: MutableList<cafeMenuInfo> = mutableListOf()
+class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
+    internal lateinit var menuList: Array<MutableList<MenuInfo>>
+    private var category:Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): cafeMenuHolder =
         cafeMenuHolder(
@@ -19,34 +21,38 @@ class CafeMenuRecyclerAdapter(val menuType:Int) : RecyclerView.Adapter<CafeMenuR
         )
 
     override fun onBindViewHolder(holder: cafeMenuHolder, position: Int) {
-        val menu = cafeMenuList.get(position)
-        holder.setMenu(menu)
+        holder.setMenu(menuList[category][position])
     }
 
-    override fun getItemCount(): Int = cafeMenuList.size
+    override fun getItemCount(): Int {
+        Log.d("TAG", "개수 : ${menuList[category].size}")
+        return menuList[category].size
+    }
+
+    fun setCategory(position:Int) {
+        category = position
+    }
 
 
     inner class cafeMenuHolder(private var binding: RecyclerItemCafeMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var cafeMenu: cafeMenuInfo
+        private lateinit var cafeMenu: MenuInfo
 
         init {
             binding.root.setOnClickListener {
                 var intent =
                     Intent(binding.root.context, CafeMenuDetailActivity::class.java).apply {
-                        putExtra("name", cafeMenu.name)
-                        putExtra("type", menuType)
-                        putExtra("price", cafeMenu.price)
+                        putExtra("info", cafeMenu)
                     }
 
                 binding.root.context.startActivity(intent)
             }
         }
 
-        fun setMenu(cafeMenu: cafeMenuInfo) {
+        fun setMenu(cafeMenu: MenuInfo) {
             this.cafeMenu = cafeMenu
 
-            Glide.with(binding.root.context).load(R.drawable.coffee_image).circleCrop().into(binding.imageCafeMenu)
+            Glide.with(binding.root.context).load(cafeMenu.imageUrl).circleCrop().into(binding.imageCafeMenu)
             binding.textCafeMenuName.text = cafeMenu.name
             binding.textCafeMenuOrgPrice.text = cafeMenu.price.toString()
 

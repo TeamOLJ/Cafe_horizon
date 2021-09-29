@@ -1,36 +1,36 @@
 package com.teamolj.cafehorizon.smartOrder
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivitySmartOrderBinding
 
 open class SmartOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySmartOrderBinding
-    private lateinit var viewPager: ViewPager2
 
-    private lateinit var MENU_ITEMS: Array<String>
-    lateinit var db:AppDatabase
+    lateinit var dbApp: AppDatabase
+    lateinit var db: FirebaseFirestore
 
+    lateinit var menuList:Array<MutableList<MenuInfo>>
+    lateinit var categories:Array<String>
+    lateinit var adapter:CafeMenuRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySmartOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        db = AppDatabase.getInstance(this)
-
-        MENU_ITEMS = resources.getStringArray(R.array.array_cafe_menu)
 
         val topAppBar = binding.toolbar
 
@@ -44,18 +44,55 @@ open class SmartOrderActivity : AppCompatActivity() {
             finish()
         }
 
-        viewPager = binding.viewPager
-        viewPager.offscreenPageLimit = MENU_ITEMS.size
-        val pagerAdapter = SmartOrderAdapter(this)
-        viewPager.adapter = pagerAdapter
+        dbApp = AppDatabase.getInstance(this)
+        db = Firebase.firestore
 
+        db.collection("CafeMenu").get().addOnSuccessListener { result ->
+            menuList = Array(result.size()) { mutableListOf() }
+            categories = Array(result.size()) { "" }
+            adapter = CafeMenuRecyclerAdapter()
 
-        val tabLayout = binding.tabLayout
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = MENU_ITEMS[position]
-        }.attach()
+            for (i in 0 until result.size()) {
+                // 파이어베이스의 카테고리별 메뉴 문서
+                val document = result.documents[i]
+                // 문서 이름(카테고리명) 저장
+                categories[i] = document.id
+
+                for (field in document.data!!) {
+                    val hashMap = field.value as HashMap<String, Any>
+
+                    // 카테고리별 메뉴 리스트에 메뉴 정보 저장
+                    menuList[i].add(
+                        MenuInfo(
+                            hashMap["name"].toString(),
+                            hashMap["description"].toString(),
+                            hashMap["imageUrl"].toString(),
+                            hashMap["price"].toString().toInt(),
+                            i.toByte(),
+                            hashMap["optionType"].toString().toByte()   //옵션 여부를 1/0으로 구분(샷-시럽-휘핑 순서)
+                        )
+                    )
+                }
+
+            }
+
+            adapter.menuList = menuList
+            val viewPager = binding.viewPager
+            viewPager.offscreenPageLimit = categories.size
+            viewPager.adapter = SmartOrderAdapter(this)
+
+            val tabLayout = binding.tabLayout
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = categories[position]
+            }.attach()
+
+            binding.progressBar.visibility = View.GONE
+
+        }.addOnFailureListener { exception ->
+            binding.progressBar.visibility = View.GONE
+            Log.d("TAG", exception.message!!)
+        }
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -75,7 +112,6 @@ open class SmartOrderActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_smartorder, menu)
         return super.onCreateOptionsMenu(menu)
@@ -94,8 +130,8 @@ open class SmartOrderActivity : AppCompatActivity() {
     }
 
 
-    fun updateToolbarMenu(menu: Menu) {
-        if (db.cartDao().getCount()==0) {
+    private fun updateToolbarMenu(menu: Menu) {
+        if (dbApp.cartDao().getCount()==0) {
             menu.findItem(R.id.action_filled_cart).isVisible = false
             menu.findItem(R.id.action_empty_cart).isVisible = true
         } else {
@@ -104,9 +140,13 @@ open class SmartOrderActivity : AppCompatActivity() {
         }
     }
 
+    fun getAdapter(position:Int):CafeMenuRecyclerAdapter {
+        adapter.setCategory(position)
+        return adapter
+    }
 
     private inner class SmartOrderAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = MENU_ITEMS.size
-        override fun createFragment(position: Int): Fragment = CafeMenuRecyclerFragment(position)
+        override fun getItemCount(): Int = categories.size
+        override fun createFragment(position:Int): Fragment = CafeMenuRecyclerFragment(position)
     }
 }
