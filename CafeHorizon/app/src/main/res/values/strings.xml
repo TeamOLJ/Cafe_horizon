@@ -211,15 +211,6 @@
     <string name="btn_negative_permission_request">닫기</string>
 
     <string name="text_select_image">사진 선택</string>
-    <string name="barcode_key">11111</string> <!--지울것..-->
-
-    <string-array name="array_cafe_menu">
-        <item>신메뉴</item>
-        <item>커피(hot)</item>
-        <item>커피(ice)</item>
-        <item>프라푸치노</item>
-        <item>음료</item>
-        <item>디저트</item>
-    </string-array>
+    <string name="barcode_key">11111</string> <!--병합 전에 지울것..-->
 
 </resources>
