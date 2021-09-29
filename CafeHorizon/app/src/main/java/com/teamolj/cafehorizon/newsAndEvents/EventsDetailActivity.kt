@@ -1,8 +1,8 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityEventsDetailBinding
 
@@ -24,6 +24,6 @@ class EventsDetailActivity : AppCompatActivity() {
 
         val events: Events = intent.getSerializableExtra("events") as Events
 
-        binding.imageEvents.setImageURI(Uri.parse(events.imageUri))
+        Glide.with(binding.root).load(events.contentUrl).into(binding.imageEvents)
     }
 }

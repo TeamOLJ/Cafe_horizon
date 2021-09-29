@@ -4,6 +4,7 @@ import java.io.Serializable
 
 data class Events(
     var title: String,
-    var imageUri: String,
-    var period: String
-) :Serializable
+    var contentUrl: String,
+    var startDate: Long,
+    var endDate: Long
+) : Serializable

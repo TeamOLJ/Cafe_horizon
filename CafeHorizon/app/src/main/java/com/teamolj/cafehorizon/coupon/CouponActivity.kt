@@ -23,7 +23,6 @@ class CouponActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCouponBinding
     private val ITEMS_NUM: Int = 2
 
-    lateinit var db: FirebaseFirestore
     lateinit var adapter:CouponRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,6 @@ class CouponActivity : AppCompatActivity() {
 
         docRef.get().addOnSuccessListener { documents ->
             val couponList: Array<MutableList<Coupon>> = Array(2) { mutableListOf() }
-            adapter = CouponRecyclerAdapter()
 
             for (document in documents) {
                 val isUsed = document.data["isUsed"] as Boolean
@@ -76,6 +74,7 @@ class CouponActivity : AppCompatActivity() {
                 }
             }
 
+            adapter = CouponRecyclerAdapter()
             adapter.couponList = couponList
             val viewPager = binding.viewPager
             viewPager.offscreenPageLimit = ITEMS_NUM
@@ -90,13 +89,10 @@ class CouponActivity : AppCompatActivity() {
 
             binding.progressBar.visibility = View.GONE
 
-        }.addOnFailureListener { exception ->
-
+        }.addOnFailureListener {
             binding.progressBar.visibility = View.GONE
-            Log.w("firebase", "Error getting documents.", exception)
-            Toast.makeText(binding.root.context,
-                getString(R.string.toast_error_occurred),
-                Toast.LENGTH_SHORT).show()
+            Log.w("firebase", "Error getting documents.", it)
+            Toast.makeText(binding.root.context, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
         }
 
 

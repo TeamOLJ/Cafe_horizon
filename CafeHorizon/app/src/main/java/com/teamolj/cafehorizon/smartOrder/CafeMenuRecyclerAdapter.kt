@@ -11,7 +11,7 @@ import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
 
 class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
     internal lateinit var menuList: Array<MutableList<MenuInfo>>
-    private var category:Int = 0
+    private var category: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): cafeMenuHolder =
         cafeMenuHolder(
@@ -28,7 +28,7 @@ class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.c
         return menuList[category].size
     }
 
-    fun setCategory(position:Int) {
+    fun setCategory(position: Int) {
         category = position
     }
 
@@ -39,10 +39,8 @@ class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.c
 
         init {
             binding.root.setOnClickListener {
-                var intent =
-                    Intent(binding.root.context, CafeMenuDetailActivity::class.java).apply {
-                        putExtra("info", cafeMenu)
-                    }
+                var intent = Intent(binding.root.context, CafeMenuDetailActivity::class.java)
+                intent.putExtra("info", cafeMenu)
 
                 binding.root.context.startActivity(intent)
             }
@@ -51,7 +49,8 @@ class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.c
         fun setMenu(cafeMenu: MenuInfo) {
             this.cafeMenu = cafeMenu
 
-            Glide.with(binding.root.context).load(cafeMenu.imageUrl).circleCrop().into(binding.imageCafeMenu)
+            Glide.with(binding.root.context).load(cafeMenu.imageUrl).circleCrop()
+                .into(binding.imageCafeMenu)
             binding.textCafeMenuName.text = cafeMenu.name
             binding.textCafeMenuOrgPrice.text = cafeMenu.price.toString()
 
