@@ -11,6 +11,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -22,7 +23,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 
-class GetImageFunc {
+class ImageFunc {
     companion object {
         private lateinit var context: Context
         const val PERMISSION_REQUEST_CODE: Int = 1000
@@ -86,7 +87,7 @@ class GetImageFunc {
                     mCurrentPhotoPath = tempImage.absolutePath
                     photoFile = tempImage
                 } catch (e:IOException) {
-                    Log.w("TAG", "파일 생성 에러! ${e}")
+                    Log.w("ImageFunc", "파일 생성 에러! ${e}")
                 }
 
                 if(photoFile!=null) {
@@ -94,7 +95,6 @@ class GetImageFunc {
                     context.packageName+".fileprovider",
                     photoFile)
 
-                    Log.d("TAG", "captureWithUseCache run")
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 }
             }

@@ -3,11 +3,11 @@ package com.teamolj.cafehorizon.smartOrder
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 
+
 @Dao
 interface CartDao {
-    @Query("SELECT * FROM orm_cart ORDER BY type")
-    fun getAllByType(): List<Cart>
-
+    @Query("SELECT * FROM orm_cart ORDER BY category")
+    fun getAllByCategory():List<MenuInfo>
 
     @Query("SELECT * FROM orm_cart WHERE name = :name AND shot = :optionShot AND syrup = :optionSyrup AND whipping = :optionWhipping")
     fun getCafeMenuByPrimaryKey(
@@ -15,21 +15,21 @@ interface CartDao {
         optionShot: Int,
         optionSyrup: Int,
         optionWhipping: Boolean
-    ): Cart?
+    ): MenuInfo?
 
 
     @Query("SELECT COUNT(*) FROM orm_cart")
     fun getCount(): Int
 
-    @Query("SELECT SUM(amount*each_price) FROM orm_cart")
+    @Query("SELECT SUM(amount*price) FROM orm_cart")
     fun getTotalAmount():Int
 
 
     @Insert(onConflict = REPLACE)
-    fun insert(cart: Cart)
+    fun insert(menuInfo: MenuInfo)
 
     @Update
-    fun update(cart:Cart)
+    fun update(menuInfo: MenuInfo)
 
 
     @Query("UPDATE orm_cart SET amount= amount + :amount WHERE name = :name AND shot = :optionShot AND syrup = :optionSyrup AND whipping = :optionWhipping")
@@ -42,17 +42,20 @@ interface CartDao {
     )
 
 
-    fun insertOrUpdate(cart: Cart) {
-        val itemFromRoom = getCafeMenuByPrimaryKey(cart.cafeMenuName, cart.optionShot, cart.optionSyrup, cart.optionWhipping)
+    fun insertOrUpdate(menuInfo: MenuInfo) {
+        val itemFromRoom = getCafeMenuByPrimaryKey(menuInfo.name, menuInfo.optionShot, menuInfo.optionSyrup, menuInfo.optionWhipping)
 
         if (itemFromRoom == null) {
-            insert(cart)
+            insert(menuInfo)
         } else {
-            updateAmount(cart.cafeMenuAmount, cart.cafeMenuName, cart.optionShot, cart.optionSyrup, cart.optionWhipping)
+            updateAmount(menuInfo.amount, menuInfo.name, menuInfo.optionShot, menuInfo.optionSyrup, menuInfo.optionWhipping)
         }
     }
 
 
     @Delete
-    fun delete(cart: Cart)
+    fun delete(menuInfo:MenuInfo)
+
+    @Query("DELETE FROM orm_cart")
+    fun deleteAll()
 }

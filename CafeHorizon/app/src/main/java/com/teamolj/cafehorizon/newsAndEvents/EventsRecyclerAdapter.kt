@@ -2,14 +2,15 @@ package com.teamolj.cafehorizon.newsAndEvents
 
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.teamolj.cafehorizon.databinding.RecyclerItemEventsBinding
+import java.text.SimpleDateFormat
 
 
-class EventAdapter : RecyclerView.Adapter<EventAdapter.eventsHolder>() {
+class EventsRecyclerAdapter : RecyclerView.Adapter<EventsRecyclerAdapter.eventsHolder>() {
     internal var eventsList = mutableListOf<Events>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): eventsHolder =
@@ -21,8 +22,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.eventsHolder>() {
 
 
     override fun onBindViewHolder(holder: eventsHolder, position: Int) {
-        var events = eventsList.get(position)
-        holder.setEvent(events)
+        holder.setEvent(eventsList[position])
     }
 
     override fun getItemCount(): Int = eventsList.size
@@ -30,24 +30,23 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.eventsHolder>() {
 
     inner class eventsHolder(private var binding: RecyclerItemEventsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var events: Events
 
-        init {
+        fun setEvent(events: Events) {
+            Glide.with(binding.root).load(events.contentUrl).into(binding.imageEvents)
+
+            binding.textTitleEvents.text = if (System.currentTimeMillis() < events.endDate) {
+                events.title
+            } else events.title + " (종료)"
+
+            binding.textPeriodEvents.text =
+                "${SimpleDateFormat("yyyy-MM-dd").format(events.startDate)} ~ ${SimpleDateFormat("yyyy-MM-dd").format(events.endDate)}"
+
             binding.root.setOnClickListener {
-                var intent = Intent(binding.root.context, EventsDetailActivity::class.java).apply {
-                    putExtra("events", events)
-                }
+                val intent = Intent(binding.root.context, EventsDetailActivity::class.java)
+                intent.putExtra("events", events)
 
                 binding.root.context.startActivity(intent)
             }
-        }
-
-        fun setEvent(e: Events) {
-            events = e
-
-            binding.imageEvents.setImageURI(Uri.parse(events.imageUri))
-            binding.textTitleEvents.text = events.title
-            binding.textPeriodEvents.text = events.period
         }
     }
 }

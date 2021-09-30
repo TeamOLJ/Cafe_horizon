@@ -15,9 +15,10 @@ import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.coupon.Coupon
 import com.teamolj.cafehorizon.databinding.ActivityPayOrderBinding
 import com.teamolj.cafehorizon.smartOrder.AppDatabase
-import com.teamolj.cafehorizon.smartOrder.Cart
+import com.teamolj.cafehorizon.smartOrder.MenuInfo
 import com.teamolj.cafehorizon.views.PayOrderItemView
 import java.text.DecimalFormat
+import java.util.*
 
 class PayOrderActivity : AppCompatActivity() {
     companion object {
@@ -39,7 +40,7 @@ class PayOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPayOrderBinding
 
     private val db = Firebase.firestore
-    private var isDiscount: Boolean = false
+    private val userUid = Firebase.auth.currentUser!!.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,57 +55,62 @@ class PayOrderActivity : AppCompatActivity() {
             finish()
         }
 
-
-        val state = intent.getStringExtra("state")
-        var cafeMenuList = mutableListOf<Cart>()
+        val from = intent.getStringExtra("from")
+        var menuList = mutableListOf<MenuInfo>()
         var listTotalPrice = 0
+        var couponIndex = 0
         var eatOption = EAT_FOR_HERE
         var payOption = PAY_CREDIT
 
 
-        if (state == ORDER_NOW) {
-            cafeMenuList = mutableListOf(intent.getSerializableExtra("cafeMenu") as Cart)
-        } else if (state == ORDER_CART) {
-            cafeMenuList = AppDatabase.getInstance(this).cartDao().getAllByType().toMutableList()
+        // 바로 주문하기 or 장바구니 로부터 메뉴 리스트 가져오기
+        if (from == ORDER_NOW) {
+            menuList = mutableListOf(intent.getParcelableExtra("menuInfo")!!)
+        } else if (from == ORDER_CART) {
+            menuList = AppDatabase.getInstance(this).cartDao().getAllByCategory().toMutableList()
         }
 
-        for (menu in cafeMenuList) {
-            listTotalPrice += (menu.eachPrice * menu.cafeMenuAmount)
+        // 결제할 메뉴 리스트 표시하기
+        for (menu in menuList) {
+            listTotalPrice += (menu.price * menu.amount)
 
             val menuView = PayOrderItemView(this).apply {
                 setItemType(MENU)
-                setCafeMenuInfo(menu.cafeMenuName, menu.cafeMenuAmount, menu.eachPrice)
+                setCafeMenuInfo(menu.name, menu.amount, menu.price)
             }
-            binding.layoutCafeMenu.addView(menuView)
+            binding.layoutMenuItems.addView(menuView)
 
-            if (menu.optionShot > 0) {
+
+            if ((menu.optionType / 100 == 1) && (menu.optionShot > 0)) {
                 val shotView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("샷 추가", menu.optionShot)
                 }
-                binding.layoutCafeMenu.addView(shotView)
+                binding.layoutMenuItems.addView(shotView)
             }
-            if (menu.optionSyrup > 0) {
+
+            if ((menu.optionType % 100 / 10 == 1) && (menu.optionSyrup > 0)) {
                 val syrupView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("시럽 추가", menu.optionSyrup)
                 }
-                binding.layoutCafeMenu.addView(syrupView)
+                binding.layoutMenuItems.addView(syrupView)
             }
-            if (!menu.optionWhipping) {
+
+            if ((menu.optionType % 10 == 1) && !menu.optionWhipping) {
                 val whippingView = PayOrderItemView(this).apply {
                     setItemType(OPTION)
                     setOptionInfo("휘핑 X", 0)
                 }
-                binding.layoutCafeMenu.addView(whippingView)
+                binding.layoutMenuItems.addView(whippingView)
             }
         }
 
         binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
 
 
-        val userUid = Firebase.auth.currentUser!!.uid
-        val couponArray = arrayListOf<Coupon>(Coupon("쿠폰을 선택해주세요.", 0, 0, false))
+        // 쿠폰 스피너 설정하기
+        val couponArray = arrayListOf(Coupon("", "쿠폰을 선택해주세요.", 0, 0, false))
 
         val discountView = PayOrderItemView(this)
         discountView.setItemType(DISCOUNT)
@@ -118,6 +124,7 @@ class PayOrderActivity : AppCompatActivity() {
                 if (!isUsed && System.currentTimeMillis() < expiryDate) {
                     couponArray.add(
                         Coupon(
+                            document.id,
                             document.data["couponName"].toString(),
                             expiryDate,
                             document.data["discount"].toString().toInt(),
@@ -133,38 +140,36 @@ class PayOrderActivity : AppCompatActivity() {
 
         }
 
+        // 스피너 아이템 선택 리스너
         binding.spinnerCoupon.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                if (isDiscount) { //select coupon already
-
-                    listTotalPrice += discountView.getDiscountPrice()   //cancel old discount applied
-
-                    discountView.setDiscountInfo(
-                        couponArray[p2].couponName,
-                        couponArray[p2].discount
-                    )
-
-                    listTotalPrice -= discountView.getDiscountPrice()   //apply new discount value
-
+                try {
                     if (p2 == 0) {
-                        binding.layoutCafeMenu.removeView(discountView)
-                        isDiscount = false
+                        couponIndex = 0
+                        binding.layoutMenuItems.removeView(discountView)
+                        binding.textTotalPrice.text =
+                            DecimalFormat("총 ###,###원").format(listTotalPrice)
+                    } else {
+                        if (listTotalPrice >= couponArray[p2].discount) {
+                            couponIndex = p2
+                            discountView.setDiscountInfo(
+                                couponArray[p2].couponName,
+                                couponArray[p2].discount
+                            )
+                            binding.layoutMenuItems.addView(discountView)
+                            binding.textTotalPrice.text =
+                                DecimalFormat("총 ###,###원").format(listTotalPrice - discountView.getDiscountPrice())
+                        } else {
+                            couponIndex = 0
+                            Toast.makeText(applicationContext, "결제 금액이 할인 금액보다 적습니다.", Toast.LENGTH_SHORT).show()
+                            binding.spinnerCoupon.setSelection(0)
+                        }
                     }
 
-                } else if (p2 != 0) {   //never select coupon and choose new
-                    
-                    discountView.setDiscountInfo(
-                        couponArray[p2].couponName,
-                        couponArray[p2].discount
-                    )
-
-                    listTotalPrice -= discountView.getDiscountPrice()
-                    binding.layoutCafeMenu.addView(discountView)
-                    isDiscount = true
-
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
 
             }
 
@@ -197,15 +202,77 @@ class PayOrderActivity : AppCompatActivity() {
         }
 
         binding.btnPayment.setOnClickListener {
-            Toast.makeText(this, "$eatOption $payOption", Toast.LENGTH_SHORT).show()
             /*
-            취식 옵션 보내기
-            페이 옵션대로 결제 인텐드 실행하기
+            결제 완료한 셈 치고 수행합니다.
+            실제로는 payOption을 먼저 수행해야 합니다.
+            카페에 eatOption도 전송해야 합니다.
              */
-            val intent = Intent(this, OrderStateActivity::class.java).apply {
-                //전달해야할 정보 : 메뉴+가격, 시간, 취식옵션?
-                putExtra("orderTime", System.currentTimeMillis())
-            }
+
+            writeOrder(menuList, couponArray[couponIndex].couponPath)
+        }
+    }
+
+    // 결제 완료 후 데이터를 파이어베이스에 저장하기 위한 메소드.
+    private fun writeOrder(menuList: MutableList<MenuInfo>, couponPath: String) {
+        val order = Order(
+            if (menuList.size > 1) {
+                menuList[0].name + " 외"
+            } else {
+                menuList[0].name
+            },
+            Date(System.currentTimeMillis()),
+            getString(R.string.text_order_standby),
+            couponPath,
+            menuList
+        )
+
+        if (couponPath == "") { //쿠폰 없음
+            db.collection("UserInformation").document(userUid).collection("Orders")
+                .add(order).addOnSuccessListener {
+                    val bundle = Bundle()
+                    bundle.putParcelable("order", order)
+
+                    val intent = Intent(this, OrderStateActivity::class.java)
+                    intent.putExtra("bundle", bundle)
+                    intent.putExtra("from", "PayOrderActivity")
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Log.w("firebase", "Error getting documents.", it)
+                    Toast.makeText(this,
+                        getString(R.string.toast_error_occurred),
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+        } else {    //쿠폰 업데이트
+            db.collection("UserInformation").document(userUid).collection("Coupons")
+                .document(couponPath).update("isUsed", true,
+                    "usedDate", Date(System.currentTimeMillis()))
+                .addOnSuccessListener {
+
+                    db.collection("UserInformation").document(userUid).collection("Orders")
+                        .add(order).addOnSuccessListener {
+                            AppDatabase.getInstance(this).cartDao().deleteAll()
+
+                            val bundle = Bundle()
+                            bundle.putParcelable("order", order)
+
+                            val intent = Intent(this, OrderStateActivity::class.java)
+                            intent.putExtra("bundle", bundle)
+                            intent.putExtra("from", "PayOrderActivity")
+                            startActivity(intent)
+                        }
+                        .addOnFailureListener {
+                            Log.w("firebase", "Error getting documents.", it)
+                            Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+                .addOnFailureListener {
+                    Log.w("firebase", "Error getting documents.", it)
+                    Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }

@@ -199,10 +199,10 @@
     <string name="text_pickup_wait">픽업대기</string>
     <string name="text_pickup_finish">픽업완료</string>
 
-    <string name="desc_waiting_order">주문이 접수중입니다.</string>
-    <string name="desc_receive_order">음료를 준비중입니다.</string>
-    <string name="desc_waiting_pickup">음료가 준비되었습니다! \n픽업해주세요.</string>
-    <string name="desc_finish_pickup">픽업이 완료되었습니다. \n맛있게 드세요.</string>
+    <string name="desc_order_standby">주문이 접수중입니다.</string>
+    <string name="desc_order_receipt">음료를 준비중입니다.</string>
+    <string name="desc_pickup_wait">음료가 준비되었습니다! \n픽업해주세요.</string>
+    <string name="desc_pickup_finish">픽업이 완료되었습니다. \n맛있게 드세요.</string>
 
     <string name="text_coupon_is_used">사용완료</string>
     <string name="text_coupon_date_expiry">기간만료</string>
@@ -214,14 +214,6 @@
     <string name="btn_negative_permission_request">닫기</string>
 
     <string name="text_select_image">사진 선택</string>
-
-    <string-array name="array_cafe_menu">
-        <item>신메뉴</item>
-        <item>커피(hot)</item>
-        <item>커피(ice)</item>
-        <item>프라푸치노</item>
-        <item>음료</item>
-        <item>디저트</item>
-    </string-array>
+    <string name="barcode_key">11111</string> <!--병합 전에 지울것..-->
 
 </resources>

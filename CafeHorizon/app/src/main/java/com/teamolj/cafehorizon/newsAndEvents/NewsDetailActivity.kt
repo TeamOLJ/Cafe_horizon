@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityNewsDetailBinding
+import java.text.SimpleDateFormat
 
 class NewsDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsDetailBinding
@@ -24,7 +25,7 @@ class NewsDetailActivity : AppCompatActivity() {
         val news: News = intent.getSerializableExtra("news") as News
 
         binding.textNewsTitle.text = news.title
-        binding.textNewsDate.text = news.date
+        binding.textNewsDate.text = SimpleDateFormat("yyyy-MM-dd").format(news.date)
         binding.textNewsContent.text = news.content
     }
 }

@@ -3,12 +3,13 @@ package com.teamolj.cafehorizon.smartOrder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.teamolj.cafehorizon.databinding.RecyclerItemFilledCartBinding
 import java.text.DecimalFormat
 
 class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolder>() {
-    internal var cartList = mutableListOf<Cart>()
+    internal var menuList = mutableListOf<MenuInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): filledCartHolder =
         filledCartHolder(
@@ -18,10 +19,10 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
         )
 
     override fun onBindViewHolder(holder: filledCartHolder, position: Int) {
-        holder.setCartItem(cartList.get(position))
+        holder.setCartItem(menuList.get(position))
     }
 
-    override fun getItemCount(): Int = cartList.size
+    override fun getItemCount(): Int = menuList.size
 
 
     inner class filledCartHolder(private var binding: RecyclerItemFilledCartBinding) :
@@ -29,31 +30,32 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
         private var eachPrice: Int = 0
 
 
-        fun setCartItem(cartItem: Cart) {
-            eachPrice = cartItem.eachPrice
+        fun setCartItem(cartItem: MenuInfo) {
+            eachPrice = cartItem.price
             var menuOption = ""
 
-            if(cartItem.optionShot>0) {
+            if ((cartItem.optionType / 100 == 1) && (cartItem.optionShot > 0)) {
                 menuOption += " 샷 ${cartItem.optionShot} "
             }
-            if(cartItem.optionSyrup>0) {
+            if ((cartItem.optionType % 100 / 10 == 1) && cartItem.optionSyrup > 0) {
                 menuOption += " 시럽 ${cartItem.optionSyrup} "
             }
-            if(!cartItem.optionWhipping) {
-                menuOption += " 휘핑 없음 "
+            if ((cartItem.optionType % 10 == 1) && !cartItem.optionWhipping) {
+                menuOption += " 휘핑 X "
             }
 
-            binding.textCafeMenuName.text = cartItem.cafeMenuName
+            binding.textCafeMenuName.text = cartItem.name
             binding.textCafeMenuOption.text = menuOption
+            Glide.with(binding.root).load(cartItem.imageUrl).circleCrop().into(binding.imageCafeMenu)
 
-            changeAmountAndPrice(cartItem.cafeMenuAmount)
+            changeAmountAndPrice(cartItem.amount)
 
 
             binding.imageBtnMinus.setOnClickListener {
                 val amount = binding.textAmount.text.toString().toInt()
 
                 if (amount > 1) {
-                    cartItem.cafeMenuAmount -= 1
+                    cartItem.amount -= 1
                     AppDatabase.getInstance(binding.root.context).cartDao().update(cartItem)
                     notifyDataSetChanged()
                     FilledCartActivity.changeTotalPrice()
@@ -61,9 +63,7 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
             }
 
             binding.imageBtnPlus.setOnClickListener {
-                val amount = binding.textAmount.text.toString().toInt()
-
-                cartItem.cafeMenuAmount += 1
+                cartItem.amount += 1
                 AppDatabase.getInstance(binding.root.context).cartDao().update(cartItem)
                 notifyDataSetChanged()
                 FilledCartActivity.changeTotalPrice()
@@ -76,7 +76,7 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
                     .setNegativeButton("취소") { _, _ -> }
                     .setPositiveButton("삭제") { _, _ ->
                         AppDatabase.getInstance(binding.root.context).cartDao().delete(cartItem)
-                        cartList.removeAt(adapterPosition)
+                        menuList.removeAt(adapterPosition)
                         notifyItemRemoved(adapterPosition)
                         FilledCartActivity.changeTotalPrice()
                     }
