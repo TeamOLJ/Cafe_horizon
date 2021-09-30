@@ -69,8 +69,8 @@ open class SmartOrderActivity : AppCompatActivity() {
                             hashMap["description"].toString(),
                             hashMap["imageUrl"].toString(),
                             hashMap["price"].toString().toInt(),
-                            i.toByte(),
-                            hashMap["optionType"].toString().toByte()   //옵션 여부를 1/0으로 구분(샷-시럽-휘핑 순서)
+                            i.toInt(),
+                            hashMap["optionType"].toString().toInt()   //옵션 여부를 1/0으로 구분(샷-시럽-휘핑 순서)
                         )
                     )
                 }

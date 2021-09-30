@@ -3,7 +3,6 @@ package com.teamolj.cafehorizon
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -53,9 +52,9 @@ class OrderedListAdapter : RecyclerView.Adapter<OrderedListAdapter.listHolder>()
 
             binding.textOrderTime.text = SimpleDateFormat("yyyy.MM.dd(E) HH:mm", Locale.KOREAN).format(order.orderTime)
             binding.textOrderTitle.text = order.orderTitle
-            binding.textState.text = order.state
+            binding.textState.text = order.orderState
 
-            if(!order.isPickedup()) {
+            if(!order.checkPickUp()) {
                 binding.textState.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.colorAccent))
             }
         }

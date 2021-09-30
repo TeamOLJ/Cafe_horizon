@@ -8,7 +8,7 @@ import java.util.*
 data class Order(
     var orderTitle: String = "",
     var orderTime: Date = Date(),
-    var state: String = "",
+    var orderState: String = "",
     var couponPath: String = "",
     var orderMenuList: MutableList<MenuInfo> = mutableListOf()
 ) : Parcelable {
@@ -23,8 +23,8 @@ data class Order(
     ) {
     }
 
-    fun isPickedup(): Boolean {
-        return when (state) {
+    fun checkPickUp(): Boolean {
+        return when (orderState) {
             "픽업완료" -> true
             else -> false
         }
@@ -33,7 +33,7 @@ data class Order(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(orderTitle)
         parcel.writeLong(orderTime.time)
-        parcel.writeString(state)
+        parcel.writeString(orderState)
         parcel.writeString(couponPath)
         parcel.writeList(orderMenuList)
     }

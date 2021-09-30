@@ -7,13 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
@@ -23,7 +20,7 @@ class CouponActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCouponBinding
     private val ITEMS_NUM: Int = 2
 
-    lateinit var adapter:CouponRecyclerAdapter
+    lateinit var adapter: CouponRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCouponBinding.inflate(layoutInflater)
@@ -74,6 +71,9 @@ class CouponActivity : AppCompatActivity() {
                 }
             }
 
+            couponList[0].sortByDescending { o -> o.expiryDate }
+            couponList[1].sortByDescending { o -> o.usedDate }
+
             adapter = CouponRecyclerAdapter()
             adapter.couponList = couponList
             val viewPager = binding.viewPager
@@ -98,7 +98,7 @@ class CouponActivity : AppCompatActivity() {
 
     }
 
-    fun getAdapter(position:Int):CouponRecyclerAdapter {
+    fun getAdapter(position: Int): CouponRecyclerAdapter {
         adapter.setCategory(position)
         return adapter
     }

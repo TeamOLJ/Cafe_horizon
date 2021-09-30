@@ -87,7 +87,7 @@ class ImageFunc {
                     mCurrentPhotoPath = tempImage.absolutePath
                     photoFile = tempImage
                 } catch (e:IOException) {
-                    Log.w("TAG", "파일 생성 에러! ${e}")
+                    Log.w("ImageFunc", "파일 생성 에러! ${e}")
                 }
 
                 if(photoFile!=null) {

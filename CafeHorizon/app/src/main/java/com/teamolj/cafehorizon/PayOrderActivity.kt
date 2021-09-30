@@ -3,6 +3,7 @@ package com.teamolj.cafehorizon
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -39,6 +40,7 @@ class PayOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPayOrderBinding
 
     private val db = Firebase.firestore
+    private val userUid = Firebase.auth.currentUser!!.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,8 +110,7 @@ class PayOrderActivity : AppCompatActivity() {
 
 
         // 쿠폰 스피너 설정하기
-        val userUid = Firebase.auth.currentUser!!.uid
-        val couponArray = arrayListOf<Coupon>(Coupon("", "쿠폰을 선택해주세요.", 0, 0, false))
+        val couponArray = arrayListOf(Coupon("", "쿠폰을 선택해주세요.", 0, 0, false))
 
         val discountView = PayOrderItemView(this)
         discountView.setItemType(DISCOUNT)
@@ -161,12 +162,8 @@ class PayOrderActivity : AppCompatActivity() {
                                 DecimalFormat("총 ###,###원").format(listTotalPrice - discountView.getDiscountPrice())
                         } else {
                             couponIndex = 0
-                            Toast.makeText(
-                                applicationContext,
-                                "결제 금액이 할인 금액보다 적습니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.spinnerCoupon.setSelection(0);
+                            Toast.makeText(applicationContext, "결제 금액이 할인 금액보다 적습니다.", Toast.LENGTH_SHORT).show()
+                            binding.spinnerCoupon.setSelection(0)
                         }
                     }
 
@@ -210,28 +207,72 @@ class PayOrderActivity : AppCompatActivity() {
             실제로는 payOption을 먼저 수행해야 합니다.
             카페에 eatOption도 전송해야 합니다.
              */
-            val title = if (menuList.size > 1) {
-                menuList[0].name
-            } else {
+
+            writeOrder(menuList, couponArray[couponIndex].couponPath)
+        }
+    }
+
+    // 결제 완료 후 데이터를 파이어베이스에 저장하기 위한 메소드.
+    private fun writeOrder(menuList: MutableList<MenuInfo>, couponPath: String) {
+        val order = Order(
+            if (menuList.size > 1) {
                 menuList[0].name + " 외"
-            }
+            } else {
+                menuList[0].name
+            },
+            Date(System.currentTimeMillis()),
+            getString(R.string.text_order_standby),
+            couponPath,
+            menuList
+        )
 
-            val order = Order(
-                title,
-                Date(System.currentTimeMillis()),
-                getString(R.string.text_order_standby),
-                couponArray[couponIndex].couponPath,
-                menuList
-            )
+        if (couponPath == "") { //쿠폰 없음
+            db.collection("UserInformation").document(userUid).collection("Orders")
+                .add(order).addOnSuccessListener {
+                    val bundle = Bundle()
+                    bundle.putParcelable("order", order)
 
-            val bundle = Bundle()
-            bundle.putParcelable("order", order)
+                    val intent = Intent(this, OrderStateActivity::class.java)
+                    intent.putExtra("bundle", bundle)
+                    intent.putExtra("from", "PayOrderActivity")
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Log.w("firebase", "Error getting documents.", it)
+                    Toast.makeText(this,
+                        getString(R.string.toast_error_occurred),
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
 
-            val intent = Intent(this, OrderStateActivity::class.java)
-            intent.putExtra("bundle", bundle)
-            intent.putExtra("from", "PayOrderActivity")
-            startActivity(intent)
+        } else {    //쿠폰 업데이트
+            db.collection("UserInformation").document(userUid).collection("Coupons")
+                .document(couponPath).update("isUsed", true,
+                    "usedDate", Date(System.currentTimeMillis()))
+                .addOnSuccessListener {
 
+                    db.collection("UserInformation").document(userUid).collection("Orders")
+                        .add(order).addOnSuccessListener {
+                            AppDatabase.getInstance(this).cartDao().deleteAll()
+
+                            val bundle = Bundle()
+                            bundle.putParcelable("order", order)
+
+                            val intent = Intent(this, OrderStateActivity::class.java)
+                            intent.putExtra("bundle", bundle)
+                            intent.putExtra("from", "PayOrderActivity")
+                            startActivity(intent)
+                        }
+                        .addOnFailureListener {
+                            Log.w("firebase", "Error getting documents.", it)
+                            Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+                .addOnFailureListener {
+                    Log.w("firebase", "Error getting documents.", it)
+                    Toast.makeText(this, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }

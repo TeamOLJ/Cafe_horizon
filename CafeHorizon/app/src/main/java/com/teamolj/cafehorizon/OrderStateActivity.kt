@@ -1,5 +1,6 @@
 package com.teamolj.cafehorizon
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,7 +35,8 @@ class OrderStateActivity : AppCompatActivity() {
         topAppBar.setBackgroundColor(255)
 
         topAppBar.setNavigationOnClickListener {
-            finish()
+            // PayOrderActivity로 돌아가는 것 방지
+            startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
 
         when (intent.getStringExtra("from")) {
@@ -59,7 +61,7 @@ class OrderStateActivity : AppCompatActivity() {
         }
 
         // 주문 상태에 맞게 UI 변경
-        when (orderedList.state) {
+        when (orderedList.orderState) {
             getString(R.string.text_order_standby) -> {
                 binding.textOrderStandby.backgroundTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccent))
@@ -151,5 +153,9 @@ class OrderStateActivity : AppCompatActivity() {
         } else {
             binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
     }
 }

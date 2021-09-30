@@ -55,4 +55,7 @@ interface CartDao {
 
     @Delete
     fun delete(menuInfo:MenuInfo)
+
+    @Query("DELETE FROM orm_cart")
+    fun deleteAll()
 }

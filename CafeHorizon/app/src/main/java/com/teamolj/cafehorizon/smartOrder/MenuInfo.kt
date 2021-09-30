@@ -16,8 +16,8 @@ class MenuInfo(
     var description: String,
     @ColumnInfo(name = "image") var imageUrl: String,
     @ColumnInfo(name = "price") var price: Int,
-    @ColumnInfo(name = "category") var category: Byte,
-    var optionType: Byte,
+    @ColumnInfo(name = "category") var category: Int,
+    var optionType: Int,
     @ColumnInfo(name = "amount") var amount: Int,
     @ColumnInfo(name = "shot") var optionShot: Int,
     @ColumnInfo(name = "syrup") var optionSyrup: Int,
@@ -31,8 +31,8 @@ class MenuInfo(
         description: String,
         imageUrl: String,
         price: Int,
-        category: Byte,
-        type: Byte,
+        category: Int,
+        type: Int,
     ) : this(name, description, imageUrl, price, category, type, 1, 0, 0, false)
 
 
@@ -41,8 +41,8 @@ class MenuInfo(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readInt(),
-        parcel.readByte(),
-        parcel.readByte(),
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
@@ -55,8 +55,8 @@ class MenuInfo(
         parcel.writeString(description)
         parcel.writeString(imageUrl)
         parcel.writeInt(price)
-        parcel.writeByte(category)
-        parcel.writeByte(optionType)
+        parcel.writeInt(category)
+        parcel.writeInt(optionType)
         parcel.writeInt(amount)
         parcel.writeInt(optionShot)
         parcel.writeInt(optionSyrup)
