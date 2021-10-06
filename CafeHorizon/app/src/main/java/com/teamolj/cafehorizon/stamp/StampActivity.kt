@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,29 +44,6 @@ class StampActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.tabLayoutStamp.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (dbFetched) {
-                    when (tab!!.position) {
-                        0 -> {
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.containerStamp, StampFragment())
-                                .commit()
-                        }
-                        1 -> {
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.containerStamp, StampHistoryFragment())
-                                .commit()
-                        }
-                    }
-                }
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) { }
-            override fun onTabUnselected(tab: TabLayout.Tab?) { }
-        })
-
         db.collection("UserInformation").document(auth.currentUser!!.uid).collection("Stamps")
             .get()
             .addOnSuccessListener { result ->
@@ -87,9 +67,18 @@ class StampActivity : AppCompatActivity() {
                         else
                             getString(R.string.toast_error_occurred)
 
-                        supportFragmentManager.beginTransaction()
-                            .add(R.id.containerStamp, StampFragment())
-                            .commit()
+                        val stampPageAdapter = StampPageAdapter(this)
+                        stampPageAdapter.addFragment(StampFragment())
+                        stampPageAdapter.addFragment(StampHistoryFragment())
+                        binding.containerStamp.offscreenPageLimit = 2
+                        binding.containerStamp.adapter = stampPageAdapter
+
+                        TabLayoutMediator(binding.tabLayoutStamp, binding.containerStamp) { tab, position ->
+                            when (position) {
+                                0 -> tab.text = getString(R.string.menu_stamp)
+                                1 -> tab.text = getString(R.string.tab_stamp_history)
+                            }
+                        }.attach()
                     }
                     .addOnFailureListener {
                         binding.progressBar.visibility = View.GONE
@@ -112,5 +101,21 @@ class StampActivity : AppCompatActivity() {
 
     fun getRecyclerAdapter() : StampRecyclerAdapter {
         return rvAdapter
+    }
+
+    private inner class StampPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        var fragments : ArrayList<Fragment> = ArrayList()
+
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        fun addFragment(fragment: Fragment) {
+            fragments.add(fragment)
+            notifyItemInserted(fragments.size-1)
+        }
     }
 }

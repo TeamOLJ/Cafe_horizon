@@ -38,23 +38,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:tabMode="fixed">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/menu_stamp" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_stamp_history" />
-
-        </com.google.android.material.tabs.TabLayout>
+            app:tabMode="fixed" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/containerStamp"
         android:layout_width="0dp"
         android:layout_height="0dp"
