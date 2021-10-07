@@ -70,7 +70,6 @@ class StampActivity : AppCompatActivity() {
                         val stampPageAdapter = StampPageAdapter(this)
                         stampPageAdapter.addFragment(StampFragment())
                         stampPageAdapter.addFragment(StampHistoryFragment())
-                        binding.containerStamp.offscreenPageLimit = 2
                         binding.containerStamp.adapter = stampPageAdapter
 
                         TabLayoutMediator(binding.tabLayoutStamp, binding.containerStamp) { tab, position ->
