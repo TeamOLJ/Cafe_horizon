@@ -69,7 +69,7 @@ open class SmartOrderActivity : AppCompatActivity() {
                             hashMap["description"].toString(),
                             hashMap["imageUrl"].toString(),
                             hashMap["price"].toString().toInt(),
-                            i.toInt(),
+                            i,
                             hashMap["optionType"].toString().toInt()   //옵션 여부를 1/0으로 구분(샷-시럽-휘핑 순서)
                         )
                     )
@@ -79,7 +79,6 @@ open class SmartOrderActivity : AppCompatActivity() {
 
             adapter.menuList = menuList
             val viewPager = binding.viewPager
-            viewPager.offscreenPageLimit = categories.size
             viewPager.adapter = SmartOrderAdapter(this)
 
             val tabLayout = binding.tabLayout

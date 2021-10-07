@@ -29,6 +29,7 @@ import com.teamolj.cafehorizon.databinding.ActivityLoginBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
 import com.teamolj.cafehorizon.signUp.SignUpActivity
 import com.teamolj.cafehorizon.signUp.SignUpSocialActivity
+import java.security.MessageDigest
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {

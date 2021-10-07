@@ -1,7 +1,6 @@
 package com.teamolj.cafehorizon.chat
 
 import android.content.Intent
-import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
@@ -17,7 +16,7 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
                 binding.textChat.text = message.contentText
                 binding.textSendTime.text = message.timeToString()
-                binding.textReadState.text = message.getReadStateAsString()
+                binding.textReadState.text = message.readStateToString()
         }
     }
 
@@ -26,7 +25,7 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
             binding.textChat.text = message.contentText
             binding.textSendTime.text = message.timeToString()
-            binding.textReadState.text = message.getReadStateAsString()
+            binding.textReadState.text = message.readStateToString()
         }
     }
 
@@ -44,7 +43,7 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
             }
 
             binding.textSendTime.text = message.timeToString()
-            binding.textReadState.text = message.getReadStateAsString()
+            binding.textReadState.text = message.readStateToString()
         }
     }
 
@@ -62,7 +61,7 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
             }
 
             binding.textSendTime.text = message.timeToString()
-            binding.textReadState.text = message.getReadStateAsString()
+            binding.textReadState.text = message.readStateToString()
         }
     }
 }

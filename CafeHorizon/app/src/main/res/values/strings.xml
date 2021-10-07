@@ -214,6 +214,5 @@
     <string name="btn_negative_permission_request">닫기</string>
 
     <string name="text_select_image">사진 선택</string>
-    <string name="barcode_key">11111</string> <!--병합 전에 지울것..-->
 
 </resources>

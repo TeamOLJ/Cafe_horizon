@@ -15,7 +15,7 @@ data class Message(
         return SimpleDateFormat("HH:mm").format(time)
     }
 
-    fun getReadStateAsString():String {
+    fun readStateToString():String {
         return if (readState) "읽음" else "읽지않음"
     }
 }
