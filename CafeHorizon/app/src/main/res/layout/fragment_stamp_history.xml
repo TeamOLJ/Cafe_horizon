@@ -12,4 +12,13 @@
         android:layout_marginTop="16dp"
         tools:listitem="@layout/recycler_item_stamp"/>
 
+    <TextView
+        android:id="@+id/txtEmptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/text_list_is_empty"
+        android:textSize="20dp"
+        android:textColor="@color/gray" />
+
 </FrameLayout>

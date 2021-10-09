@@ -24,7 +24,7 @@ class StampActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
 
     private var dbFetched = false
-    private var stampCount = -1
+    private var stampCount = 0
     private var stampInform = ""
     private var rvAdapter = StampRecyclerAdapter()
 
@@ -47,12 +47,10 @@ class StampActivity : AppCompatActivity() {
         db.collection("UserInformation").document(auth.currentUser!!.uid).collection("Stamps")
             .get()
             .addOnSuccessListener { result ->
-                // 스탬프 개수 확인
-                stampCount = result.size()
-
                 // 내용물 어댑터에 저장
                 for (document in result) {
                     rvAdapter.listData.add(document.toObject<Stamp>())
+                    stampCount += document.getLong("stampSize")!!.toInt()   // 스탬프 개수 확인
                 }
                 rvAdapter.listData.sortByDescending { stamp -> stamp.earnedDate }
 
@@ -100,6 +98,10 @@ class StampActivity : AppCompatActivity() {
 
     fun getRecyclerAdapter() : StampRecyclerAdapter {
         return rvAdapter
+    }
+
+    fun checkIsListEmpty() : Boolean {
+        return rvAdapter.listData.isEmpty()
     }
 
     private inner class StampPageAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {

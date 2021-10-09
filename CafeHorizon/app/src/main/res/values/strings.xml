@@ -152,6 +152,7 @@
     <string name="hello_blank_fragment">hello</string>
 
     <string name="tab_stamp_history">적립/사용내역</string>
+    <string name="text_list_is_empty">아직 내역이 없습니다!</string>
 
     <string name="how_to_title">앱 이용안내</string>
     <string name="how_to_stamp">스탬프 이용안내</string>
