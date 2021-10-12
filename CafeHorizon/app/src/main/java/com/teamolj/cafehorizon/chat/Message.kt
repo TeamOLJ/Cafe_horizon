@@ -18,4 +18,8 @@ data class Message(
     fun readStateToString():String {
         return if (readState) "읽음" else "읽지않음"
     }
+
+    override fun toString(): String {
+        return "${user} : ${contentText} - ${SimpleDateFormat("HH:mm:ss").format(time)}"
+    }
 }

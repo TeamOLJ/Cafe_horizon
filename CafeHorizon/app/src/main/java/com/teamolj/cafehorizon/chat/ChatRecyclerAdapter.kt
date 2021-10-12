@@ -1,10 +1,8 @@
 package com.teamolj.cafehorizon.chat
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemChatBubbleInBinding
 import com.teamolj.cafehorizon.databinding.RecyclerItemChatBubbleOutBinding
@@ -12,7 +10,7 @@ import com.teamolj.cafehorizon.databinding.RecyclerItemChatPhotoInBinding
 import com.teamolj.cafehorizon.databinding.RecyclerItemChatPhotoOutBinding
 
 class ChatRecyclerAdapter(val user: String) : RecyclerView.Adapter<ChatRecyclerHolder>() {
-    var messageList = mutableListOf<Message>()
+    var messageList = ArrayDeque<Message>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRecyclerHolder {
         return when (viewType) {
@@ -23,7 +21,7 @@ class ChatRecyclerAdapter(val user: String) : RecyclerView.Adapter<ChatRecyclerH
                     )
                 )
             }
-            R.layout.recycler_item_chat_photo_in-> {
+            R.layout.recycler_item_chat_photo_in -> {
                 ChatRecyclerHolder.PhotoInHolder(
                     RecyclerItemChatPhotoInBinding.inflate(
                         LayoutInflater.from(parent.context), parent, false
@@ -49,7 +47,7 @@ class ChatRecyclerAdapter(val user: String) : RecyclerView.Adapter<ChatRecyclerH
     }
 
     override fun onBindViewHolder(holder: ChatRecyclerHolder, position: Int) {
-        when(holder){
+        when (holder) {
             is ChatRecyclerHolder.BubbleInHolder -> holder.bind(messageList.get(position))
             is ChatRecyclerHolder.PhotoInHolder -> holder.bind(messageList.get(position))
             is ChatRecyclerHolder.BubbleOutHolder -> holder.bind(messageList.get(position))
@@ -78,8 +76,23 @@ class ChatRecyclerAdapter(val user: String) : RecyclerView.Adapter<ChatRecyclerH
 
     override fun getItemCount(): Int = messageList.size
 
-    fun addNewData(message:Message) {
+
+    fun addAfterMessage(message: Message) {
         messageList.add(message)
-        this.notifyDataSetChanged()
+        this.notifyItemInserted(messageList.size - 1)
+
     }
+
+    fun addBeforeMessage(message: Message) {
+        for (i in 0 until messageList.size) {
+            if (message.time < messageList[i].time) {
+                messageList.add(i, message)
+                this.notifyItemInserted(0)
+                break
+            }
+        }
+    }
+
+    fun getOldestMessageTime(): Long = messageList[0].time ?: 0
+    fun getOldestMessageText():String = messageList[0].contentText.toString()
 }

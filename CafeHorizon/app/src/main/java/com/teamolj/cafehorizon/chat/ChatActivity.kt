@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -40,9 +42,10 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var storageReference: StorageReference
 
     private lateinit var chatAdapter: ChatRecyclerAdapter
-    private val messageList = mutableListOf<Message>()
 
     private var enable: Boolean = false;
+
+    private var newestItemTime: Long = 0
 
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -52,7 +55,7 @@ class ChatActivity : AppCompatActivity() {
 //            val uri: Uri? = result.data?.data ?: GetImageFunc.realUri
 
             // captureWithUseCache
-            val uri:Uri? = result.data?.data ?: File(ImageFunc.mCurrentPhotoPath).toUri()
+            val uri: Uri = result.data?.data ?: File(ImageFunc.mCurrentPhotoPath).toUri()
 
 
             storageReference.child("${auth.uid.toString()}/${uri?.lastPathSegment}.jpg")
@@ -61,9 +64,14 @@ class ChatActivity : AppCompatActivity() {
                     val downloadUri: Task<Uri> = taskSnapshot.storage.downloadUrl
 
                     downloadUri.addOnSuccessListener { uri ->
-                        val message = Message(userName, System.currentTimeMillis(), null, uri.toString(), false)
+                        val message = Message(userName,
+                            System.currentTimeMillis(),
+                            null,
+                            uri.toString(),
+                            false)
                         databaseReference.push().setValue(message)
-                } }
+                    }
+                }
                 .addOnFailureListener { e ->
                     showToast("image upload failed.\n${e}")
                 }
@@ -100,7 +108,6 @@ class ChatActivity : AppCompatActivity() {
 
         // Initialize recycler Adapter
         chatAdapter = ChatRecyclerAdapter(userName)
-        chatAdapter.messageList = messageList
         binding.recyclerViewChat.adapter = chatAdapter
         binding.recyclerViewChat.layoutManager = LinearLayoutManager(this)
 
@@ -155,6 +162,32 @@ class ChatActivity : AppCompatActivity() {
                 binding.editTextChat.setText("")
             }
         }
+
+        binding.recyclerViewChat.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                val firstVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+
+                if(firstVisibleItemPosition==2){
+                    val query =
+                        databaseReference.orderByChild("time")
+                        .endBefore(chatAdapter.getOldestMessageTime().toDouble())
+                        .limitToLast(15)
+
+                    query.get().addOnFailureListener {
+                        Log.w("firebase", "Error getting chat data.", it)
+                        Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+            }
+        })
+    }
+
+    override fun onDestroy() {
+        detachDatabaseReadListener()
+        super.onDestroy()
     }
 
     private fun attachDatabaseReadListener() {
@@ -162,16 +195,26 @@ class ChatActivity : AppCompatActivity() {
             childEventListener = object : ChildEventListener {
                 override fun onChildAdded(
                     snapshot: DataSnapshot,
-                    previousChildName: String?
+                    previousChildName: String?,
                 ) {
                     val newMessage: Message = snapshot.getValue(Message::class.java)!!
-                    chatAdapter.addNewData(newMessage)
-                    chatAdapter.notifyDataSetChanged()
+                    if (newMessage.user != userName && !newMessage.readState) {
+                        newMessage.readState = true;
+                        databaseReference.updateChildren(hashMapOf<String, Any>("/${snapshot.key}/readState" to true))
+                    }
+
+                    if (newestItemTime < newMessage.time) {
+                        chatAdapter.addAfterMessage(newMessage)
+                        newestItemTime = newMessage.time
+                        binding.recyclerViewChat.scrollToPosition(chatAdapter.itemCount - 1)
+                    } else {
+                        chatAdapter.addBeforeMessage(newMessage)
+                    }
                 }
 
                 override fun onChildChanged(
                     snapshot: DataSnapshot,
-                    previousChildName: String?
+                    previousChildName: String?,
                 ) {
                 }
 
@@ -179,14 +222,14 @@ class ChatActivity : AppCompatActivity() {
 
                 override fun onChildMoved(
                     snapshot: DataSnapshot,
-                    previousChildName: String?
+                    previousChildName: String?,
                 ) {
                 }
 
                 override fun onCancelled(error: DatabaseError) {}
 
             }
-            databaseReference.addChildEventListener(childEventListener!!)
+            databaseReference.limitToLast(15).addChildEventListener(childEventListener!!)
         }
     }
 
@@ -205,7 +248,7 @@ class ChatActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
