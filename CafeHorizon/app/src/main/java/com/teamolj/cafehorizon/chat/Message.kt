@@ -10,9 +10,10 @@ data class Message(
     var readState:Boolean
 ){
     constructor() : this("", 0, null, null, false) {}
+    constructor(time:Long):this("DIVIDER", time, null, null, false) {}
 
     fun timeToString():String {
-        return SimpleDateFormat("HH:mm").format(time)
+        return SimpleDateFormat("a hh:mm").format(time)
     }
 
     fun readStateToString():String {

@@ -165,22 +165,22 @@ class ChatActivity : AppCompatActivity() {
 
         binding.recyclerViewChat.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val firstVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
 
-                val firstVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
-
-                if(firstVisibleItemPosition==2){
+                if (firstVisibleItemPosition == 5) {
                     val query =
                         databaseReference.orderByChild("time")
-                        .endBefore(chatAdapter.getOldestMessageTime().toDouble())
-                        .limitToLast(15)
+                            .endBefore(chatAdapter.getOldestMessageTime().toDouble())
+                            .limitToLast(15)
 
                     query.get().addOnFailureListener {
                         Log.w("firebase", "Error getting chat data.", it)
-                        Toast.makeText(applicationContext, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,
+                            getString(R.string.toast_error_occurred),
+                            Toast.LENGTH_SHORT).show()
                     }
-
                 }
-
             }
         })
     }
