@@ -11,25 +11,29 @@
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
         android:layout_marginVertical="16dp"
-        android:background="@drawable/shape_circle"
+        android:background="@drawable/rounded_textview"
+        android:backgroundTint="@color/stampCounter"
         android:gravity="center"
         android:text="+1"
         android:textColor="@color/white"
         android:textSize="24dp"
+        android:fontFamily="@font/bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtMainTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/bold"
         android:text="윗 줄에 들어가는 글씨"
         android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@id/txtSubTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtInCircle"
         app:layout_constraintTop_toTopOf="@+id/txtInCircle" />
 
@@ -41,6 +45,8 @@
         android:layout_marginStart="16dp"
         android:text="아랫줄에 들어가는 내용"
         android:textSize="16dp"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/light"
         app:layout_constraintBottom_toBottomOf="@+id/txtInCircle"
         app:layout_constraintStart_toEndOf="@+id/txtInCircle"
         app:layout_constraintTop_toBottomOf="@id/txtMainTitle" />

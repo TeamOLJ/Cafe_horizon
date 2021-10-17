@@ -184,9 +184,7 @@
     <string name="text_how_to_pay">결제 방법</string>
     <string name="text_order_notice">유의사항</string>
 
-    <string name="desc_notice_text1">1. 어쩌고 저쩌고</string>
-    <string name="desc_notice_text2">2. 이러쿵 저러쿵</string>
-    <string name="desc_notice_text3">3. 그러므로 잘 살펴보고 이용하도록 하자. 우리는 책임지지 않겠다.</string>
+    <string name="desc_notice_text">1. 어쩌고 저쩌고\n2. 이러쿵 저러쿵\n3. 그러므로 잘 살펴보고 이용하도록 하자. 우리는 책임지지 않겠다.</string>
 
     <string name="btn_for_here">매장에서 취식</string>
     <string name="btn_to_go">포장 주문</string>

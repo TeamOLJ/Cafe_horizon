@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="1dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeNoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,16 +46,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp">
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="16dp"
+            android:clipToPadding="false">
 
             <TextView
                 android:id="@+id/textOrderCafeMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
                 android:background="@drawable/oval_primary_button"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="@string/text_order_cafe_menu"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -68,13 +68,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="12dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="@+id/viewBottomLine"
                 app:layout_constraintStart_toStartOf="@+id/textTotalDesc"
                 app:layout_constraintTop_toBottomOf="@id/textOrderCafeMenu" />
-
 
             <View
                 android:id="@+id/viewBottomLine"
@@ -91,32 +90,35 @@
                 android:id="@+id/textTotalDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="총 주문 금액"
                 android:textSize="16dp"
-                app:layout_constraintStart_toStartOf="@+id/textOrderCafeMenu"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold"
+                app:layout_constraintStart_toStartOf="@+id/layoutMenuItems"
                 app:layout_constraintTop_toBottomOf="@id/viewBottomLine" />
 
             <TextView
                 android:id="@+id/textTotalPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:text="총 00,000원"
+                android:layout_marginEnd="12dp"
+                android:text="00,000원"
                 android:textSize="16dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold"
                 app:layout_constraintEnd_toEndOf="@+id/viewBottomLine"
                 app:layout_constraintTop_toTopOf="@id/textTotalDesc" />
 
 
             <TextView
                 android:id="@+id/textCoupon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/oval_primary_button"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="@string/text_use_coupon"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -126,10 +128,9 @@
             <Spinner
                 android:id="@+id/spinnerCoupon"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginHorizontal="12dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -137,12 +138,12 @@
 
             <TextView
                 android:id="@+id/textEatOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/oval_primary_button"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="@string/text_eat_option"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -152,10 +153,9 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/groupEatOption"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginHorizontal="12dp"
                 android:gravity="center"
                 app:checkedButton="@+id/btnForHere"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,6 +169,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:layout_weight="1"
                     android:text="@string/btn_for_here"
                     android:textSize="16dp" />
@@ -178,21 +180,22 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:layout_weight="1"
                     android:text="@string/btn_to_go"
                     android:textSize="16dp" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
-
             <TextView
                 android:id="@+id/textHowToPay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/oval_primary_button"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="@string/text_how_to_pay"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -203,10 +206,9 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/groupPayOption"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginHorizontal="12dp"
                 android:gravity="center"
                 app:checkedButton="@id/btnCreditCard"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -220,6 +222,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:layout_weight="1"
                     android:text="@string/btn_credit_card"
                     android:textSize="16dp" />
@@ -229,6 +233,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:layout_weight="1"
                     android:text="@string/btn_easy_pay"
                     android:textSize="16dp" />
@@ -238,6 +244,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:layout_weight="1"
                     android:text="@string/btn_bank_transfer"
                     android:textSize="16dp" />
@@ -247,12 +255,12 @@
 
             <TextView
                 android:id="@+id/textOrderNotice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/oval_primary_button"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="@string/text_order_notice"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -260,59 +268,35 @@
                 app:layout_constraintTop_toBottomOf="@id/groupPayOption" />
 
             <TextView
-                android:id="@+id/textOrderNoticeDesc1"
+                android:id="@+id/textOrderNoticeDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="32dp"
                 android:fontFamily="@font/light"
-                android:text="@string/desc_notice_text1"
+                android:text="@string/desc_notice_text"
                 android:textSize="14dp"
+                android:textColor="@color/black"
+                android:lineSpacingMultiplier="1.2"
+                android:justificationMode="inter_word"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textOrderNotice" />
 
-            <TextView
-                android:id="@+id/textOrderNoticeDesc2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/light"
-                android:text="@string/desc_notice_text2"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
-                app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc1" />
-
-            <TextView
-                android:id="@+id/textOrderNoticeDesc3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="32dp"
-                android:fontFamily="@font/light"
-                android:text="@string/desc_notice_text3"
-                android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textOrderNotice"
-                app:layout_constraintTop_toBottomOf="@id/textOrderNoticeDesc2" />
-
             <Button
                 android:id="@+id/btnPayment"
-                android:layout_width="320dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/oval_primary_button"
                 android:text="@string/btn_payment"
+                android:textSize="24dp"
+                android:fontFamily="@font/bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textOrderNoticeDesc3" />
+                app:layout_constraintTop_toBottomOf="@+id/textOrderNoticeDesc" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

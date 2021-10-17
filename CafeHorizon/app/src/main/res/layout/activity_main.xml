@@ -47,7 +47,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/viewPagerMainImage"
             app:viewSlideIndicatorSize="3"
             app:viewSlideIndicatorDotSize="8dp"
-            app:viewSlideIndicatorMargin="5dp" />
+            app:viewSlideIndicatorMargin="5dp"
+            app:viewSlideIndicatorInactiveColor="@color/white" />
 
         <TextView
             android:id="@+id/textUserNickname"

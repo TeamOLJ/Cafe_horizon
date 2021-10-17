@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="1dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeNoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +37,7 @@
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textHowToTitle"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
@@ -47,12 +46,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="false"
         app:viewHowToItemText="@string/how_to_title"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textHowToStamp"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="stamp"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,13 +62,14 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/how_to_stamp"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textHowToCoupon"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="coupon"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,12 +79,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/how_to_coupon"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textHowToSmartOrder"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="smartOrder"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,12 +95,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/how_to_smart_order"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textHowToVersion"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textHowToSmartOrder"
@@ -106,12 +109,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="false"
         app:viewHowToItemText="버전 정보"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textTermsTitle"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHowToVersion"
@@ -120,12 +124,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="false"
         app:viewHowToItemText="@string/terms_title"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textTermsService"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="service"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,12 +140,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/terms_service"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textTermsPrivacyPolicy"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="privacyPolicy"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,12 +156,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/terms_privacy_policy"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textTermsMarketing"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="marketing"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,12 +172,13 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/terms_agree_to_use_marketing"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
     <com.teamolj.cafehorizon.views.HowToItemView
         android:id="@+id/textTermsAdInfo"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:tag="adInfo"
         android:onClick="onHowToClick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,6 +188,7 @@
         app:viewHowToItemPaddingRight="20dp"
         app:viewHowToItemShowImage="true"
         app:viewHowToItemText="@string/terms_agree_to_receive_ad_info"
-        app:viewHowToItemTextSize="16dp" />
+        app:viewHowToItemTextSize="16dp"
+        app:viewHowToItemTextColor="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

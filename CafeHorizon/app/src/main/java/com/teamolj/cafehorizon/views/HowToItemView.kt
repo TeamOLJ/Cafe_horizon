@@ -8,6 +8,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ViewHowToItemBinding
+import kotlinx.android.synthetic.main.view_main_button.view.*
 
 class HowToItemView @JvmOverloads constructor(
     context: Context,
@@ -29,6 +30,7 @@ class HowToItemView @JvmOverloads constructor(
                 val backgroundColor = getColor(R.styleable.HowToItemView_viewHowToItemBgColor, 0)
 
                 val itemText = getString(R.styleable.HowToItemView_viewHowToItemText)
+                val titleColor = getColor(R.styleable.HowToItemView_viewHowToItemTextColor, 0xFF000000.toInt())
                 val itemTextSize =
                     getDimension(R.styleable.HowToItemView_viewHowToItemTextSize, 16F)
 
@@ -49,6 +51,7 @@ class HowToItemView @JvmOverloads constructor(
 
                 binding.textItem.text = itemText
                 binding.textItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, itemTextSize)
+                binding.textItem.setTextColor(titleColor)
 
                 binding.container.setPadding(itemPaddingLeft.toInt(), 0, itemPaddingRight.toInt(), 0)
 

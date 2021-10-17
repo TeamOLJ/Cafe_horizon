@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="1dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeNoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,29 +39,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_cart_big"
-        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/textEmptyCart1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/textEmptyCart1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/desc_empty_cart_text1"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bold"
+        app:layout_constraintBottom_toTopOf="@+id/textEmptyCart2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/textEmptyCart2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="72dp"
         android:text="@string/desc_empty_cart_text2"
         android:textSize="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnBackToMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmptyCart1" />
@@ -72,10 +78,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="72dp"
+        android:background="@drawable/oval_primary_button"
         android:text="@string/btn_select_cafe_menu"
         android:textSize="24dp"
-        android:background="@drawable/oval_primary_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmptyCart2" />

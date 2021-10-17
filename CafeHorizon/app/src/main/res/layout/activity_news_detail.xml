@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="1dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeNoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,17 +34,30 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <ImageView
+        android:id="@+id/imageNewIcon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_new_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textNewsTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/textNewsTitle" />
+
     <TextView
         android:id="@+id/textNewsTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bold"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toEndOf="@+id/imageNewIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <TextView
@@ -55,20 +67,37 @@
         android:layout_marginTop="8dp"
         android:text="period"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@id/textNewsTitle"
+        android:textColor="@color/black"
+        android:fontFamily="@font/light"
         app:layout_constraintStart_toStartOf="@id/textNewsTitle"
         app:layout_constraintTop_toBottomOf="@+id/textNewsTitle" />
 
+    <View
+        android:id="@+id/divline"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNewsDate" />
 
     <TextView
         android:id="@+id/textNewsContent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:clipToPadding="false"
         android:textSize="16dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@id/textNewsTitle"
-        app:layout_constraintStart_toStartOf="@id/textNewsTitle"
-        app:layout_constraintTop_toBottomOf="@id/textNewsDate" />
+        android:textColor="@color/black"
+        android:fontFamily="@font/medium"
+        android:justificationMode="inter_word"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

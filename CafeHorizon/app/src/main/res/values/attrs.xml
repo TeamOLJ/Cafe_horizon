@@ -37,6 +37,7 @@
         <attr name="viewHowToItemBgColor" format="reference|integer" />
         <attr name="viewHowToItemText" format="string" />
         <attr name="viewHowToItemTextSize" format="dimension" />
+        <attr name="viewHowToItemTextColor" format="reference|integer" />
         <attr name="viewHowToItemPaddingLeft" format="reference|dimension" />
         <attr name="viewHowToItemPaddingRight" format="reference|dimension" />
         <attr name="viewHowToItemShowImage" format="boolean" />

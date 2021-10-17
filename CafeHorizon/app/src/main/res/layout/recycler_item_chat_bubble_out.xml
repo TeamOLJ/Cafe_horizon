@@ -8,10 +8,11 @@
         android:id="@+id/textChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:padding="12dp"
         android:background="@drawable/speech_bubble_out"
         android:gravity="center_vertical"
-        android:maxWidth="280dp"
+        android:maxWidth="240dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +21,11 @@
         android:id="@+id/textSendTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:text="12:37"
         android:textSize="14dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/light"
         app:layout_constraintBottom_toBottomOf="@+id/textChat"
         app:layout_constraintStart_toEndOf="@+id/textChat" />
 
@@ -33,6 +36,8 @@
         android:text="읽음"
         android:layout_marginBottom="4dp"
         android:textSize="14dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/light"
         app:layout_constraintBottom_toTopOf="@+id/textSendTime"
         app:layout_constraintStart_toStartOf="@+id/textSendTime" />
 

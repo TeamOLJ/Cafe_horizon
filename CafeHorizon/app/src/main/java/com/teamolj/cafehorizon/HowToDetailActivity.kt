@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.ktx.firestore
@@ -97,6 +98,9 @@ class HowToDetailActivity : AppCompatActivity() {
                         binding.slideIndicator.setCurrentSlide(position)
                     }
                 })
+
+                val child = viewPager.getChildAt(0)
+                (child as? RecyclerView)?.overScrollMode = View.OVER_SCROLL_NEVER
 
                 binding.slideIndicator.setSlideSize(howToImageList.size)
             }

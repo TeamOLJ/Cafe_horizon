@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/recycler_item_border"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="16dp">
 
     <ImageView
         android:id="@+id/imageNewIcon"
@@ -13,47 +14,35 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_new_item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textNewsTitle" />
+        app:layout_constraintTop_toTopOf="@id/textNewsTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/textNewsTitle" />
 
     <TextView
         android:id="@+id/textNewsTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/sample_text"
         android:textSize="16dp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textNewsDate"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageNewIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textNewsDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/sample_date"
         android:textSize="14dp"
+        android:fontFamily="@font/light"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textNewsTitle"
         app:layout_constraintTop_toBottomOf="@+id/textNewsTitle" />
-
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:src="@drawable/btn_rightarrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
