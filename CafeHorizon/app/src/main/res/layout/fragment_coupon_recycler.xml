@@ -4,6 +4,8 @@
     android:id="@+id/recyclerViewHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    android:clipToPadding="false"
     tools:listitem="@layout/recycler_item_coupon">
 
 </androidx.recyclerview.widget.RecyclerView>
