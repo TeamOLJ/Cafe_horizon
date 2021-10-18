@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -74,6 +75,15 @@ class LoginActivity : AppCompatActivity() {
         binding.txtUserPwd.doOnTextChanged { _, _, _, _ ->
             binding.textFieldUserPwd.error = null
             binding.textFieldUserPwd.isErrorEnabled = false
+        }
+
+        binding.txtUserPwd.setOnKeyListener { _, keyCode, event ->
+            if ((event.action== KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                binding.btnLogin.performClick()
+                true
+            } else {
+                false
+            }
         }
 
         binding.btnLogin.setOnClickListener {
