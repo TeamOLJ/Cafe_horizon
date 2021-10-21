@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
 import java.lang.StringBuilder
 
@@ -37,7 +38,10 @@ class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.caf
         RecyclerView.ViewHolder(binding.root) {
 
         fun setMenu(menuInfo: MenuInfo) {
-            Glide.with(binding.root.context).load(menuInfo.imageUrl).circleCrop()
+            Glide.with(binding.root.context)
+                .load(menuInfo.imageUrl)
+                .circleCrop()
+                .thumbnail(0.1f)
                 .into(binding.imageCafeMenu)
             binding.textCafeMenuName.text = menuInfo.name
             binding.textCafeMenuOrgPrice.text = menuInfo.price.toString()

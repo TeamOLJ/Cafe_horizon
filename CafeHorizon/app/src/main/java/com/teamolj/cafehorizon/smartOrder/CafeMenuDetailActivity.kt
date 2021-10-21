@@ -161,7 +161,7 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
     fun changeTotalPrice() {
         binding.textCafeMenuTotalPrice.text =
-            DecimalFormat("총 ###,###원").format(menuInfo.amount * menuInfo.price)
+            DecimalFormat("###,###원").format(menuInfo.amount * menuInfo.price)
     }
 
 }

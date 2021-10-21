@@ -172,7 +172,7 @@
         android:id="@+id/textTotalPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="총 00,000원"
+        android:text="00,000원"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="@+id/layoutOrderItems"
         app:layout_constraintTop_toTopOf="@id/textTotalDesc" />

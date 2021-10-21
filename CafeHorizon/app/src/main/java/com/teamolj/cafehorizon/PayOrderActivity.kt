@@ -106,7 +106,7 @@ class PayOrderActivity : AppCompatActivity() {
             }
         }
 
-        binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+        binding.textTotalPrice.text = DecimalFormat("###,###원").format(listTotalPrice)
 
 
         // 쿠폰 스피너 설정하기
@@ -149,7 +149,7 @@ class PayOrderActivity : AppCompatActivity() {
                         couponIndex = 0
                         binding.layoutMenuItems.removeView(discountView)
                         binding.textTotalPrice.text =
-                            DecimalFormat("총 ###,###원").format(listTotalPrice)
+                            DecimalFormat("###,###원").format(listTotalPrice)
                     } else {
                         if (listTotalPrice >= couponArray[p2].discount) {
                             couponIndex = p2
@@ -159,7 +159,7 @@ class PayOrderActivity : AppCompatActivity() {
                             )
                             binding.layoutMenuItems.addView(discountView)
                             binding.textTotalPrice.text =
-                                DecimalFormat("총 ###,###원").format(listTotalPrice - discountView.getDiscountPrice())
+                                DecimalFormat("###,###원").format(listTotalPrice - discountView.getDiscountPrice())
                         } else {
                             couponIndex = 0
                             Toast.makeText(applicationContext, "결제 금액이 할인 금액보다 적습니다.", Toast.LENGTH_SHORT).show()
@@ -232,6 +232,8 @@ class PayOrderActivity : AppCompatActivity() {
                     val bundle = Bundle()
                     bundle.putParcelable("order", order)
 
+                    AppDatabase.getInstance(this).cartDao().deleteAll();
+
                     val intent = Intent(this, OrderStateActivity::class.java)
                     intent.putExtra("bundle", bundle)
                     intent.putExtra("from", "PayOrderActivity")
@@ -257,6 +259,8 @@ class PayOrderActivity : AppCompatActivity() {
 
                             val bundle = Bundle()
                             bundle.putParcelable("order", order)
+
+                            AppDatabase.getInstance(this).cartDao().deleteAll();
 
                             val intent = Intent(this, OrderStateActivity::class.java)
                             intent.putExtra("bundle", bundle)

@@ -74,7 +74,7 @@ class OrderedListActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
 
             var adapter = OrderedListAdapter()
-            adapter.orderedList = orderedList;
+            adapter.orderedList = orderedList
             binding.recyclerViewOrderedList.adapter = adapter
             binding.recyclerViewOrderedList.layoutManager = LinearLayoutManager(this)
 
