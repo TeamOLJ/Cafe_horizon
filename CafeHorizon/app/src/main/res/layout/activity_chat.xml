@@ -84,6 +84,7 @@
             android:minHeight="32dp"
             android:padding="4dp"
             android:textSize="14dp"
+            android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSendChat"
             app:layout_constraintStart_toEndOf="@id/btnPhotoPicker"

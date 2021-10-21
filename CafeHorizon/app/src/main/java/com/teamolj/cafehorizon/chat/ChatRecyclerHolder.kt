@@ -4,11 +4,11 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.*
 import java.text.SimpleDateFormat
 
@@ -51,10 +51,11 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
             Glide.with(binding.root)
                 .load(message.photoUrl)
-                .into(binding.imageChat)
+                .thumbnail(0.5f)
+                .into(binding.photoChat)
 
-            binding.imageChat.setOnClickListener {
-                val intent = Intent(binding.root.context, ImageDetailActivity::class.java)
+            binding.photoChat.setOnClickListener {
+                val intent = Intent(binding.root.context, PhotoDetailActivity::class.java)
                 intent.putExtra("photoUrl", message.photoUrl)
                 binding.root.context.startActivity(intent)
             }
@@ -69,10 +70,11 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
             Glide.with(binding.root)
                 .load(message.photoUrl)
-                .into(binding.imageChat)
+                .thumbnail(0.5f)
+                .into(binding.photoChat)
 
-            binding.imageChat.setOnClickListener {
-                val intent = Intent(binding.root.context, ImageDetailActivity::class.java)
+            binding.photoChat.setOnClickListener {
+                val intent = Intent(binding.root.context, PhotoDetailActivity::class.java)
                 intent.putExtra("photoUrl", message.photoUrl)
                 binding.root.context.startActivity(intent)
             }

@@ -1,7 +1,9 @@
 package com.teamolj.cafehorizon.chat
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +14,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -43,7 +49,7 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatRecyclerAdapter
 
-    private var enable: Boolean = false;
+    private var isEnable: Boolean = true;
 
     private var newestItemTime: Long = 0
 
@@ -51,15 +57,24 @@ class ChatActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            // captureWithSaveImage
-//            val uri: Uri? = result.data?.data ?: GetImageFunc.realUri
-
-            // captureWithUseCache
             val uri: Uri = result.data?.data ?: File(ImageFunc.mCurrentPhotoPath).toUri()
 
+            cropImageLauncher.launch(
+                options(uri = uri) {
+                    setGuidelines(CropImageView.Guidelines.ON)
+                    setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                }
+            )
+        }
 
-            storageReference.child("${auth.uid.toString()}/${uri?.lastPathSegment}.jpg")
-                .putFile(uri!!)
+    }
+
+    private val cropImageLauncher = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            val uriContent = result.uriContent
+
+            storageReference.child("${auth.uid.toString()}/${uriContent?.lastPathSegment}")
+                .putFile(uriContent!!)
                 .addOnSuccessListener { taskSnapshot ->
                     val downloadUri: Task<Uri> = taskSnapshot.storage.downloadUrl
 
@@ -76,7 +91,6 @@ class ChatActivity : AppCompatActivity() {
                     showToast("image upload failed.\n${e}")
                 }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,18 +118,16 @@ class ChatActivity : AppCompatActivity() {
         storageReference = storage.reference.child("ChatImages")
 
 
-        ImageFunc.getInstance(this)
-
         // Initialize recycler Adapter
         chatAdapter = ChatRecyclerAdapter(userName)
         binding.recyclerViewChat.adapter = chatAdapter
         binding.recyclerViewChat.layoutManager = LinearLayoutManager(this)
 
+        binding.btnSendChat.isEnabled = false
 
-        if (enable) {
+        if (!isEnable) {
             //영업시간 X
             binding.btnPhotoPicker.isEnabled = false
-
             binding.editTextChat.keyListener = null
             binding.editTextChat.setText(R.string.text_chatting_not_enable)
             binding.editTextChat.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -125,16 +137,20 @@ class ChatActivity : AppCompatActivity() {
                     R.color.gray
                 )
             )
-            binding.btnSendChat.isEnabled = false
 
         } else {
             // 영업시간 O
             binding.btnPhotoPicker.setOnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    ImageFunc.requirePermissions()
+                    ActivityCompat.requestPermissions(this, arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), ImageFunc.PERMISSION_REQUEST_CODE)
+
                 } else {
                     // 버전이 낮은 경우 권한 확인하지 않음.
-                    pickImageLauncher.launch(ImageFunc.getPickIntent())
+                    pickImageLauncher.launch(ImageFunc.getPickIntent(this))
                 }
             }
 
@@ -257,14 +273,14 @@ class ChatActivity : AppCompatActivity() {
                 if (grantResults.isEmpty()) {
                 }
                 if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                    pickImageLauncher.launch(ImageFunc.getPickIntent())
+                    pickImageLauncher.launch(ImageFunc.getPickIntent(this))
                 } else {
                     // 권한 거부
                     if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                        showToast("권한이 거부되었습니다. 권한을 허용해야 사용할 수 있습니다.")
+                        showToast(getString(R.string.text_permission_request))
                     } else {
                         // +다신 물어보지 않기
-                        ImageFunc.showDialogToGetPermission()
+                        ImageFunc.showDialogToGetPermission(this)
                     }
                 }
             }
