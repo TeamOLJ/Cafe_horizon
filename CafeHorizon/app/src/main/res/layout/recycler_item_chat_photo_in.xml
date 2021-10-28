@@ -6,26 +6,24 @@
 
     <ImageView
         android:id="@+id/photoChat"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/btn_download_photo"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
 
     <TextView
         android:id="@+id/textSendTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="12:37"
-        android:textSize="14dp"
-        android:textColor="@color/black"
         android:fontFamily="@font/light"
+        android:text="12:37"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/photoChat"
         app:layout_constraintEnd_toStartOf="@+id/photoChat" />
 
@@ -34,10 +32,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:text="읽음"
-        android:textSize="14dp"
-        android:textColor="@color/black"
         android:fontFamily="@font/light"
+        android:text="읽음"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/textSendTime"
         app:layout_constraintEnd_toEndOf="@+id/textSendTime" />
 

@@ -56,14 +56,14 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
     class PhotoInHolder(private val binding: RecyclerItemChatPhotoInBinding) :
         ChatRecyclerHolder(binding) {
         fun bind(message: Message) {
-            itemView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-
-            var density = binding.root.context.resources.displayMetrics.density
-            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
-            layoutParams.matchConstraintMaxWidth = (itemView.measuredWidth * density / 2).toInt()
-            layoutParams.matchConstraintMinWidth = (itemView.measuredWidth * density / 3).toInt()
-
-            binding.photoChat.layoutParams = layoutParams
+//            itemView.rootView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+//
+//            var density = binding.root.context.resources.displayMetrics.density
+//            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
+//            layoutParams.matchConstraintMaxWidth = (itemView.rootView.measuredWidth * density / 2).toInt()
+//            layoutParams.matchConstraintMinWidth = (itemView.rootView.measuredWidth * density / 3).toInt()
+//
+//            binding.photoChat.layoutParams = layoutParams
 
             Glide.with(binding.root)
                 .load(message.photoUrl)
@@ -84,14 +84,14 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
     class PhotoOutHolder(private val binding: RecyclerItemChatPhotoOutBinding) :
         ChatRecyclerHolder(binding) {
         fun bind(message: Message) {
-            itemView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-
-            var density = binding.root.context.resources.displayMetrics.density
-            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
-            layoutParams.matchConstraintMaxWidth = (itemView.measuredWidth * density / 2).toInt()
-            layoutParams.matchConstraintMinWidth = (itemView.measuredWidth * density / 3).toInt()
-
-            binding.photoChat.layoutParams = layoutParams
+//            itemView.rootView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+//
+//            var density = binding.root.context.resources.displayMetrics.density
+//            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
+//            layoutParams.matchConstraintMaxWidth = (itemView.rootView.measuredWidth * density / 2).toInt()
+//            layoutParams.matchConstraintMinWidth = (itemView.rootView.measuredWidth * density / 3).toInt()
+//
+//            binding.photoChat.layoutParams = layoutParams
 
             Glide.with(binding.root)
                 .load(message.photoUrl)
