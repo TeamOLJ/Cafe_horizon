@@ -15,11 +15,12 @@
     </style>
 
     <style name="OutlinedRoundBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxBackgroundMode">outline</item>
-        <item name="boxCornerRadiusBottomEnd">32dp</item>
-        <item name="boxCornerRadiusBottomStart">32dp</item>
-        <item name="boxCornerRadiusTopEnd">32dp</item>
-        <item name="boxCornerRadiusTopStart">32dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="RoundedButton" parent="Widget.MaterialComponents.Button">
