@@ -8,7 +8,6 @@
         android:id="@+id/textChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
         android:background="@drawable/speech_bubble_in"
         android:gravity="center_vertical"
         android:maxWidth="240dp"
