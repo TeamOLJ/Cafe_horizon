@@ -5,13 +5,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageChat"
+        android:id="@+id/photoChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
-        android:maxWidth="160dp"
-        android:minWidth="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +23,8 @@
         android:textSize="14dp"
         android:textColor="@color/black"
         android:fontFamily="@font/light"
-        app:layout_constraintBottom_toBottomOf="@+id/imageChat"
-        app:layout_constraintStart_toEndOf="@+id/imageChat" />
+        app:layout_constraintBottom_toBottomOf="@+id/photoChat"
+        app:layout_constraintStart_toEndOf="@+id/photoChat" />
 
     <TextView
         android:id="@+id/textReadState"

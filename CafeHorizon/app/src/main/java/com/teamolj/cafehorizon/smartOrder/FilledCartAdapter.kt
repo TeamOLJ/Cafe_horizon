@@ -1,14 +1,17 @@
 package com.teamolj.cafehorizon.smartOrder
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.teamolj.cafehorizon.databinding.RecyclerItemFilledCartBinding
 import java.text.DecimalFormat
 
-class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolder>() {
+class FilledCartAdapter(val context: Context) :
+    RecyclerView.Adapter<FilledCartAdapter.filledCartHolder>() {
     internal var menuList = mutableListOf<MenuInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): filledCartHolder =
@@ -46,7 +49,8 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
 
             binding.textCafeMenuName.text = cartItem.name
             binding.textCafeMenuOption.text = menuOption
-            Glide.with(binding.root).load(cartItem.imageUrl).circleCrop().into(binding.imageCafeMenu)
+            Glide.with(binding.root).load(cartItem.imageUrl).circleCrop()
+                .into(binding.imageCafeMenu)
 
             changeAmountAndPrice(cartItem.amount)
 
@@ -79,10 +83,13 @@ class FilledCartAdapter : RecyclerView.Adapter<FilledCartAdapter.filledCartHolde
                         menuList.removeAt(adapterPosition)
                         notifyItemRemoved(adapterPosition)
                         FilledCartActivity.changeTotalPrice()
+
+                        if (menuList.size == 0) {
+                            Toast.makeText(context, "장바구니가 비었습니다.", Toast.LENGTH_SHORT).show()
+                            (context as FilledCartActivity).finish()
+                        }
                     }
                     .show()
-
-
             }
         }
 

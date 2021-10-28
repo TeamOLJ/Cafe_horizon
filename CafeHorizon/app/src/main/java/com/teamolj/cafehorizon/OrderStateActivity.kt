@@ -21,6 +21,8 @@ class OrderStateActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     private lateinit var orderedList: Order
 
+    private var from:String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderStateBinding.inflate(layoutInflater)
@@ -39,7 +41,9 @@ class OrderStateActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
 
-        when (intent.getStringExtra("from")) {
+        from = intent.getStringExtra("from")!!
+
+        when (from) {
             "OrderedListActivity" -> {
                 try {
                     orderedList = intent.getBundleExtra("bundle")?.getParcelable<Order>("order")!!
@@ -147,15 +151,23 @@ class OrderStateActivity : AppCompatActivity() {
                     listTotalPrice -= discountView.getDiscountPrice()
                     binding.layoutOrderItems.addView(discountView)
 
-                    binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+                    binding.textTotalPrice.text = DecimalFormat("###,###원").format(listTotalPrice)
                 }
             }
         } else {
-            binding.textTotalPrice.text = DecimalFormat("총 ###,###원").format(listTotalPrice)
+            binding.textTotalPrice.text = DecimalFormat("###,###원").format(listTotalPrice)
         }
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+        when(from) {
+            "OrderedListActivity" -> {
+                super.onBackPressed()
+            }
+
+            "PayOrderActivity" -> {
+                startActivity(Intent(applicationContext, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+            }
+        }
     }
 }

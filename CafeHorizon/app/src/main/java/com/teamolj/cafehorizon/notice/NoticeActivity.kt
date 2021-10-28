@@ -2,13 +2,24 @@ package com.teamolj.cafehorizon.notice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityNoticeBinding
 import java.text.SimpleDateFormat
+import java.util.*
 
 class NoticeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoticeBinding
+
+    private lateinit var noticeAdapter: NoticeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,31 +34,38 @@ class NoticeActivity : AppCompatActivity() {
             finish()
         }
 
-        val data: MutableList<Notice> = loadNotices()
+        val db = Firebase.firestore
+        val userUid = Firebase.auth.currentUser!!.uid
+        val docRef = db.collection("UserInformation").document(userUid).collection("Notices")
 
-        var adapter = NoticeAdapter()
-        adapter.noticeList = data
-        binding.recyclerViewNotice.adapter = adapter
-        binding.recyclerViewNotice.layoutManager = LinearLayoutManager(this)
-    }
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.DAY_OF_MONTH, -30)
+        val monthAgo: Date = cal.time
 
+        docRef
+            .whereGreaterThan("noticeTime", monthAgo)
+            .orderBy("noticeTime", Query.Direction.DESCENDING)
+            .get().addOnSuccessListener { snapshot ->
+                val noticeList: MutableList<Notice> = mutableListOf()
 
-    internal fun loadNotices(): MutableList<Notice> {
-        val data:MutableList<Notice> = mutableListOf()
+                for (document in snapshot.documents) {
+                    noticeList.add(Notice(document["noticeContext"].toString(),
+                        (document["noticeTime"] as Timestamp).seconds * 1000))
+                }
 
-        for (no in 0..100) {
-            val title = "이것은 ${no}번째 알림입니다. 14일 이전의 알림만 표시하도록 합니다. height 50dp"
-            val date = System.currentTimeMillis()
-            val sdf = SimpleDateFormat("yyyy/MM/dd")
-            var notice = Notice(title, sdf.format(date))
-            data.add(notice)
-        }
-        
-        /*
-        데이터베이스에 접근해서 content, date(SimpleDateFormat("yyyy-MM-dd"), 14일 이전) 불러오기
-        input: 유저 정보
-         */
-        
-        return data
+                var adapter = NoticeAdapter()
+                adapter.noticeList = noticeList
+                binding.recyclerViewNotice.adapter = adapter
+                binding.recyclerViewNotice.layoutManager = LinearLayoutManager(this)
+
+                binding.progressBar.visibility = View.GONE
+
+            }.addOnFailureListener {
+                binding.progressBar.visibility = View.GONE
+                Log.w("firebase", "Error getting documents.", it)
+                Toast.makeText(binding.root.context,
+                    getString(R.string.toast_error_occurred),
+                    Toast.LENGTH_SHORT).show()
+            }
     }
 }

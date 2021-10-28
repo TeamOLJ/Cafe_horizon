@@ -94,6 +94,7 @@
     <string name="title_coupon_list">보유 쿠폰</string>
     <string name="title_coupon_history">쿠폰 히스토리</string>
     <string name="title_chatting">채팅문의</string>
+    <string name="title_download">다운로드</string>
 
     <string name="welcome">환영합니다</string>
     <string name="nim">님</string>

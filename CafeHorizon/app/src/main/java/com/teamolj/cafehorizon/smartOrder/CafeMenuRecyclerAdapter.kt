@@ -4,12 +4,13 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
+import java.lang.StringBuilder
 
-class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
+class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
     internal lateinit var menuList: Array<MutableList<MenuInfo>>
     private var category: Int = 0
 
@@ -35,25 +36,22 @@ class CafeMenuRecyclerAdapter() : RecyclerView.Adapter<CafeMenuRecyclerAdapter.c
 
     inner class cafeMenuHolder(private var binding: RecyclerItemCafeMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var cafeMenu: MenuInfo
 
-        init {
+        fun setMenu(menuInfo: MenuInfo) {
+            Glide.with(binding.root.context)
+                .load(menuInfo.imageUrl)
+                .circleCrop()
+                .thumbnail(0.1f)
+                .into(binding.imageCafeMenu)
+            binding.textCafeMenuName.text = menuInfo.name
+            binding.textCafeMenuOrgPrice.text = menuInfo.price.toString()
+
             binding.root.setOnClickListener {
-                var intent = Intent(binding.root.context, CafeMenuDetailActivity::class.java)
-                intent.putExtra("info", cafeMenu)
+                val intent = Intent(binding.root.context, CafeMenuDetailActivity::class.java)
+                intent.putExtra("info", menuInfo)
 
                 binding.root.context.startActivity(intent)
             }
-        }
-
-        fun setMenu(cafeMenu: MenuInfo) {
-            this.cafeMenu = cafeMenu
-
-            Glide.with(binding.root.context).load(cafeMenu.imageUrl).circleCrop()
-                .into(binding.imageCafeMenu)
-            binding.textCafeMenuName.text = cafeMenu.name
-            binding.textCafeMenuOrgPrice.text = cafeMenu.price.toString()
-
         }
     }
 }

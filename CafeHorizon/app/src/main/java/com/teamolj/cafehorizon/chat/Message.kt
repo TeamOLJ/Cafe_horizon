@@ -10,12 +10,17 @@ data class Message(
     var readState:Boolean
 ){
     constructor() : this("", 0, null, null, false) {}
+    constructor(time:Long):this("DIVIDER", time, null, null, false) {}
 
     fun timeToString():String {
-        return SimpleDateFormat("HH:mm").format(time)
+        return SimpleDateFormat("a hh:mm").format(time)
     }
 
-    fun getReadStateAsString():String {
+    fun readStateToString():String {
         return if (readState) "읽음" else "읽지않음"
+    }
+
+    override fun toString(): String {
+        return "${user} : ${contentText} - ${SimpleDateFormat("HH:mm:ss").format(time)}"
     }
 }
