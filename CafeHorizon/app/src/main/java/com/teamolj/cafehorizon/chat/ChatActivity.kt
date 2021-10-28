@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityChatBinding
 import java.io.File
+import java.util.*
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding

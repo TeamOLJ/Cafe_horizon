@@ -4,11 +4,12 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.view.View
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.*
 import java.text.SimpleDateFormat
 
@@ -22,11 +23,14 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
             binding.textReadState.text = message.readStateToString()
 
             binding.textChat.setOnLongClickListener {
-                val clipboard = binding.root.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                val clip:ClipData = ClipData.newPlainText("chat message", binding.textChat.text.toString())
+                val clipboard =
+                    binding.root.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clip: ClipData =
+                    ClipData.newPlainText("chat message", binding.textChat.text.toString())
                 Toast.makeText(binding.root.context, "텍스트가 복사되었습니다.", Toast.LENGTH_SHORT).show()
                 clipboard.setPrimaryClip(clip)
-                true; }
+                true;
+            }
         }
     }
 
@@ -38,17 +42,29 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
             binding.textReadState.text = message.readStateToString()
 
             binding.textChat.setOnLongClickListener {
-                val clipboard = binding.root.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                val clip:ClipData = ClipData.newPlainText("chat message", binding.textChat.text.toString())
+                val clipboard =
+                    binding.root.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clip: ClipData =
+                    ClipData.newPlainText("chat message", binding.textChat.text.toString())
                 Toast.makeText(binding.root.context, "텍스트가 복사되었습니다.", Toast.LENGTH_SHORT).show()
                 clipboard.setPrimaryClip(clip)
-                true; }
+                true;
+            }
         }
     }
 
     class PhotoInHolder(private val binding: RecyclerItemChatPhotoInBinding) :
         ChatRecyclerHolder(binding) {
         fun bind(message: Message) {
+            itemView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+
+            var density = binding.root.context.resources.displayMetrics.density
+            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
+            layoutParams.matchConstraintMaxWidth = (itemView.measuredWidth * density / 2).toInt()
+            layoutParams.matchConstraintMinWidth = (itemView.measuredWidth * density / 3).toInt()
+
+            binding.photoChat.layoutParams = layoutParams
+
             Glide.with(binding.root)
                 .load(message.photoUrl)
                 .thumbnail(0.5f)
@@ -68,6 +84,15 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
     class PhotoOutHolder(private val binding: RecyclerItemChatPhotoOutBinding) :
         ChatRecyclerHolder(binding) {
         fun bind(message: Message) {
+            itemView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+
+            var density = binding.root.context.resources.displayMetrics.density
+            val layoutParams = binding.photoChat.layoutParams as ConstraintLayout.LayoutParams
+            layoutParams.matchConstraintMaxWidth = (itemView.measuredWidth * density / 2).toInt()
+            layoutParams.matchConstraintMinWidth = (itemView.measuredWidth * density / 3).toInt()
+
+            binding.photoChat.layoutParams = layoutParams
+
             Glide.with(binding.root)
                 .load(message.photoUrl)
                 .thumbnail(0.5f)
