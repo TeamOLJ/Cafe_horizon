@@ -3,6 +3,7 @@ package com.teamolj.cafehorizon.newsAndEvents
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teamolj.cafehorizon.R
@@ -32,11 +33,10 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.newsHolder>
 
         fun setNews(news: News) {
             val betweenDays = (System.currentTimeMillis() - news.date) / (24 * 60 * 60 * 1000)
+            val over3Days = betweenDays > 3
 
-            if (betweenDays <= 3) {
-                binding.imageNewIcon.setImageResource(R.drawable.ic_new_item)
-            } else {
-                binding.imageNewIcon.setImageResource(android.R.color.transparent)
+            if (over3Days) {
+                binding.imageNewIcon.visibility = View.INVISIBLE
             }
 
             binding.textNewsTitle.text = news.title
@@ -45,6 +45,7 @@ class NewsRecyclerAdapter : RecyclerView.Adapter<NewsRecyclerAdapter.newsHolder>
             binding.root.setOnClickListener {
                 val intent = Intent(binding.root.context, NewsDetailActivity::class.java)
                 intent.putExtra("news", news)
+                intent.putExtra("over3Days", over3Days)
 
                 binding.root.context.startActivity(intent)
             }

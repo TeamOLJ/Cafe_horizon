@@ -2,6 +2,7 @@ package com.teamolj.cafehorizon.newsAndEvents
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityNewsDetailBinding
 import java.text.SimpleDateFormat
@@ -23,6 +24,10 @@ class NewsDetailActivity : AppCompatActivity() {
         }
 
         val news: News = intent.getSerializableExtra("news") as News
+
+        if (intent.getBooleanExtra("over3Days", true)) {
+            binding.imageNewIcon.visibility = View.INVISIBLE
+        }
 
         binding.textNewsTitle.text = news.title
         binding.textNewsDate.text = SimpleDateFormat("yyyy-MM-dd").format(news.date)
