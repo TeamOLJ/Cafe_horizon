@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basicBackground">
@@ -36,11 +37,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtUserID"
+            android:paddingStart="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLines="1"
-            app:fontFamily="sans-serif" />
+            app:fontFamily="sans-serif"
+            tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,10 +66,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtUserPwd"
+            android:paddingStart="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            app:fontFamily="sans-serif" />
+            app:fontFamily="sans-serif"
+            tools:ignore="RtlSymmetry" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
