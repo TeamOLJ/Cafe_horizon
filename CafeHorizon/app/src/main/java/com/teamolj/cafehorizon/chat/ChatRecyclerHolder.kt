@@ -4,9 +4,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
-import android.view.View
+import android.util.Log
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
@@ -58,7 +57,6 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
             Glide.with(binding.root)
                 .load(message.photoUrl)
-                .thumbnail(0.5f)
                 .into(binding.photoChat)
 
             binding.photoChat.setOnClickListener {
@@ -77,7 +75,6 @@ sealed class ChatRecyclerHolder(binding: ViewBinding) : RecyclerView.ViewHolder(
         fun bind(message: Message) {
             Glide.with(binding.root)
                 .load(message.photoUrl)
-                .thumbnail(0.5f)
                 .into(binding.photoChat)
 
             binding.photoChat.setOnClickListener {

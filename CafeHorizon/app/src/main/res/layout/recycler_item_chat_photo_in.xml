@@ -7,13 +7,16 @@
     <ImageView
         android:id="@+id/photoChat"
         android:layout_width="0dp"
+        app:layout_constraintWidth_default="wrap"
         android:layout_height="wrap_content"
+        android:maxHeight="240dp"
+        android:src="@drawable/img_placeholder"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.3"/>
 
     <TextView
         android:id="@+id/textSendTime"

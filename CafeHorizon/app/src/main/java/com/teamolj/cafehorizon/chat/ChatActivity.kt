@@ -107,7 +107,7 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
 
-        auth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()f
         userName = auth.currentUser!!.uid
 
         database =
