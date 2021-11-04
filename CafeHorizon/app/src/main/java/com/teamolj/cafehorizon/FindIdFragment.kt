@@ -22,7 +22,6 @@ import com.teamolj.cafehorizon.databinding.FragmentFindIdBinding
 import com.teamolj.cafehorizon.operation.InternetConnection
 import java.util.concurrent.TimeUnit
 
-
 class FindIdFragment : Fragment() {
     private lateinit var binding: FragmentFindIdBinding
 

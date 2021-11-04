@@ -1,7 +1,6 @@
 package com.teamolj.cafehorizon.chat
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
@@ -30,7 +29,6 @@ import com.google.firebase.storage.StorageReference
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityChatBinding
 import java.io.File
-import java.util.*
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -67,7 +65,6 @@ class ChatActivity : AppCompatActivity() {
                 }
             )
         }
-
     }
 
     private val cropImageLauncher = registerForActivityResult(CropImageContract()) { result ->
@@ -107,7 +104,7 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
 
-        auth = FirebaseAuth.getInstance()f
+        auth = FirebaseAuth.getInstance()
         userName = auth.currentUser!!.uid
 
         database =
@@ -117,7 +114,6 @@ class ChatActivity : AppCompatActivity() {
 
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference.child("ChatImages")
-
 
         // Initialize recycler Adapter
         chatAdapter = ChatRecyclerAdapter(userName)
@@ -138,7 +134,6 @@ class ChatActivity : AppCompatActivity() {
                     R.color.gray
                 )
             )
-
         } else {
             // 영업시간 O
             binding.btnPhotoPicker.setOnClickListener {

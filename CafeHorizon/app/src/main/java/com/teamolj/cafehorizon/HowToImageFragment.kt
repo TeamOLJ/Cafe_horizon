@@ -14,7 +14,7 @@ class HowToImageFragment(private val imageUrl : String) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHowToImageBinding.inflate(inflater, container, false)
 
         Glide.with(this)

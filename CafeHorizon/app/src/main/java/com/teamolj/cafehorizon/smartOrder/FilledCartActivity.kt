@@ -28,7 +28,7 @@ class FilledCartActivity : AppCompatActivity() {
         FilledCartActivity.binding = this.binding
         changeTotalPrice()
 
-        var adapter = FilledCartAdapter(this)
+        val adapter = FilledCartAdapter(this)
         adapter.menuList = AppDatabase.getInstance(this).cartDao().getAllByCategory() as MutableList<MenuInfo>
         binding.recyclerViewCart.adapter = adapter
         binding.recyclerViewCart.layoutManager = LinearLayoutManager(this)

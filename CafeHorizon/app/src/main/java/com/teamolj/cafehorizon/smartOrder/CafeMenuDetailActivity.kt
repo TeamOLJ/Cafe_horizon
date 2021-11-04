@@ -61,7 +61,6 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
         if (menuInfo.optionType % 100 / 10 == 1) createOptionSyrupView()
         if (menuInfo.optionType % 10 == 1) createOptionWhippingView()
 
-
         binding.btnAddCart.setOnClickListener {
             if (menuInfo.amount > 0) {
                 dbApp.cartDao().insertOrUpdate(menuInfo)
@@ -82,7 +81,6 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
                 Toast.makeText(this, "수량을 확인해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     //추가옵션 타이틀 뷰 생성
@@ -157,7 +155,6 @@ class CafeMenuDetailActivity : SmartOrderActivity() {
 
         binding.layoutOption.addView(view)
     }
-
 
     fun changeTotalPrice() {
         binding.textCafeMenuTotalPrice.text =

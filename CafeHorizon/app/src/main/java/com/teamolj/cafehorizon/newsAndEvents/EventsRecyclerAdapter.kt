@@ -1,6 +1,5 @@
 package com.teamolj.cafehorizon.newsAndEvents
 
-
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.teamolj.cafehorizon.databinding.RecyclerItemEventsBinding
 import java.text.SimpleDateFormat
-
 
 class EventsRecyclerAdapter : RecyclerView.Adapter<EventsRecyclerAdapter.eventsHolder>() {
     internal var eventsList = mutableListOf<Events>()
@@ -20,13 +18,11 @@ class EventsRecyclerAdapter : RecyclerView.Adapter<EventsRecyclerAdapter.eventsH
             )
         )
 
-
     override fun onBindViewHolder(holder: eventsHolder, position: Int) {
         holder.setEvent(eventsList[position])
     }
 
     override fun getItemCount(): Int = eventsList.size
-
 
     inner class eventsHolder(private var binding: RecyclerItemEventsBinding) :
         RecyclerView.ViewHolder(binding.root) {

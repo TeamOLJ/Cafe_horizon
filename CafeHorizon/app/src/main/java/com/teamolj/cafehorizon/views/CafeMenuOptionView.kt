@@ -5,7 +5,6 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RadioGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.chip.ChipGroup
 import com.teamolj.cafehorizon.R
@@ -49,7 +48,6 @@ class CafeMenuOptionView @JvmOverloads constructor(
                 binding.textOptionTitle.text = optionTitle
                 binding.textAmount.text = defaultAmount
                 setItemType(itemType)
-
 
                 binding.imageBtnMinus.setOnClickListener {
                     if (getAmountValue() > 0) {

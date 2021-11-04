@@ -15,14 +15,12 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.noticeHolder>() {
         )
     )
 
-
     override fun onBindViewHolder(holder: noticeHolder, position: Int) {
         val notice = noticeList[position]
         holder.setNotice(notice)
     }
 
     override fun getItemCount(): Int = noticeList.size
-
 
     inner class noticeHolder(private var binding: RecyclerItemNoticeBinding) :
         RecyclerView.ViewHolder(binding.root) {

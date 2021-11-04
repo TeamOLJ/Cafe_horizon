@@ -27,11 +27,9 @@ class FilledCartAdapter(val context: Context) :
 
     override fun getItemCount(): Int = menuList.size
 
-
     inner class filledCartHolder(private var binding: RecyclerItemFilledCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var eachPrice: Int = 0
-
 
         fun setCartItem(cartItem: MenuInfo) {
             eachPrice = cartItem.price
@@ -53,7 +51,6 @@ class FilledCartAdapter(val context: Context) :
                 .into(binding.imageCafeMenu)
 
             changeAmountAndPrice(cartItem.amount)
-
 
             binding.imageBtnMinus.setOnClickListener {
                 val amount = binding.textAmount.text.toString().toInt()

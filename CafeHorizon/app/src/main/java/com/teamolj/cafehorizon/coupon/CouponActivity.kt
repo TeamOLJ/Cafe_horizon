@@ -94,8 +94,6 @@ class CouponActivity : AppCompatActivity() {
             Log.w("firebase", "Error getting documents.", it)
             Toast.makeText(binding.root.context, getString(R.string.toast_error_occurred), Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     fun getAdapter(position: Int): CouponRecyclerAdapter {

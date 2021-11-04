@@ -39,7 +39,6 @@ class CouponRecyclerAdapter() : RecyclerView.Adapter<CouponRecyclerAdapter.histo
         category = position
     }
 
-
     inner class historyAdapter(private var binding: RecyclerItemCouponBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

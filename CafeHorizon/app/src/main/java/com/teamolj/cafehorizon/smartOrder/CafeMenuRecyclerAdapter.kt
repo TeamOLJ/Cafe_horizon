@@ -1,14 +1,11 @@
 package com.teamolj.cafehorizon.smartOrder
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.RecyclerItemCafeMenuBinding
-import java.lang.StringBuilder
 
 class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.cafeMenuHolder>() {
     internal lateinit var menuList: Array<MutableList<MenuInfo>>
@@ -32,7 +29,6 @@ class CafeMenuRecyclerAdapter : RecyclerView.Adapter<CafeMenuRecyclerAdapter.caf
     fun setCategory(position: Int) {
         category = position
     }
-
 
     inner class cafeMenuHolder(private var binding: RecyclerItemCafeMenuBinding) :
         RecyclerView.ViewHolder(binding.root) {

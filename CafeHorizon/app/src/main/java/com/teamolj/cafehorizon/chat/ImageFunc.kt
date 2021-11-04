@@ -1,10 +1,8 @@
 package com.teamolj.cafehorizon.chat
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
@@ -14,7 +12,6 @@ import androidx.core.content.FileProvider
 import com.teamolj.cafehorizon.R
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
 
 class ImageFunc {
     companion object {
@@ -77,6 +74,5 @@ class ImageFunc {
             }
             return cameraIntent
         }
-
     }
 }

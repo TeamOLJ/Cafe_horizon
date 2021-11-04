@@ -8,7 +8,6 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ViewHowToItemBinding
-import kotlinx.android.synthetic.main.view_main_button.view.*
 
 class HowToItemView @JvmOverloads constructor(
     context: Context,
@@ -42,7 +41,6 @@ class HowToItemView @JvmOverloads constructor(
                 val isShowImage =
                     getBoolean(R.styleable.HowToItemView_viewHowToItemShowImage, false)
 
-
                 if(backgroundColor == 0) {
                     binding.container.setBackgroundResource(R.drawable.recycler_item_border)
                 } else {
@@ -55,9 +53,7 @@ class HowToItemView @JvmOverloads constructor(
 
                 binding.container.setPadding(itemPaddingLeft.toInt(), 0, itemPaddingRight.toInt(), 0)
 
-
                 binding.imageRightArrow.visibility = if(isShowImage) View.VISIBLE else GONE
-
 
             } finally {
                 recycle()

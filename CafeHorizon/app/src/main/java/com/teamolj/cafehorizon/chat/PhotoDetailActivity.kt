@@ -1,7 +1,6 @@
 package com.teamolj.cafehorizon.chat
 
 import android.Manifest
-import android.app.Activity
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.os.Build
@@ -41,7 +40,6 @@ class PhotoDetailActivity : AppCompatActivity() {
                         ActivityCompat.requestPermissions(this,
                             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                             PERMISSION_REQUEST_CODE)
-
                     } else {
                         // 파이어베이스로부터 Byte Array 형태로 이미지 불러오기
                         val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(photoUrl)

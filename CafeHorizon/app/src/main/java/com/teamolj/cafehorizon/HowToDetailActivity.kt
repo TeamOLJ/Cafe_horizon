@@ -71,7 +71,6 @@ class HowToDetailActivity : AppCompatActivity() {
                 setTerms("TermsAdInfo")
             }
         }
-
     }
 
     private fun setHowToImage(tag: String) {

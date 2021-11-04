@@ -3,7 +3,6 @@ package com.teamolj.cafehorizon.smartOrder
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 
-
 @Dao
 interface CartDao {
     @Query("SELECT * FROM orm_cart ORDER BY category")
@@ -16,7 +15,6 @@ interface CartDao {
         optionSyrup: Int,
         optionWhipping: Boolean
     ): MenuInfo?
-
 
     @Query("SELECT COUNT(*) FROM orm_cart")
     fun getCount(): Int
@@ -31,7 +29,6 @@ interface CartDao {
     @Update
     fun update(menuInfo: MenuInfo)
 
-
     @Query("UPDATE orm_cart SET amount= amount + :amount WHERE name = :name AND shot = :optionShot AND syrup = :optionSyrup AND whipping = :optionWhipping")
     fun updateAmount(
         amount: Int,
@@ -40,7 +37,6 @@ interface CartDao {
         optionSyrup: Int,
         optionWhipping: Boolean
     )
-
 
     fun insertOrUpdate(menuInfo: MenuInfo) {
         val itemFromRoom = getCafeMenuByPrimaryKey(menuInfo.name, menuInfo.optionShot, menuInfo.optionSyrup, menuInfo.optionWhipping)
@@ -51,7 +47,6 @@ interface CartDao {
             updateAmount(menuInfo.amount, menuInfo.name, menuInfo.optionShot, menuInfo.optionSyrup, menuInfo.optionWhipping)
         }
     }
-
 
     @Delete
     fun delete(menuInfo:MenuInfo)

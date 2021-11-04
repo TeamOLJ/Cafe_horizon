@@ -35,7 +35,6 @@ class MenuInfo(
         type: Int,
     ) : this(name, description, imageUrl, price, category, type, 1, 0, 0, false)
 
-
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,

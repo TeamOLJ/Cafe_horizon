@@ -13,9 +13,11 @@ class AppSharedPreferences(context: Context) {
     fun getString(key: String, defValue: String): String {
         return prefs.getString(key, defValue).toString()
     }
+
     fun getBoolean(key: String): Boolean {
         return prefs.getBoolean(key, false)
     }
+
     fun getDateAsString(key: String): String {
         return prefs.getString(key, "").toString()
     }
@@ -24,10 +26,12 @@ class AppSharedPreferences(context: Context) {
         editor.putString(key, str)
         editor.commit()
     }
+
     fun setBoolean(key: String, bool: Boolean) {
         editor.putBoolean(key, bool)
         editor.commit()
     }
+
     fun setDateAsString(key: String, date: Date?) {
         if (date != null)
             editor.putString(key, SimpleDateFormat("yyyy/MM/dd").format(date))

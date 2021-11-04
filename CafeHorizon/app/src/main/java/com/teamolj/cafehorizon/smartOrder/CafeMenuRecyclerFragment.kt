@@ -15,7 +15,7 @@ class CafeMenuRecyclerFragment(val position: Int) : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentCafeMenuRecyclerBinding.inflate(inflater, container, false)
 
         binding.recyclerViewCafeMenu.adapter = (activity as SmartOrderActivity).getAdapter(position)

@@ -62,7 +62,6 @@ class PayOrderActivity : AppCompatActivity() {
         var eatOption = EAT_FOR_HERE
         var payOption = PAY_CREDIT
 
-
         // 바로 주문하기 or 장바구니 로부터 메뉴 리스트 가져오기
         if (from == ORDER_NOW) {
             menuList = mutableListOf(intent.getParcelableExtra("menuInfo")!!)
@@ -79,7 +78,6 @@ class PayOrderActivity : AppCompatActivity() {
                 setCafeMenuInfo(menu.name, menu.amount, menu.price)
             }
             binding.layoutMenuItems.addView(menuView)
-
 
             if ((menu.optionType / 100 == 1) && (menu.optionShot > 0)) {
                 val shotView = PayOrderItemView(this).apply {
@@ -107,7 +105,6 @@ class PayOrderActivity : AppCompatActivity() {
         }
 
         binding.textTotalPrice.text = DecimalFormat("###,###원").format(listTotalPrice)
-
 
         // 쿠폰 스피너 설정하기
         val couponArray = arrayListOf(Coupon("", "쿠폰을 선택해주세요.", 0, 0, false))
@@ -137,7 +134,6 @@ class PayOrderActivity : AppCompatActivity() {
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             binding.spinnerCoupon.adapter = arrayAdapter
-
         }
 
         // 스피너 아이템 선택 리스너
@@ -176,7 +172,6 @@ class PayOrderActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
 
-
         binding.groupEatOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 eatOption = when (checkedId) {
@@ -187,7 +182,6 @@ class PayOrderActivity : AppCompatActivity() {
                 }
             }
         }
-
 
         binding.groupPayOption.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {

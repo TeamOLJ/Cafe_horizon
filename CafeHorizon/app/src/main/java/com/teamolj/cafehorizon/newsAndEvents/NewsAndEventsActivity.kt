@@ -101,7 +101,6 @@ class NewsAndEventsActivity : FragmentActivity() {
                 getString(R.string.toast_error_occurred),
                 Toast.LENGTH_SHORT).show()
         }
-
     }
 
     fun getEventsAdp(): EventsRecyclerAdapter = eventsAdapter

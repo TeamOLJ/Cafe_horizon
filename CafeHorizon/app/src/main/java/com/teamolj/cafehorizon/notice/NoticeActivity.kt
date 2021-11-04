@@ -13,7 +13,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.teamolj.cafehorizon.R
 import com.teamolj.cafehorizon.databinding.ActivityNoticeBinding
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NoticeActivity : AppCompatActivity() {
@@ -53,7 +52,7 @@ class NoticeActivity : AppCompatActivity() {
                         (document["noticeTime"] as Timestamp).seconds * 1000))
                 }
 
-                var adapter = NoticeAdapter()
+                val adapter = NoticeAdapter()
                 adapter.noticeList = noticeList
                 binding.recyclerViewNotice.adapter = adapter
                 binding.recyclerViewNotice.layoutManager = LinearLayoutManager(this)

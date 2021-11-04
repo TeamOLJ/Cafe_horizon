@@ -53,7 +53,6 @@
         <activity android:name=".MyInfoActivity" />
         <activity android:name=".UnsubscribeActivity" />
         <activity android:name=".UnsubDoneActivity" />
-        <activity android:name=".TesterFunctions" />
         <activity android:name=".chat.PhotoDetailActivity" />
 
         <!-- image cropper -->
@@ -71,7 +70,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-
 
         <!-- Facebook Login -->
         <meta-data

@@ -2,7 +2,6 @@ package com.teamolj.cafehorizon.smartOrder
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -74,7 +73,6 @@ open class SmartOrderActivity : AppCompatActivity() {
                         )
                     )
                 }
-
             }
 
             adapter.menuList = menuList
@@ -99,13 +97,13 @@ open class SmartOrderActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_filled_cart -> {
-                var intent = Intent(this, FilledCartActivity::class.java)
+                val intent = Intent(this, FilledCartActivity::class.java)
                 startActivity(intent)
                 return true
             }
 
             R.id.action_empty_cart -> {
-                var intent = Intent(this, EmptyCartActivity::class.java)
+                val intent = Intent(this, EmptyCartActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -119,18 +117,15 @@ open class SmartOrderActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         updateToolbarMenu(menu!!)
         return super.onPrepareOptionsMenu(menu)
     }
 
-
     override fun onResume() {   //MenuDetailActivitiy에서 돌아올 때 액션바 새로고침
         invalidateOptionsMenu()
         super.onResume()
     }
-
 
     private fun updateToolbarMenu(menu: Menu) {
         if (dbApp.cartDao().getCount()==0) {

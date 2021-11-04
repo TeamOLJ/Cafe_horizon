@@ -61,7 +61,6 @@ class ChatRecyclerAdapter(private val user: String) : RecyclerView.Adapter<ChatR
             is ChatRecyclerHolder.PhotoOutHolder -> holder.bind(messageList[position])
             is ChatRecyclerHolder.DateDividerHolder -> holder.bind(messageList[position].time)
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -84,7 +83,6 @@ class ChatRecyclerAdapter(private val user: String) : RecyclerView.Adapter<ChatR
     }
 
     override fun getItemCount(): Int = messageList.size
-
 
     fun addAfterMessage(message: Message) {
         if (messageList.isEmpty()) {
