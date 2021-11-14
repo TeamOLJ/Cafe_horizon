@@ -54,18 +54,6 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         db = Firebase.firestore
 
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            // 비정상 경로 접근 차단
-            if (App.prefs.getString("userNick", "") != "") {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-            else
-                auth.signOut()
-        }
-
         binding.txtUserID.doOnTextChanged { _, _, _, _ ->
             // remove error message
             binding.textFieldUserID.error = null

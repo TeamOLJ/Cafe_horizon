@@ -2,4 +2,7 @@
     <style name="Theme.App" parent="Theme.MaterialComponents.DayNight">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/activity_splash</item>
+    </style>
 </resources>
