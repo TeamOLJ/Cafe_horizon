@@ -17,7 +17,7 @@ data class Message(
     }
 
     fun readStateToString():String {
-        return if (readState) "읽음" else "읽지않음"
+        return if (readState) "읽음" else ""
     }
 
     override fun toString(): String {

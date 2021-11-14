@@ -86,6 +86,7 @@
                     app:placeholderText="@string/new_nickname"
                     app:expandedHintEnabled="false"
                     app:hintEnabled="false"
+                    app:helperText="@string/nickname_requirement"
                     app:boxBackgroundColor="@color/blueBackground"
                     app:boxStrokeWidthFocused="1dp"
                     app:layout_constraintEnd_toStartOf="@+id/btnChangeNick"

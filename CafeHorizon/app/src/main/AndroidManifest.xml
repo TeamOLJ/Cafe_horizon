@@ -51,7 +51,8 @@
         <activity android:name=".FindInfoActivity" />
         <activity android:name=".BarcodeActivity" />
         <activity android:name=".MyInfoActivity" />
-        <activity android:name=".UnsubscribeActivity" />
+        <activity android:name=".UnsubscribeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".UnsubDoneActivity" />
         <activity android:name=".chat.PhotoDetailActivity" />
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +57,7 @@ class OrderedListAdapter : RecyclerView.Adapter<OrderedListAdapter.listHolder>()
 
             if(!order.checkPickUp()) {
                 binding.textState.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.root.context, R.color.colorAccent))
+                binding.imageCircle.visibility = View.VISIBLE
             }
         }
     }

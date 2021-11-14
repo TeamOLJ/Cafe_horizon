@@ -60,8 +60,7 @@ class HowToDetailActivity : AppCompatActivity() {
             }
 
             "marketing" -> {
-                binding.textToolbar.text =
-                    resources.getString(R.string.terms_agree_to_use_marketing)
+                binding.textToolbar.text = resources.getString(R.string.terms_agree_to_use_marketing)
                 setTerms("TermsMarketing")
             }
 
@@ -114,7 +113,7 @@ class HowToDetailActivity : AppCompatActivity() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    binding.textTerms.text = document.data?.get("terms").toString()
+                    binding.textTerms.text = document.data?.get("terms").toString().replace("\\\\n", "\n")
                 }
             }
     }

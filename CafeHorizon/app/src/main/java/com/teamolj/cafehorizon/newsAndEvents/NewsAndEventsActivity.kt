@@ -45,7 +45,7 @@ class NewsAndEventsActivity : FragmentActivity() {
                     newsList.add(
                         News(
                             document.data["title"].toString(),
-                            document.data["content"].toString(),
+                            document.data["content"].toString().replace("\\\\n", "\n"),
                             (document.data["date"] as Timestamp).seconds * 1000
                         )
                     )
