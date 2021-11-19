@@ -24,7 +24,7 @@ class MenuInfo(
     @ColumnInfo(name = "whipping") var optionWhipping: Boolean,
 ) : Parcelable {
 
-    constructor() : this("", "", "", 0, -1, 0, 1, 0, 0, false)
+    constructor() : this("", "", "", 0, -1, 0, 1, 0, 0, true)
 
     constructor(
         name: String,
@@ -33,7 +33,7 @@ class MenuInfo(
         price: Int,
         category: Int,
         type: Int,
-    ) : this(name, description, imageUrl, price, category, type, 1, 0, 0, false)
+    ) : this(name, description, imageUrl, price, category, type, 1, 0, 0, true)
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
